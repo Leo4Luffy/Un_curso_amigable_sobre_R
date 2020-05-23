@@ -99,4 +99,6 @@ Es zootecnista y apasionado por el campo de la genética animal. Hoy en día des
 
 + __Duvan Ariel Nieves__
 
+Estudiante de ingeniería ambiental interesado en la ecología, la programación y la ciencia de datos. contacame en el correo  <a href="mailto:dnieves@unal.edu.co"><u>correo</u></a>.
+
 ## Lo básico sobre el R
