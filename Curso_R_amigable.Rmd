@@ -60,7 +60,7 @@ data.frame(
   geom_curve(x = 2.4, xend = 2.5, y = 3.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
   annotate(geom = 'text', x = 2.7, y = 3.0, label = 'Ordenar', family = 'gochi', size = 10.4, colour = 'black') +
   geom_curve(x = 2.9, xend = 3.0, y = 3.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
-  annotate(geom = 'text', x = 3.25, y = 3.0, label = 'Tranformar', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.25, y = 3.0, label = 'Transformar', family = 'gochi', size = 10.4, colour = 'black') +
   annotate(geom = 'text', x = 3.7, y = 3.5, label = 'Visualizar', family = 'gochi', size = 10.4, colour = 'black') +
   geom_curve(x = 3.4, xend = 3.6, y = 3.1, yend = 3.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = -0.2) +
   annotate(geom = 'text', x = 3.75, y = 2.6, label = 'Modelar', family = 'gochi', size = 10.4, colour = 'black') +
