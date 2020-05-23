@@ -26,6 +26,8 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("images/Mundo_R.jpg")  
 ```
 
+<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font></section>
+
 ### Descripción
 
 Este curso pretende ser una introducción básica del `R`. Su objetivo consiste en enseñar habilidades en la limpieza, manipulación y visualización de datos mediante el uso del `R`. Tenga en cuenta que este curso no pretende ser un sustituto de un curso completo de programación o de estadística.
@@ -83,22 +85,43 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, out.width = '400'}
+### Acerca de nosotros
 
-knitr::include_graphics("images/flujo_datos.png")  
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  __Jorge Leonardo López Martínez__ es zootecnista y apasionado por el campo de la genética animal. Hoy en día desea adquirir conocimiento en todo lo relacionado a la programación aplicada a la genética animal.
+  <HR>
+  <i class="fas fa-envelope"></i> jollopezma@unal.edu.co<br>
+  <i class="fa fa-github"></i> [Leo4Luffy](https://github.com/Leo4Luffy)
+  </div>
+  <div class="col-md-6" markdown="1">
+  __Duvan Ariel Nieves__ es estudiante de ingeniería ambiental con interés en la ecología, la programación y la ciencia de datos.
+  <HR>
+  <i class="fas fa-envelope"></i> dnieves@unal.edu.co<br>
+  <i class="fa fa-github"></i> [Duvancho321](https://github.com/Duvancho321)
+  </div>
+</div>
+
+## Una breve introducción al R
+
+### ¿Qué es el `R`?
+
+`R` es un lenguaje de programación creado por __Robert Gentleman__ y __Ross Ihaka__ en el año de 1992. Ambos creadores le dieron el nombre de `R` al lenguaje implementado por las iniciales de sus nombres (a modo de broma).
+
+```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+
+knitr::include_graphics("images/Creadores.jpg")
 ```
 
 
-### Acerca de nosotros
 
-+ __Jorge Leonardo López Martínez__
+```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
 
-Es zootecnista y apasionado por el campo de la genética animal. Hoy en día desea adquirir conocimiento en todo lo relacionado a la programación aplicada a la genética animal. Lo puedes contactar por <a href="mailto:jollopezma@unal.edu.co"><u>correo</u></a> electronico.
+knitr::include_graphics("images/al_principio_pero_ahora.jpg")
+```
 
-<HR>
+<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font></section>
 
-+ __Duvan Ariel Nieves__
+## Operaciones básicas R
 
-Estudiante de ingeniería ambiental interesado en la ecología, la programación y la ciencia de datos. contacame en el correo  <a href="mailto:dnieves@unal.edu.co"><u>correo</u></a>.
 
-## Lo básico sobre el R
