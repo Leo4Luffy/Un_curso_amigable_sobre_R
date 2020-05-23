@@ -1,0 +1,102 @@
+---
+title: "Un curso amigable sobre R"
+output: 
+  learnr::tutorial:
+    css: css/Estilo.css
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+
+library(learnr)
+library(dplyr)
+library(ggplot2)
+library(jpeg)
+library(gridGraphics)
+library(showtext)
+font_add_google('Gochi Hand', 'gochi')
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## ¡Bienvenido!
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/Mundo_R.jpg")  
+```
+
+### Descripción
+
+Este curso pretende ser una introducción básica del `R`. Su objetivo consiste en enseñar habilidades en la limpieza, manipulación y visualización de datos mediante el uso del `R`. Tenga en cuenta que este curso no pretende ser un sustituto de un curso completo de programación o de estadística.
+
+```{r eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
+
+hex_tidyverse <- readJPEG('images/tidyverse.jpg', native = TRUE)
+hex_tidyverse <- rasterGrob(hex_tidyverse, interpolate = FALSE)
+
+hex_readr <- readJPEG('images/readr.jpg', native = TRUE)
+hex_readr <- rasterGrob(hex_readr, interpolate = FALSE)
+
+hex_tidyr <- readJPEG('images/tidyr.jpg', native = TRUE)
+hex_tidyr <- rasterGrob(hex_tidyr, interpolate = FALSE)
+
+hex_dplyr <- readJPEG('images/dplyr.jpg', native = TRUE)
+hex_dplyr <- rasterGrob(hex_dplyr, interpolate = FALSE)
+
+hex_ggplot2 <- readJPEG('images/ggplot2.jpg', native = TRUE)
+hex_ggplot2 <- rasterGrob(hex_ggplot2, interpolate = FALSE)
+
+hex_rmarkdown <- readJPEG('images/rmarkdown.jpg', native = TRUE)
+hex_rmarkdown <- rasterGrob(hex_rmarkdown, interpolate = FALSE)
+
+data.frame(
+  x = c(2:5.0), y = c(1.6:4.6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 2.95, xmax = 3.93, ymin = 2.5, ymax = 3.6, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.2, y = 3.0, label = 'Importar', family = 'gochi', size = 10.4, colour = 'black') +
+  geom_curve(x = 2.4, xend = 2.5, y = 3.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 2.7, y = 3.0, label = 'Ordenar', family = 'gochi', size = 10.4, colour = 'black') +
+  geom_curve(x = 2.9, xend = 3.0, y = 3.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 3.25, y = 3.0, label = 'Tranformar', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.7, y = 3.5, label = 'Visualizar', family = 'gochi', size = 10.4, colour = 'black') +
+  geom_curve(x = 3.4, xend = 3.6, y = 3.1, yend = 3.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = -0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.6, label = 'Modelar', family = 'gochi', size = 10.4, colour = 'black') +
+  geom_curve(x = 3.65, xend = 3.4, y = 2.7, yend = 2.9, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = -0.2) +
+  geom_curve(x = 3.8, xend = 3.8, y = 3.4, yend = 2.7, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = -0.3) +
+  geom_curve(x = 3.96, xend = 4.06, y = 3.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 4.3, y = 3.0, label = 'Comunicar', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.98, y = 2.4, label = 'Explorar', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(hex_tidyverse, xmin = 4.0, xmax = 5.0, ymin = 3.8, ymax = 4.8) +
+  annotation_custom(hex_readr, xmin = 2.1, xmax = 2.3, ymin = 3.1, ymax = 3.5) +
+  annotation_custom(hex_tidyr, xmin = 3.1, xmax = 2.3, ymin = 3.1, ymax = 3.5) +
+  annotation_custom(hex_dplyr, xmin = 4.1, xmax = 2.3, ymin = 3.14, ymax = 3.54) +
+  annotation_custom(hex_ggplot2, xmin = 3.5, xmax = 3.9, ymin = 3.64, ymax = 4.04) +
+  annotation_custom(hex_rmarkdown, xmin = 4.1, xmax = 4.5, ymin = 2.5, ymax = 2.9) +
+  #scale_y_continuous(limits = c(2.5, 3.6)) +
+  scale_x_continuous(limits = c(2, 4.6)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, out.width = '400'}
+
+knitr::include_graphics("images/flujo_datos.png")  
+```
+
+
+### Acerca de nosotros
+
++ __Jorge Leonardo López Martínez__
+
+Es zootecnista y apasionado por el campo de la genética animal. Hoy en día desea adquirir conocimiento en todo lo relacionado a la programación aplicada a la genética animal. Lo puedes contactar por <a href="mailto:jollopezma@unal.edu.co"><u>correo</u></a> electronico.
+
+<HR>
+
++ __Duvan Ariel Nieves__
+
+## Lo básico sobre el R
