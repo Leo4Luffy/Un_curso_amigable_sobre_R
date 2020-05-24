@@ -102,6 +102,12 @@ data.frame(
   </div>
 </div>
 
+<br>
+
+No dude en comunicarse con nosotros por correo electrónico si tiene preguntas acerca del curso y su contenido.
+
+Tenga en cuenta que este curso está bajo la licencia [Creative Commons Attribution Share Alike 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Por tanto el contenido del curso deben acreditarse a sus autores.
+
 ## Una breve introducción al R
 
 ### ¿Qué es el `R`?
