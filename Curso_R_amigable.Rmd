@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("images/Mundo_R.jpg")  
 ```
 
-<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font></section>
+<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</section>
 
 ### Descripción
 
@@ -106,7 +106,9 @@ data.frame(
 
 No dude en comunicarse con nosotros por correo electrónico si tiene preguntas acerca del curso y su contenido.
 
-Tenga en cuenta que este curso está bajo la licencia [Creative Commons Attribution Share Alike 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Por tanto el contenido del curso deben acreditarse a sus autores.
+Tenga en cuenta que este curso está bajo la licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Por tanto el contenido del curso debe acreditarse a sus autores.
+
+<section style="text-align: center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br/></section>
 
 ## Una breve introducción al R
 
@@ -114,19 +116,63 @@ Tenga en cuenta que este curso está bajo la licencia [Creative Commons Attribut
 
 `R` es un lenguaje de programación creado por __Robert Gentleman__ y __Ross Ihaka__ en el año de 1992. Ambos creadores le dieron el nombre de `R` al lenguaje implementado por las iniciales de sus nombres (a modo de broma).
 
-```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "28%", fig.align = "center"}
 
 knitr::include_graphics("images/Creadores.jpg")
 ```
 
+Se trata de un lenguaje __interpretado__ o de script, con __tipado dinámico__, __multiplataforma__ y __orientado a objetos__:
 
++ __Lenguaje interpretado__ o de script: se ejecuta utilizando
+un programa intermedio llamado __intérprete__ (IDE).
 
-```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
++ __Tipado dinámico__: se refiere a que no es necesario
+declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
+
+```{r addition, exercise = TRUE}
+
+a <- 'Hola'
+typeof(a)
+
+b <- 1
+typeof(b)
+```
+
++ __Multiplataforma__: El intérprete de `R` está disponible en muchas plataformas (Linux, Windows, UNIX, Mac OS, etc), por lo que podrá correr en muchos computadores.
+
++ __Orientado a objetos__
+
+### ¿Por qué usar `R`?
+
+El lenguaje de programación `R` se puede obtener y distribuir de forma gratuita, debido a que se encuentra bajo __Licencia Pública General__ del proyecto GNU. Por lo tanto es un programa de código abierto y gratis.
+
+<div class="row">
+  <div class="col-md-8" markdown="1">
+  `R` cuenta con una __comunidad__ de usuarios alrededor del mundo. Al contar con una comunidad es posible dar con la solución de algún problema de programación, así como el desarrollo de paquetes utilizados en temas específicos, desarrolados por especialistas en alguna parte del mundo.
+  </div>
+  <div class="col-md-4" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/Rday.jpg")
+```
+<section style="text-align: center;">Encuentro en el [Rday 2019](https://rdaymedellin.github.io/).</section>
+  </div>
+</div>
+
+Finalmente, el uso del `R` garantiza que otro investigador pueda repetir el experimento, comprobar los resultados obtenidos y estar en la condición de ampliar o refutar las interpretaciones del estudio realizado.
+
+<!--es importante resaltar que la reproducibilidad es uno de los principios de la investigación científica. E-->
+
+```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 
 knitr::include_graphics("images/al_principio_pero_ahora.jpg")
 ```
 
-<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font></section>
+<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</section>
+
+### Instalar `R` y `RStudio`
+
+Es hora de instalar uno de los programas estadísticos más utilizados por las distintas universidades y empresas.
 
 ## Operaciones básicas R
 
