@@ -130,7 +130,6 @@ un programa intermedio llamado __intérprete__ (IDE).
 declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
 
 ```{r addition, exercise = TRUE}
-
 a <- 'Hola'
 typeof(a)
 
@@ -176,4 +175,51 @@ Es hora de instalar uno de los programas estadísticos más utilizados por las d
 
 ## Operaciones básicas R
 
+### Operaciones con vectores 
+
+Generemos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
+
+Operaciones de suma.
+
+```{r addition_1, exercise = TRUE}
+#Vector de prueba
+x <- c(1:8)
+x
+
+#Suma sobre cada elemento del vector de prueba
+test_1 <- x+2
+test_1
+
+#Suma sobre repetitiva sobre los elementos del vector de prueba
+test_2 <- x + c(10,20)
+test_2
+
+#Suma uno a uno sobre nuestro vector de prueba 
+test_3 <- x + c(8:1) 
+test_3
+```
+
+De igual forma podemos utilizar la resta, te invito a que restablezcas el vector de prueba a partir de los vectores test_1, test_2, test_3. Para ello copia los vectores que realizamos en el fragmento de código anterior y logra crear de nuevo el vector x. Dale confio en que podrás hacerlo.
+
+aca iria la evaluacion de codigo para lo anterior
+
+Vamos ahora con operación de producto. 
+
+```{r addition_2, exercise = TRUE}
+#Vector de prueba
+y <- seq(2,20,2)
+y
+
+#Producto sobre cada elemento del vector de prueba
+test_1 <- y*2
+test_1
+
+#Producto repetitivo sobre los dos elementos del vector de prueba
+test_2 <- y * c(5,7)
+test_2
+
+#Producto uno a uno sobre nuestro vector de prueba 
+test_3 <- y * c(10:1) 
+test_3
+```
 
