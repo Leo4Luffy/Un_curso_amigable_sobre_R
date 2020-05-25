@@ -13,11 +13,11 @@ library(dplyr)
 library(ggplot2)
 library(jpeg)
 library(gridGraphics)
+library(curl)
 library(showtext)
 font_add_google('Gochi Hand', 'gochi')
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
 
 ## ¡Bienvenido!
 
@@ -89,13 +89,13 @@ data.frame(
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-  __Jorge Leonardo López Martínez__ es zootecnista y apasionado por el campo de la genética animal. Hoy en día desea adquirir conocimiento en todo lo relacionado a la programación aplicada a la genética animal.
+  __Jorge Leonardo López Martínez__ es zootecnista con interés en el uso de la programación aplicada al campo de la genética animal.
   <HR>
   <i class="fas fa-envelope"></i> jollopezma@unal.edu.co<br>
   <i class="fa fa-github"></i> [Leo4Luffy](https://github.com/Leo4Luffy)
   </div>
   <div class="col-md-6" markdown="1">
-  __Duvan Ariel Nieves__ es estudiante de ingeniería ambiental con interés en la ecología, la programación y la ciencia de datos.
+  __Duvan Ariel Nieves Ruiz__ es estudiante de ingeniería ambiental con interés en la ecología, la programación y la ciencia de datos.
   <HR>
   <i class="fas fa-envelope"></i> dnieves@unal.edu.co<br>
   <i class="fa fa-github"></i> [Duvancho321](https://github.com/Duvancho321)
