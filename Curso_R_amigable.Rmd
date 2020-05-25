@@ -14,6 +14,7 @@ library(ggplot2)
 library(jpeg)
 library(gridGraphics)
 library(curl)
+library(fontawesome)
 library(showtext)
 font_add_google('Gochi Hand', 'gochi')
 knitr::opts_chunk$set(echo = FALSE)
@@ -26,7 +27,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("images/Mundo_R.jpg")  
 ```
 
-<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
 
 ### Descripción
 
@@ -77,13 +78,38 @@ data.frame(
   annotation_custom(hex_dplyr, xmin = 4.1, xmax = 2.3, ymin = 3.14, ymax = 3.54) +
   annotation_custom(hex_ggplot2, xmin = 3.5, xmax = 3.9, ymin = 3.64, ymax = 4.04) +
   annotation_custom(hex_rmarkdown, xmin = 4.1, xmax = 4.5, ymin = 2.5, ymax = 2.9) +
-  #scale_y_continuous(limits = c(2.5, 3.6)) +
   scale_x_continuous(limits = c(2, 4.6)) +
   theme_void() +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
 ```
+
+A lo largo del curso podrá encontrar ejemplos de código y ejercicios de codificación. Abajo encontrara como podrán ser usados:
+
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` = Código de ejemplo.
+
+Los ejemplos contienen código previamente escrito para que pueda explorarlo y ejecutarlo presionando el botón amarillo "Run Code" (ejecutar) en la esquina superior derecha. Puede actualizar el código en cualquiera de los ejemplos presionando "Start Over" (iniciar de nuevo) en la esquina superior izquierda y el código se restablecerá automáticamente al valor predeterminado.
+
+```{r addition_ejemplos, exercise = TRUE}
+
+
+```
+
+#### `r fa("fas fa-laptop-code", fill = "black")` = Ejercicio de codificación.
+
+Aquí se indican ejercicios prácticos de codificación donde se le pedirá que escriba el código manualmente. Si no da con la solución, puede buscar ayuda dando clic en los botones "Solution" (solución) o "Hints" (sugerencias).
+
+```{r exercise_ejercicios, exercise = TRUE}
+
+```
+
+```{r exercise_ejercicios-solution}
+
+Ejercicio_código
+```
+
+<br>
 
 ### Acerca de nosotros
 
@@ -110,7 +136,7 @@ Tenga en cuenta que este curso está bajo la licencia <a rel="license" href="htt
 
 <section style="text-align: center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br/></section>
 
-## Una breve introducción al R
+## 1. Una breve introducción al R
 
 ### ¿Qué es el `R`?
 
@@ -126,20 +152,38 @@ Se trata de un lenguaje __interpretado__ o de script, con __tipado dinámico__, 
 + __Lenguaje interpretado__ o de script: se ejecuta utilizando
 un programa intermedio llamado __intérprete__ (IDE).
 
++ __Orientado a objetos__: `R` realiza acciones sobre esos objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
+
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 1.1
+
+```{r addition_3, exercise = TRUE}
+
+# Para asignar un tipo de dato a un objeto se suele emplear el simbolo "<-"
+
+a <- 12
+
+b <- c(4, 6, 8, 12)
+
+c <- matrix(data = 1:4,
+            nrow = 2,
+            ncol = 2)
+```
+
++ __Multiplataforma__: el intérprete de `R` está disponible en muchas plataformas (Linux, Windows, UNIX, Mac OS, etc), por lo que podrá ejecutarse en muchos computadores.
+
 + __Tipado dinámico__: se refiere a que no es necesario
 declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
 
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 1.2
+
 ```{r addition, exercise = TRUE}
+
 a <- 'Hola'
 typeof(a)
 
 b <- 1
 typeof(b)
 ```
-
-+ __Multiplataforma__: El intérprete de `R` está disponible en muchas plataformas (Linux, Windows, UNIX, Mac OS, etc), por lo que podrá correr en muchos computadores.
-
-+ __Orientado a objetos__
 
 ### ¿Por qué usar `R`?
 
@@ -154,7 +198,7 @@ El lenguaje de programación `R` se puede obtener y distribuir de forma gratuita
 
 knitr::include_graphics("images/Rday.jpg")
 ```
-<section style="text-align: center;">Encuentro en el [Rday 2019](https://rdaymedellin.github.io/).</section>
+<section style="text-align: center;"><small>Encuentro en el [Rday 2019](https://rdaymedellin.github.io/).</small></section>
   </div>
 </div>
 
@@ -167,13 +211,57 @@ Finalmente, el uso del `R` garantiza que otro investigador pueda repetir el expe
 knitr::include_graphics("images/al_principio_pero_ahora.jpg")
 ```
 
-<section style="text-align: center;">Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
 
-### Instalar `R` y `RStudio`
+### Instalación de `R` base y `RStudio`
 
-Es hora de instalar uno de los programas estadísticos más utilizados por las distintas universidades y empresas.
+`R` base es el software básico que contiene el lenguaje de programación `R`. `RStudio` es un software que facilita la programación en `R`.
 
-## Operaciones básicas R
+#### `R` base:
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  + Windows: la instalación de `R` base en windows se realiza a través de la [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive Network).
+  + Linux: la instalación de `R` base en Linux se realiza escribiendo el siguiente código en la terminal:<br>
+  <div style="background-color:#262626">
+  <font color = "white"><p> sudo apt-get update</p></font>
+  <font color = "white"><p> sudo apt-get install r-base r-base-dev</p></font>
+  </div>
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/consola_R_base.jpg")
+```
+  </div>
+</div>
+
+#### `RStudio`:
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  Se puede instalar directamente desde la [página de `RStudio`](https://rstudio.com/products/rstudio/download/). Hay se encuentran los archivos de instalación tanto en windows como en Linux.
+  
+  Cuando se abre `RStudio` se pueden ver cuatro paneles: 
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+
+knitr::include_graphics("images/RStudio.jpg")
+```
+  <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+  </div>
+</div>
+
++ La fuente: su libreta de notas para el código
+
++ La consola: el corazón de `R`
+
++ El ambiente / el historial
+
++ Los archivos / las gráficas / los paquetes / la ayuda
+
+## 2. Operaciones básicas R
 
 ### Operaciones con vectores 
 
