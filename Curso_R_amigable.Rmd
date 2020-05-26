@@ -16,7 +16,9 @@ library(gridGraphics)
 library(curl)
 library(fontawesome)
 library(showtext)
+library(gradethis)
 font_add_google('Gochi Hand', 'gochi')
+tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -98,7 +100,7 @@ Los ejemplos contienen código previamente escrito para que pueda explorarlo y e
 
 #### `r fa("fas fa-laptop-code", fill = "black")` = Ejercicio de codificación.
 
-Aquí se indican ejercicios prácticos de codificación donde se le pedirá que escriba el código manualmente. Si no da con la solución, puede buscar ayuda dando clic en los botones "Solution" (solución) o "Hints" (sugerencias).
+Aquí se indican ejercicios prácticos de codificación donde se le pedirá que escriba el código manualmente. Si no da con la solución, puede buscar ayuda dando clic en los botones "Solution" (solución) o "Hints" (sugerencias). En la mayoría de los casos el código podrá ser evaluado con el botón “Submit Answer” (Enviar Respuesta), indicándole cuando la respuesta sea acertada.
 
 ```{r exercise_ejercicios, exercise = TRUE}
 
@@ -121,7 +123,7 @@ Ejercicio_código
   <i class="fa fa-github"></i> [Leo4Luffy](https://github.com/Leo4Luffy)
   </div>
   <div class="col-md-6" markdown="1">
-  __Duvan Ariel Nieves Ruiz__ es estudiante de ingeniería ambiental con interés en la ecología, la programación y la ciencia de datos.
+  __Duvan Ariel Nieves Ruiz__ es estudiante de ingeniería ambiental apasionado por el software libre con interés en la ecología y la programación.
   <HR>
   <i class="fas fa-envelope"></i> dnieves@unal.edu.co<br>
   <i class="fa fa-github"></i> [Duvancho321](https://github.com/Duvancho321)
@@ -181,8 +183,11 @@ declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
 a <- 'Hola'
 typeof(a)
 
-b <- 1
+b <- 1L
 typeof(b)
+
+c <- 12.3
+typeof(c)
 ```
 
 ### ¿Por qué usar `R`?
@@ -263,11 +268,22 @@ knitr::include_graphics("images/RStudio.jpg")
 
 ## 2. Operaciones básicas R
 
+Antes de realizar operaciones sobre algunos objetos en R, veamos cuales de estas podemos realizar.
+
+* Suma y diferencia (+, -)
+* Producto y división (*, /)
+* Potencia (^,**)
+* Residuo (%%)
+* Mayor, mayor o igual, menor, menor o igual, igual y diferente que (>, >=, <, <=, ==, !=)
+* Conjunción (&, &&), disyunción (|, ||)
+
 ### Operaciones con vectores 
 
 Generemos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
 
 Operaciones de suma.
+
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.1
 
 ```{r addition_1, exercise = TRUE}
 #Vector de prueba
@@ -287,11 +303,31 @@ test_3 <- x + c(8:1)
 test_3
 ```
 
-De igual forma podemos utilizar la resta, te invito a que restablezcas el vector de prueba a partir de los vectores test_1, test_2, test_3. Para ello copia los vectores que realizamos en el fragmento de código anterior y logra crear de nuevo el vector x. Dale confio en que podrás hacerlo.
+De igual forma podemos utilizar la resta, te invito a que restablezcas el vector de prueba `x` a partir de los vectores test_1, test_2, test_3. Para ello copia los vectores que realizamos en el fragmento de código anterior y crear de nuevo el vector `x`. Vamos confio en que podrás hacerlo.
 
-aca iria la evaluacion de codigo para lo anterior
+#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.1
+
+```{r exe_1, exercise = TRUE}
+test_1 <- c(1:8)+ 2
+test_2 <- c(1:8) + c(10,20)
+test_3 <- c(1:8) + c(8:1)
+
+# Ahora es tu turno
+```
+
+```{r exe_1-solution}
+test_1 - 2
+test_2 - c(10,20)
+test_3 - c(8:1)
+```
+
+```{r exe_1-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
 
 Vamos ahora con operación de producto. 
+
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.2
 
 ```{r addition_2, exercise = TRUE}
 #Vector de prueba
@@ -310,4 +346,49 @@ test_2
 test_3 <- y * c(10:1) 
 test_3
 ```
+
+Ya que vimos cómo funciona el producto en R, te propongo que utilizando la operación inversa restablezcas el vector de prueba `y`. Intentalo, se que podrás hacerlo.
+
+#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.2
+
+```{r exe_2, exercise = TRUE}
+test_1 <- seq(2,20,2) * 2
+test_2 <- seq(2,20,2) * c(5,7)
+test_3 <- seq(2,20,2) * c(10:1) 
+
+# Ahora es tu turno
+```
+
+```{r exe_2-solution}
+test_1 / 2
+test_2 / c(10,20)
+test_3 / c(10:1)
+```
+
+```{r exe_2-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Hagamos un ejercicio un poco más corto para la potenciación y su operación inversa. Halla la séptima potencia del 4 y la raíz cúbica del 27, te dejamos un par de ejemplos para que puedas guiarte. 
+
+#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.3
+
+```{r exe_3, exercise = TRUE}
+8**5
+16**(1/4)
+
+# Ahora es tu turno
+```
+
+```{r exe_3-solution}
+4**7
+27**(1/3)
+```
+
+```{r exe_3-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy útiles  en cualquier campo de la programación.
+
 
