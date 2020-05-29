@@ -266,6 +266,8 @@ knitr::include_graphics("images/RStudio.jpg")
 
 + Los archivos / las gráficas / los paquetes / la ayuda
 
+<!--colocar sobre rscloud-->
+
 ## 2. Operaciones básicas R
 
 Antes de realizar operaciones sobre algunos objetos en R, veamos cuales de estas podemos realizar.
