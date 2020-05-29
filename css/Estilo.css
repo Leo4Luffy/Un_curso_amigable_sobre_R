@@ -119,3 +119,54 @@ h5 {
     font-size: 16px;
 }
 
+/*div tips*/
+div.caution {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: #808080;
+  background-color: #ffffff;
+  border: double 4px #808080;
+}
+
+div.caution {
+  background-image: url("caution.png");
+}
+
+div.example {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: #808080;
+  background-color: #ffffff;
+  border: double 4px #FFFF00;
+}
+
+div.example {
+  background-image: url("example.png");
+}
+
+div.exercise {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: #808080;
+  background-color: #ffffff;
+  border: double 4px #7FFFD4;
+}
+
+div.exercise {
+  background-image: url("exercise.png");
+}
