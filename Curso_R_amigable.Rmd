@@ -87,20 +87,22 @@ data.frame(
         axis.title = element_blank())
 ```
 
-A lo largo del curso podrá encontrar ejemplos de código y ejercicios de codificación. Abajo encontrara como podrán ser usados:
+A lo largo del curso podrá encontrar fragmentos de código para realizar ejemplos y ejercicios de codificación. Abajo encontrara como podrán ser usados:
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` = Código de ejemplo.
-
+:::example
+#### Fragmentos de código para realizar ejemplos
 Los ejemplos contienen código previamente escrito para que pueda explorarlo y ejecutarlo presionando el botón amarillo "Run Code" (ejecutar) en la esquina superior derecha. Puede actualizar el código en cualquiera de los ejemplos presionando "Start Over" (iniciar de nuevo) en la esquina superior izquierda y el código se restablecerá automáticamente al valor predeterminado.
+:::
 
 ```{r addition_ejemplos, exercise = TRUE}
 
 
 ```
 
-#### `r fa("fas fa-laptop-code", fill = "black")` = Ejercicio de codificación.
-
-Aquí se indican ejercicios prácticos de codificación donde se le pedirá que escriba el código manualmente. Si no da con la solución, puede buscar ayuda dando clic en los botones "Solution" (solución) o "Hints" (sugerencias). En la mayoría de los casos el código podrá ser evaluado con el botón “Submit Answer” (Enviar Respuesta), indicándole cuando la respuesta sea acertada.
+:::exercise
+#### Fragmentos de código para realizar ejercicios de codificación
+Aquí se indican ejercicios prácticos de codificación donde se le pedirá que escriba el código manualmente. Si no da con la solución, puede buscar ayuda dando clic en los botones "Solution" (solución) o "Hints" (sugerencias). En la mayoría de los casos el código podrá ser evaluado con el botón "Submit Answer" (Enviar Respuesta), indicándole cuando la respuesta sea acertada.
+:::
 
 ```{r exercise_ejercicios, exercise = TRUE}
 
@@ -110,6 +112,13 @@ Aquí se indican ejercicios prácticos de codificación donde se le pedirá que 
 
 Ejercicio_código
 ```
+
+También se encontrara con el siguiente bloque informativo:
+
+:::caution
+#### Bloque informativo de aclaración
+En ocasiones se dara alguna recomendación sobre un tema. Este bloque se usará para llevar a cabo esto.
+:::
 
 <br>
 
@@ -156,11 +165,11 @@ un programa intermedio llamado __intérprete__ (IDE).
 
 + __Orientado a objetos__: `R` realiza acciones sobre esos objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 1.1
+:::example
+#### Ejemplo 1.1
+:::
 
 ```{r addition_eje, exercise = TRUE}
-
-# Para asignar un tipo de dato a un objeto se suele emplear el simbolo "<-"
 
 a <- 12
 
@@ -171,12 +180,18 @@ c <- matrix(data = 1:4,
             ncol = 2)
 ```
 
+:::caution
+Para crear un objeto en `R`, se debe hacer la __asignación__ del objeto. Para hacer una asignación, se suele emplear el simbolo __<-__. Por ejemplo la notación __a <- ...__, asigna __...__ (lo que se quiere almacenar) al objeto __a__.
+:::
+
 + __Multiplataforma__: el intérprete de `R` está disponible en muchas plataformas (Linux, Windows, UNIX, Mac OS, etc), por lo que podrá ejecutarse en muchos computadores.
 
 + __Tipado dinámico__: se refiere a que no es necesario
 declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 1.2
+:::example
+#### Ejemplo 1.2
+:::
 
 ```{r addition, exercise = TRUE}
 
@@ -209,8 +224,6 @@ knitr::include_graphics("images/Rday.jpg")
 
 Finalmente, el uso del `R` garantiza que otro investigador pueda repetir el experimento, comprobar los resultados obtenidos y estar en la condición de ampliar o refutar las interpretaciones del estudio realizado.
 
-<!--es importante resaltar que la reproducibilidad es uno de los principios de la investigación científica. E-->
-
 ```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 
 knitr::include_graphics("images/al_principio_pero_ahora.jpg")
@@ -218,9 +231,9 @@ knitr::include_graphics("images/al_principio_pero_ahora.jpg")
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
 
-### Instalación de `R` base y `RStudio`
+### Instalación de `R` base y RStudio
 
-`R` base es el software básico que contiene el lenguaje de programación `R`. `RStudio` es un software que facilita la programación en `R`.
+`R` base es el software básico que contiene el lenguaje de programación `R`. RStudio es un software que facilita la programación en `R`.
 
 #### `R` base:
 
@@ -241,13 +254,13 @@ knitr::include_graphics("images/consola_R_base.jpg")
   </div>
 </div>
 
-#### `RStudio`:
+#### RStudio:
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-  Se puede instalar directamente desde la [página de `RStudio`](https://rstudio.com/products/rstudio/download/). Hay se encuentran los archivos de instalación tanto en windows como en Linux.
+  Se puede instalar directamente desde la [página de RStudio](https://rstudio.com/products/rstudio/download/). Hay se encuentran los archivos de instalación tanto en windows como en Linux.
   
-  Cuando se abre `RStudio` se pueden ver cuatro paneles: 
+  Cuando se abre RStudio se pueden ver cuatro paneles: 
   </div>
   <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
@@ -258,15 +271,87 @@ knitr::include_graphics("images/RStudio.jpg")
   </div>
 </div>
 
-+ La fuente: su libreta de notas para el código
++ La fuente: la libreta de notas para el código
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/source_RStudio.jpg")
+```
+
+:::caution
+Un texto insertado en el código el cual es omitido en la ejecución, se denomina como __comentario__. En `R`, un comentario es un texto que comienza con el símbolo __#__ y se extiende hasta el final de la línea. Este permite que `R` no intente interpretarlo como parte del código.
+:::
 
 + La consola: el corazón de `R`
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/console.jpg")
+```
+
 + El ambiente / el historial
 
-+ Los archivos / las gráficas / los paquetes / la ayuda
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
 
-<!--colocar sobre rscloud-->
+knitr::include_graphics("images/environment.jpg")
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/history.jpg")
+```
+  </div>
+</div>
+
++ Los archivos / las gráficas / la ayuda / los paquetes
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/files.jpg")
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/plots.jpg")
+```
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/help.jpg")
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/packages.jpg")
+```
+  </div>
+</div>
+
+### Los paquetes en `R`
+
+### RStudio cloud
+
+### Trabajando con proyectos
+
+```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
+
+knitr::include_graphics("images/Proyectos.jpg")
+```
+
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
 
 ## 2. Operaciones básicas R
 
