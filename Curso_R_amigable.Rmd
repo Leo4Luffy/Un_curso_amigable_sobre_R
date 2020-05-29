@@ -158,7 +158,7 @@ un programa intermedio llamado __intérprete__ (IDE).
 
 #### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 1.1
 
-```{r addition_3, exercise = TRUE}
+```{r addition_eje, exercise = TRUE}
 
 # Para asignar un tipo de dato a un objeto se suele emplear el simbolo "<-"
 
@@ -312,7 +312,7 @@ De igual forma podemos utilizar la resta, te invito a que restablezcas el vector
 ```{r exe_1, exercise = TRUE}
 test_1 <- c(1:8)+ 2
 test_2 <- c(1:8) + c(10,20)
-test_3 <- c(1:8) + c(8:1)
+test_3 <- c(1:8) + 8:1
 
 # Ahora es tu turno
 ```
@@ -320,7 +320,7 @@ test_3 <- c(1:8) + c(8:1)
 ```{r exe_1-solution}
 test_1 - 2
 test_2 - c(10,20)
-test_3 - c(8:1)
+test_3 - 8:1
 ```
 
 ```{r exe_1-check}
@@ -345,7 +345,7 @@ test_2 <- y * c(5,7)
 test_2
 
 #Producto uno a uno sobre nuestro vector de prueba 
-test_3 <- y * c(10:1) 
+test_3 <- y * 10:1 
 test_3
 ```
 
@@ -356,7 +356,7 @@ Ya que vimos cómo funciona el producto en R, te propongo que utilizando la oper
 ```{r exe_2, exercise = TRUE}
 test_1 <- seq(2,20,2) * 2
 test_2 <- seq(2,20,2) * c(5,7)
-test_3 <- seq(2,20,2) * c(10:1) 
+test_3 <- seq(2,20,2) * 10:1 
 
 # Ahora es tu turno
 ```
@@ -364,7 +364,7 @@ test_3 <- seq(2,20,2) * c(10:1)
 ```{r exe_2-solution}
 test_1 / 2
 test_2 / c(10,20)
-test_3 / c(10:1)
+test_3 / 10:1
 ```
 
 ```{r exe_2-check}
@@ -391,6 +391,75 @@ Hagamos un ejercicio un poco más corto para la potenciación y su operación in
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy útiles  en cualquier campo de la programación.
+Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy útiles  en cualquier campo de la programación y del análisis. Crearemos un vector de prueba y de él seleccionaremos los elementos que cumplan la condición específica de ser menores a 20.
 
+#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.3
+```{r addition_3, exercise = TRUE}
+#Vector de prueba
+vec <- seq(1,100,length.out = 20)
+vec
+
+#Condición
+filt_1 <- vec < 20
+filt_1
+
+#Selección
+vec_filt <- vec[filt_1]
+vec_filt
+
+```
+
+Encontremos ahora dentro de un vector de prueba los números diferentes de los pares, de igual manera te invito a que encuentres los números pares modificando el ejercicio planteado.
+
+#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.4
+
+```{r exe_4, exercise = TRUE}
+#Vector de prueba
+vec <- seq(1,150,3)
+vec
+
+#Condición y selección
+vec[vec%%2 != 0]
+
+# Ahora es tu turno
+
+```
+
+```{r exe_4-solution}
+vec[vec%%2 != 0]
+```
+
+```{r exe_4-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Veamos ahora una ejercicio con dos condiciones simultáneas y deberás realizar una operación similar para nuestro vector de prueba, en el cual elegirás los valores mayores a 15 y menores a 80.
+
+* `r fa("far fa-sticky-note")`Recuerda los operadores lógicos que nombramos en la parte inicial de esta sección.
+
+#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.5
+
+```{r exe_5, exercise = TRUE}
+#Vector de prueba
+vec <- seq(1,100,length.out = 20)
+vec
+
+#Condición y selección
+vec[vec>90 | vec<45]
+
+# Ahora es tu turno
+
+```
+
+```{r exe_5-solution}
+vec[vec>15 &  vec<80]
+```
+
+```{r exe_5-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+### Operaciones con matrices
+
+zdcz
 
