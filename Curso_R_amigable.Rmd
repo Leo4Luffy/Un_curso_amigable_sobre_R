@@ -15,8 +15,8 @@ library(jpeg)
 library(gridGraphics)
 library(curl)
 library(fontawesome)
-library(showtext)
 library(gradethis)
+library(showtext)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -353,13 +353,13 @@ knitr::include_graphics("images/Proyectos.jpg")
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
 
-## 2. Operaciones básicas R
+## 2. Operaciones básicas `R`
 
-Antes de realizar operaciones sobre algunos objetos en R, veamos cuales de estas podemos realizar.
+Antes de realizar operaciones sobre algunos objetos en `R`, veamos cuales de estas podemos realizar.
 
 * Suma y diferencia (+, -)
 * Producto y división (*, /)
-* Potencia (^,**)
+* Potencia (^, **)
 * Residuo (%%)
 * Mayor, mayor o igual, menor, menor o igual, igual y diferente que (>, >=, <, <=, ==, !=)
 * Conjunción (&, &&), disyunción (|, ||)
@@ -370,7 +370,9 @@ Generemos un vector de prueba y realicemos algunas operaciones aritméticas bás
 
 Operaciones de suma.
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.1
+:::example
+#### Ejemplo 2.1
+:::
 
 ```{r addition_1, exercise = TRUE}
 #Vector de prueba
@@ -392,7 +394,9 @@ test_3
 
 De igual forma podemos utilizar la resta, te invito a que restablezcas el vector de prueba `x` a partir de los vectores test_1, test_2, test_3. Para ello copia los vectores que realizamos en el fragmento de código anterior y crear de nuevo el vector `x`. Vamos confio en que podrás hacerlo.
 
-#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.1
+:::exercise
+#### Ejercicio 2.1
+:::
 
 ```{r exe_1, exercise = TRUE}
 test_1 <- c(1:8)+ 2
@@ -414,7 +418,9 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 Vamos ahora con operación de producto. 
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.2
+:::example
+#### Ejemplo 2.2
+:::
 
 ```{r addition_2, exercise = TRUE}
 #Vector de prueba
@@ -436,7 +442,9 @@ test_3
 
 Ya que vimos cómo funciona el producto en R, te propongo que utilizando la operación inversa restablezcas el vector de prueba `y`. Intentalo, se que podrás hacerlo.
 
-#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.2
+:::exercise
+#### Ejercicio 2.2
+:::
 
 ```{r exe_2, exercise = TRUE}
 test_1 <- seq(2,20,2) * 2
@@ -458,7 +466,9 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 Hagamos un ejercicio un poco más corto para la potenciación y su operación inversa. Halla la séptima potencia del 4 y la raíz cúbica del 27, te dejamos un par de ejemplos para que puedas guiarte. 
 
-#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.3
+:::exercise
+#### Ejercicio 2.3
+:::
 
 ```{r exe_3, exercise = TRUE}
 8**5
@@ -478,7 +488,10 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy útiles  en cualquier campo de la programación y del análisis. Crearemos un vector de prueba y de él seleccionaremos los elementos que cumplan la condición específica de ser menores a 20.
 
-#### `r fa("fas fa-chalkboard-teacher", fill = "black")` Ejemplo 2.3
+:::example
+#### Ejemplo 2.3
+:::
+
 ```{r addition_3, exercise = TRUE}
 #Vector de prueba
 vec <- seq(1,100,length.out = 20)
@@ -496,7 +509,9 @@ vec_filt
 
 Encontremos ahora dentro de un vector de prueba los números diferentes de los pares, de igual manera te invito a que encuentres los números pares modificando el ejercicio planteado.
 
-#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.4
+:::exercise
+#### Ejercicio 2.4
+:::
 
 ```{r exe_4, exercise = TRUE}
 #Vector de prueba
@@ -522,7 +537,9 @@ Veamos ahora una ejercicio con dos condiciones simultáneas y deberás realizar 
 
 * `r fa("far fa-sticky-note")`Recuerda los operadores lógicos que nombramos en la parte inicial de esta sección.
 
-#### `r fa("fas fa-laptop-code", fill = "black")` Ejercicio 2.5
+:::exercise
+#### Ejercicio 2.5
+:::
 
 ```{r exe_5, exercise = TRUE}
 #Vector de prueba
