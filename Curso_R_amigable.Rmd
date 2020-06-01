@@ -436,16 +436,47 @@ old.packages() # Para comprobar que paquetes necesitan ser actualizados.
 update.packages() # Para actualizar todo los paquetes instalados.
 ```
 
-### RStudio cloud
-
 ### Trabajando con proyectos
 
-```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
+Un __directorio de trabajo__ en `R` es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde `R` buscara los archivos para importarlos y al que serán exportados.
+
+Con la función `getwd()` se puede encontrar el directorio en el que se esta trabajando.
+
+:::example
+#### Ejemplo 1.8
+:::
+
+<!--Configurar un directorio de trabajo correctamente también ayuda a desarrollar buenos hábitos que conducen a un análisis reproducible.-->
+
+```{r addition_10, exercise = TRUE}
+
+getwd() # Da como resultado la ruta "/home/leo/Escritorio/github/Un_curso_amigable_sobre_R".
+```
+
+Para cambiar el directorio de trabajo se puede emplear la función `setwd()`, dando como argumento la ruta del directorio que se quiere usar: `setwd("/home/leo/Escritorio/otro_directorio")`
+
+Sin embargo como señala [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/), con la función `setwd()` es practicamente imposible para cualquier otra persona que no sea el autor original del código `R`, en su computadora, hacer que las rutas de archivo funcionen.<!--"La posibilidad de que el comando setwd() tenga el efecto deseado (hacer que las rutas de archivo funcionen) para cualquier persona además de su autor es 0%. También es poco probable que funcione para el autor dentro de uno o dos años o para computadoras a partir de ahora. El proyecto no es autónomo y portátil. Para recrear y tal vez extender esta trama, el destinatario afortunado deberá editar manualmente uno o más caminos para reflejar dónde ha aterrizado el proyecto en su máquina. Cuando haces esto por 73a vez en 2 días, mientras marcas una tarea, comienzas a fantasear con encender la computadora del perpetrador."-->
+
+```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
 
 knitr::include_graphics("images/Proyectos.jpg")
 ```
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+
+Un proyecto es simplemente un directorio de trabajo designado como un archivo __.RProj__. Cuando abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo __.RProj__.
+
+
+<!--
+<div class="row">
+  <div class="col-md-5" markdown="1">
+
+  </div>
+  <div class="col-md-7" markdown="1">
+
+  </div>
+</div>
+-->
 
 ## 2. Operaciones básicas R
 
