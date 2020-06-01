@@ -734,9 +734,32 @@ test_2
 #Suma sobre la matriz de prueba (columna)
 test_3 <- m + seq(7,1,length.out=20) 
 test_3
-
 ```
 
+Ahora veamos cómo funcionan las operaciones entre matrices.
+
+:::example
+#### Ejemplo 2.2.2
+:::
+
+```{r addition_222, exercise = TRUE}
+#Matriz de prueba 1
+m <- 11:30
+dim(m) <- c(5,4)
+
+#MAtriz de prueba 2
+#Producto sobre cada elemento de la matriz de prueba
+test_1 <- m*3
+test_1
+
+#Potencia repetitiva sobre los elementos de la matriz de prueba (columna)
+test_2 <- m **c(2,3)
+test_2
+
+#Suma sobre la matriz de prueba (columna)
+test_3 <- m + seq(7,1,length.out=20) 
+test_3
+```
 
 </details>
 
