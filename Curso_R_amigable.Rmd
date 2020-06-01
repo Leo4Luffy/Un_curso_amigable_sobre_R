@@ -35,7 +35,7 @@ knitr::include_graphics("images/Mundo_R.jpg")
 
 Este curso pretende ser una introducción básica del `R`. Su objetivo consiste en enseñar habilidades en la limpieza, manipulación y visualización de datos mediante el uso del `R`. Tenga en cuenta que este curso no pretende ser un sustituto de un curso completo de programación o de estadística.
 
-```{r eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
+```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
 
 hex_tidyverse <- readJPEG('images/tidyverse.jpg', native = TRUE)
 hex_tidyverse <- rasterGrob(hex_tidyverse, interpolate = FALSE)
@@ -466,7 +466,6 @@ knitr::include_graphics("images/Proyectos.jpg")
 
 Un proyecto es simplemente un directorio de trabajo designado como un archivo __.RProj__. Cuando abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo __.RProj__.
 
-
 <!--
 <div class="row">
   <div class="col-md-5" markdown="1">
@@ -477,6 +476,30 @@ Un proyecto es simplemente un directorio de trabajo designado como un archivo __
   </div>
 </div>
 -->
+
+```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
+
+carpeta <- readJPEG('images/imagen_carpeta.jpg', native = TRUE)
+carpeta <- rasterGrob(carpeta, interpolate = FALSE)
+
+rstudio_imagen <- readJPEG('images/rstudio.jpg', native = TRUE)
+rstudio_imagen <- rasterGrob(rstudio_imagen, interpolate = FALSE)
+
+data.frame(
+  x = c(1.0:5.0), y = c(1.0:5.0)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotation_custom(carpeta, xmin = 1.0, xmax = 1.7, ymin = 4.3, ymax = 5.0) +
+  annotate(geom = 'text', x = 2.6, y = 4.65, label = 'Tu nombre de carpeta del proyecto', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.33, xmax = 1.38, ymin = 1.2, ymax = 4.3, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotation_custom(rstudio_imagen, xmin = 1.8, xmax = 2.5, ymin = 3.5, ymax = 4.2)
+  #scale_x_continuous(limits = c(2, 4.6)) +
+  #theme_void() +
+  #theme(axis.text = element_blank(),
+   #     axis.ticks = element_blank(),
+    #    axis.title = element_blank())
+```
 
 ## 2. Operaciones básicas R
 
