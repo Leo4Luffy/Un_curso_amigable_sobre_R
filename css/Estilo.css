@@ -119,6 +119,20 @@ h5 {
     font-size: 16px;
 }
 
+/*Opciones para secciones resumen*/
+details > summary {
+  color: black;
+  font-family: 'Roboto Slab', serif;
+  padding: 4px;
+  font-size:18px;
+  size:100px;
+  width: 350px;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 1px 1px 2px #bbbbbb;
+  cursor: pointer;
+}
+
 /*div tips*/
 div.caution {
   padding: 1em;

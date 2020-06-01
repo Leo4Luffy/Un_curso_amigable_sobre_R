@@ -458,17 +458,17 @@ Antes de realizar operaciones sobre algunos objetos en `R`, veamos cuales de est
 * Mayor, mayor o igual, menor, menor o igual, igual y diferente que (>, >=, <, <=, ==, !=)
 * Conjunción (&, &&), disyunción (|, ||)
 
-### Operaciones con vectores 
+<details><summary>2.1 Operaciones con vectores </summary> 
 
 Generemos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
 
 Operaciones de suma.
 
 :::example
-#### Ejemplo 2.1
+#### Ejemplo 2.1.1
 :::
 
-```{r addition_1, exercise = TRUE}
+```{r addition_211, exercise = TRUE}
 #Vector de prueba
 x <- c(1:8)
 x
@@ -477,7 +477,7 @@ x
 test_1 <- x+2
 test_1
 
-#Suma sobre repetitiva sobre los elementos del vector de prueba
+#Suma repetitiva sobre los elementos del vector de prueba
 test_2 <- x + c(10,20)
 test_2
 
@@ -489,10 +489,10 @@ test_3
 De igual forma podemos utilizar la resta, te invito a que restablezcas el vector de prueba `x` a partir de los vectores test_1, test_2, test_3. Para ello copia los vectores que realizamos en el fragmento de código anterior y crear de nuevo el vector `x`. Vamos confio en que podrás hacerlo.
 
 :::exercise
-#### Ejercicio 2.1
+#### Ejercicio 2.1.1
 :::
 
-```{r exe_1, exercise = TRUE}
+```{r exe_211, exercise = TRUE}
 test_1 <- c(1:8)+ 2
 test_2 <- c(1:8) + c(10,20)
 test_3 <- c(1:8) + 8:1
@@ -500,23 +500,23 @@ test_3 <- c(1:8) + 8:1
 # Ahora es tu turno
 ```
 
-```{r exe_1-solution}
+```{r exe_211-solution}
 test_1 - 2
 test_2 - c(10,20)
 test_3 - 8:1
 ```
 
-```{r exe_1-check}
+```{r exe_211-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
 Vamos ahora con operación de producto. 
 
 :::example
-#### Ejemplo 2.2
+#### Ejemplo 2.1.2
 :::
 
-```{r addition_2, exercise = TRUE}
+```{r addition_212, exercise = TRUE}
 #Vector de prueba
 y <- seq(2,20,2)
 y
@@ -537,10 +537,10 @@ test_3
 Ya que vimos cómo funciona el producto en R, te propongo que utilizando la operación inversa restablezcas el vector de prueba `y`. Intentalo, se que podrás hacerlo.
 
 :::exercise
-#### Ejercicio 2.2
+#### Ejercicio 2.1.2
 :::
 
-```{r exe_2, exercise = TRUE}
+```{r exe_212, exercise = TRUE}
 test_1 <- seq(2,20,2) * 2
 test_2 <- seq(2,20,2) * c(5,7)
 test_3 <- seq(2,20,2) * 10:1 
@@ -548,45 +548,45 @@ test_3 <- seq(2,20,2) * 10:1
 # Ahora es tu turno
 ```
 
-```{r exe_2-solution}
+```{r exe_212-solution}
 test_1 / 2
 test_2 / c(10,20)
 test_3 / 10:1
 ```
 
-```{r exe_2-check}
+```{r exe_212-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
 Hagamos un ejercicio un poco más corto para la potenciación y su operación inversa. Halla la séptima potencia del 4 y la raíz cúbica del 27, te dejamos un par de ejemplos para que puedas guiarte. 
 
 :::exercise
-#### Ejercicio 2.3
+#### Ejercicio 2.1.3
 :::
 
-```{r exe_3, exercise = TRUE}
+```{r exe_213, exercise = TRUE}
 8**5
 16**(1/4)
 
 # Ahora es tu turno
 ```
 
-```{r exe_3-solution}
+```{r exe_213-solution}
 4**7
 27**(1/3)
 ```
 
-```{r exe_3-check}
+```{r exe_213-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
 Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy útiles  en cualquier campo de la programación y del análisis. Crearemos un vector de prueba y de él seleccionaremos los elementos que cumplan la condición específica de ser menores a 20.
 
 :::example
-#### Ejemplo 2.3
+#### Ejemplo 2.1.3
 :::
 
-```{r addition_3, exercise = TRUE}
+```{r addition_213, exercise = TRUE}
 #Vector de prueba
 vec <- seq(1,100,length.out = 20)
 vec
@@ -604,10 +604,10 @@ vec_filt
 Encontremos ahora dentro de un vector de prueba los números diferentes de los pares, de igual manera te invito a que encuentres los números pares modificando el ejercicio planteado.
 
 :::exercise
-#### Ejercicio 2.4
+#### Ejercicio 2.1.4
 :::
 
-```{r exe_4, exercise = TRUE}
+```{r exe_214, exercise = TRUE}
 #Vector de prueba
 vec <- seq(1,150,3)
 vec
@@ -619,11 +619,11 @@ vec[vec%%2 != 0]
 
 ```
 
-```{r exe_4-solution}
-vec[vec%%2 != 0]
+```{r exe_214-solution}
+vec[vec%%2 == 0]
 ```
 
-```{r exe_4-check}
+```{r exe_214-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
@@ -632,10 +632,10 @@ Veamos ahora una ejercicio con dos condiciones simultáneas y deberás realizar 
 * `r fa("far fa-sticky-note")`Recuerda los operadores lógicos que nombramos en la parte inicial de esta sección.
 
 :::exercise
-#### Ejercicio 2.5
+#### Ejercicio 2.1.5
 :::
 
-```{r exe_5, exercise = TRUE}
+```{r exe_215, exercise = TRUE}
 #Vector de prueba
 vec <- seq(1,100,length.out = 20)
 vec
@@ -647,15 +647,42 @@ vec[vec>90 | vec<45]
 
 ```
 
-```{r exe_5-solution}
+```{r exe_215-solution}
 vec[vec>15 &  vec<80]
 ```
 
-```{r exe_5-check}
+```{r exe_215-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-### Operaciones con matrices
+</details>
 
-zdcz
+<details><summary>2.2 Operaciones con matrices </summary> 
+
+Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
+
+:::example
+#### Ejemplo 2.2.1
+:::
+
+```{r addition_221, exercise = TRUE}
+#Matriz de prueba
+m <- matrix(11:30,nrow = 5)
+
+#Producto sobre cada elemento de la matriz de prueba
+test_1 <- m*3
+test_1
+
+#Potencia repetitiva sobre los elementos de la matriz de prueba (columna)
+test_2 <- m **c(2,3)
+test_2
+
+#Suma sobre la matriz de prueba (columna)
+test_3 <- m + seq(7,1,length.out=20) 
+test_3
+
+```
+
+
+</details>
 
