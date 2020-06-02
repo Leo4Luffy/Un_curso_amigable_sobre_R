@@ -52,6 +52,9 @@ hex_dplyr <- rasterGrob(hex_dplyr, interpolate = FALSE)
 hex_ggplot2 <- readJPEG('images/ggplot2.jpg', native = TRUE)
 hex_ggplot2 <- rasterGrob(hex_ggplot2, interpolate = FALSE)
 
+hex_broom <- readJPEG('images/broom.jpg', native = TRUE)
+hex_broom <- rasterGrob(hex_broom, interpolate = FALSE)
+
 hex_rmarkdown <- readJPEG('images/rmarkdown.jpg', native = TRUE)
 hex_rmarkdown <- rasterGrob(hex_rmarkdown, interpolate = FALSE)
 
@@ -78,8 +81,9 @@ data.frame(
   annotation_custom(hex_readr, xmin = 2.1, xmax = 2.3, ymin = 3.1, ymax = 3.5) +
   annotation_custom(hex_tidyr, xmin = 3.1, xmax = 2.3, ymin = 3.1, ymax = 3.5) +
   annotation_custom(hex_dplyr, xmin = 4.1, xmax = 2.3, ymin = 3.14, ymax = 3.54) +
-  annotation_custom(hex_ggplot2, xmin = 3.5, xmax = 3.9, ymin = 3.64, ymax = 4.04) +
-  annotation_custom(hex_rmarkdown, xmin = 4.1, xmax = 4.5, ymin = 2.5, ymax = 2.9) +
+  annotation_custom(hex_ggplot2, xmin = 3.45, xmax = 3.95, ymin = 3.60, ymax = 4.08) +
+  annotation_custom(hex_rmarkdown, xmin = 4.05, xmax = 4.55, ymin = 2.45, ymax = 2.95) +
+  annotation_custom(hex_broom, xmin = 3.55, xmax = 3.95, ymin = 2.05, ymax = 2.45) +
   scale_x_continuous(limits = c(2, 4.6)) +
   theme_void() +
   theme(axis.text = element_blank(),
