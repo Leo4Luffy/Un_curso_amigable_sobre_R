@@ -446,36 +446,43 @@ Con la función `getwd()` se puede encontrar el directorio en el que se esta tra
 #### Ejemplo 1.8
 :::
 
-<!--Configurar un directorio de trabajo correctamente también ayuda a desarrollar buenos hábitos que conducen a un análisis reproducible.-->
-
 ```{r addition_10, exercise = TRUE}
 
 getwd() # Da como resultado la ruta "/home/leo/Escritorio/github/Un_curso_amigable_sobre_R".
 ```
 
-Para cambiar el directorio de trabajo se puede emplear la función `setwd()`, dando como argumento la ruta del directorio que se quiere usar: `setwd("/home/leo/Escritorio/otro_directorio")`
+Para cambiar el directorio de trabajo se puede emplear la función `setwd()`, dando como argumento la ruta del directorio que se quiere usar. 
 
-Sin embargo como señala [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/), con la función `setwd()` es practicamente imposible para cualquier otra persona que no sea el autor original del código `R`, en su computadora, hacer que las rutas de archivo funcionen.<!--"La posibilidad de que el comando setwd() tenga el efecto deseado (hacer que las rutas de archivo funcionen) para cualquier persona además de su autor es 0%. También es poco probable que funcione para el autor dentro de uno o dos años o para computadoras a partir de ahora. El proyecto no es autónomo y portátil. Para recrear y tal vez extender esta trama, el destinatario afortunado deberá editar manualmente uno o más caminos para reflejar dónde ha aterrizado el proyecto en su máquina. Cuando haces esto por 73a vez en 2 días, mientras marcas una tarea, comienzas a fantasear con encender la computadora del perpetrador."-->
+:::example
+#### Ejemplo 1.9
+:::
 
-```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+```{r addition_11, exercise = TRUE}
+
+setwd(dir = "/home/leo/Escritorio/Curso_estadística") # Se cambia el directorio de trabajo a la carpeta Curso_estadistica.
+```
+
+Sin embargo como señala [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/), con la función `setwd()` es practicamente imposible para cualquier otra persona que no sea el autor original del código `R`, en su computadora, hacer que las rutas de archivo funcionen.<!--"La posibilidad de que el comando setwd() tenga el efecto deseado (hacer que las rutas de archivo funcionen) para cualquier persona además de su autor es 0%. También es poco probable que funcione para el autor dentro de uno o dos años o para computadoras a partir de ahora. El proyecto no es autónomo y portátil. Para recrear y tal vez extender esta trama, el destinatario afortunado deberá editar manualmente uno o más caminos para reflejar dónde ha aterrizado el proyecto en su máquina. Cuando haces esto por 73a vez en 2 días, mientras marcas una tarea, comienzas a fantasear con encender la computadora del perpetrador."--> La solución consistiría en trabajar con __proyectos__. 
+
+<div class="row">
+  <div class="col-md-5" markdown="1">
+  Un proyecto es un directorio de trabajo nombrado como un archivo __.Rproj__. Cuando se abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo __.Rproj__.
+  
+  Configurar un directorio de trabajo correctamente también ayuda a desarrollar buenos hábitos que conducen a un __análisis reproducible__.
+  </div>
+  <div class="col-md-7" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
 
 knitr::include_graphics("images/Proyectos.jpg")
 ```
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
-
-Un proyecto es simplemente un directorio de trabajo designado como un archivo __.RProj__. Cuando abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo __.RProj__.
-
-<!--
-<div class="row">
-  <div class="col-md-5" markdown="1">
-
-  </div>
-  <div class="col-md-7" markdown="1">
-
   </div>
 </div>
--->
+
+#### Estructurando el directorio de trabajo
+
+Además de usar proyectos, también es una buena práctica estructurar el directorio de una manera que ayude a cualquier persona con la que se esta colaborando, o una versión futura de usted intente reproducir algunos análisis.
 
 ```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
 
@@ -491,14 +498,42 @@ data.frame(
   ggplot(aes(x, y)) +
   geom_blank() +
   annotation_custom(carpeta, xmin = 1.0, xmax = 1.7, ymin = 4.3, ymax = 5.0) +
-  annotate(geom = 'text', x = 2.6, y = 4.65, label = 'Tu nombre de carpeta del proyecto', family = 'gochi', size = 10.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.33, xmax = 1.38, ymin = 1.2, ymax = 4.3, colour = 'black', fill = 'black', alpha = 0.4) +
-  annotation_custom(rstudio_imagen, xmin = 1.8, xmax = 2.5, ymin = 3.5, ymax = 4.2)
-  #scale_x_continuous(limits = c(2, 4.6)) +
-  #theme_void() +
-  #theme(axis.text = element_blank(),
-   #     axis.ticks = element_blank(),
-    #    axis.title = element_blank())
+  annotate(geom = 'text', x = 2.3, y = 4.72, label = 'Nombre de la carpeta del proyecto', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.33, xmax = 1.38, ymin = 1.43, ymax = 4.3, colour = 'black', fill = 'gray34') +
+  annotation_custom(rstudio_imagen, xmin = 1.65, xmax = 2.15, ymin = 3.9, ymax = 4.4) +
+  annotate(geom = 'rect', xmin = 1.38, xmax = 1.74, ymin = 4.13, ymax = 4.18, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.36, y = 4.15, label = 'Archivo .RProj', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(carpeta, xmin = 1.65, xmax = 2.15, ymin = 3.4, ymax = 3.9) +
+  annotate(geom = 'rect', xmin = 1.38, xmax = 1.74, ymin = 3.63, ymax = 3.68, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.21, y = 3.65, label = 'Datos', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(carpeta, xmin = 1.65, xmax = 2.15, ymin = 2.9, ymax = 3.4) +
+  annotate(geom = 'rect', xmin = 1.38, xmax = 1.74, ymin = 3.13, ymax = 3.18, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.25, y = 3.15, label = 'Código', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.85, xmax = 1.88, ymin = 1.86, ymax = 2.9, colour = 'black', fill = 'gray34') +
+  annotation_custom(carpeta, xmin = 2.05, xmax = 2.45, ymin = 2.5, ymax = 2.9) +
+  annotate(geom = 'rect', xmin = 1.88, xmax = 2.12, ymin = 2.71, ymax = 2.76, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.63, y = 2.74, label = 'Funciones', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(rstudio_imagen, xmin = 2.05, xmax = 2.45, ymin = 2.1, ymax = 2.5) +
+  annotate(geom = 'rect', xmin = 1.88, xmax = 2.12, ymin = 2.3, ymax = 2.35, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.64, y = 2.34, label = 'Análisis A', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(rstudio_imagen, xmin = 2.05, xmax = 2.45, ymin = 1.7, ymax = 2.1) +
+  annotate(geom = 'rect', xmin = 1.88, xmax = 2.12, ymin = 1.86, ymax = 1.91, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.64, y = 1.94, label = 'Análisis B', family = 'gochi', size = 10.4, colour = 'black') +
+  annotation_custom(carpeta, xmin = 1.65, xmax = 2.15, ymin = 1.2, ymax = 1.7) +
+  annotate(geom = 'text', x = 2.3, y = 1.5, label = 'Resultados', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.38, xmax = 1.74, ymin = 1.43, ymax = 1.48, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'rect', xmin = 1.85, xmax = 1.88, ymin = 0.62, ymax = 1.2, colour = 'black', fill = 'gray34') +
+  annotation_custom(carpeta, xmin = 2.05, xmax = 2.45, ymin = 0.8, ymax = 1.2) +
+  annotation_custom(carpeta, xmin = 2.05, xmax = 2.45, ymin = 0.4, ymax = 0.8) +
+  annotate(geom = 'rect', xmin = 1.88, xmax = 2.12, ymin = 1.02, ymax = 1.07, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'rect', xmin = 1.88, xmax = 2.12, ymin = 0.62, ymax = 0.67, colour = 'black', fill = 'gray34') +
+  annotate(geom = 'text', x = 2.56, y = 1.0, label = 'Gráficos', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.55, y = 0.6, label = 'Datos', family = 'gochi', size = 10.4, colour = 'black') +
+  scale_x_continuous(limits = c(1, 4.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
 ```
 
 ## 2. Operaciones básicas R
