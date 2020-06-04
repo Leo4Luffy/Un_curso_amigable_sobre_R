@@ -5,8 +5,8 @@ account: jorge-leonardo-lopez-martinez
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2350747
-bundleId: 3221146
+bundleId: 3224615
 url: https://jorge-leonardo-lopez-martinez.shinyapps.io/Curso_R_amigable/
-when: 1591152591.13922
+when: 1591209763.38884
 asMultiple: FALSE
 asStatic: FALSE

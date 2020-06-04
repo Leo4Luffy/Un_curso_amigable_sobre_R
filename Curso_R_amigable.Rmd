@@ -130,14 +130,16 @@ En ocasiones se dara alguna recomendación sobre un tema. Este bloque se usará 
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-  __Jorge Leonardo López Martínez__ es zootecnista con interés en el uso de la programación aplicada al campo de la genética animal.
+  __Jorge Leonardo López Martínez__ es zootecnista con interés en el uso de la programación y la bioestadística aplicada al campo de la genética animal.
   <HR>
+  <i class="fab fa-black-tie"></i> [leo4luffy.github.io](https://leo4luffy.github.io/)<br>
   <i class="fas fa-envelope"></i> jollopezma@unal.edu.co<br>
   <i class="fa fa-github"></i> [Leo4Luffy](https://github.com/Leo4Luffy)
   </div>
   <div class="col-md-6" markdown="1">
   __Duvan Ariel Nieves Ruiz__ es estudiante de ingeniería ambiental apasionado por el software libre con interés en la ecología y la programación.
   <HR>
+  <i class="fab fa-black-tie"></i> [duvancho321.github.io](https://duvancho321.github.io/)<br>
   <i class="fas fa-envelope"></i> dnieves@unal.edu.co<br>
   <i class="fa fa-github"></i> [Duvancho321](https://github.com/Duvancho321)
   </div>
@@ -167,7 +169,7 @@ Se trata de un lenguaje __interpretado__ o de script, con __tipado dinámico__, 
 + __Lenguaje interpretado__ o de script: se ejecuta utilizando
 un programa intermedio llamado __intérprete__ (IDE).
 
-+ __Orientado a objetos__: `R` realiza acciones sobre esos objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
++ __Orientado a objetos__: `R` realiza acciones objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
 
 :::example
 #### Ejemplo 1.1.1
@@ -185,7 +187,7 @@ c <- matrix(data = 1:4,
 ```
 
 :::caution
-Para crear un objeto en `R`, se debe hacer la __asignación__ del objeto. Para hacer una asignación, se suele emplear el simbolo __<-__. Por ejemplo la notación __a <- ...__, asigna __...__ (lo que se quiere almacenar) al objeto __a__.
+Para crear nuevos objetos en `R`, se debe hacer la __asignación__ del objeto. La asignación de objetos es la forma de almacenar información. Para hacer una asignación, se suele emplear el simbolo __<-__. Por ejemplo la notación __a <- ...__, asigna __...__ (lo que se quiere almacenar) al objeto __a__.
 :::
 
 + __Multiplataforma__: el intérprete de `R` está disponible en muchas plataformas (Linux, Windows, UNIX, Mac OS, etc), por lo que podrá ejecutarse en muchos computadores.
@@ -207,6 +209,12 @@ typeof(b)
 
 c <- 12.3
 typeof(c)
+
+d <- 1 + 2i
+typeof(d)
+
+e <- c(FALSE, TRUE)
+typeof(e)
 ```
 
 ### 1.2 ¿Por qué usar `R`?
