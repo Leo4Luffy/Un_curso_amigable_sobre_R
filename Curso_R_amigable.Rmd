@@ -561,9 +561,113 @@ Antes de realizar operaciones sobre algunos objetos en `R`, veamos cuales de est
 * Mayor, mayor o igual, menor, menor o igual, igual y diferente que (>, >=, <, <=, ==, !=)
 * Conjunción (&, &&), disyunción (|, ||)
 
+### Indexación
+
+Dentro de los múltiples objetos de R sean estos simples como un vector o compuestos como un dataframe debemos tener claro el manejo de nuestra información, por lo cual es necesario saber cómo acceder a ella, segmentarla, seleccionarla y/o cambiarla. Para cualquiera de los casos utilizamos la indexación, lo cual significa que los elementos de nuestros objetos están identificados usualmente mediante un índice entero que inicia con el número uno `[1]`.
+
+En las secciones posteriores exploraremos cada objeto con detalle, abordando las distintas operaciones que podemos realizar sobre cada uno de ellos incluyendo la segmentación, selección y Modificación.
+
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r,echo=F, comment=""}
+print("[1][2][3][4][5][6][7][8][9]")
+11:19
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r,echo=F,comment=""}
+matrix(1:25,nrow = 5)
+```
+  </div>
+</div>
+
+### Coerción
+Existe una forma de convertir el tipo de un vectoro matriz a otro tipo y para ello contamos con funciones base del tipo `as.*`
+
++------------------+--------------------------------------+
+| Función          | Acción                               |
++==================+======================================+
+| `as.character()` | Convertir objetos a tipo caracter    |
++------------------+--------------------------------------+
+| `as.complex()`   | Convertir objetos a tipo complejo    |
++------------------+--------------------------------------+
+| `as.data.frame()`| Convertir objetos a tipo dataframe   |
++------------------+--------------------------------------+
+| `as.Date()`      | Convertir objetos a tipo fecha       |
++------------------+--------------------------------------+
+| `as.double()`    | Convertir objetos a tipo doble       |
++------------------+--------------------------------------+
+| `as.factor()`    | Convertir objetos a tipo factor      |
++------------------+--------------------------------------+
+| `as.integer()`   | Convertir objetos a tipo entero      |
++------------------+--------------------------------------+
+| `as.list()`      | Convertir objetos a tipo lista       |
++------------------+--------------------------------------+
+| `as.logical()`   | Convertir objetos a tipo lógico      |
++------------------+--------------------------------------+
+| `as.matrix()`    | Convertir objetos a tipo matriz      |
++------------------+--------------------------------------+
+| `as.numeric()`   | Convertir objetos a tipo numérico    |
++------------------+--------------------------------------+
+| `as.POSIXct()`   | Convertir objetos a tipo fecha y hora|
++------------------+--------------------------------------+
+| `as.vector()`    | Convertir objetos a tipo vector      |
++------------------+--------------------------------------+
+
+### Funciones de prueba 
+
+En algunos casos diferenciar o reconocer el tipo de un vector o matriz que se tiene no es tan simple, en estos casos utilizamos la función `typeof()`, sin embargo existe también la opción de utilizar funciones que devuelvan valores de `TRUE` o `FALSE`.  En las funciones base de R se encuentran funciones del tipo `is.*`. Una alternativa a las funciones base de r son las del paquete **purr** las cuales son del tipo `is_*`
+
++------------------+-----------------+
+| R base           | purr            |
++==================+=================+
+| `is.logical()`   | `is_logical()`  |
++------------------+-----------------+
+| `is.integer()`   | `is_integer()`  |
++------------------+-----------------+
+| `is.double()`    | `is_double()`   |
++------------------+-----------------+
+| `is.numeric()`   | `is_numeric()`  |
++------------------+-----------------+
+| `is.character()` | `is_character()`|
++------------------+-----------------+
+| `is.list()`      | `is_list()`     |
++------------------+-----------------+
+| `is.vector()`    | `is_vector()`   |
++------------------+-----------------+
+
 <details><summary>2.1 Operaciones con vectores </summary> 
 
-Generemos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
+Antes de iniciar con ejemplos y ejercicios debemos tener presente que un vector es  una colección de elementos de la misma clase atómica, es decir que un vector puede contener n elementos del mismo tipo, ya sean estos números, caracteres, factores o lógicos, nunca podrán ser de dos o más tipos. A medida que veamos ejemplos y realicemos ejercicios aprenderemos distintas formas de crear vectores.
+
+A continuación veremos vectores con las distintas clases atómicas y qué sucede si intentamos mezclarlas.
+
+:::example
+#### Ejemplo 2.1.0
+:::
+
+```{r addition_220, exercise = TRUE}
+#Vector numérico
+num <- c(1,2,3,4,5)
+num
+#Vector de caracteres
+let <- c("a","b","c","d","e","f")
+let
+#Vector de Factores
+fac <- factor(c("f1","f2","f3","f2","f1"))
+fac
+#Vector logico
+log <- c(T,F,T,T,T,F)
+log
+#mezcla de clases atomicas
+c(num,let)
+c(num,log)
+```
+
+Como vimos en la última parte al mezclar dos clases atómicas no obtenemos un error, sin embargo los vectores mezclados toman la clase solo de uno de ellos (la más compleja), en el primero vemos como los números de `num` quedan entre comillas, lo cual implica que ahora son caracteres, de igual forma en el vector dos vemos que los valores lógicos de `log` son convertidos a su equivalente numérico
+
+Ahora vamos con uno ejemplos en los cuales generaremos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
 
 Operaciones de suma.
 
@@ -575,15 +679,12 @@ Operaciones de suma.
 #Vector de prueba
 x <- c(1:8)
 x
-
 #Suma sobre cada elemento del vector de prueba
 test_1 <- x+2
 test_1
-
 #Suma repetitiva sobre los elementos del vector de prueba
 test_2 <- x + c(10,20)
 test_2
-
 #Suma uno a uno sobre nuestro vector de prueba 
 test_3 <- x + c(8:1) 
 test_3
@@ -599,7 +700,6 @@ De igual forma podemos utilizar la resta, te invito a que restablezcas el vector
 test_1 <- c(1:8)+ 2
 test_2 <- c(1:8) + c(10,20)
 test_3 <- c(1:8) + 8:1
-
 # Ahora es tu turno
 ```
 
@@ -623,15 +723,12 @@ Vamos ahora con operación de producto.
 #Vector de prueba
 y <- seq(2,20,2)
 y
-
 #Producto sobre cada elemento del vector de prueba
 test_1 <- y*2
 test_1
-
 #Producto repetitivo sobre los dos elementos del vector de prueba
 test_2 <- y * c(5,7)
 test_2
-
 #Producto uno a uno sobre nuestro vector de prueba 
 test_3 <- y * 10:1 
 test_3
@@ -647,7 +744,6 @@ Ya que vimos cómo funciona el producto en R, te propongo que utilizando la oper
 test_1 <- seq(2,20,2) * 2
 test_2 <- seq(2,20,2) * c(5,7)
 test_3 <- seq(2,20,2) * 10:1 
-
 # Ahora es tu turno
 ```
 
@@ -670,7 +766,6 @@ Hagamos un ejercicio un poco más corto para la potenciación y su operación in
 ```{r exe_213, exercise = TRUE}
 8**5
 16**(1/4)
-
 # Ahora es tu turno
 ```
 
@@ -693,15 +788,12 @@ Ahora hagamos un par de ejercicios de operaciones lógicas, los cuales son muy �
 #Vector de prueba
 vec <- seq(1,100,length.out = 20)
 vec
-
 #Condición
 filt_1 <- vec < 20
 filt_1
-
 #Selección
 vec_filt <- vec[filt_1]
 vec_filt
-
 ```
 
 Encontremos ahora dentro de un vector de prueba los números diferentes de los pares, de igual manera te invito a que encuentres los números pares modificando el ejercicio planteado.
@@ -714,12 +806,9 @@ Encontremos ahora dentro de un vector de prueba los números diferentes de los p
 #Vector de prueba
 vec <- seq(1,150,3)
 vec
-
 #Condición y selección
 vec[vec%%2 != 0]
-
 # Ahora es tu turno
-
 ```
 
 ```{r exe_214-solution}
@@ -742,12 +831,9 @@ Veamos ahora una ejercicio con dos condiciones simultáneas y deberás realizar 
 #Vector de prueba
 vec <- seq(1,100,length.out = 20)
 vec
-
 #Condición y selección
 vec[vec>90 | vec<45]
-
 # Ahora es tu turno
-
 ```
 
 ```{r exe_215-solution}
@@ -771,15 +857,12 @@ Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, reco
 ```{r addition_221, exercise = TRUE}
 #Matriz de prueba
 m <- matrix(11:30,nrow = 5)
-
 #Producto sobre cada elemento de la matriz de prueba
 test_1 <- m*3
 test_1
-
 #Potencia repetitiva sobre los elementos de la matriz de prueba (columna)
 test_2 <- m **c(2,3)
 test_2
-
 #Suma sobre la matriz de prueba (columna)
 test_3 <- m + seq(7,1,length.out=20) 
 test_3
@@ -795,16 +878,13 @@ Ahora veamos cómo funcionan las operaciones entre matrices.
 #Matriz de prueba 1
 m <- 11:30
 dim(m) <- c(5,4)
-
 #MAtriz de prueba 2
 #Producto sobre cada elemento de la matriz de prueba
 test_1 <- m*3
 test_1
-
 #Potencia repetitiva sobre los elementos de la matriz de prueba (columna)
 test_2 <- m **c(2,3)
 test_2
-
 #Suma sobre la matriz de prueba (columna)
 test_3 <- m + seq(7,1,length.out=20) 
 test_3
