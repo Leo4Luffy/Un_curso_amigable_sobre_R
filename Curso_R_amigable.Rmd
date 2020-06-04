@@ -941,8 +941,7 @@ is.factor(test_2)
 is.numeric(test_3)
 ```
 
-
-
+Como último ejercicio de esta sección deberás generar dos vectores uno que corresponda a la secuencia de números de de 50 a 75 con una longitud de 20 elementos y otro vector de 35 a 16, estos vectores tendrán el nombre de vec1 y vec2 respectivamente. filt1 será un vector que cumpla la condición
 
 :::exercise
 #### Ejercicio 2.1.6
@@ -950,16 +949,15 @@ is.numeric(test_3)
 
 ```{r exe_216, exercise = TRUE}
 #Vector de prueba
-vec <- seq(1,100,length.out = 20)
-vec
-#Condición y selección
-vec[vec>90 | vec<45]
-# Ahora es tu turno
+vec1 <- 
+vec2 <- 
+
+  
 ```
 
 ```{r exe_216-solution}
 vec1 <- seq(50,75,length.out = 20)
-vec2 <- 
+vec2 <- 35:16
 ```
 
 ```{r exe_216-check}
