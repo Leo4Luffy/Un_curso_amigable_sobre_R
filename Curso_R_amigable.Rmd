@@ -629,6 +629,42 @@ En algunos casos diferenciar o reconocer el tipo de un vector o matriz que se ti
 | `is.vector()`    | `is_vector()`   |
 +------------------+-----------------+
 
+### Funciones útiles
+
+En R contamos con las conocidas funciones base, muchas con utilidades matemáticas o estadísticas, veamos algunas de ellas que pueden ser muy útiles en cualquier proyecto de análisis. 
+
++-------------+-------------------------------------------------------------------+
+| Función     | Acción                                                            |
++=============+===================================================================+
+| `sort()`    | Ordena los elementos ascendentemente                              |
++-------------+-------------------------------------------------------------------+
+| `round()`   | Redondea los valor sin decimales por defecto                      |
++-------------+-------------------------------------------------------------------+
+| `floor()`   | Devuelve el entero más grande que no sea mayor que el número dado |
++-------------+-------------------------------------------------------------------+
+| `sqrt()`    | Calcula la raíz cuadrada de un vector numérico                    |
++-------------+-------------------------------------------------------------------+
+| `sum()`     | Calcula la suma de los elementos del objeto                       |
++-------------+-------------------------------------------------------------------+
+| `prod()`    | Calcula la producto de los elementos del objeto                   |
++-------------+-------------------------------------------------------------------+
+| `abs()`     | Devuelve el valor absoluto de un vector numérico                  |
++-------------+-------------------------------------------------------------------+
+| `mean()`    | Calcula la media de un vector numérico                            |
++-------------+-------------------------------------------------------------------+
+| `median()`  | Calcula la media de un vector numérico                            |
++-------------+-------------------------------------------------------------------+
+| `sd()`      | Calcula la desviacion estandar de un vector numérico              |
++-------------+-------------------------------------------------------------------+
+| `IQR()`     | Calcula el rango intercuartílico de un vector numérico            |
++-------------+-------------------------------------------------------------------+
+| `var()`     | Calcula la varianza estandar de un vector numérico                |
++-------------+-------------------------------------------------------------------+
+| `cor()`     | Calcula la correlación de dos vectores numéricos                  |
++-------------+-------------------------------------------------------------------+
+| `quantile()`| Devuelve los cuantiles seleccionados de un vector numérico        |
++-------------+-------------------------------------------------------------------+
+
 <details><summary>2.1 Operaciones con vectores </summary> 
 
 Antes de iniciar con ejemplos y ejercicios debemos tener presente que un vector es  una colección de elementos de la misma clase atómica, es decir que un vector puede contener n elementos del mismo tipo, ya sean estos números, caracteres, factores o lógicos, nunca podrán ser de dos o más tipos. A medida que veamos ejemplos y realicemos ejercicios aprenderemos distintas formas de crear vectores.
@@ -833,6 +869,100 @@ vec[vec>15 &  vec<80]
 ```
 
 ```{r exe_215-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Trabajemos ahora algunos ejercicios de indexación que nos permitan segmentar y modificar nuestros vectores. veamos cómo tomar una sección de nuestro vector de prueba y además modificar algunos de sus valores.
+
+* `r fa("far fa-sticky-note")`Recuerda que la indexación en R inicia con uno `[1]`
+
+:::example
+#### Ejemplo 2.1.4
+:::
+
+```{r addition_214, exercise = TRUE}
+#Vector de prueba
+vec <- letters
+vec
+#Seleccion
+vec[1:10] #primeras 10 letras
+vec[-16:-1] # ultimas 10 letras 
+#Modificación
+vec[1] = "letra.a" #solo la primera posición
+vec
+vec[c(1,26)] = c("la.letra.a","la.letra.z") #multiples posiciones
+vec
+```
+
+Exclusivamente para los ejemplos de selección de los primeros y los últimos elementos de un objeto podemos utilizar las funciones `head()`  y `tail()` respectivamente. 
+
+```{r addition_2141, exercise = TRUE}
+#Vector de prueba
+vec <- letters
+#Seleccion
+head(vec,10)#primeras 10 letras
+tail(vec,10)#ultimas 10 letras 
+```
+
+Observemos un ejemplo en el que se acceda a elementos de un vector para hacer operaciones con estos.
+
+:::example
+#### Ejemplo 2.1.5
+:::
+
+```{r addition_215, exercise = TRUE}
+#Vectores de prueba
+vec1 <- 20:40
+vec2 <- letters
+#Operaciones
+vec1[5]+vec1[21] #operaciones aritmeticas uno a uno
+vec1[c(5,10)]+vec1[c(18,21)] #operaciones aritmeticas 
+paste0(vec2[3],vec2[18],vec2[1],vec2[14]) #concatenar caracteres 
+```
+
+Como último ejemplo de esta sección visualicemos las conversiones y veamos su efectividad utilizando las funciones de prueba.
+
+:::example
+#### Ejemplo 2.1.6
+:::
+
+```{r addition_216, exercise = TRUE}
+#Vectores de prueba
+vec1 <- 20:40
+vec2 <- letters
+vec3 <- c(T,F,T,T,T,F)
+#conversiones
+test_1 <- as.character(vec1)
+test_2 <- as.factor(vec2)
+test_3 <- as.numeric(vec3)
+#funciones de prueba
+is.character(test_1)
+is.factor(test_2)
+is.numeric(test_3)
+```
+
+
+
+
+:::exercise
+#### Ejercicio 2.1.6
+:::
+
+```{r exe_216, exercise = TRUE}
+#Vector de prueba
+vec <- seq(1,100,length.out = 20)
+vec
+#Condición y selección
+vec[vec>90 | vec<45]
+# Ahora es tu turno
+```
+
+```{r exe_216-solution}
+vec1 <- seq(50,75,length.out = 20)
+vec2 <- 
+```
+
+```{r exe_216-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
