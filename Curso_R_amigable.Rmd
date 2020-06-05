@@ -109,7 +109,7 @@ ciencia_datos <- data.frame(
   geom_curve(x = 1.7, xend = 1.7, y = 4.2, yend = 2.6, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
    annotate(geom = 'text', x = 1.7, y = 2.45, label = 'Ordenar', family = 'gochi', size = 10.4, colour = 'black') +
   geom_curve(x = 2.1, xend = 2.8, y = 2.45, yend = 2.45, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
-  annotate(geom = 'text', x = 3.45, y = 2.45, label = 'Manipular', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.36, y = 2.45, label = 'Manipular', family = 'gochi', size = 10.4, colour = 'black') +
   annotate(geom = 'text', x = 4.38, y = 3.5, label = 'Visualizar', family = 'gochi', size = 10.4, colour = 'black') +
   annotate(geom = 'text', x = 4.8, y = 1.5, label = 'Modelar', family = 'gochi', size = 10.4, colour = 'black') +
   annotation_custom(visualizacion, xmin = 4.2, xmax = 5.6, ymin = -1.1, ymax = 1.7) +
@@ -1108,7 +1108,7 @@ knitr::include_graphics("images/dplyr.jpg")
 ```
   </div>
   <div class="col-md-4" markdown="1">
-  `ggplot2` para crear __gráficos__ declarativamente, basado en la gramática de gráficos.
+  `ggplot2` para crear __gráficos__ declarativamente, basado en la denominada gramática de gráficos.
   </div>
   <div class="col-md-2" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
@@ -1138,7 +1138,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-o simplemente se puede instalar y cargar el paquete `tidyverse`:
+O simplemente se puede instalar y cargar el paquete `tidyverse`:
 
 ```{r addition_4_1_3, exercise = TRUE}
 
