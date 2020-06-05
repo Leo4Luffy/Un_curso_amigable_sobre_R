@@ -737,7 +737,7 @@ c(num,let)
 c(num,log)
 ```
 
-Como vimos en la última parte al mezclar dos clases atómicas no obtenemos un error, sin embargo los vectores mezclados toman la clase solo de uno de ellos (la más compleja), en el primero vemos como los números de `num` quedan entre comillas, lo cual implica que ahora son caracteres, de igual forma en el vector dos vemos que los valores lógicos de `log` son convertidos a su equivalente numérico
+Como vimos en la última parte al mezclar dos clases atómicas no obtenemos un error, sin embargo los vectores mezclados toman la clase solo de uno de ellos (la más compleja), en el primero vemos como los números de `num` quedan entre comillas, lo cual implica que ahora son caracteres, de igual forma en el vector dos vemos que los valores lógicos de `log` son convertidos a su equivalente numérico.
 
 Ahora vamos con uno ejemplos en los cuales generaremos un vector de prueba y realicemos algunas operaciones aritméticas básicas.Sean estas suma, resta, división, multiplicación y exponenciación.
 
@@ -985,7 +985,9 @@ is.factor(test_2)
 is.numeric(test_3)
 ```
 
-Como último ejercicio de esta sección deberás generar dos vectores uno que corresponda a la secuencia de números de de 50 a 75 con una longitud de 20 elementos y otro vector de 35 a 16, estos vectores tendrán el nombre de vec1 y vec2 respectivamente. filt1 será un vector que cumpla la condición
+Como último ejercicio de esta sección deberás generar dos vectores uno que corresponda a la secuencia de números de de 50 a 75 con una longitud de 20 elementos y otro vector con los números del 35 al -8, estos vectores tendrán el nombre de vec1 y vec2 respectivamente. filt1 será un vector que cumpla la condición de números mayores a 64 de vec1, mientras que filt2 será la selección de los números pares de vec2. para filt1 calcularemos la media y para filt2 obtendremos la suma de los valores absolutos de las posiciones  2,3,7,19,20,21 y 22. 
+
+* `r fa("far fa-sticky-note")` Recuerda lo aprendido anteriormente y ten presente las funciones útiles nombradas al inicio de esta sección. 
 
 :::exercise
 #### Ejercicio 2.1.6
@@ -995,13 +997,17 @@ Como último ejercicio de esta sección deberás generar dos vectores uno que co
 #Vector de prueba
 vec1 <- 
 vec2 <- 
-
-  
+filt_1 <- 
+filt_2 <- 
 ```
 
 ```{r exe_216-solution}
 vec1 <- seq(50,75,length.out = 20)
-vec2 <- 35:16
+vec2 <- 35:-8
+filt_1 <- vec1 > 64
+filt_2 <- vec2[vec2 %% 2 ==0 ]
+mean(filt1)
+sum(abs(filt_2[c(2,3,7,19:22)]))
 ```
 
 ```{r exe_216-check}
