@@ -989,6 +989,7 @@ is.numeric(test_3)
 
 Como último ejercicio de esta sección deberás generar dos vectores uno que corresponda a la secuencia de números de de 50 a 75 con una longitud de 20 elementos y otro vector con los números del 35 al -8, estos vectores tendrán el nombre de vec1 y vec2 respectivamente. filt1 será un vector que cumpla la condición de números mayores a 64 de vec1, mientras que filt2 será la selección de los números pares de vec2. para filt1 calcularemos la media y para filt2 obtendremos la suma de los valores absolutos de las posiciones  2,3,7,19,20,21 y 22. 
 
+
 * `r fa("far fa-sticky-note")` Recuerda lo aprendido anteriormente y ten presente las funciones útiles nombradas al inicio de esta sección. 
 
 :::exercise
