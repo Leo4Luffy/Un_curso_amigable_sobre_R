@@ -109,7 +109,7 @@ ciencia_datos <- data.frame(
   geom_curve(x = 1.7, xend = 1.7, y = 4.2, yend = 2.6, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
    annotate(geom = 'text', x = 1.7, y = 2.45, label = 'Ordenar', family = 'gochi', size = 10.4, colour = 'black') +
   geom_curve(x = 2.1, xend = 2.8, y = 2.45, yend = 2.45, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
-  annotate(geom = 'text', x = 3.45, y = 2.45, label = 'Transformar', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.45, y = 2.45, label = 'Manipular', family = 'gochi', size = 10.4, colour = 'black') +
   annotate(geom = 'text', x = 4.38, y = 3.5, label = 'Visualizar', family = 'gochi', size = 10.4, colour = 'black') +
   annotate(geom = 'text', x = 4.8, y = 1.5, label = 'Modelar', family = 'gochi', size = 10.4, colour = 'black') +
   annotation_custom(visualizacion, xmin = 4.2, xmax = 5.6, ymin = -1.1, ymax = 1.7) +
@@ -1076,57 +1076,42 @@ ciencia_datos
 
 El `tidyverse` es una colección de paquetes `R` que tienen como objetivo cubrir todo el espectro de análisis de datos dentro de `R`<!--, cada uno de los cuales apoya al otro en conceptos y resultados-->. Los paquetes dentro del `tidyverse` son:
 
-+ Importando los datos: `readr`
-
 <div class="row">
-  <div class="col-md-5" markdown="1">
-  
+  <div class="col-md-4" markdown="1">
+  `readr` cuyo objetivo consiste en proporcionar una forma rápida y amigable de leer (__importar__) los datos.
   </div>
-  <div class="col-md-7" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "26%", fig.align = "center"}
+  <div class="col-md-2" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "66%", fig.align = "center"}
 
 knitr::include_graphics("images/readr.jpg")
 ```
   </div>
-</div>
-
-
-+ Datos ordenados: `tidyr`
-
-<div class="row">
-  <div class="col-md-5" markdown="1">
-  
+  <div class="col-md-4" markdown="1">
+  `tidyr` cuyo objetivo consiste en ayudar a crear __datos ordenados__.
   </div>
-  <div class="col-md-7" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "26%", fig.align = "center"}
+  <div class="col-md-2" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "66%", fig.align = "center"}
 
 knitr::include_graphics("images/tidyr.jpg")
 ```
   </div>
 </div>
 
-+ Manipulación de datos: `dplyr`
-
 <div class="row">
-  <div class="col-md-5" markdown="1">
-  
+  <div class="col-md-4" markdown="1">
+  `dplyr` que proporciona un conjunto consistente de funciones que ayudan a resolver los desafíos más comunes de la __manipulación__ de datos.
   </div>
-  <div class="col-md-7" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "28%", fig.align = "center"}
+  <div class="col-md-2" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "62%", fig.align = "center"}
 
 knitr::include_graphics("images/dplyr.jpg")
 ```
   </div>
-</div>
-
-+ Visualización de datos: `ggplot2`
-
-<div class="row">
-  <div class="col-md-5" markdown="1">
-  
+  <div class="col-md-4" markdown="1">
+  `ggplot2` para crear __gráficos__ declarativamente, basado en la gramática de gráficos.
   </div>
-  <div class="col-md-7" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+  <div class="col-md-2" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 
 knitr::include_graphics("images/ggplot2.jpg")
 ```
