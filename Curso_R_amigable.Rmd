@@ -1023,6 +1023,8 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 <details><summary>2.2 Operaciones con matrices </summary> 
 
+Ahora trabajaremos con las matrices, que desde la perspectiva de R son vectores con el atributo `dim` definido como un vector entero de dos elementos (número de filas y número de columnas). Las matrices son útiles para almacenar muchos datos y son bastante similares a las hojas de cálculo de Excel, puede pensar en ellas como  un conjunto de n vectores de la misma longitud.
+
 Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
 
 :::example
