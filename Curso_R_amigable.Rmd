@@ -684,6 +684,8 @@ En `R` contamos con las conocidas funciones base, muchas con utilidades matemát
 +-------------+-------------------------------------------------------------------+
 | Función     | Acción                                                            |
 +=============+===================================================================+
+| `length()`  | Calcula el número de elementos del objeto                         |
++-------------+-------------------------------------------------------------------+
 | `sort()`    | Ordena los elementos ascendentemente                              |
 +-------------+-------------------------------------------------------------------+
 | `round()`   | Redondea los valor sin decimales por defecto                      |
@@ -1025,6 +1027,32 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 Ahora trabajaremos con las matrices, que desde la perspectiva de R son vectores con el atributo `dim` definido como un vector entero de dos elementos (número de filas y número de columnas). Las matrices son útiles para almacenar muchos datos y son bastante similares a las hojas de cálculo de Excel, puede pensar en ellas como  un conjunto de n vectores de la misma longitud.
 
+Generalmente las matrices en R tienen connotación matemática y pese a ser utilizadas para almacenar información, debemos recordar que todos sus elementos sólo pueden pertenecer a un solo tipo ya sea este numérico, lógico o caracter. Teniendo presente esto veamos operadores y funciones que pueden resultarnos útiles en el contexto matemático y operativo de R. 
+
++-------------+-------------------------------+
+| Función     | Acción                        |
++=============+===============================+
+| `dim(M)`    | Dimesión de la matriz         |
++-------------+-------------------------------+
+| `t(M)`      | Transpuesta de la matriz      |
++-------------+-------------------------------+ 
+| `det(M)`    | Determinate de la matriz      |
++-------------+-------------------------------+
+| `solve(M)`  | Inversa de la matriz          |
++-------------+-------------------------------+
+| `diag(M)`   | Diagonal de la matriz         |
++-------------+-------------------------------+
+| `M1%*%M2`   | Producto matricial            |
++-------------+-------------------------------+
+| `colSums(M)`| Suma de colunnas de la Matriz |
++-------------+-------------------------------+
+| `rowSums(M)`| Suma de filas de la Matriz    |
++-------------+-------------------------------+
+| `cbind()`   | Unir vectores por columnas    |
++-------------+-------------------------------+
+| `rbin()`    | Unir vectores por filas       |
++-------------+-------------------------------+
+
 Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
 
 :::example
@@ -1034,6 +1062,7 @@ Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, reco
 ```{r addition_221, exercise = TRUE}
 #Matriz de prueba
 m <- matrix(11:30,nrow = 5)
+m
 #Producto sobre cada elemento de la matriz de prueba
 test_1 <- m*3
 test_1
@@ -1053,19 +1082,54 @@ Ahora veamos cómo funcionan las operaciones entre matrices.
 
 ```{r addition_222, exercise = TRUE}
 #Matriz de prueba 1
-m <- 11:30
-dim(m) <- c(5,4)
-#MAtriz de prueba 2
-#Producto sobre cada elemento de la matriz de prueba
-test_1 <- m*3
-test_1
-#Potencia repetitiva sobre los elementos de la matriz de prueba (columna)
-test_2 <- m **c(2,3)
-test_2
-#Suma sobre la matriz de prueba (columna)
-test_3 <- m + seq(7,1,length.out=20) 
-test_3
+m1 <- 21:40
+dim(m1) <- c(5,4)
+#Matriz de prueba 2
+m2 <- cbind(1:5,6:10,11:15,16:20)
+#suma de matrices
+m1 + m2
+#Producto uno a uno
+m1*m2
+#Producto matricial
+m1 %*% t(m2)
 ```
+
+Tratemos de ver otras operaciones directamente con ejercicios. Te invito a que generes `m1` del ejercicio anterior utilizando la función `rbind()`, `m2` utilizando la función `matrix()` y calcules el producto matricial de m1 traspuesta con m2 nombrandolo `m3`. Por último calcula la suma de la diagonal de `m3`.
+
+:::exercise
+#### Ejercicio 2.2.1
+:::
+
+```{r exe_221, exercise = TRUE}
+#Matriz de prueba 1
+m1 <- 
+#Matriz de prueba 2
+m2 <-
+#Producto Matricial
+m3 <- 
+#suma de la diagonal
+```
+
+```{r exe_221-solution}
+#Matriz de prueba 1
+m1 <- rbind(seq(21,36,5),
+            seq(22,37,5),
+            seq(23,38,5),
+            seq(24,39,5),
+            seq(25,40,5))
+#Matriz de prueba 2
+m2 <- matrix(1:20,nrow = 5)
+#Producto Matricial
+m3 <- t(m1) %*% m2 
+#suma de la diagonal
+sum(diag(m3))
+```
+
+```{r exe_221-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+
 
 </details>
 
