@@ -16,6 +16,8 @@ library(gridGraphics)
 library(curl)
 library(fontawesome)
 library(gradethis)
+library(kableExtra)
+library(patchwork)
 library(showtext)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
@@ -1074,14 +1076,14 @@ ciencia_datos
 
 ### 4.1 El `tidyverse`
 
-El `tidyverse` es una colección de paquetes `R` que tienen como objetivo cubrir todo el espectro de análisis de datos dentro de `R`<!--, cada uno de los cuales apoya al otro en conceptos y resultados-->. Los paquetes dentro del `tidyverse` son:
+El `tidyverse` es una colección de paquetes `R` que trabajan en armonía con el objetivo de cubrir todo el espectro de análisis de datos dentro de `R`<!--, cada uno de los cuales apoya al otro en conceptos y resultados-->. Los paquetes dentro del `tidyverse` (al menos los abordados en este curso) son:
 
 <div class="row">
   <div class="col-md-4" markdown="1">
   `readr` cuyo objetivo consiste en proporcionar una forma rápida y amigable de leer (__importar__) los datos.
   </div>
   <div class="col-md-2" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "66%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
 
 knitr::include_graphics("images/readr.jpg")
 ```
@@ -1145,9 +1147,227 @@ O simplemente se puede instalar y cargar el paquete `tidyverse`:
 install.packages('tidyverse')
 
 library(tidyverse)
+
+tidyverse_update() # Si deseas actualizar el tidyverse.
 ```
+
+Es importante mencionar que el `tidyverse` está en constante evolución. Las mejores formas de mantenerse al día con él son:
+
+1) Seguir el blog de [`RStudio`]( https://blog.rstudio.com/ ),
+
+2) Seguir en twitter a personas como Mara Averick (@dataandme), Hadley Wickham (@hadleywickham), Max Kuhn (@topepos), David Robinson (@drob) y Julia Silge (@juliasilge).
 
 Si bien el tidyverse se compone principalmente de un conjunto de paquetes de `R` muy útiles, también es una forma de pensar en implementar el análisis de __datos ordenados__.
 
 ### 4.2 Datos ordenados
+
+<!--
+Los conjuntos de datos ordenados son todos iguales, pero cada conjunto de datos desordenado es desordenado a su manera".
+- Hadley Wickham
+-->
+
+En la naturaleza, los conjuntos de datos vienen en muchos formatos diferentes.
+
+:::example
+#### Ejemplo 4.2.1
+:::
+
++ Conjunto de datos __1__
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+library(DSR)
+
+table1 %>%
+  rename('País' = country, 'Año' = year, 'Casos' = cases, 'Población' = population) %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered')))
+```
+
++ Conjunto de datos __2__
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+table2 %>%
+  rename('País' = country, 'Año' = year, 'Casos/Población' = key, 'Valor' = value) %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered')))
+```
+
++ Conjunto de datos __3__
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+table3 %>%
+  rename('País' = country, 'Año' = year, 'Tasa' = rate) %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered')))
+```
+
++ Conjunto de datos __4__
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+table4 %>%
+  rename('País' = country) %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered'))) %>%
+  add_header_above(c(' ', 'Casos' = 2))
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+table5 %>%
+  rename('País' = country) %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered'))) %>%
+  add_header_above(c(' ', 'Población' = 2))
+```
+  </div>
+</div>
+
+Los conjuntos de datos anteriores muestran los mismos datos organizados en cuatro formas diferentes. Sin embargo el conjunto de datos que cumple las siguientes tres reglas es mucho más fácil para trabajar en `R`:
+
+<!--
+1) Cada variable en el conjunto de datos se coloca en su propia columna,
+2) Cada observación se coloca en su propia fila,
+3) Cada valor se coloca en su propia celda.
+-->
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
+
+Variables <- data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.5, ymax = 2.0, color = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.0, ymax = 2.5, color = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.5, ymax = 3.0, color = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.25, xend = 3.25, y = 1.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.25, xend = 3.25, y = 3.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.75, xend = 3.75, y = 1.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.75, xend = 3.75, y = 3.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 4.25, xend = 4.25, y = 1.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 4.25, xend = 4.25, y = 3.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 4.75, xend = 4.75, y = 1.0, yend = 3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 4.75, xend = 4.75, y = 3.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 4.0, y = 3.5, label = 'Variables', family = 'gochi', size = 20.4, colour = 'black') +
+  scale_y_continuous(limits = c(1, 3.6)) +
+  scale_x_continuous(limits = c(3, 5.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+Observaciones <- data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.0, xend = 5.0, y = 1.25, yend = 1.25, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 5.0, xend = 3.0, y = 1.25, yend = 1.25, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.0, xend = 5.0, y = 1.75, yend = 1.75, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 5.0, xend = 3.0, y = 1.75, yend = 1.75, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.0, xend = 5.0, y = 2.25, yend = 2.25, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 5.0, xend = 3.0, y = 2.25, yend = 2.25, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  geom_curve(x = 3.0, xend = 5.0, y = 2.75, yend = 2.75, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 5.0, xend = 3.0, y = 2.75, yend = 2.75, arrow = arrow(length = unit(0.1, 'inch')), size = 1.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 4.0, y = 3.5, label = 'Observaciones', family = 'gochi', size = 16.4, colour = 'black') +
+  scale_y_continuous(limits = c(1, 3.6)) +
+  scale_x_continuous(limits = c(3, 5.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+Valores_1 <- data.frame(
+  x = c(3.25, 3.25, 3.25, 3.25, 3.75, 3.75, 3.75, 3.75, 4.25, 4.25, 4.25, 4.25, 4.75, 4.75, 4.75, 4.75),
+  y = c(1.25, 1.75, 2.25, 2.75, 1.25, 1.75, 2.25, 2.75, 1.25, 1.75, 2.25, 2.75, 1.25, 1.75, 2.25, 2.75)
+)
+
+Valores_2 <- data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 4.5, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 1.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.0, ymax = 2.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.5, ymax = 3.0, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 3.5, label = 'Valores', family = 'gochi', size = 20.4, colour = 'black') +
+  geom_point(data = Valores_1, aes(x, y), colour = 'black', fill = 'black', size = 2.4) +
+  scale_y_continuous(limits = c(1, 3.6)) +
+  scale_x_continuous(limits = c(3, 5.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+(Variables)|(Observaciones)|(Valores_2)
+```
+
+Los datos que satisfacen estas reglas se conocen como __datos ordenados__.
+
+:::exercise
+#### Ejercicio 4.2.1
+Teniendo en cuenta las reglas sobre datos ordenados, ¿cual de los cuatro conjuntos de datos anteriormente mencionados considera cumple con este principio?
+:::
+
+<!--
+Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
+-->
+
+<!--Hay muchos otros paquetes excelentes que no forman parte del tidyverse, porque están diseñados con un conjunto diferente de principios subyacentes. Esto no los hace mejores o peores, solo diferentes.-->
+
+
 
