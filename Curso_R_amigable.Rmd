@@ -1227,9 +1227,10 @@ install.packages('tidyverse')
 
 library(tidyverse)
 
-tidyverse_update() # Si deseas actualizar el tidyverse.
+tidyverse_update() # Si desea actualizar el tidyverse.
 ```
 
+<!--
 El `tidyverse` está en constante evolución. Las mejores formas de mantenerse al día con él son:
 
 1) Seguir el blog de [`RStudio`]( https://blog.rstudio.com/ ),
@@ -1237,6 +1238,7 @@ El `tidyverse` está en constante evolución. Las mejores formas de mantenerse a
 2) Seguir en twitter a personas como Mara Averick (@dataandme), Hadley Wickham (@hadleywickham), Max Kuhn (@topepos), David Robinson (@drob) y Julia Silge (@juliasilge).
 
 Si bien el tidyverse se compone principalmente de un conjunto de paquetes de `R` muy útiles, también es una forma de pensar en implementar el análisis de __datos ordenados__.
+-->
 
 ### 4.2 Datos ordenados
 
@@ -1480,6 +1482,106 @@ question(" ",
   random_answer_order = TRUE
 )
 ```
+
+Los datos ordenados funcionan bien en `R` porque `R` es un lenguaje de programación vectorizado. Los conjuntos de datos en `R` están construidos a partir de vectores y las operaciones de `R` están optimizadas para trabajar con vectores. Los datos ordenados aprovechan estas dos características.
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
+
+Dato_ordenado_1 <- data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.75, xmax = 4.25, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 5.25, xmax = 5.75, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 3.25, y = 5.25, label = 'Vec1', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.0, y = 5.25, label = 'Vec2', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 5.25, label = 'Vec3', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 5.5, y = 5.25, label = 'Vec4', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.25, xend = 3.25, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 4.0, xend = 4.0, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 4.75, xend = 4.75, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 5.5, xend = 5.5, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 3.25, xend = 5.5, y = 6.0, yend = 6.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.25, y = 6.5, label = 'data.frame', family = 'gochi', size = 9.4, colour = 'black') +
+  scale_y_continuous(limits = c(1, 7.0)) +
+  scale_x_continuous(limits = c(2.85, 6.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+
+Dato_ordenado_2 <- data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 3.75, xmax = 4.25, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 5.25, xmax = 5.75, ymin = 1.0, ymax = 5.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'text', x = 3.25, y = 5.25, label = 'País', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.0, y = 5.25, label = 'Año', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 5.25, label = 'Casos', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 5.5, y = 5.25, label = 'Pob.', family = 'gochi', size = 9.4, colour = 'black') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 5.0, yend = 5.0, colour = 'black') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.0, xend = 3.5, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.75, xend = 4.25, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 4.5, xend = 5.0, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 2.0, yend = 2.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 3.0, yend = 3.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 5.25, xend = 5.75, y = 4.0, yend = 4.0, colour = 'black', linetype = 'dashed') +
+  annotate(geom = 'segment', x = 3.25, xend = 3.25, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 4.0, xend = 4.0, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 4.75, xend = 4.75, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 5.5, xend = 5.5, y = 5.5, yend = 6.0, colour = 'black') +
+  annotate(geom = 'segment', x = 3.25, xend = 5.5, y = 6.0, yend = 6.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.25, y = 6.5, label = 'Conjunto de datos 1', family = 'gochi', size = 9.4, colour = 'black') +
+  scale_y_continuous(limits = c(1, 7.0)) +
+  scale_x_continuous(limits = c(2.85, 6.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+(Dato_ordenado_1)|(Dato_ordenado_2)
+```
+
+<!--
+En este punto, puede pensar que los datos ordenados son tan obvios que son triviales. Seguramente, la mayoría de los conjuntos de datos vienen en un formato ordenado, ¿verdad? Incorrecto. En la práctica, los datos sin procesar rara vez son ordenados y, como resultado, es mucho más difícil trabajar con ellos. La Sección 2.4 proporciona un ejemplo realista de los datos recopilados en la naturaleza.
+-->
+
+### 4.3 Ordenar los datos: `tidyr`
+
+
 
 <!--
 Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
