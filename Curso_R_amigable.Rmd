@@ -1230,7 +1230,7 @@ library(tidyverse)
 tidyverse_update() # Si deseas actualizar el tidyverse.
 ```
 
-Es importante mencionar que el `tidyverse` está en constante evolución. Las mejores formas de mantenerse al día con él son:
+El `tidyverse` está en constante evolución. Las mejores formas de mantenerse al día con él son:
 
 1) Seguir el blog de [`RStudio`]( https://blog.rstudio.com/ ),
 
@@ -1259,6 +1259,11 @@ library(DSR)
 
 table1 %>%
   rename('País' = country, 'Año' = year, 'Casos' = cases, 'Población' = population) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    ))%>%
   kable() %>% 
   kable_styling(full_width = FALSE,
                 bootstrap_options = (c('striped', 'bordered')))
@@ -1269,7 +1274,15 @@ table1 %>%
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
 table2 %>%
-  rename('País' = country, 'Año' = year, 'Casos/Población' = key, 'Valor' = value) %>%
+  rename('País' = country, 'Año' = year, 'Variables' = key, 'Valor' = value) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'),
+    Variables = case_when(
+    Variables == 'cases' ~ 'Casos',
+    Variables == 'population' ~ 'Población')
+    ) %>%
   kable() %>% 
   kable_styling(full_width = FALSE,
                 bootstrap_options = (c('striped', 'bordered')))
@@ -1281,6 +1294,11 @@ table2 %>%
 
 table3 %>%
   rename('País' = country, 'Año' = year, 'Tasa' = rate) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    ))%>%
   kable() %>% 
   kable_styling(full_width = FALSE,
                 bootstrap_options = (c('striped', 'bordered')))
@@ -1294,6 +1312,11 @@ table3 %>%
 
 table4 %>%
   rename('País' = country) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    )) %>%
   kable() %>% 
   kable_styling(full_width = FALSE,
                 bootstrap_options = (c('striped', 'bordered'))) %>%
@@ -1305,6 +1328,11 @@ table4 %>%
 
 table5 %>%
   rename('País' = country) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    )) %>%
   kable() %>% 
   kable_styling(full_width = FALSE,
                 bootstrap_options = (c('striped', 'bordered'))) %>%
@@ -1441,6 +1469,17 @@ Los datos que satisfacen estas reglas se conocen como __datos ordenados__.
 #### Ejercicio 4.2.1
 Teniendo en cuenta las reglas sobre datos ordenados, ¿cual de los cuatro conjuntos de datos anteriormente mencionados considera cumple con este principio?
 :::
+
+```{r letter_4_2_1, echo = FALSE}
+question(" ",
+  answer("Conjunto de datos 4", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("Conjunto de datos 1", correct = TRUE, message = "Estas en lo correcto... en este conjunto de datos cada variable se coloco en su propia columna, cada observación en su propia fila y cada valor en su propia celda."),
+  answer("Conjunto de datos 2", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("Conjunto de datos 3", message = "No estas en lo correcto, sigue intentandolo."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
 
 <!--
 Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
