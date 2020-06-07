@@ -1129,6 +1129,19 @@ sum(diag(m3))
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
+Trabajemos ahora con algunas operaciones sobre filas y columnas, como nombrarlas modificarlas y utilizarlas.
+
+:::example
+#### Ejemplo 2.2.3
+:::
+
+```{r addition_223, exercise = TRUE}
+#Matriz de prueba 1
+m <- matrix(seq(15,-10,length.out = 24),ncol = 6,byrow = T)
+m
+#suma de las columnas
+mcol <- colSums(m)
+```
 
 
 </details>
