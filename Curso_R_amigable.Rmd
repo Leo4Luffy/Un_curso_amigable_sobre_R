@@ -1320,7 +1320,6 @@ Para afianzar algunos conceptos trabajaremos sobre la matriz `m` , tendrás que 
 #### Ejercicio 2.2.4
 :::
 
-
 ```{r}
 set.seed(25)
 ```
