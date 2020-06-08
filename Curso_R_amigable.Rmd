@@ -1266,6 +1266,7 @@ Para finalizar esta sección te invito a que trabajes con la matriz `M` , primer
 #Objetos de prueba
 M <- matrix(seq(100,700,length.out = 9),3)
 vec1 <- c(3,1.5,3)*100
+vec2 <- c(1,.76,1/1.75)
 #Operaciones
 
 
@@ -1288,6 +1289,23 @@ M
 ```{r exe_223-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
+
+</details>
+
+<details><summary>2.3 Operaciones con marcos de datos</summary> 
+
+```{r}
+tibble(x=1:3, y = list(1:3,2:4,3:5))
+data.frame(x=1:3, y = list(1:3,2:4,3:5))
+tibble(x=1:3, y = x*3)
+#data.frame(x=1:3, y = x*3)
+#merge
+#subset
+#aggregate()
+#order
+# colMEans para matrices
+```
+
 
 </details>
 
