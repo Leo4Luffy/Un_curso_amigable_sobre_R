@@ -1256,6 +1256,39 @@ m[5,2] <- "letrav"
 m
 ```
 
+Para finalizar esta sección te invito a que trabajes con la matriz `M` , primero suma `vec1` a la primera columna de la matriz de prueba, después multiplica el elemento de la primera columna y tercera fila  por 1.375 y por último multiplica la tercera columna por `vec2`. Estas operaciones deben hacerse sobre la matriz, de tal forma que al terminar las operaciones y llamar M está guarde las operaciones realizadas.
+
+:::exercise
+#### Ejercicio 2.2.3
+:::
+
+```{r exe_223, exercise = TRUE}
+#Objetos de prueba
+M <- matrix(seq(100,700,length.out = 9),3)
+vec1 <- c(3,1.5,3)*100
+#Operaciones
+
+
+
+M
+```
+
+```{r exe_223-solution}
+#Objetos de prueba
+M <- matrix(seq(100,700,length.out = 9),3)
+vec1 <- c(3,1.5,1.5)*100
+vec2 <- c(1,.76,1/1.75)
+#Operaciones
+M[,1] <- M[,1] + vec1
+M[3,1] <- M[3,1] * 1.375
+M[,3] <- M[,3] * vec2
+M
+```
+
+```{r exe_223-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
 </details>
 
 ## 4. Datos ordenados y el tidyverse
