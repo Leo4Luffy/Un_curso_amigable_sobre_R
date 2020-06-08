@@ -1027,6 +1027,25 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 Ahora trabajaremos con las matrices, que desde la perspectiva de R son vectores con el atributo `dim` definido como un vector entero de dos elementos (número de filas y número de columnas). Las matrices son útiles para almacenar muchos datos y son bastante similares a las hojas de cálculo de Excel, puede pensar en ellas como  un conjunto de n vectores de la misma longitud.
 
+En lo que se refiere a matrices la indexación funciona nombrando primero las filas y después las columnas, de tal forma que teniendo una matriz M de dimensiones mxn tendremos m filas y n columnas. Si utilizamos el comando `M[1,]` obtendremos la primera fila  y al utilizar `M[,1]`obtendremos la primera columna. Más adelante abordaremos ejercicios que nos permitan manejar e identificar las columnas y filas de una matriz.
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r,echo=F, comment=""}
+matrix(1:25,nrow = 5)
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r,echo=F,comment=""}
+m <- matrix(1:25,nrow = 5)
+print("M[1,]")
+m[1,]
+print("M[,1]")
+m[,1]
+```
+  </div>
+</div>
+
 Generalmente las matrices en R tienen connotación matemática y pese a ser utilizadas para almacenar información, debemos recordar que todos sus elementos sólo pueden pertenecer a un solo tipo ya sea este numérico, lógico o caracter. Teniendo presente esto veamos operadores y funciones que pueden resultarnos útiles en el contexto matemático y operativo de R. 
 
 +-------------+-------------------------------+
@@ -1054,6 +1073,7 @@ Generalmente las matrices en R tienen connotación matemática y pese a ser util
 +-------------+-------------------------------+
 
 Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
+
 :::example
 #### Ejemplo 2.2.1
 :::
@@ -1209,6 +1229,9 @@ pm <- round(pm*100,3)
 c(pm[4,1],pm[3,2],pm[2,3],pm[1,4])
 
 ```
+
+
+
 </details>
 
 ## 4. Datos ordenados y el tidyverse

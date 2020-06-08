@@ -959,6 +959,23 @@ sum(abs(filt_2[c(2,3,7,19:22)]))</code></pre>
 <details>
 <p><summary>2.2 Operaciones con matrices </summary></p>
 <p>Ahora trabajaremos con las matrices, que desde la perspectiva de R son vectores con el atributo <code>dim</code> definido como un vector entero de dos elementos (número de filas y número de columnas). Las matrices son útiles para almacenar muchos datos y son bastante similares a las hojas de cálculo de Excel, puede pensar en ellas como un conjunto de n vectores de la misma longitud.</p>
+<p>En lo que se refiere a matrices la indexación funciona nombrando primero las filas y después las columnas, de tal forma que teniendo una matriz M de dimensiones mxn tendremos m filas y n columnas. Si utilizamos el comando <code>M[1,]</code> obtendremos la primera fila y al utilizar <code>M[,1]</code>obtendremos la primera columna. Más adelante abordaremos ejercicios que nos permitan manejar e identificar las columnas y filas de una matriz.</p>
+<div class="row">
+<div class="col-md-6" markdown="1">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    6   11   16   21
+[2,]    2    7   12   17   22
+[3,]    3    8   13   18   23
+[4,]    4    9   14   19   24
+[5,]    5   10   15   20   25</code></pre>
+</div>
+<div class="col-md-6" markdown="1">
+<pre><code>[1] &quot;M[1,]&quot;</code></pre>
+<pre><code>[1]  1  6 11 16 21</code></pre>
+<pre><code>[1] &quot;M[,1]&quot;</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
 <p>Generalmente las matrices en R tienen connotación matemática y pese a ser utilizadas para almacenar información, debemos recordar que todos sus elementos sólo pueden pertenecer a un solo tipo ya sea este numérico, lógico o caracter. Teniendo presente esto veamos operadores y funciones que pueden resultarnos útiles en el contexto matemático y operativo de R.</p>
 <table style="width:64%;">
 <colgroup>
@@ -1014,7 +1031,10 @@ sum(abs(filt_2[c(2,3,7,19:22)]))</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores. :::example #### Ejemplo 2.2.1 :::</p>
+<p>Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.</p>
+<div class="example">
+<h4 id="section-ejemplo-2.2.1">Ejemplo 2.2.1</h4>
+</div>
 <div class="tutorial-exercise" data-label="addition_221" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>#Matriz de prueba
 m &lt;- matrix(11:30,nrow = 5)
@@ -1158,7 +1178,7 @@ c(pm[4,1],pm[3,2],pm[2,3],pm[1,4])</code></pre>
 </div>
 <div id="section-datos-ordenados-y-el-tidyverse" class="section level2">
 <h2>4. Datos ordenados y el tidyverse</h2>
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-22-1.png" width="520" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-24-1.png" width="520" style="display: block; margin: auto;" /></p>
 <div id="section-el-tidyverse" class="section level3">
 <h3>4.1 El <code>tidyverse</code></h3>
 <p>El <code>tidyverse</code> es una colección de paquetes <code>R</code> que trabajan en armonía con el objetivo de cubrir todo el espectro de análisis de datos dentro de <code>R</code><!--, cada uno de los cuales apoya al otro en conceptos y resultados-->. Los paquetes dentro del <code>tidyverse</code> (al menos los abordados en este curso) son:</p>
@@ -1752,7 +1772,7 @@ China
 2) Cada observación se coloca en su propia fila,
 3) Cada valor se coloca en su propia celda.
 -->
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-32-1.png" width="460" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-34-1.png" width="460" style="display: block; margin: auto;" /></p>
 <p>Los datos que satisfacen estas reglas se conocen como <strong>datos ordenados</strong>.</p>
 <div class="exercise">
 <h4 id="section-ejercicio-4.2.1">Ejercicio 4.2.1</h4>
@@ -1767,19 +1787,19 @@ China
 </div>
 </div>
 <p>Los datos ordenados funcionan bien en <code>R</code> porque <code>R</code> es un lenguaje de programación vectorizado. Los conjuntos de datos en <code>R</code> están construidos a partir de vectores y las operaciones de <code>R</code> están optimizadas para trabajar con vectores. Los datos ordenados aprovechan estas dos características.</p>
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-33-1.png" width="460" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-35-1.png" width="460" style="display: block; margin: auto;" /></p>
 <!--
 En este punto, puede pensar que los datos ordenados son tan obvios que son triviales. Seguramente, la mayoría de los conjuntos de datos vienen en un formato ordenado, ¿verdad? Incorrecto. En la práctica, los datos sin procesar rara vez son ordenados y, como resultado, es mucho más difícil trabajar con ellos. La Sección 2.4 proporciona un ejemplo realista de los datos recopilados en la naturaleza.
 -->
 </div>
 <div id="section-ordenar-los-datos-con-tidyr" class="section level3">
 <h3>4.3 Ordenar los datos con <code>tidyr</code></h3>
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-34-1.png" width="520" style="display: block; margin: auto;" /></p>
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-35-1.png" width="500" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-36-1.png" width="520" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-37-1.png" width="500" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <h4 id="section-ejercicio-4.3.1">Ejercicio 4.3.1</h4>
 </div>
-<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-36-1.png" width="500" style="display: block; margin: auto;" /></p>
+<p><img src="Curso_R_amigable_files/figure-html/unnamed-chunk-38-1.png" width="500" style="display: block; margin: auto;" /></p>
 <!--
 Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
 -->
@@ -2059,7 +2079,7 @@ output$`tutorial-exercise-addition_4_1_3-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "letter_4_2_1",     question = structure("", html = TRUE, class = c("html", "character"    )), answers = list(structure(list(id = "lnr_ans_8b78f57",         option = "Conjunto de datos 4", value = "Conjunto de datos 4",         label = structure("Conjunto de datos 4", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8c27017",         option = "Conjunto de datos 1", value = "Conjunto de datos 1",         label = structure("Conjunto de datos 1", html = TRUE, class = c("html",         "character")), correct = TRUE, message = structure("Estas en lo correcto... en este conjunto de datos cada variable se coloco en su propia columna, cada observación en su propia fila y cada valor en su propia celda.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2edb64a",         option = "Conjunto de datos 2", value = "Conjunto de datos 2",         label = structure("Conjunto de datos 2", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3547ca5",         option = "Conjunto de datos 3", value = "Conjunto de datos 3",         label = structure("Conjunto de datos 3", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "letter_4_2_1-answer", question = "letter_4_2_1"),     loading = structure("<strong>Loading:<\u002fstrong> <\u002fp>\n\n<p><br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 117136726.945454, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "letter_4_2_1",     question = structure("", html = TRUE, class = c("html", "character"    )), answers = list(structure(list(id = "lnr_ans_48d8f4",         option = "Conjunto de datos 4", value = "Conjunto de datos 4",         label = structure("Conjunto de datos 4", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c17789d",         option = "Conjunto de datos 1", value = "Conjunto de datos 1",         label = structure("Conjunto de datos 1", html = TRUE, class = c("html",         "character")), correct = TRUE, message = structure("Estas en lo correcto... en este conjunto de datos cada variable se coloco en su propia columna, cada observación en su propia fila y cada valor en su propia celda.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e0a2c78",         option = "Conjunto de datos 2", value = "Conjunto de datos 2",         label = structure("Conjunto de datos 2", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d16efdf",         option = "Conjunto de datos 3", value = "Conjunto de datos 3",         label = structure("Conjunto de datos 3", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "letter_4_2_1-answer", question = "letter_4_2_1"),     loading = structure("<strong>Loading:<\u002fstrong> <\u002fp>\n\n<p><br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 506143012.764309, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
