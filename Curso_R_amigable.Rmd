@@ -1054,7 +1054,6 @@ Generalmente las matrices en R tienen connotación matemática y pese a ser util
 +-------------+-------------------------------+
 
 Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
-
 :::example
 #### Ejemplo 2.2.1
 :::
@@ -1129,7 +1128,7 @@ sum(diag(m3))
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Trabajemos ahora con algunas operaciones sobre filas y columnas, como nombrarlas modificarlas y utilizarlas.
+En el siguiente ejemplo, calcularemos la suma de los valores de cada columna y determinaremos su representación en porcentaje de la suma calculada. El porcentaje lo aproximáremos  a dos cifras decimales y haremos un ejercicio de indexación con este resultado imprimiendo un vector con los resultados de la diagonal.
 
 :::example
 #### Ejemplo 2.2.3
@@ -1137,10 +1136,54 @@ Trabajemos ahora con algunas operaciones sobre filas y columnas, como nombrarlas
 
 ```{r addition_223, exercise = TRUE}
 #Matriz de prueba 1
-m <- matrix(seq(15,-10,length.out = 24),ncol = 6,byrow = T)
+m <- matrix(seq(18,2,length.out = 16),ncol = 4,byrow = T)
 m
-#suma de las columnas
-mcol <- colSums(m)
+#suma de cada columnas
+tcol <- colSums(m)
+tcol
+#Porcentaje de cada columna
+pm <- round(m / tcol *100,2)
+pm
+#Diagonal con funcion
+diag(pm)
+#diagonal con índice
+c(pm[1,1],pm[2,2],pm[3,3],pm[4,4])
+```
+
+Hagamos un ejercicio similar al ejemplo anterior,  para ello usaremos la matriz `m` y calcularemos en `pm` el porcentaje aproximado a tres cifras decimales que cada elemento representa de la suma de cada fila; con él debemos imprimir un vector con los resultados de la diagonal secundaria.
+
+:::exercise
+#### Ejercicio 2.2.2
+:::
+
+```{r exe_222, exercise = TRUE}
+#Matriz de prueba
+m <- matrix(seq(42,2,length.out = 16),ncol = 4,byrow = T)
+#Suma de cada fila
+tfil <-
+#Porcenatje de cada fila 
+pm <- 
+#diagonal secundaria
+c()
+```
+
+```{r exe_222-solution}
+#Matriz de prueba
+m <- matrix(seq(42,2,length.out = 16),ncol = 4)
+#Suma de cada fila
+tfil <- rowSums(m)
+#Porcenatje de cada fila 
+pm <- rbind(m[1,]/tfil[1],
+            m[2,]/tfil[2],
+            m[3,]/tfil[3],
+            m[4,]/tfil[4])
+pm <- round(pm,3)
+#diagonal secundaria
+c(pm[1,4],pm[2,3],pm[3,2],pm[4,1])
+```
+
+```{r exe_222-check}
+grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
 
