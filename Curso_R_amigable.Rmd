@@ -686,6 +686,8 @@ En `R` contamos con las conocidas funciones base, muchas con utilidades matemát
 +-------------+-------------------------------------------------------------------+
 | Función     | Acción                                                            |
 +=============+===================================================================+
+| `sample()`  | Toma una muestra del tamaño especificado de determiando elemnto   |
++-------------+-------------------------------------------------------------------+
 | `length()`  | Calcula el número de elementos del objeto                         |
 +-------------+-------------------------------------------------------------------+
 | `sort()`    | Ordena los elementos ascendentemente                              |
@@ -1050,29 +1052,33 @@ m[,1]
 
 Generalmente las matrices en R tienen connotación matemática y pese a ser utilizadas para almacenar información, debemos recordar que todos sus elementos sólo pueden pertenecer a un solo tipo ya sea este numérico, lógico o caracter. Teniendo presente esto veamos operadores y funciones que pueden resultarnos útiles en el contexto matemático y operativo de R. 
 
-+-------------+-------------------------------+
-| Función     | Acción                        |
-+=============+===============================+
-| `dim(M)`    | Dimesión de la matriz         |
-+-------------+-------------------------------+
-| `t(M)`      | Transpuesta de la matriz      |
-+-------------+-------------------------------+ 
-| `det(M)`    | Determinate de la matriz      |
-+-------------+-------------------------------+
-| `solve(M)`  | Inversa de la matriz          |
-+-------------+-------------------------------+
-| `diag(M)`   | Diagonal de la matriz         |
-+-------------+-------------------------------+
-| `M1%*%M2`   | Producto matricial            |
-+-------------+-------------------------------+
-| `colSums(M)`| Suma de colunnas de la Matriz |
-+-------------+-------------------------------+
-| `rowSums(M)`| Suma de filas de la Matriz    |
-+-------------+-------------------------------+
-| `cbind()`   | Unir vectores por columnas    |
-+-------------+-------------------------------+
-| `rbin()`    | Unir vectores por filas       |
-+-------------+-------------------------------+
++---------------+---------------------------------+
+| Función       | Acción                          |
++===============+=================================+
+| `dim(M)`      | Dimesión de la matriz           |
++---------------+---------------------------------+
+| `t(M)`        | Transpuesta de la matriz        |
++---------------+---------------------------------+ 
+| `det(M)`      | Determinate de la matriz        |
++---------------+---------------------------------+
+| `solve(M)`    | Inversa de la matriz            |
++---------------+---------------------------------+
+| `diag(M)`     | Diagonal de la matriz           |
++---------------+---------------------------------+
+| `M1%*%M2`     | Producto matricial              |
++---------------+---------------------------------+
+| `colSums(M)`  | Suma por colunnas de la Matriz  |
++---------------+---------------------------------+
+| `rowSums(M)`  | Suma por filas de la Matriz     |
++---------------+---------------------------------+
+| `colMeans(M)` | Media por colunnas de la Matriz |
++---------------+---------------------------------+
+| `rowMeans(M)` | Media por filas de la Matriz    |
++---------------+---------------------------------+
+| `cbind()`     | Unir vectores por columnas      |
++---------------+---------------------------------+
+| `rbin()`      | Unir vectores por filas         |
++---------------+---------------------------------+
 
 Generemos una matriz de prueba y realicemos algunas operaciones sobre esta, recordando que podemos operar sobre filas y/o columnas. Iniciemos con operaciones aritméticas básicas con vectores.
 
@@ -1232,6 +1238,56 @@ c(pm[4,1],pm[3,2],pm[2,3],pm[1,4])
 
 ```
 
+Ahora trabajemos lo que se denomina estandarización sobre una matriz, para ello calcula la media y la desviación estándar por columnas y a cada elemento de la columna correspondiente deberas restarle la media y dividir por la desviación estándar. 
+
+:::exercise
+#### Ejercicio 2.2.3
+:::
+
+```{r}
+set.seed(10)
+```
+
+```{r exe_223, exercise = TRUE}
+#Matriz de prueba
+m <- matrix(sample(1:8,16,replace = T),ncol = 4,byrow = T)
+#Media
+mmean <- 
+#Desviación estandar
+msd <-
+#Estandarización
+sm <- 
+#Resultado
+sm
+```
+
+```{r}
+set.seed(20)
+```
+
+```{r exe_223-solution}
+#Matriz de prueba
+m <- matrix(sample(1:8,16,replace = T),ncol = 4,byrow = T)
+#Media
+mmean <- colMeans(m)
+#Desviación estandar
+msd <- c(sd(m[,1]),
+         sd(m[,2]),
+         sd(m[,3]),
+         sd(m[,4]))
+#Estandarización
+sm <- cbind((m[,1]-mmean[1])/msd[1],
+            (m[,2]-mmean[2])/msd[2],
+            (m[,3]-mmean[3])/msd[3],
+            (m[,4]-mmean[4])/msd[4])  
+#Resultado
+sm
+```
+
+```{r exe_223-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
 Para tener una mayor comprensión de la indexación en las matrices nombremos cada una de las filas y de las columnas de un matriz `m`, llamemos filas y columnas individualmente; tambien elementos individuales y por último modifiquemos algunos valores.
 
 :::example
@@ -1258,13 +1314,58 @@ m[5,2] <- "letrav"
 m
 ```
 
+Para afianzar algunos conceptos trabajaremos sobre la matriz `m` , tendrás que calcular la suma y la media tanto por filas como por columnas, añadirlas a la matriz original utilizando `cbind`  y `rbind` y por último nombra cada una de las filas y de las columnas añadiendo  los nombres contenidos en los vectores `rname` y `cname`
+
+:::exercise
+#### Ejercicio 2.2.4
+:::
+
+
+```{r}
+set.seed(25)
+```
+
+```{r exe_224, exercise = TRUE}
+#Matriz de prueba
+m <- matrix(sample(1:16,16),ncol = 4,byrow = T)
+#vectores
+rname <- c("fila1","fila2","fila3","fila4","csum","cmean")
+cname <- c("columna1","columna2","columna3","columna4","fsum","fmean")
+#Nueva matriz
+
+#nombres para la matriz 
+
+```
+
+```{r}
+set.seed(25)
+```
+
+```{r exe_224-solution}
+#Matriz de prueba
+m <- matrix(sample(1:16,16),ncol = 4,byrow = T)
+#vectores
+rname <- c("fila1","fila2","fila3","fila4","csum","cmean")
+cname <- c("columna1","columna2","columna3","columna4","fsum","fmean")
+#Nueva matriz
+m <- rbind(m,colSums(m),colMeans(m))
+m <- cbind(m,rowSums(m),rowMeans(m))
+#nombres para la matriz 
+rownames(m) <- rname
+colnames(m) <- cname
+```
+
+```{r exe_224-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
 Para finalizar esta sección te invito a que trabajes con la matriz `M` , primero suma `vec1` a la primera columna de la matriz de prueba, después multiplica el elemento de la primera columna y tercera fila  por 1.375 y por último multiplica la tercera columna por `vec2`. Estas operaciones deben hacerse sobre la matriz, de tal forma que al terminar las operaciones y llamar M está guarde las operaciones realizadas.
 
 :::exercise
-#### Ejercicio 2.2.3
+#### Ejercicio 2.2.5
 :::
 
-```{r exe_223, exercise = TRUE}
+```{r exe_225, exercise = TRUE}
 #Objetos de prueba
 M <- matrix(seq(100,700,length.out = 9),3)
 vec1 <- c(3,1.5,3)*100
@@ -1276,7 +1377,7 @@ vec2 <- c(1,.76,1/1.75)
 M
 ```
 
-```{r exe_223-solution}
+```{r exe_225-solution}
 #Objetos de prueba
 M <- matrix(seq(100,700,length.out = 9),3)
 vec1 <- c(3,1.5,1.5)*100
@@ -1288,7 +1389,7 @@ M[,3] <- M[,3] * vec2
 M
 ```
 
-```{r exe_223-check}
+```{r exe_225-check}
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
