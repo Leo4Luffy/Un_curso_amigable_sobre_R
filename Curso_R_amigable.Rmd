@@ -1964,9 +1964,9 @@ ancho
 ```{r addition_4_3_1_b, exercise = TRUE}
 
 datos_2_ancho <- pivot_wider(
-  data = datos_2,
-  names_from = Variables,
-  values_from = Valor
+  data = datos_2, # El nombre del conjunto de datos a ordenar.
+  names_from = Variables, # Argumento que indica el nombre de la columna donde se encuentran las variables.
+  values_from = Valor # Argumento que indica el nombre de la columna que contiene los valores de las variables.
   )
 
 datos_2_ancho
@@ -1974,9 +1974,27 @@ datos_2_ancho
 
 + `pivot_longer()`
 
+La función `pivot_longer()` permite resolver las situaciones en donde se tienen columnas que realmente no representan variables, sino valores de una misma variable.
+
 :::example
 #### Ejemplo 4.3.2
 :::
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+datos_4_a <- table4 %>%
+  rename('País' = country) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    ))
+```
+
+```{r addition_4_3_2_a, exercise = TRUE}
+
+datos_4_a
+```
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -2044,7 +2062,7 @@ largo_1 <- data.frame(
   annotate(geom = 'rect', xmin = 23.0, xmax = 25.0, ymin = 6.0, ymax = 6.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
   annotate(geom = 'text', x = 24.0, y = 6.25, label = '212258', family = 'gochi', size = 8.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 25.0, xmax = 27.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 26.0, y = 7.75, label = '2000', family = 'gochi', size = 6.4, colour = 'black') +
+  annotate(geom = 'text', x = 26.0, y = 7.75, label = '2000', family = 'gochi', size = 8.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 25.0, xmax = 27.0, ymin = 7.0, ymax = 7.5, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 26.0, y = 7.25, label = '2666', family = 'gochi', size = 8.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 25.0, xmax = 27.0, ymin = 6.5, ymax = 7.0, colour = 'red', fill = 'red', alpha = 0.2) +
@@ -2066,13 +2084,42 @@ largo_1 <- data.frame(
 largo_1
 ```
 
+```{r addition_4_3_2_b, exercise = TRUE}
+
+datos_4_a_largo <- pivot_longer(
+  data = datos_4_a, # El nombre del conjunto de datos a ordenar.
+  cols = c('1999', '2000'), # Argumento donde se indican las columnas que pueden ser una variable.
+  names_to = 'Años', # Argumento donde se indica el nombre de la columna a crear a partir de los datos almacenados anteriormente como columna de datos.
+  values_to = 'Casos' # Argumento donde se indica el nombre de la columna a crear a partir de los datos almacenados anteriormente como valores de celda.
+  )
+
+datos_4_a_largo
+```
+
 :::caution
-Como se pudo observar, la función `pivot_longer()` hace lo opuesto a `pivot_wider()`. Estas son funciones complementarias, es decir, si al resultado de aplicar la función `pivot_wider()` le aplicamos la función `pivot_longer()` se llega al conjunto de datos original. Otra observación interesante es que `pivot_longer()` alarga los conjuntos de datos, mientras que `pivot_wider()` los hace más anchos.
+Como se observó, la función `pivot_longer()` hace lo opuesto a `pivot_wider()`. Por lo tanto, ambas funciones son complementarias, es decir, si al resultado de aplicar la función `pivot_wider()` se le aplica la función `pivot_longer()` se llega al conjunto de datos original. Otra observación interesante es que `pivot_longer()` __alarga__ los conjuntos de datos, mientras que `pivot_wider()` los hace más __anchos__.
 :::
 
 :::exercise
 #### Ejercicio 4.3.1
+Teniendo en cuenta el ejemplo planteado anteriormente con la función `pivot_longer()`, por favor intente hacer lo mismo con el siguiente conjunto de datos llamado __datos_4_b__ con el fin obtener la estructura de datos ordenados presentada en la imagen a continuación.
 :::
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+datos_4_b <- table5 %>%
+  rename('País' = country) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    ))
+```
+
+```{r addition_4_3_2_c, exercise = TRUE}
+
+datos_4_b
+```
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -2161,6 +2208,30 @@ largo_2 <- data.frame(
         axis.title = element_blank())
 largo_2
 ```
+
+```{r exe_4_3_2_c, exercise = TRUE}
+
+
+```
+
+```{r exe_4_3_2_c-solution}
+
+datos_4_b_largo <- pivot_longer(
+  data = datos_4_b,
+  cols = c('1999', '2000'),
+  names_to = 'Años',
+  values_to = 'Población'
+  )
+
+datos_4_b_largo
+```
+
+```{r exe_4_3_2_c-check}
+
+grade_code("¡Muy bien!, a partir de este cambio cada variable se coloco en su propia columna, cada observación en su propia fila y cada valor en su propia celda.")
+```
+
++ `_join()`
 
 <!--
 Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
