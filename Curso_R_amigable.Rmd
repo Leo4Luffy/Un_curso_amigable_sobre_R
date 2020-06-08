@@ -1142,7 +1142,11 @@ m
 tcol <- colSums(m)
 tcol
 #Porcentaje de cada columna
-pm <- round(m / tcol *100,2)
+pm <- cbind(m[,1]/tcol[1],
+            m[,2]/tcol[2],
+            m[,3]/tcol[3],
+            m[,4]/tcol[4])
+pm <- round(pm*100,2)
 pm
 #Diagonal con funcion
 diag(pm)
@@ -1169,7 +1173,7 @@ c()
 
 ```{r exe_222-solution}
 #Matriz de prueba
-m <- matrix(seq(42,2,length.out = 16),ncol = 4)
+m <- matrix(seq(42,2,length.out = 16),ncol = 4,byrow = T)
 #Suma de cada fila
 tfil <- rowSums(m)
 #Porcenatje de cada fila 
@@ -1177,7 +1181,7 @@ pm <- rbind(m[1,]/tfil[1],
             m[2,]/tfil[2],
             m[3,]/tfil[3],
             m[4,]/tfil[4])
-pm <- round(pm,3)
+pm <- round(pm*100,3)
 #diagonal secundaria
 c(pm[1,4],pm[2,3],pm[3,2],pm[4,1])
 ```
@@ -1186,7 +1190,25 @@ c(pm[1,4],pm[2,3],pm[3,2],pm[4,1])
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
+Veamos otra forma de solucionar el ejercicio anterior.
 
+```{r exe_2221, exercise = TRUE}
+#Matriz de prueba
+m <- matrix(seq(42,2,length.out = 16),ncol = 4,byrow = T)
+#matriz transpuesta
+tm <- t(m)
+#suma de cada columnas,
+tcol <- colSums(tm)
+#Porcentaje de cada columna
+pm <- cbind(tm[,1]/tcol[1],
+            tm[,2]/tcol[2],
+            tm[,3]/tcol[3],
+            tm[,4]/tcol[4])
+pm <- round(pm*100,3)
+#Diagonal con funcion
+c(pm[4,1],pm[3,2],pm[2,3],pm[1,4])
+
+```
 </details>
 
 ## 4. Datos ordenados y el tidyverse
