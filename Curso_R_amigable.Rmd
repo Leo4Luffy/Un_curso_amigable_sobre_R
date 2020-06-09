@@ -2488,8 +2488,176 @@ datos_4_b_largo
 grade_code("¡Muy bien!, a partir de este cambio cada variable se coloco en su propia columna, cada observación en su propia fila y cada valor en su propia celda.")
 ```
 
-+ `_join()`
++ `nest` y `unnest`
 
+
+
++ `separate()` y `unite()`
+
+La función `separate()` lo que hace es dividir una columna en múltiples columnas, tomando como separador algún símbolo, mientras que la función `unite()` toma múltiples columnas y las une en una única columna, separando los elementos mediante un separador.
+
+:::example
+#### Ejemplo 4.3.3
+:::
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+datos_3 <- table3 %>%
+  rename('País' = country, 'Año' = year, 'Tasa' = rate) %>%
+  mutate(País = case_when(
+    País == 'Afghanistan' ~ 'Afganistán',
+    País == 'Brazil' ~ 'Brasil',
+    País == 'China' ~ 'China'
+    ))
+```
+
+```{r addition_4_3_3_a, exercise = TRUE}
+
+datos_3
+```
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+combinando_separando <- data.frame(
+  x = c(1:21), y = c(1:21)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 13.0, y = 7.75, label = 'País', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 7.0, ymax = 7.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 7.25, label = 'Afganistán', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 6.5, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 6.75, label = 'Afganistán', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 6.0, ymax = 6.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 6.25, label = 'Brasil', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 5.75, label = 'Brasil', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 5.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 5.25, label = 'China', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 12.0, xmax = 14.0, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 13.0, y = 4.75, label = 'China', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 15.0, y = 7.75, label = 'Año', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 7.0, ymax = 7.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 7.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 6.5, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 6.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 6.0, ymax = 6.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 6.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 5.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 5.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 5.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 14.0, xmax = 16.0, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 15.0, y = 4.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 7.75, label = 'Casos', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 7.0, ymax = 7.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 7.25, label = '745', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 6.5, ymax = 7.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 6.75, label = '2666', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 6.0, ymax = 6.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 6.25, label = '37737', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 5.5, ymax = 6.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 5.75, label = '80488', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 5.0, ymax = 5.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 5.25, label = '212258', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 16.0, xmax = 18.0, ymin = 4.5, ymax = 5.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 17.0, y = 4.75, label = '213766', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 7.75, label = 'Población', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 7.0, ymax = 7.5, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 7.25, label = '19987071', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 6.5, ymax = 7.0, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 6.75, label = '20595360', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 6.0, ymax = 6.5, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 6.25, label = '172006362', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 5.5, ymax = 6.0, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 5.75, label = '174504896', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 5.0, ymax = 5.5, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 5.25, label = '1272915272', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 18.0, xmax = 21.0, ymin = 4.5, ymax = 5.0, colour = 'red', fill = 'red', alpha = 0.2) +
+  annotate(geom = 'text', x = 19.5, y = 4.75, label = '1280428583', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 7.0, y = 7.75, label = 'Tasa', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 7.0, ymax = 7.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 7.25, label = '745/19987071', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 6.5, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 6.75, label = '2666/20595360', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 6.0, ymax = 6.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 6.25, label = '37737/172006362', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 5.75, label = '80488/174504898', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 5.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 5.25, label = '212258/1272915272', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 9.0, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 7.0, y = 4.75, label = '213766/1280428583', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.0, y = 7.75, label = 'Año', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 7.0, ymax = 7.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 7.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 6.5, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 6.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 6.0, ymax = 6.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 6.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 5.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 5.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 5.25, label = '1999', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 4.75, label = '2000', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 7.5, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.0, y = 7.75, label = 'País', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 7.0, ymax = 7.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 7.25, label = 'Afganistán', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 6.5, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 6.75, label = 'Afganistán', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 6.0, ymax = 6.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 6.25, label = 'Brasil', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 5.75, label = 'Brasil', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 5.0, ymax = 5.5, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 5.25, label = 'China', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 4.75, label = 'China', family = 'gochi', size = 7.0, colour = 'black') +
+  geom_curve(x = 9.0, xend = 16.0, y = 7.25, yend = 7.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 7.25, yend = 7.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 16.0, y = 6.75, yend = 6.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 6.75, yend = 6.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 16.0, y = 6.25, yend = 6.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 6.25, yend = 6.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 16.0, y = 5.75, yend = 5.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 5.75, yend = 5.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 16.0, y = 5.25, yend = 5.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 5.25, yend = 5.25, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 16.0, y = 4.75, yend = 4.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  geom_curve(x = 9.0, xend = 18.0, y = 4.75, yend = 4.75, arrow = arrow(length = unit(0.1, 'inch')), size = 0.5, color = 'black', curvature = -0.4) +
+  scale_y_continuous(limits = c(4.0, 8.0)) +
+  #scale_x_continuous(limits = c(8, 5.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+combinando_separando
+```
+
+```{r addition_4_3_3_b, exercise = TRUE}
+
+datos_3_separado <- separate(
+  data = datos_3, # El nombre del conjunto de datos a ordenar.
+  col = Tasa, # Argumento donde se indica el nombre de la columna que se quiere dividir.
+  into =  c('Casos', 'Población'), # Argumento donde se indica los nombres de las nuevas variables.
+  sep  =  '/'#, # Argumento donde se indica el símbolo que separa las dos variables en una misma columna.
+  #convert = TRUE # Opción que permite hacer la conversión de tipo caracter a numérico.
+  )
+
+datos_3_separado
+```
+
+<!--
++ `_join()`
+-->
 
 
 <!--
