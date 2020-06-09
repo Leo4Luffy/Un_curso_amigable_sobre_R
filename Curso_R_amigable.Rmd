@@ -1474,7 +1474,7 @@ str(letrasdf)
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Recordemos que los dataframe son similares a las matrices en cuanto a indexación, sin embargo los marcos de datos poseen otras formas de acceso que veremos utilizando la base de datos `Starwars`.
+Recordemos que los dataframe son similares a las matrices en cuanto a indexación, para probarlo trabajaremos el siguiente ejercicio con la base de datos `Starwars`.
 
 ```{r,eval=TRUE,message=FALSE,echo=FALSE}
 data("starwars")
@@ -1483,9 +1483,44 @@ Starwars <- starwars %>%
 Starwars
 ```
 
+El ejercicio consiste en seleccionar las primeras 5 columnas de nuestra base de datos, seleccionar las primeras 20 filas de la columna name y por último  seleccionar las filas entre 20 y 40 para las columnas height y mass.
 
+:::exercise
+#### Ejercicio 2.3.2
+:::
 
+```{r exe_232, exercise = TRUE}
+#Primeras 5 columnas
+Starwars[]
+#primeras 20 filas de name
+Starwars[]
+#filas entre 20:40 para height y mass.
+Starwars[]
+```
 
+```{r exe_232-solution}
+#Primeras 5 columnas
+Starwars[,1:5]
+#primeras 20 filas de name
+Starwars[1:20,"name"]
+#filas entre 20:40 para height y mass.
+Starwars[20:40,c(2,3)]
+```
+
+```{r exe_232-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Otra posible solución a este ejercicio seria la siguiente.
+
+```{r exe_2321, exercise = TRUE}
+#Primeras 5 columnas
+Starwars[,c("name","height","mass","hair_color","skin_color")]
+#primeras 20 filas de name
+Starwars[1:20,1]
+#filas entre 20:40 para height y mass.
+Starwars[20:40,c("height","mass")]
+```
 
 
 kjhjhn
