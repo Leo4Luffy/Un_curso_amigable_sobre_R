@@ -21,6 +21,7 @@ library(kableExtra)
 library(patchwork)
 library(flair)
 library(showtext)
+library(DT)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -1416,7 +1417,7 @@ df
 str(df)
 ```
 
-Podemos notar que al utilizar la función `data.frame` el vector de letras es convertido a factor, lo que en algunos casos puede no ser conveniente, para evitar estos inconvenientes podemos utilizar el argumento `stringsAsFactors = F`.
+Podemos notar que al utilizar la función `data.frame()` el vector de letras es convertido a factor, lo que en algunos casos puede no ser conveniente, para evitar este problema podemos utilizar el argumento `stringsAsFactors = F`.
 
 ```{r,eval=TRUE,message=FALSE,echo=FALSE}
 #vectores de prueba
@@ -1432,6 +1433,60 @@ df
 #Estructura
 str(df)
 ```
+
+También podemos crear dataframe a partir de matrices y vectores utilizando la coerción. En el siguiente ejercicio debes convertir los objetos de prueba a marcos de datos conservado sus propiedades originales, no olvides verificar su estructura.
+
+* `r fa("far fa-sticky-note")` Recuerda la sección de coerción y las funciones allí nombradas.
+
+:::exercise
+#### Ejercicio 2.3.1
+:::
+
+```{r exe_231, exercise = TRUE}
+#Objetos de prueba
+m <- matrix(seq(100,700,length.out = 9),3)
+letras <- letters[1:15]
+#conversión
+mdf <- 
+mdf
+letrasdf <- 
+letrasdf
+#estructura
+str()
+str()  
+```
+
+```{r exe_231-solution}
+#Objetos de prueba
+m <- matrix(seq(100,700,length.out = 9),3)
+letras <- letters[1:5]
+#conversión
+mdf <- as.data.frame(m)
+mdf
+letrasdf <- as.data.frame(letras,stringsAsFactors = F)
+letrasdf
+#estructura
+str(mdf)
+str(letrasdf) 
+```
+
+```{r exe_231-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Recordemos que los dataframe son similares a las matrices en cuanto a indexación, sin embargo los marcos de datos poseen otras formas de acceso que veremos utilizando la base de datos `Starwars`.
+
+```{r,eval=TRUE,message=FALSE,echo=FALSE}
+data("starwars")
+Starwars <- starwars %>% 
+  select(-c(12:14))
+Starwars
+```
+
+
+
+
+
 
 kjhjhn
 
