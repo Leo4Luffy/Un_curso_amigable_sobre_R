@@ -687,11 +687,13 @@ En `R` contamos con las conocidas funciones base, muchas con utilidades matemát
 +-------------+-------------------------------------------------------------------+
 | Función     | Acción                                                            |
 +=============+===================================================================+
-| `str()`     | Devuelve la estructura de un objeto                              |
+| `str()`     | Devuelve la estructura de un objeto                               |
 +-------------+-------------------------------------------------------------------+
 | `sample()`  | Toma una muestra del tamaño especificado de determiando objeto    |
 +-------------+-------------------------------------------------------------------+
 | `length()`  | Calcula el número de elementos del objeto                         |
++-------------+-------------------------------------------------------------------+
+| `table()`   | Devuelve tablas de contingencia de conteos                        |
 +-------------+-------------------------------------------------------------------+
 | `sort()`    | Ordena los elementos ascendentemente                              |
 +-------------+-------------------------------------------------------------------+
@@ -1522,8 +1524,34 @@ Starwars[1:20,1]
 Starwars[20:40,c("height","mass")]
 ```
 
+Como vimos en el ejercicio anterior podemos acceder a una columna de un dataframe utilizando expresiones del tipo `Starwars[,1]` o `Starwars[,”name”]`, sin embargo la forma más popular y simple es utilizar la expresión `Starwars$name`. Esta última no solo nos permite acceder a una columna de nuestro set de datos, también permite crear nuevas variables. Veamos un ejemplo en el que seleccionemos la columna `species` y creemos una nueva columna que enumere nuestros datos.
 
-kjhjhn
+:::example
+#### Ejemplo 2.3.2
+:::
+
+```{r addition_232, exercise = TRUE}
+#seleccion
+Starwars$species
+#nueva variable
+Starwars$numero <- 1:87
+#Nueva Starwars
+Starwars
+```
+
+```{r,eval=TRUE,message=FALSE,echo=FALSE}
+Starwars$numero <- 1:87
+```
+
+Veamos en acción la función `table()` para conocer el numero de individuos por especies de la base de datos Starwars.
+
+```{r addition_2321, exercise = TRUE,comment=""}
+table(Starwars$species)
+```
+
+
+
+
 
 ```{r}
 tibble(x=1:3, y = list(1:3,2:4,3:5))
