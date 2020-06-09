@@ -2233,11 +2233,11 @@ grade_code("¡Muy bien!, a partir de este cambio cada variable se coloco en su p
 
 + `_join()`
 
+
+
 <!--
 Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la habilidad más fructífera que puedes aprender como científico de datos. Le ahorrará horas de tiempo y hará que sus datos sean mucho más fáciles de visualizar, manipular y modelar con R.
 -->
 
 <!--Hay muchos otros paquetes excelentes que no forman parte del tidyverse, porque están diseñados con un conjunto diferente de principios subyacentes. Esto no los hace mejores o peores, solo diferentes.-->
-
-
 
