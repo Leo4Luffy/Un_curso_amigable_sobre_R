@@ -1428,6 +1428,12 @@ numeros <- seq(1,100, length.out = 15)
 logicos <- c(T,T,F,F,T,T,T,F,F,F,F,T,T,F,F)
 ```
 
+```{r,eval=FALSE}
+save(letras,file = "data_pkg/letras.rda")
+save(numeros,file = "data_pkg/numeros.rda")
+save(logicos,file = "data_pkg/logicos.rda")
+```
+
 ```{r addition_2311, exercise = TRUE}
 #Dataframe
 df <- data.frame(letras,numeros,logicos,stringsAsFactors = F)
