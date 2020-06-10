@@ -7,7 +7,7 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-
+library(CursoR)
 library(learnr)
 library(dplyr)
 library(tidyr)
@@ -1485,6 +1485,10 @@ Starwars <- starwars %>%
 Starwars
 ```
 
+```{r,eval=FALSE}
+save(Starwars,file="data_pkg/Starwars.rda")
+```
+
 El ejercicio consiste en seleccionar las primeras 5 columnas de nuestra base de datos, seleccionar las primeras 20 filas de la columna name y por último  seleccionar las filas entre 20 y 40 para las columnas height y mass.
 
 :::exercise
@@ -2013,7 +2017,7 @@ La función `pivot_wider()` es usada cuando se tiene una observación dispersa e
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
-datos_2 <- table2 %>%
+datos_2 <- DSR::table2 %>%
   rename('País' = country, 'Año' = year, 'Variables' = key, 'Valor' = value) %>%
   mutate(País = case_when(
     País == 'Afghanistan' ~ 'Afganistán',
@@ -2025,8 +2029,12 @@ datos_2 <- table2 %>%
     )
 ```
 
-```{r addition_4_3_1_a, exercise = TRUE}
+```{r,eval=FALSE}
+save(datos_2,file = "data_pkg/datos_2.rda")
+```
 
+
+```{r addition_4_3_1_a, exercise = TRUE}
 datos_2
 ```
 
@@ -2239,7 +2247,7 @@ La función `pivot_longer()` permite resolver las situaciones en donde se tienen
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
-datos_4_a <- table4 %>%
+datos_4_a <- DSR::table4 %>%
   rename('País' = country) %>%
   mutate(País = case_when(
     País == 'Afghanistan' ~ 'Afganistán',
@@ -2248,8 +2256,11 @@ datos_4_a <- table4 %>%
     ))
 ```
 
-```{r addition_4_3_2_a, exercise = TRUE}
+```{r,eval=FALSE}
+save(datos_4_a,file = "data_pkg/datos_4_a.rda")
+```
 
+```{r addition_4_3_2_a, exercise = TRUE}
 datos_4_a
 ```
 
@@ -2364,7 +2375,7 @@ Teniendo en cuenta el ejemplo planteado anteriormente con la función `pivot_lon
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
-datos_4_b <- table5 %>%
+datos_4_b <- DSR::table5 %>%
   rename('País' = country) %>%
   mutate(País = case_when(
     País == 'Afghanistan' ~ 'Afganistán',
@@ -2373,8 +2384,11 @@ datos_4_b <- table5 %>%
     ))
 ```
 
-```{r addition_4_3_2_c, exercise = TRUE}
+```{r,eval=FALSE}
+save(datos_4_b,file = "data_pkg/datos_4_b.rda")
+```
 
+```{r addition_4_3_2_c, exercise = TRUE}
 datos_4_b
 ```
 
@@ -2502,7 +2516,7 @@ La función `separate()` lo que hace es dividir una columna en múltiples column
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
-datos_3 <- table3 %>%
+datos_3 <- DSR::table3 %>%
   rename('País' = country, 'Año' = year, 'Tasa' = rate) %>%
   mutate(País = case_when(
     País == 'Afghanistan' ~ 'Afganistán',
@@ -2511,8 +2525,11 @@ datos_3 <- table3 %>%
     ))
 ```
 
-```{r addition_4_3_3_a, exercise = TRUE}
+```{r,eval=FALSE}
+save(datos_3,file = "data_pkg/datos_3.rda")
+```
 
+```{r addition_4_3_3_a, exercise = TRUE}
 datos_3
 ```
 
