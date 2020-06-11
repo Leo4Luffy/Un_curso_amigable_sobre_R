@@ -1562,7 +1562,7 @@ Veamos en acción la función `table()` para conocer el numero de individuos por
 table(Starwars$species)
 ```
 
-Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando también las otras características presentes en la base de datos. Además de ello con `Starwars_human` podemos probar la función `sort()` utilizando la altura de los individuos y también podemos seleccionar los hombres provenientes de Tatooine.
+Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando también las otras características presentes en la base de datos. Además de ello con `Starwars_human` podemos probar la función `sort()` utilizando la masa de los individuos y visualizar los hombres provenientes de Tatooine.
 
 :::example
 #### Ejemplo 2.3.3
@@ -1573,9 +1573,9 @@ Del fragmento de código anterior sabemos que la gran mayoría de personajes de 
 Starwars_human <- Starwars[Starwars$species =="Human",]
 Starwars_human
 #Ordenar por altura ascendentemente
-Starwars_human[order(Starwars_human$height),]
+Starwars_human[order(Starwars_human$mass),]
 #Ordenar por altura descendentemente
-Starwars_human[order(Starwars_human$height,decreasing = T),]
+Starwars_human[order(Starwars_human$mass,decreasing = T),]
 #Hombres de Tatooine
 Starwars_human[Starwars_human$gender =="masculine" & Starwars_human$homeworld =="Tatooine",]
 ```
@@ -1588,6 +1588,30 @@ Starwars_human <- subset(Starwars, species =="Human")
 Starwars_human
 #Hombres de Tatooine
 subset(Starwars_human,gender =="masculine" & homeworld =="Tatooine")
+```
+
+Ahora te invito a que crees un subconjunto de datos con el nombre `Starwars_fem` en el cual debes seleccionar el género femenino y la especie humana, adicionalmente ordena descendentemente el dataset de acuerdo a su altura eliminado la variable sex.
+
+:::exercise
+#### Ejercicio 2.3.3
+:::
+
+```{r exe_233, exercise = TRUE}
+#Subconjunto
+Starwars_fem <- 
+#Reordenado
+Starwars_fem[]
+```
+
+```{r exe_233-solution}
+#Subconjunto
+Starwars_fem <- subset(Starwars, gender == "feminine" & species =="Human")
+#Reordenado
+Starwars_fem[order(Starwars_fem$height,decreasing = T),c(1:7,9:11)]
+```
+
+```{r exe_233-check}
+grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
 
