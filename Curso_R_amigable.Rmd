@@ -19,6 +19,7 @@ library(fontawesome)
 library(gradethis)
 library(kableExtra)
 library(patchwork)
+library(palmerpenguins)
 library(showtext)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
@@ -2414,7 +2415,7 @@ largo_1
 datos_4_a_largo <- pivot_longer(
   data = datos_4_a, # El nombre del conjunto de datos a ordenar.
   cols = c('1999', '2000'), # Argumento donde se indican las columnas que pueden ser una variable.
-  names_to = 'Años', # Argumento donde se indica el nombre de la columna a crear a partir de los datos almacenados anteriormente como columna de datos.
+  names_to = 'Año', # Argumento donde se indica el nombre de la columna a crear a partir de los datos almacenados anteriormente como columna de datos.
   values_to = 'Casos' # Argumento donde se indica el nombre de la columna a crear a partir de los datos almacenados anteriormente como valores de celda.
   )
 
@@ -2900,11 +2901,80 @@ save(Tuberculosis, file = 'data_pkg/Tuberculosis.rda')
 
 ```{r addition_ejercicio, exercise = TRUE}
 
-Tuberculosis
+
+```
+
+```{r addition_ejercicio-hint, warning = FALSE}
+
+Tuberculosis_2 <- pivot_longer(
+  data = ,
+  cols = c(),
+  names_to = 'codificacion',
+  values_to = 'valor'
+  )
+
+Tuberculosis_3 <- (
+  data = Tuberculosis_2,
+  col = codificacion,
+  into = c('new', 'type', 'sexage'),
+  sep = ' '
+  )
+
+Tuberculosis_4 <- separate(
+  data = ,
+  col = sexage,
+  into = c(' ', ' '),
+  sep = 1 # Aqui 1 indica el primer elemento dentro de la variable sexage, es decir m o f.
+  )
+
+Tuberculosis_5 <- pivot_wider(
+  data = Tuberculosis_4,
+  names_from = type,
+  values_from = Valor
+  )
+```
+
+```{r addition_ejercicio-solution, warning = FALSE}
+
+Tuberculosis_2 <- pivot_longer(
+  data = Tuberculosis,
+  cols = c(5:60),
+  names_to = 'codificacion',
+  values_to = 'valor'
+  )
+
+Tuberculosis_3 <- separate(
+  data = Tuberculosis_2,
+  col = codificacion,
+  into = c('new', 'tipo', 'sexage'),
+  sep = '_'
+  )
+
+Tuberculosis_4 <- separate(
+  data = Tuberculosis_3,
+  col = sexage,
+  into = c('sex', 'age'),
+  sep = 1 # Aqui 1 indica el primer elemento dentro de la variable sexage.
+  )
+
+Tuberculosis_5 <- pivot_wider(
+  data = Tuberculosis_4,
+  names_from = tipo,
+  values_from = valor
+  )
 ```
 
 ## 5. Manipulación de datos
 
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+Pinguinos <- palmerpenguins::penguins
+Pinguinos
+```
+
+```{r,eval=FALSE}
+save(Pinguinos, file = "data_pkg/Pinguinos.rda")
+```
 
 
 <!--
