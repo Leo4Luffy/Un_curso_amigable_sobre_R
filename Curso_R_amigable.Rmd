@@ -692,13 +692,15 @@ En `R` se cuenta con las conocidas funciones base, muchas con utilidades matemá
 +-------------+-------------------------------------------------------------------+
 | `length()`  | Calcula el número de elementos del objeto                         |
 +-------------+-------------------------------------------------------------------+
-| `nrow()`    | Calcula el número de filas en un objete de dos dimensiones        |
+| `nrow()`    | Calcula el número de filas en un objeto de dos dimensiones        |
 +-------------+-------------------------------------------------------------------+
-| `ncol()`    | Calcula el número de columnas en un objete de dos dimensiones     |
+| `ncol()`    | Calcula el número de columnas en un objeto de dos dimensiones     |
 +-------------+-------------------------------------------------------------------+
 | `table()`   | Devuelve tablas de contingencia de conteos                        |
 +-------------+-------------------------------------------------------------------+
-| `sort()`    | Ordena los elementos ascendentemente                              |
+| `sort()`    | Ordena los elementos de un vector ascendentemente                 |
++-------------+-------------------------------------------------------------------+
+| `order()`   | Devuelve una permutación que reorganiza su primer argumento       |
 +-------------+-------------------------------------------------------------------+
 | `round()`   | Redondea los valor sin decimales por defecto                      |
 +-------------+-------------------------------------------------------------------+
@@ -1560,7 +1562,7 @@ Veamos en acción la función `table()` para conocer el numero de individuos por
 table(Starwars$species)
 ```
 
-Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando las demás características presentes en la base de datos.
+Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando también las otras características presentes en la base de datos. Además de ello con `Starwars_human` podemos probar la función `sort()` utilizando la altura de los individuos y también podemos seleccionar los hombres provenientes de Tatooine.
 
 :::example
 #### Ejemplo 2.3.3
@@ -1569,7 +1571,23 @@ Del fragmento de código anterior sabemos que la gran mayoría de personajes de 
 ```{r addition_233, exercise = TRUE}
 #Subconjunto
 Starwars_human <- Starwars[Starwars$species =="Human",]
-Starwars_human 
+Starwars_human
+#Ordenar por altura ascendentemente
+Starwars_human[order(Starwars_human$height),]
+#Ordenar por altura descendentemente
+Starwars_human[order(Starwars_human$height,decreasing = T),]
+#Hombres de Tatooine
+Starwars_human[Starwars_human$gender =="masculine" & Starwars_human$homeworld =="Tatooine",]
+```
+
+En lo referente a la función `sort()` todo salio de acuerdo a lo planteado, sin embargo con los subconjuntos de datos no podemos hacer la misma afirmación, si nos fijamos en el dataset de los  hombres proveniente de Tatooine podemos ver que hay filas totalmente vacías, por esta razón la forma más adecuada y corta  de obtener subconjuntos de datos es con la función `subset()` como veremos a continuación.
+
+```{r addition_2331, exercise = TRUE}
+#Subconjunto
+Starwars_human <- subset(Starwars, species =="Human")
+Starwars_human
+#Hombres de Tatooine
+subset(Starwars_human,gender =="masculine" & homeworld =="Tatooine")
 ```
 
 
