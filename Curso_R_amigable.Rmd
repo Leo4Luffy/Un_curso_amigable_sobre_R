@@ -692,6 +692,10 @@ En `R` se cuenta con las conocidas funciones base, muchas con utilidades matemá
 +-------------+-------------------------------------------------------------------+
 | `length()`  | Calcula el número de elementos del objeto                         |
 +-------------+-------------------------------------------------------------------+
+| `nrow()`    | Calcula el número de filas en un objete de dos dimensiones        |
++-------------+-------------------------------------------------------------------+
+| `ncol()`    | Calcula el número de columnas en un objete de dos dimensiones     |
++-------------+-------------------------------------------------------------------+
 | `table()`   | Devuelve tablas de contingencia de conteos                        |
 +-------------+-------------------------------------------------------------------+
 | `sort()`    | Ordena los elementos ascendentemente                              |
@@ -1484,7 +1488,7 @@ Recordemos que los dataframe son similares a las matrices en cuanto a indexació
 
 data("starwars")
 Starwars <- starwars %>% 
-  select(-c(11:14))
+  select(-c(12:14))
 Starwars
 ```
 
@@ -1541,13 +1545,13 @@ Como vimos en el ejercicio anterior podemos acceder a una columna de un datafram
 #seleccion
 Starwars$species
 #nueva variable
-Starwars$numero <- 1:87
+Starwars$numero <- 1:nrow(Starwars)
 #Nueva Starwars
 Starwars
 ```
 
 ```{r,eval=TRUE,message=FALSE,echo=FALSE}
-Starwars$numero <- 1:87
+Starwars$numero <- 1:nrow(Starwars)
 ```
 
 Veamos en acción la función `table()` para conocer el numero de individuos por especies de la base de datos Starwars.
@@ -1556,10 +1560,23 @@ Veamos en acción la función `table()` para conocer el numero de individuos por
 table(Starwars$species)
 ```
 
+Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando las demás características presentes en la base de datos.
+
+:::example
+#### Ejemplo 2.3.3
+:::
+
+```{r addition_233, exercise = TRUE}
+#Subconjunto
+Starwars_human <- Starwars[Starwars$species =="Human",]
+Starwars_human 
+```
+
+
 ```{r}
-tibble(x=1:3, y = list(1:3, 2:4, 3:5))
-data.frame(x = 1:3, y = list(1:3, 2:4, 3:5))
-tibble(x = 1:3, y = x*3)
+#tibble(x=1:3, y = list(1:3, 2:4, 3:5))
+#data.frame(x = 1:3, y = list(1:3, 2:4, 3:5))
+#tibble(x = 1:3, y = x*3)
 #data.frame(x = 1:3, y = x*3)
 #merge
 #subset
