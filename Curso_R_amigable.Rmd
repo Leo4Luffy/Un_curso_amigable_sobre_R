@@ -2844,7 +2844,7 @@ save(Tuberculosis, file = 'data_pkg/Tuberculosis.rda')
 Tuberculosis
 ```
 
-## 5. Limpieza y manipulación de datos
+## 5. Manipulación de datos
 
 
 
