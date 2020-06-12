@@ -1683,6 +1683,13 @@ knitr::include_graphics("images/ggplot2.jpg")
   </div>
 </div>
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/tidyverse_war.jpg")  
+```
+
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+
 Para usar los paquetes del `tidyverse` se deben instalar primero. Para esto, los paquetes se pueden instalar de forma individual:
 
 ```{r addition_4_1_1, exercise = TRUE}
@@ -2966,6 +2973,25 @@ Tuberculosis_5 <- pivot_wider(
 
 ## 5. Manipulación de datos
 
+### 5.1 Descripción de los datos a usar
+
+En esta parte del curso sobre la __manipulación de datos__ se empleara el conjunto de datos `palmerpenguins`, el cual resultó de una investigación donde se examinó el dimorfismo sexual ecológico entre pingüinos del género _Pygoscelis_.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "38%", fig.align = "center"}
+
+knitr::include_graphics("images/Pygoscelis_penguins.png")  
+```
+
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+
+#### Información sobre el conjunto de datos
+
+__Descargo de responsabilidad:__ El conjunto de datos `palmerpenguins` hace parte de un paquete del mismo nombre que podrás encontrar [aquí](https://github.com/allisonhorst/palmerpenguins). Las desarrolladoras del paquete mencionan que este conjunto de datos debe entenderse como datos de muestra para aprender sobre herramientas de manipulación y visualización, y cualquiera persona interesada en publicarlos deberá comunicarse previamente con las personas responables de su recopilación.
+
+__Cita de datos:__ Gorman KB, Williams TD, Fraser WR (2014) Dimorfismo sexual ecológico y variabilidad ambiental dentro de una comunidad de Pingüinos antárticos (Género _Pygoscelis_). PLoS ONE 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081
+
+__Estructura general de lo datos:__ El conjunto de datos `palmerpenguins` ya se encuentra en formato ordenado. A continuación podrá hechar un vistazo de su estructura:
+
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
 Pinguinos <- palmerpenguins::penguins
@@ -2975,6 +3001,34 @@ Pinguinos
 ```{r,eval=FALSE}
 save(Pinguinos, file = "data_pkg/Pinguinos.rda")
 ```
+
++ En `species`podrá encontrar las tres especies existentes del genéro de pingüinos _Pygoscelis_.
+
++ En `island` podrá encontrar el nombre de las islas donde fueron ubicadas las colonias de pingüinos.
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
++ En `culmen_length_mm` se registró la longitud del culmen (margen superior del pico) de las tres especies de pingüinos.
++ En `culmen_depth_mm` se registró la profundidad del culmen de las tres especies de pingüinos.
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "38%", fig.align = "center"}
+
+knitr::include_graphics("images/culmen_penguins.png")
+```
+
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+  </div>
+</div>
+
++ En `flipper_length_mm` se registró la longitud de la aleta de las tres especies de pingüinos.
+
++ En `body_mass_g` se registró la masa corporal de cada uno de los pingüinos.
+
++ En `sex` podrá encontrar la información sobre el sexo (FEMALE para hembras y MALE para machos) de cada uno de los pingüinos.
+
+### 5.2 Manipular los datos con `dplyr`
+
 
 
 <!--
