@@ -1640,6 +1640,17 @@ Starwars
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
+Una función bastante útil cuando trabajamos en R es `summary( )` la cual se utiliza para producir resúmenes de objetos, sean estos modelos, dataframe o vectores. De momento trabajaremos sobre dataframe y veamos que resulta.
+
+:::example
+#### Ejemplo 2.3.4
+:::
+
+```{r addition_234, exercise = TRUE, comment=""}
+#Subconjunto
+summary(Starwars)
+```
+
 
 ```{r}
 #tibble(x=1:3, y = list(1:3, 2:4, 3:5))
