@@ -1615,6 +1615,42 @@ Starwars_fem[order(Starwars_fem$height,decreasing = T),c(1:7,9:11)]
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
+Aplicando lo aprendido en el ejemplo 2.3.2 crea la variable `IMC` ($IMC = \frac{Masa\ (kg)}{Altura(m)^2}$), para ello debes transformar la altura a metros. Además debes crear otra variable llamada `Obesidad` que corresponde a un puntaje de IMC de por lo menos 30 unidades. 
+
+:::exercise
+#### Ejercicio 2.3.4
+:::
+
+```{r exe_234, exercise = TRUE}
+#IMC
+Starwars$IMC <- 
+#Obesidad
+Starwars$Obesidad <- 
+```
+
+```{r exe_234-solution}
+#IMC
+Starwars$IMC <- (Starwars$mass) / (Starwars$height/100)**2
+#Obesidad
+Starwars$Obesidad <- Starwars$IMC >= 30
+Starwars
+```
+
+```{r exe_234-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Una función bastante útil cuando trabajamos en R es `summary( )` la cual se utiliza para producir resúmenes de objetos, sean estos modelos, dataframe o vectores. De momento trabajaremos sobre dataframe y veamos que resulta.
+
+:::example
+#### Ejemplo 2.3.4
+:::
+
+```{r addition_234, exercise = TRUE, comment=""}
+#Subconjunto
+summary(Starwars)
+```
+
 
 ```{r}
 #tibble(x=1:3, y = list(1:3, 2:4, 3:5))
