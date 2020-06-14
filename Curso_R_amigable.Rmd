@@ -1651,6 +1651,134 @@ Una función bastante útil cuando trabajamos en R es `summary( )` la cual se ut
 summary(Starwars)
 ```
 
+Supongamos que ahora necesitamos medidas resumen de peso y altura por género, `summary()` ya no sería útil, entonces debemos utilizar otra función que nos permita lograr nuestro objetivo. La función `with()` nos ayudará con estas nuevas medidas resumen.
+
+:::example
+#### Ejemplo 2.3.5
+:::
+
+```{r addition_235, exercise = TRUE, comment=""}
+#Medidas resumen
+with(Starwars,mean(height[gender =="feminine"],na.rm = T))
+with(Starwars,max(mass[gender =="masculine"],na.rm = T))
+with(Starwars,median(height[gender =="masculine"],na.rm = T))
+with(Starwars,min(mass[gender =="feminine"],na.rm = T))
+```
+
+Con esta función podemos hacer algunas cosas interesantes como por ejemplo conocer los nombres de los personajes con obesidad solo creando la variable IMC. Podemos hacerlo de cuatro formas que veremos a continuación. 
+
+```{r addition_2351, exercise = TRUE, comment=""}
+#IMC
+Starwars$IMC <- (Starwars$mass) / (Starwars$height/100)**2
+#Obesos forma 1
+Starwars[Starwars$IMC>=30,]$name
+#Obesos forma 2
+subset(Starwars,IMC>=30)$name
+#Obesos forma 3
+with(Starwars,name[IMC>=30])
+#Obesos forma 4
+with(subset(Starwars,IMC>=30),name[])
+```
+
+Teniendo en cuenta lo que hemos trabajado sobre los dataframe, cual o cuales son las formas más adecuadas de obtener los nombres de las personas con obesidad de Starwars.
+
+```{r addition_2352, echo = FALSE}
+question(" ",
+  answer("Forma 1", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("Forma 3", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("Formas 3 y 4", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("Formas 2 y 4",correct = TRUE, message = "Estas en lo correcto.."),
+  answer("Formas 1 y 3", message = "No estas en lo correcto, sigue intentandolo."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+
+Realiza el siguiente ejercicio en el debes utilizar las funciones `with()` y `subset()` para calcular la mediana de la masa de las mujeres y guardarlo en `medfem`. Con medfem calculada debes obtener el nombre de los personajes cuyo peso sea a lo sumo el valor obtenido en la mediana de la masa de las mujeres.
+
+:::exercise
+#### Ejercicio 2.3.5
+:::
+
+```{r exe_235, exercise = TRUE}
+#Mediana
+medfem <- 
+#Nombres
+
+```
+
+```{r exe_235-solution}
+#Mediana
+medfem <- with(Starwars,min(mass[gender =="feminine"],na.rm = T))
+#Nombres
+with(subset(Starwars,mass<=medfem),name[])
+```
+
+```{r exe_235-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Ya vimos como obtener medidas resumen como la media para las mujeres o los hombres, veamos en este momento como obtener la media de la altura para los dos generos utlizando la función `aggregate()`.
+
+:::example
+#### Ejemplo 2.3.6
+:::
+
+```{r addition_236, exercise = TRUE, comment=""}
+#Media de peso
+aggregate(height~gender,Starwars,mean)
+```
+
+Pero qué sucede si necesitamos la media para la altura y la masa, la primera opción sería utilizar `aggregate()` con cada una variable, sin embargo hay una opción más cómoda valiéndonos de una función que ya hemos utilizado antes `cbind()`. Veamos cómo hacerlo:
+
+```{r addition_2361, exercise = TRUE, comment=""}
+#Media de altura y masa
+aggregate(cbind(height,mass)~gender,Starwars,mean)
+```
+
+Genial verdad?, es mucho más rápido que utlizar `with()` y `subset()` varias veces, pero hagamos algo más interesante, veamos la media de la altura y la masa por género teniendo en cuenta su lugar de origen.
+
+```{r addition_2362, exercise = TRUE, comment=""}
+#Media de altura y masa por genero y mundo natal
+aggregate(cbind(height,mass)~homeworld+gender,Starwars,mean)
+```
+
+Para hacerlo más interesante e incluir media, mediana, máximos y mínimos de altura y masa debemos apoyarnos en las funciones `do.call()` y `function()`, esta última función la retomaremos más adelante con mayor detalle, do.call() debes consultarla por tu cuenta.
+
+```{r addition_2363, exercise = TRUE, comment=""}
+#Media, madiana... de altura y masa por genero y mundo natal
+ag_st <- aggregate(cbind(height,mass)~homeworld+gender,Starwars,function(x) c(mn=mean(x), med=median(x),max = max(x),min=min(x)))
+do.call(data.frame,ag_st)
+```
+
+Apliquemos lo que acabamos de aprender, para ello debes calcular la altura y peso máximo por género y especie en la primera parte, en la segunda parte debes calcular la mediana y la mitad del rango intercuartílico para las mismas variables por género y especie.
+
+:::exercise
+#### Ejercicio 2.3.6
+:::
+
+```{r exe_236, exercise = TRUE}
+#Primera parte
+
+#Segunda aprte
+ag_st <- 
+do.call(data.frame,ag_st)
+```
+
+```{r exe_236-solution}
+#Primera parte
+aggregate(cbind(height,mass)~species+gender,Starwars,mean)
+#Segunda aprte
+ag_st <- aggregate(cbind(height,mass)~species+gender,Starwars,function(x) c(med=median(x),IQR_2 = IQR(x)/2))
+do.call(data.frame,ag_st)
+```
+
+```{r exe_236-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+
 
 ```{r}
 #tibble(x=1:3, y = list(1:3, 2:4, 3:5))
