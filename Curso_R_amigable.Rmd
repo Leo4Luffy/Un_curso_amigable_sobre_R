@@ -21,6 +21,7 @@ require(patchwork)
 require(palmerpenguins)
 require(showtext)
 require(fontawesome)
+require(tibble)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -1492,7 +1493,7 @@ Recordemos que los dataframe son similares a las matrices en cuanto a indexació
 data("starwars")
 Starwars <- starwars %>% 
   select(-c(12:14))
-Starwars
+Starwars <- as.data.frame(Starwars)
 ```
 
 ```{r,eval=FALSE}
