@@ -1563,7 +1563,7 @@ Veamos en acción la función `table()` para conocer el numero de individuos por
 table(Starwars$species)
 ```
 
-Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando también las otras características presentes en la base de datos. Además de ello con `Starwars_human` podemos probar la función `sort()` utilizando la masa de los individuos y visualizar los hombres provenientes de Tatooine.
+Del fragmento de código anterior sabemos que la gran mayoría de personajes de Starwars son humanos, ahora veamos cómo seleccionar un subconjunto de los datos en el cual solo estén los personajes humanos, conservando también las otras características presentes en la base de datos. Además de ello con `Starwars_human` podemos probar la función `order()` utilizando la masa de los individuos y visualizar los hombres provenientes de Tatooine.
 
 :::example
 #### Ejemplo 2.3.3
@@ -1581,7 +1581,7 @@ Starwars_human[order(Starwars_human$mass,decreasing = T),]
 Starwars_human[Starwars_human$gender =="masculine" & Starwars_human$homeworld =="Tatooine",]
 ```
 
-En lo referente a la función `sort()` todo salio de acuerdo a lo planteado, sin embargo con los subconjuntos de datos no podemos hacer la misma afirmación, si nos fijamos en el dataset de los  hombres proveniente de Tatooine podemos ver que hay filas totalmente vacías, por esta razón la forma más adecuada y corta  de obtener subconjuntos de datos es con la función `subset()` como veremos a continuación.
+En lo referente a la función `order()` todo salio de acuerdo a lo planteado, sin embargo con los subconjuntos de datos no podemos hacer la misma afirmación, si nos fijamos en el dataset de los  hombres proveniente de Tatooine podemos ver que hay filas totalmente vacías, por esta razón la forma más adecuada y corta  de obtener subconjuntos de datos es con la función `subset()` como veremos a continuación.
 
 ```{r addition_2331, exercise = TRUE}
 #Subconjunto
@@ -3718,13 +3718,7 @@ slice_max(
   )
 ```
 
-#### 5.2.1.3 Organizar filas con `arrange()`
-
-La función `arrange()` permite ordenar un conjunto de datos en función del valor de una determinada variable. Esto puede ser útil si se desea ver rápidamente qué mediciones tuvieron los valores más altos o más bajos.
-
-:::example
-#### Ejemplo 5.2.1.3.1
-:::
++ Organizar filas con `arrange()`
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
@@ -3887,12 +3881,14 @@ organizar <- data.frame(
   annotate(geom = 'text', x = 28.5, y = 5.25, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'NA', family = 'gochi', size = 7.4, colour = 'black') +
-  geom_curve(x = 19.6, xend = 19.6, y = 4.5, yend = 9.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, colour = 'black', curvature = 0.0) +
+  geom_curve(x = 19.6, xend = 19.6, y = 4.5, yend = 9.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 25.6, xend = 25.6, y = 9.5, yend = 4.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
   annotate(geom = 'rect', xmin = 12.1, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'gray34', fill = 'gray34', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'arrange (', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 14.24, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 14.3, y = 11.25, label = 'desc(body_mass)', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 12.7, y = 11.0, label = ')', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 14.7, y = 11.5, label = '.data = palmerpenguins,', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 13.78, y = 11.25, label = '-culmen_depth,', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 13.54, y = 11.0, label = 'body_mass', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 12.25, y = 10.75, label = ')', size = 7.4, colour = 'black') +
   scale_y_continuous(limits = c(4.0, 11.78)) +
   #scale_x_continuous(limits = c(8, 5.0)) +
   theme_void() +
@@ -3900,22 +3896,6 @@ organizar <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 organizar
-```
-
-```{r ejemplo_5_2_1_3_1_b, exercise = TRUE}
-
-arrange(
-  .data = penguins,
-  desc(body_mass_g)
-  )
-```
-
-```{r ejemplo_5_2_1_3_1_a, exercise = TRUE}
-
-arrange(
-  .data = penguins,
-  body_mass_g
-  )
 ```
 
 + Seleccionar columnas con `select()`
