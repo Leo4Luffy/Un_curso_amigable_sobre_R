@@ -1779,6 +1779,56 @@ do.call(data.frame,ag_st)
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
+Ya vimos cómo funciona la indexación, los subconjuntos, las medidas resumen y la selección de columnas y filas en los dataframe. Pero faltan algunas cosas referente a ellos, empezando por la cuestión de que en `R` la función que los define fue creada en 1992 para el lenguaje S, es por ello que hoy en día son considerados levemente obsoletos. En reemplazo del dataframe tradicional se creó el formato de datos `Tibble`, el cual recoge todo lo bueno de su antecesor con mejoras que potencian su rendimiento y usabilidad, lo que quiere decir que podemos utilizar `order()` `subset()` `summary()` `with()` `aggregate()` y demás funciones que utilizamos en esta subsección. Cabe mencionar que este nuevo formato no hace parte de las funciones básicas de `R`, por lo que necesitaremos instalar y cargar un paquete para trabajar con él.
+
+```{r addition_23001, exercise = TRUE, comment=""}
+install.packages("tibble")
+library(tibble)
+```
+
+Las primeras mejoras inician con problemas que ya tratamos en el ejemplo 2.3.1 y es la cuestión que los data.frame convierten los caracteres a factores cosa que no hacen los tibble, otra diferencia es que tibble nunca cambia los nombres de las variables y nunca crean nombres de fila.
+
+Para reconocer estas mejoras debes trabajar el siguiente ejercicio en consola, crea de nuevo el marco de datos df del ejemplo 2.3.1  utilizando la función `data.frame()` y luego crea df2 con la función `tibble()`, sigue los pasos que estan a continuacion:
+
+:::exercise
+#### Ejercicio 2.3.7
+:::
+
+1. Carga las librerías necesarias
+
+```{r,eval=FALSE,echo=TRUE}
+library(CursoR)
+library(tibble)
+```
+
+2. Crea `df` y `df2`
+
+```{r,eval=FALSE,echo=TRUE}
+df <- data.frame(letras, numeros, logicos)
+df2 <- tibble(letras,numeros,logicos)
+```
+
+3. Imprime en pantalla los dos marcos de datos 
+
+```{r,eval=FALSE,echo=TRUE}
+df
+df2
+```
+
+Al final de estos tres pasos debes obtener los siguientes resultados, en los cuales notarás otra mejora en relación a la impresión, como se ve, los tibble arroja el tipo de dato de cada columna cosa que no sucede con los dataframe tradicionales.
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+knitr::include_graphics("images/tibble_1.png")
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+knitr::include_graphics("images/tibble_2.png")
+```
+  </div>
+</div>
 
 
 ```{r}
