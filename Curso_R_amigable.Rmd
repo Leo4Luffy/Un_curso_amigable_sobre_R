@@ -3665,7 +3665,7 @@ posicion <- data.frame(
   annotate(geom = 'rect', xmin = 12.3, xmax = 13.3, ymin = 11.72, ymax = 11.78, colour = 'burlywood4', fill = 'burlywood4', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'slice (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.36, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 13.0, y = 11.25, label = '1:4', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 13.30, y = 11.25, label = 'c(1:4)', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 12.8, y = 11.0, label = ')', size = 7.4, colour = 'black') +
   scale_y_continuous(limits = c(4.0, 11.78)) +
   #scale_x_continuous(limits = c(8, 5.0)) +
@@ -3674,6 +3674,48 @@ posicion <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 posicion
+```
+
+```{r ejemplo_5_2_1_2_1_a, exercise = TRUE}
+
+slice(
+  .data = penguins,
+  c(1:4)
+  )
+```
+
+```{r ejemplo_5_2_1_2_1_b, exercise = TRUE}
+
+slice_head(
+  .data = penguins,
+  n = 4
+  )
+
+slice_tail(
+  .data = penguins,
+  n = 4
+  )
+```
+
+```{r ejemplo_5_2_1_2_1_c, exercise = TRUE}
+
+slice_sample(
+  .data = penguins,
+  n = 4
+  )
+```
+
+```{r ejemplo_5_2_1_2_1_d, exercise = TRUE}
+
+slice_min(
+  .data = penguins,
+  culmen_depth_mm, n = 4
+  )
+
+slice_max(
+  .data = penguins,
+  body_mass_g, n = 4
+  )
 ```
 
 + Organizar filas con `arrange()`
