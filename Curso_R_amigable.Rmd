@@ -3938,8 +3938,7 @@ organizar <- data.frame(
   annotate(geom = 'text', x = 28.5, y = 5.25, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'NA', family = 'gochi', size = 7.4, colour = 'black') +
-  geom_curve(x = 19.6, xend = 19.6, y = 4.5, yend = 9.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
-  geom_curve(x = 25.6, xend = 25.6, y = 9.5, yend = 4.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 19.6, xend = 19.6, y = 4.6, yend = 9.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
   annotate(geom = 'rect', xmin = 12.1, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'gray34', fill = 'gray34', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'arrange (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.24, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
@@ -4120,13 +4119,99 @@ select(
 
 select(
   .data = penguins,
-  -(species:body_mass_g),
+  -(species:sex),
    species,
    culmen_length_mm,
    culmen_depth_mm,
    body_mass_g
   )
 ```
+
++ Seleccionar columnas basadas en nombres parciales de columnas
+
+Si se tiene una gran cantidad de columnas o variables con una estructura similar en el nombre, se puede utilizar la concordancia parcial mediante la adición de `starts_with()`, `ends_with()` o `contains()` en la sentencia de selección.
+
+:::example
+#### Ejemplo 5.2.1.4.2
+:::
+
+```{r ejemplo_5_2_1_4_2, exercise = TRUE}
+
+select(
+  .data = penguins,
+  starts_with('culmen')
+  )
+
+select(
+  .data = penguins,
+  ends_with('mm')
+  )
+
+select(
+  .data = penguins,
+  contains('length')
+  )
+```
+
++ Seleccionar columnas basadas en columnas preidentificadas
+
+Puede identificar el nombre de las columnas inicialmente, y luego referirse a ellas dentro de la función `select()` por medio de la función `one_of()` o utilizando el operador `!!`.
+
+:::example
+#### Ejemplo 5.2.1.4.3
+:::
+
+```{r ejemplo_5_2_1_4_3, exercise = TRUE}
+
+variables_cualitativas <- c('species', 'island', 'sex')
+
+select(
+  .data = penguins,
+  one_of(variables_cualitativas)
+  )
+
+select(
+  .data = penguins,
+  !!variables_cualitativas
+  )
+```
+
++ Seleccionar columnas por su tipo de dato
+
+La función `select_if()` permite seleccionar columnas en base a su tipo de dato. Para esto, se puede emplear las funciones `is.character()`, `is.numeric()`, `is.integer()`, `is.double()`, `is.logical()`, `is.factor()`.
+
+:::example
+#### Ejemplo 5.2.1.4.4
+:::
+
+```{r ejemplo_5_2_1_4_4, exercise = TRUE}
+
+select_if(
+  penguins,
+  is.factor
+  )
+
+select_if(
+  penguins,
+  ~!is.numeric(.)
+  )
+```
+
+:::caution
+
+:::
+
+:::exercise
+
+:::
+
++ Uso de `select()` para renombrar columnas
+
+Otro uso interesante de la función `select()` consiste en cambiar el nombre de las columnas.
+
+:::example
+#### Ejemplo 5.2.1.4.5
+:::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
@@ -4291,9 +4376,9 @@ renombre <- data.frame(
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'rename (', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 14.8, y = 11.5, label = '.data = palmerpenguins,', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 13.7, y = 11.25, label = 'gender = sex', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 12.2, y = 11.0, label = ')', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 14.2, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 13.8, y = 11.25, label = 'gender = sex', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 12.6, y = 11.0, label = ')', size = 7.4, colour = 'black') +
   geom_point(aes(x = 28.5, y = 9.75), pch = 'x', size = 20.0, colour = 'red', fill = 'red') +
   annotate(geom = 'text', x = 28.5, y = 10.25, label = 'gender', family = 'gochi', size = 7.4, colour = 'red') +
   scale_y_continuous(limits = c(4.0, 11.78)) +
