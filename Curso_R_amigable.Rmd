@@ -1844,9 +1844,9 @@ mtcars_3 <- mtcars %>% mutate(cars = rownames(mtcars)) %>% relocate(cars)%>%
 ```
 
 ```{r,eval=FALSE}
-save(Starwars, file="data_pkg/mtcars_1.rda")
-save(Starwars, file="data_pkg/mtcars_2.rda")
-save(Starwars, file="data_pkg/mtcars_3.rda")
+save(mtcars_1, file="data_pkg/mtcars_1.rda")
+save(mtcars_2, file="data_pkg/mtcars_2.rda")
+save(mtcars_3, file="data_pkg/mtcars_3.rda")
 ```
 
 Trabajaremos ahora con tres bases de datos modificadas para cierta cantidad de autos de la revista Motor Trend US de 1974 que comprenden 5 variables, `mpg` millas por galón, `hp` potencia bruta, `wt` peso, `am` transmisión y `carb` número de carburadores. A diferencia del ejemplo anterior en el que todas bases de datos separadas tenían exactamente los mismos nombre en esta solo coinciden algunos nombres de carros.  En el siguiente ejemplo veremos en la primera parte cómo unir solo las coincidencias, en la segunda parte veremos cómo unir conservando inclusive los carros que no coinciden.
