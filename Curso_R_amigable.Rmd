@@ -1438,7 +1438,7 @@ save(numeros,file = "data_pkg/numeros.rda")
 save(logicos,file = "data_pkg/logicos.rda")
 ```
 
-```{r addition_2311, exercise = TRUE}
+```{r addition_231_1, exercise = TRUE}
 #Dataframe
 df <- data.frame(letras, numeros, logicos, stringsAsFactors = FALSE)
 df
@@ -1779,7 +1779,114 @@ do.call(data.frame,ag_st)
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Ya vimos cómo funciona la indexación, los subconjuntos, las medidas resumen y la selección de columnas y filas en los dataframe. Pero faltan algunas cosas referente a ellos, empezando por la cuestión de que en `R` la función que los define fue creada en 1992 para el lenguaje S, es por ello que hoy en día son considerados levemente obsoletos. En reemplazo del dataframe tradicional se creó el formato de datos `Tibble`, el cual recoge todo lo bueno de su antecesor con mejoras que potencian su rendimiento y usabilidad, lo que quiere decir que podemos utilizar `order()` `subset()` `summary()` `with()` `aggregate()` y demás funciones que utilizamos en esta subsección. Cabe mencionar que este nuevo formato no hace parte de las funciones básicas de `R`, por lo que necesitaremos instalar y cargar un paquete para trabajar con él.
+Para continuar con el manejo de los marcos de datos trabajaremos con la función `merge()`, la cual sirve para unir diferentes dataframe de acuerdo a variables en común, para utilizarla dividiremos Starwars en varios marcos de datos conservando en cada uno de ellos la variable `name`, luego cambiaremos su orden y al final los uniremos.
+
+:::example
+#### Ejemplo 2.3.7
+:::
+
+```{r addition_237, exercise = TRUE, comment=""}
+#Divisiones 
+starw_1 <- Starwars[order(Starwars$height),c(1:5)]
+starw_2 <- Starwars[order(Starwars$mass),c(1,6:11)]
+starw_1
+starw_2
+#Union
+merge(starw_1,starw_2)
+```
+
+Esto funcionó muy bien uniendo dos marcos de datos, sin embargo para unir tres o más marcos de datos el proceso es algo diferente, ya que solo se puede unir dos a la vez. veamos cómo funciona con dos o más dataframe.
+
+```{r addition_2371, exercise = TRUE, comment=""}
+#Divisiones 
+starw_1 <- Starwars[order(Starwars$height),c(1,2,4)]
+starw_2 <- Starwars[order(Starwars$mass),c(1,3,5,7)]
+starw_3 <- Starwars[order(Starwars$homeworld),c(1,6,8:11)]
+starw_1
+starw_2
+starw_3
+#Union
+starw_1_2 <- merge(starw_1,starw_2,by = "name")
+merge(starw_1_2,starw_3)
+```
+
+A medida que aumente el número de dataframe a unir aumentará el número de variables que debemos crear y el proceso se hará mucho más largo, para evitar realizar muchos pasos podemos utilizar la función `Reduce()` de la siguiente manera.
+
+```{r addition_2372, exercise = TRUE, comment=""}
+#Divisiones 
+starw_1 <- Starwars[order(Starwars$height),c(1,2)]
+starw_2 <- Starwars[order(Starwars$mass),c(1,4,5)]
+starw_3 <- Starwars[order(Starwars$homeworld),c(1,6)]
+starw_4 <- Starwars[order(Starwars$eye_color),c(1,7)]
+starw_5 <- Starwars[order(Starwars$gender),c(1,3,8)]
+starw_6 <- Starwars[order(Starwars$birth_year),c(1,9:11)]
+#Union
+Reduce(function(...) merge(...,by="name"),list(starw_1,starw_2,starw_3,starw_4,starw_5,starw_6))
+```
+
+Con lo anterior logramos ahorrarnos por lo menos 4 o 5 pasos para lograr el mismo objetivo. Veamos ahora un ejemplo del cual no tengamos previo conocimiento del resultado
+
+:::example
+#### Ejemplo 2.3.8
+:::
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+data("mtcars")
+mtcars_1 <- mtcars %>% mutate(cars = rownames(mtcars)) %>% relocate(cars) %>% 
+  as_tibble() %>% select(c(1,3,5)) %>% slice(1:10) %>% arrange(hp)
+mtcars_2 <- mtcars %>% mutate(cars = rownames(mtcars)) %>% relocate(cars)%>% 
+  as_tibble() %>% select(1,7) %>% slice(8:14) %>% arrange(wt)
+mtcars_3 <- mtcars %>% mutate(cars = rownames(mtcars)) %>% relocate(cars)%>% 
+  as_tibble() %>% select(c(1,10,12)) %>% slice(5,13,14,30,32) %>%
+  mutate(am = "manual") %>% arrange(-carb)
+```
+
+```{r,eval=FALSE}
+save(Starwars, file="data_pkg/mtcars_1.rda")
+save(Starwars, file="data_pkg/mtcars_2.rda")
+save(Starwars, file="data_pkg/mtcars_3.rda")
+```
+
+Trabajaremos ahora con tres bases de datos modificadas para cierta cantidad de autos de la revista Motor Trend US de 1974 que comprenden 5 variables, `mpg` millas por galón, `hp` potencia bruta, `wt` peso, `am` transmisión y `carb` número de carburadores. A diferencia del ejemplo anterior en el que todas bases de datos separadas tenían exactamente los mismos nombre en esta solo coinciden algunos nombres de carros.  En el siguiente ejemplo veremos en la primera parte cómo unir solo las coincidencias, en la segunda parte veremos cómo unir conservando inclusive los carros que no coinciden.
+
+```{r addition_238, exercise = TRUE, comment=""}
+#bases de datos
+mtcars_1
+mtcars_2
+#Primera = coincidencias
+merge(mtcars_1,mtcars_2, by ="cars")
+#Segunda = todo
+merge(mtcars_1,mtcars_2, by ="cars",all = TRUE)
+```
+
+Une `mtcars_1`, `mtcars_2`, `mtcars_3` utilizando la función `Reduce ()` para los carros que están en las 3 base de datos incluyendo los que no coinciden.
+
+:::exercise
+#### Ejercicio 2.3.7
+:::
+
+```{r exe_237, exercise = TRUE}
+#bases de datos
+mtcars_1
+mtcars_2
+mtcars_3
+#Union completa
+```
+
+```{r exe_237-solution}
+#bases de datos
+mtcars_1
+mtcars_2
+mtcars_3
+#Union completa
+Reduce(function(...) merge(...,by="cars",all = T),list(mtcars_1,mtcars_2,mtcars_3))
+```
+
+```{r exe_237-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Ya vimos cómo funciona la indexación, los subconjuntos, las medidas resumen y la selección de columnas y filas en los dataframe. Pero faltan algunas cosas referente a ellos, empezando por la cuestión de que en `R` la función que los define fue creada en 1992 para el lenguaje S, es por ello que hoy en día son considerados levemente obsoletos. En reemplazo del dataframe tradicional se creó el formato de datos `Tibble`, el cual recoge todo lo bueno de su antecesor con mejoras que potencian su rendimiento y usabilidad, lo que quiere decir que podemos utilizar `order()`, `subset()`, `summary()`, `with()`, `aggregate()`, `merge()` y demás funciones que utilizamos en esta subsección. Cabe mencionar que este nuevo formato no hace parte de las funciones básicas de `R`, por lo que necesitaremos instalar y cargar un paquete para trabajar con él.
 
 ```{r addition_23001, exercise = TRUE, comment=""}
 install.packages("tibble")
@@ -1791,7 +1898,7 @@ Las primeras mejoras inician con problemas que ya tratamos en el ejemplo 2.3.1 y
 Para reconocer estas mejoras debes trabajar el siguiente ejercicio en consola, crea de nuevo el marco de datos df del ejemplo 2.3.1  utilizando la función `data.frame()` y luego crea df2 con la función `tibble()`, sigue los pasos que estan a continuacion:
 
 :::exercise
-#### Ejercicio 2.3.7
+#### Ejercicio 2.3.8
 :::
 
 1. Carga las librerías necesarias
@@ -1830,18 +1937,109 @@ knitr::include_graphics("images/tibble_2.png")
   </div>
 </div>
 
+Una mejora que poseen los tibble es la forma en que se escriben los datos ya que no es necesario escribir vectores con nuestra información, veamos un ejemplo. 
 
-```{r}
-#tibble(x=1:3, y = list(1:3, 2:4, 3:5))
-#data.frame(x = 1:3, y = list(1:3, 2:4, 3:5))
-#tibble(x = 1:3, y = x*3)
-#data.frame(x = 1:3, y = x*3)
-#merge
-#subset
-#aggregate()
-#order
-# colMEans para matrices
+:::example
+#### Ejemplo 2.3.9
+:::
+
+```{r addition_239, exercise = TRUE, comment=""}
+amigos <- tribble(
+  ~nombre ,~edad,~ altura,~soltero,
+  "Andres",  23 ,    181 ,  TRUE   ,
+  "Julian",  24 ,    179 ,  FALSE  ,
+  "Maria" ,  19 ,    167 ,  TRUE   ,
+  "sandra",  21 ,    174 ,  TRUE   ,
+  "Karol" ,  26 ,    171 ,  FALSE  ,
+  "Javier",  18 ,    164 ,  TRUE  
+)
+amigos
 ```
+
+Otra de las diferencias con los dataframe, es la capacidad que tienen los tibble para hace referencia a variables que se acaban de crear, veamos cómo funciona
+
+:::example
+#### Ejemplo 2.3.10
+:::
+
+```{r addition_2310, exercise = TRUE, comment=""}
+tibble(x = 1:5, 
+       y = 1, 
+       z = x ^ 2 + y)
+```
+
+Hagamos un ejercicio para reforzar esta última diferencia. En él debes crear dos objetos `df_vol` y `tb_vol`, en ellos debes guardar la información de 10 cilindros y calcular las variables radio y volumen para cada uno, de tal forma que cada objeto contenga exactamente la misma información. Para el objeto df_vol utiliza `data.frame()` y para tb_vol `tibble()`. Al finalizar debes imprimir los dos objetos en pantalla.
+
+:::exercise
+#### Ejercicio 2.3.9
+:::
+
+```{r exe_239, exercise = TRUE}
+#Informacion
+referencia <- paste("Cilindro",seq(1,10))
+seq(1.5,100,length.out = 10) #altura
+seq(3,50,length.out = 10) #diametro
+#dataframe
+df_vol <- 
+#tibble
+tb_vol <- 
+#verificacion
+df_vol
+tb_vol
+```
+
+```{r exe_239-solution}
+#Informacion
+referencia <- paste("Cilindro",seq(1,10))
+seq(1.5,100,length.out = 10) #altura
+seq(3,50,length.out = 10) #diametro
+#dataframe
+df_vol <- data.frame(referencia,
+                     altura = seq(1.5,100,length.out = 10),
+                     diametro = seq(3,50,length.out = 10))
+df_vol$radio <- df_vol$diametro /2
+df_vol$volumen <- pi * df_vol$radio^2 * df_vol$altura
+#tibble
+tb_vol <- tibble(referencia,
+                 altura = seq(1.5,100,length.out = 10),
+                 diametro = seq(3,50,length.out = 10),
+                 radio = diametro/2,
+                 volumen = pi * radio^2 *altura)
+#verificacion
+df_vol
+tb_vol
+```
+
+```{r exe_239-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Otra de las capacidades que tiene tibble es conservar la estructura de objetos anidados, sean estos, vectores, matrices, dataframe, listas e incluso otro tibble, solo necesitamos cumplir la regla de que nuestra variable que anida objetos tenga la misma extensión de nuestras filas.
+
+Para entender esto retomemos la base de datos del ejemplo 2.3.7 con algunas modificaciones, las variables serán nombre,físico y sentimental, donde fisco tendrá edad y altura mientras que sentimental tendrá si es soltero y si tiene hijos, esta forma de guardar información es relativamente complicada en los dataframe. Veamos cómo podemos lograrlo.
+
+:::example
+#### Ejemplo 2.3.11
+:::
+
+```{r addition_2311, exercise = TRUE, comment=""}
+amigos <- tribble(
+  ~nombre ,         ~fisico          ,  ~ sentimental    ,
+  "Andres", c(edad=23,altura=181) , c(soltero=T,hijos=F) ,
+  "Julian", c(edad=24,altura=179) , c(soltero=F,hijos=T) ,
+  "Maria" , c(edad=19,altura=167) , c(soltero=T,hijos=F) ,
+  "sandra", c(edad=21,altura=174) , c(soltero=T,hijos=F) ,
+  "Karol" , c(edad=26,altura=171) , c(soltero=F,hijos=T) ,
+  "Javier", c(edad=18,altura=164) , c(soltero=T,hijos=F) ,
+)
+amigos
+```
+
+Como se pueda notar el tipo de datos  que reporta las columnas físico y sentimental pertenece a lista, lo cual es un requerimiento para anidar objetos con los tibble. De las listas hablaremos en la siguiente subsección y retomaremos este ejemplo para acceder a elementos individuales del marco de datos `amigos`.
+
+</details>
+
+<details><summary>2.3 Operaciones con listas </summary> 
 
 </details>
 
