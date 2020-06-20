@@ -5128,16 +5128,27 @@ La función `summarise()` (o `summarize()`) permite obtener un nuevo conjunto de
 
 summarise(
   .data = penguins,
-  Prom_lenght = round(mean(culmen_length_mm, na.rm = TRUE), digits = 2),
+  Prom_length = round(mean(culmen_length_mm, na.rm = TRUE), digits = 2),
   Prom_depth = round(mean(culmen_depth_mm, na.rm = TRUE), digits = 2)
   )
 
-#pull(.data = Resumen,
- #    var = 'Prom_lenght'
-  #   )
+Promedio <- function(x){
+  x = na.omit(x)
+  Suma = sum(x)
+  Total = length(x)
+  Media = Suma/Total
+  print(Media)
+  }
+
+
+summarise(
+  .data = penguins,
+  Prom_length = Promedio(culmen_length_mm),
+  Prom_depth = Promedio(culmen_depth_mm)
+  )
 ```
 
-`group_by()`<!--http://www.rebeccabarter.com/blog/2019-08-05_base_r_to_tidyverse/-->
+Usar la función `summarise()` puede ser útil por sí sola, pero es aún más útil cuando se usa para saber las diferencias entre grupos. Para hacer esto, se puede combinar con la función `group_by()`.
 
 :::example
 #### Ejemplo 5.2.1.8.2
@@ -5346,6 +5357,7 @@ Grupos <- group_by(
   .data = penguins,
   species
   )
+Grupos
 
 summarise(
   .data = Grupos,
@@ -5355,10 +5367,10 @@ summarise(
 ```
 
 :::caution
-
+La agrupación permite comparar rápidamente diferentes subconjuntos de los datos. La agrupación permite enmarcar la pregunta de análisis en términos de comparar grupos de observaciones, en lugar de observaciones individuales. Esta forma hace que sea más fácil hacer y responder preguntas complejas sobre los datos.
 :::
 
-#### 5.2.1.9 Operaciones en varias columnas con `across()`
+#### 5.2.1.9 Resumir valores con `summarise()`/`summarize()` y `across()`
 
 A menudo es útil realizar la misma operación en varias columnas. La función `across()` permite realizar esto.
 
@@ -5530,15 +5542,15 @@ resumen <- data.frame(
   annotate(geom = 'rect', xmin = 16.0, xmax = 19.0, ymin = 3.5, ymax = 4.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 17.5, y = 3.75, label = 'culmen_length', family = 'gochi', size = 6.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 16.0, xmax = 19.0, ymin = 3.0, ymax = 3.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
-  annotate(geom = 'text', x = 17.5, y = 3.25, label = '', family = 'gochi', size = 6.0, colour = 'black') +
+  annotate(geom = 'text', x = 17.5, y = 3.25, label = '44.84', family = 'gochi', size = 6.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 19.0, xmax = 22.0, ymin = 3.5, ymax = 4.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 20.5, y = 3.75, label = 'culmen_depth', family = 'gochi', size = 6.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 19.0, xmax = 22.0, ymin = 3.0, ymax = 3.5, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
-  annotate(geom = 'text', x = 20.5, y = 3.25, label = '', family = 'gochi', size = 6.0, colour = 'black') +
+  annotate(geom = 'text', x = 20.5, y = 3.25, label = '16.91', family = 'gochi', size = 6.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 22.0, xmax = 25.0, ymin = 3.5, ymax = 4.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 23.5, y = 3.75, label = 'fipper_length', family = 'gochi', size = 6.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 22.0, xmax = 25.0, ymin = 3.0, ymax = 3.5, colour = 'red', fill = 'red', alpha = 0.2) +
-  annotate(geom = 'text', x = 33.5, y = 3.25, label = '', family = 'gochi', size = 6.0, colour = 'black') +
+  annotate(geom = 'text', x = 23.5, y = 3.25, label = '193.44', family = 'gochi', size = 6.0, colour = 'black') +
   #annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 14.0, y = 11.75, label = 'summarise (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 15.36, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
@@ -5591,7 +5603,36 @@ summarise(
 
 #### 5.2.1.10 Combinando funciones con `%>%`
 
-El pipe (`%>%`) es un operador que permite encadenas funciones. Lo que hace es tomar la salida de una función y pasarla como entrada de la siguiente función. Esto ayuda enormemente a mejorar la legibilidad del código.
+Se pudo ver muchas de la funcionalidades interesantes y realmente utiles que ofrece el paquete `dplyr` y sus funciones. Sin embargo en la forma en como se explicaron, cada proceso requerira siempre guardarse por separado en objetos diferentes y hacerlo paso a paso:
+
+```{r ejemplo_5_2_1_10_1_a, exercise = TRUE, message = FALSE}
+
+a1 <- rename(
+  .data = penguins,
+  gender = sex
+  )
+a2 <- filter(
+  .data = a1,
+  gender == 'FEMALE'
+  )
+a3 <- mutate(
+  .data = a2,
+  body_mass_kg = body_mass_g / 1000
+)
+
+mutate(
+  filter(
+    rename(
+      .data = penguins,
+      gender = sex
+      ),
+    gender == 'FEMALE'
+    ),
+  body_mass_kg = body_mass_g / 1000
+  )
+```
+
+Para solucionar este problema, el paquete `dplyr` proporciona el operador pipe (`%>%`). El `%>%` es un operador que permite encadenas funciones. Lo que hace es tomar la salida de una función y pasarla como entrada de la siguiente función. Esto ayuda enormemente a mejorar la legibilidad del código.
 
 :::example
 #### Ejemplo 5.2.1.10.1
@@ -5783,8 +5824,8 @@ tuberia <- data.frame(
   #annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 14.0, y = 11.75, label = 'penguins %>%', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 16.4, y = 11.5, label = 'rename (gender = sex) %>%', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 16.8, y = 11.25, label = 'filter (gender = "FEMALE") %>%', size = 7.4, colour = 'black') +
-  annotate(geom = 'text', x = 18.35, y = 11.0, label = 'mutate (body_mass_kg = body_mass / 1000)', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 16.92, y = 11.25, label = 'filter (gender == "FEMALE") %>%', size = 7.4, colour = 'black') +
+  annotate(geom = 'text', x = 18.31, y = 11.0, label = 'mutate (body_mass_kg = body_mass / 1000)', size = 7.4, colour = 'black') +
   geom_point(aes(x = 28.5, y = 9.75), pch = 'x', size = 20.0, colour = 'red', fill = 'red') +
   annotate(geom = 'text', x = 28.5, y = 10.25, label = 'gender', family = 'gochi', size = 7.4, colour = 'red') +
   annotate(geom = 'rect', xmin = 11.8, xmax = 32.7, ymin = 9.23, ymax = 9.27, colour = 'yellow', fill = 'yellow', alpha = 1.0) +
@@ -5800,6 +5841,14 @@ tuberia <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 tuberia
+```
+
+```{r ejemplo_5_2_1_10_1_b, exercise = TRUE, message = FALSE}
+
+penguins %>%
+  rename(gender = sex) %>%
+  filter(gender == 'FEMALE') %>%
+  mutate(body_mass_kg = body_mass_g / 1000)
 ```
 
 #### 5.2.1.11 Unir conjuntos de datos con `_join()`
