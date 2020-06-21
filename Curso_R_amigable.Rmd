@@ -22,8 +22,8 @@ require(kableExtra)
 require(patchwork)
 require(palmerpenguins)
 require(showtext)
-require(fontawesome)
 require(tibble)
+require(fontawesome)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -3472,7 +3472,6 @@ El paquete `dplyr` tiene como objetivo proporcionar una función para cada verbo
 
 3) Grupos de filas y columnas:
   + `summarise()`.
-  + `across()`.
 </div>
   <div class="col-md-8" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
@@ -5601,9 +5600,13 @@ summarise(
   )
 ```
 
-#### 5.2.1.10 Combinando funciones con `%>%`
+#### 5.2.1.10 Realización de operaciones secuenciales con `%>%`
 
-Se pudo ver muchas de la funcionalidades interesantes y realmente utiles que ofrece el paquete `dplyr` y sus funciones. Sin embargo en la forma en como se explicaron, cada proceso requerira siempre guardarse por separado en objetos diferentes y hacerlo paso a paso:
+Un enfoque para realizar análisis de datos complejos consiste en crear objetos intermedios para usar en dicho análisis. Este es un flujo de trabajo muy común.
+
+:::example
+#### Ejemplo 5.2.1.10.1
+:::
 
 ```{r ejemplo_5_2_1_10_1_a, exercise = TRUE, message = FALSE}
 
@@ -5632,10 +5635,10 @@ mutate(
   )
 ```
 
-Para solucionar este problema, el paquete `dplyr` proporciona el operador pipe (`%>%`). El `%>%` es un operador que permite encadenas funciones. Lo que hace es tomar la salida de una función y pasarla como entrada de la siguiente función. Esto ayuda enormemente a mejorar la legibilidad del código.
+Para solucionar el problema que puede resultar del enfoque anterior, el paquete `dplyr` proporciona el operador de tubería (`%>%`). El `%>%` es un operador que permite encadenas funciones. Lo que hace es tomar la salida de una función y pasarla como entrada de la siguiente función.
 
 :::example
-#### Ejemplo 5.2.1.10.1
+#### Ejemplo 5.2.1.10.2
 :::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
@@ -5843,12 +5846,36 @@ tuberia <- data.frame(
 tuberia
 ```
 
-```{r ejemplo_5_2_1_10_1_b, exercise = TRUE, message = FALSE}
+```{r ejemplo_5_2_1_10_1_b, exercise = TRUE}
 
-penguins %>%
+Peso_fem_kg <- penguins %>%
   rename(gender = sex) %>%
   filter(gender == 'FEMALE') %>%
   mutate(body_mass_kg = body_mass_g / 1000)
+Peso_fem_kg
+```
+
+:::exercise
+#### Ejercicio 5.2.1.10.1
+Intente por favor calcular el valor medio de la longitud de la aleta (`flipper_length_mm`) de las tres especies de pinguinos del conjunto de datos `penguins`, pero que sean solo de sexo (`sex`) macho (`MALE`).
+:::
+
+```{r ejercicio_5_2_1_10_1, exercise = TRUE}
+
+
+```
+
+```{r ejercicio_5_2_1_10_1-solution, message = FALSE}
+
+penguins %>%
+  filter(sex == 'MALE') %>%
+  summarise(
+    across(
+      .cols = flipper_length_mm,
+      .fns = mean,
+      na.rm = TRUE
+      )
+  )
 ```
 
 #### 5.2.1.11 Unir conjuntos de datos con `_join()`
@@ -6110,6 +6137,6 @@ union_total
 ```
 
 :::caution
-Las funciones del paquete `dplyr` tienen muchas más posibilidades a las presentadas aquí. Si deseas ver un resumen de las posibilidades de este paquete, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf).
+Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y profundizar a las presentadas anteriormente, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf).
 :::
 
