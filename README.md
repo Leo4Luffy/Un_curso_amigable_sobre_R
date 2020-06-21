@@ -2,7 +2,7 @@
 
 Este es un repositorio para preparar un curso básico sobre el lenguaje de programación R. <!--Puedes disfrutar de él dandole clic <a href="https://jorge-leonardo-lopez-martinez.shinyapps.io/Curso_R_amigable/">aquí</a>.-->
 
-## Información de contacto de los autores
+Información de contacto de los autores:
 
 | Jorge Leonardo López Martínez  | Duvan Ariel Nieves Ruiz |
 | -------- | -------- |
