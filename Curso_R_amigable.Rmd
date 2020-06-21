@@ -5880,11 +5880,59 @@ penguins %>%
 
 #### 5.2.1.11 Unir conjuntos de datos con `_join()`
 
-<!--
-https://www.uv.es/pjperez/curso_R/tt_4_data_munging_v1.html#5_combinando_(joining)_df%E2%80%99s
--->
+A menudo los datos se pueden almacenar en múltiples conjuntos de datos. En algún momento se querrá acceder a la información de dichos conjuntos de datos, por lo cual necesitará una forma de poder combinarlos. A este proceso se le denomina unión (__join__) por la sencilla razón de que unira dichos conjuntos de datos.
+
+El paquete `dplyr` cuenta con un conjunto de funciones de combinación para realizar este procedimiento.
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+Datos_a <- tribble(
+  ~ID , ~x1,
+  '1', 'a1',
+  '2', 'a2'
+  )
+
+Datos_b <- tribble(
+  ~ID , ~x2,
+  '2', 'b1',
+  '3', 'b2'
+  )
+```
+
+```{r, eval = FALSE}
+
+save(Datos_a, file = 'data_pkg/Datos_a.rda')
+save(Datos_b, file = 'data_pkg/Datos_b.rda')
+```
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+Datos_a %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered')))
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+
+Datos_b %>%
+  kable() %>% 
+  kable_styling(full_width = FALSE,
+                bootstrap_options = (c('striped', 'bordered')))
+```
+  </div>
+</div>
 
 + `inner_join()`
+
+Esta unión retorna todas las columnas del primer y segundo conjunto de datos, pero solo retorna las filas del primer conjunto de datos que coinciden con el segundo conjunto de datos.
+
+:::example
+#### Ejemplo 5.2.1.11.1
+:::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
@@ -5940,7 +5988,26 @@ union_interior <- data.frame(
 union_interior
 ```
 
+```{r ejemplo_5_2_1_11_1, exercise = TRUE}
+
+inner_join(
+  x = Datos_a,
+  y = Datos_b,
+  by = 'ID'
+  )
+```
+
+:::caution
+Generalmente, las uniones llevadas a cabo usando la función `inner_join()` no son apropiadas para su uso en el análisis de datos dado que es muy fácil perder observaciones.
+:::
+
 + `left_join()`
+
+Esta unión retorna todas las columnas del primer y segundo conjunto de datos, pero solo retorna las filas del conjunto de datos que se especifica en `x` como argumento.
+
+:::example
+#### Ejemplo 5.2.1.11.2
+:::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
@@ -6003,7 +6070,22 @@ union_izquierda <- data.frame(
 union_izquierda
 ```
 
+```{r ejemplo_5_2_1_11_2, exercise = TRUE}
+
+left_join(
+  x = Datos_a,
+  y = Datos_b,
+  by = 'ID'
+  )
+```
+
 + `right_join()`
+
+Esta función es opuesta a la función `left_join()`, en el sentido de que solo retorna las filas del conjunto de datos que se especifica en `y` como argumento.
+
+:::example
+#### Ejemplo 5.2.1.11.3
+:::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
@@ -6066,7 +6148,22 @@ union_derecha <- data.frame(
 union_derecha
 ```
 
+```{r ejemplo_5_2_1_11_3, exercise = TRUE}
+
+right_join(
+  x = Datos_a,
+  y = Datos_b,
+  by = 'ID'
+  )
+```
+
 + `full_join()`
+
+Esta unión retorna toda las columnas y filas de ambos conjunto de datos. De esta forma, retorna una fila para cualquier observación independiente si coinciden o no.
+
+:::example
+#### Ejemplo 5.2.1.11.4
+:::
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
@@ -6136,7 +6233,21 @@ union_total <- data.frame(
 union_total
 ```
 
+```{r ejemplo_5_2_1_11_4, exercise = TRUE}
+
+full_join(
+  x = Datos_a,
+  y = Datos_b,
+  by = 'ID'
+  )
+```
+
 :::caution
 Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y profundizar a las presentadas anteriormente, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf).
 :::
+
+## 6. Visualización de datos
+
+
+
 
