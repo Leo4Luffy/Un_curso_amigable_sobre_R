@@ -6510,6 +6510,79 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y pr
 
 ## 6. Visualización de datos
 
+### 6.1 
 
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
 
+Diamante_1 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(2.0, 4.0, 2.0, 0.0)
+)
 
+Diamante_2 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(4.5, 6.5, 4.5, 2.5)
+)
+
+Diamante_3 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(7.0, 9.0, 7.0, 5.0)
+)
+
+punto <- data.frame(
+  x = 5.0, y = 8.0 
+)
+
+triangulo <- data.frame(
+  x = 4.2, y = 7.3 
+)
+
+cuadrado <- data.frame(
+  x = 5.4, y = 6.5
+)
+
+Diamante_4 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(9.5, 11.5, 9.5, 7.5)
+)
+
+data.frame(
+  x = c(0.0:10.0), y = c(0.0:10.0)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  geom_polygon(data = Diamante_1, aes(x = x, y = y), fill = 'yellow', colour = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.25, y = 3.2, label = '192.45', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 6.1, y = 2.25, label = '6.223', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.0, y = 2.95, label = '263.21', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.85, y = 2.0, label = '8.224', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.75, y = 2.70, label = '532.34', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.60, y = 1.75, label = '1.229', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.50, y = 2.45, label = '643.09', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.35, y = 1.50, label = '0.983', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.25, y = 2.20, label = '325.11', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.10, y = 1.25, label = '3.205', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.0, y = 1.95, label = '867.42', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.85, y = 1.0, label = '3.017', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  geom_polygon(data = Diamante_2, aes(x = x, y = y), fill = 'cyan', colour = 'cyan', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.9, y = 5.3, label = 'A', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.75, y = 4.35, label = 'X', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.1, y = 4.5, label = 'B', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.95, y = 3.55, label = 'Y', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
+  geom_polygon(data = Diamante_3, aes(x = x, y = y), fill = 'red', colour = 'red', alpha = 0.2) +
+  geom_point(data = punto, aes(x = x, y = y), pch = 21, colour = 'black', fill = 'black', alpha = 0.7, size = 8.8) +
+  geom_point(data = triangulo, aes(x = x, y = y), pch = 25, colour = 'black', fill = 'black', alpha = 0.7, size = 8.2) +
+  geom_point(data = cuadrado, aes(x = x, y = y), pch = 22, colour = 'black', fill = 'black', alpha = 0.7, size = 8.8) +
+  geom_polygon(data = Diamante_4, aes(x = x, y = y), fill = 'green', colour = 'green', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.1, y = 2.0, label = 'Datos', family = 'gochi', size = 15.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.9, y = 4.5, label = 'Estética', family = 'gochi', size = 15.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 7.0, label = 'Geometrías', family = 'gochi', size = 15.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.9, y = 9.5, label = 'Facetas', family = 'gochi', size = 15.0, colour = 'black') +
+  #scale_y_continuous(limits = c(-5.8, 6.0)) +
+  #scale_x_continuous(limits = c(1, 6.0)) #+
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+
+knitr::include_graphics("images/ggplot2_3.png")  
+```
