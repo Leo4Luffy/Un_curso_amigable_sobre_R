@@ -2041,9 +2041,271 @@ Como se pueda notar el tipo de datos  que reporta las columnas físico y sentime
 
 </details>
 
-<details><summary>2.3 Operaciones con listas </summary> 
+<details><summary>2.4 Operaciones con listas </summary> 
+
+Se entiende por lista a la colección de elementos de cualquier longitud que pueden ser de una clase diferente cada uno, lo que indica que en una lista podemos almacenar todos los objetos de los que tenemos conocimiento, sean estos vectores, matrices, dataframe, tibble en incuso otras listas. Para crear listas utilizamos la función `list()`, veamos un ejemplo sencillo de cómo se crea una lista objetos de diferente clase.
+
+:::example
+#### Ejemplo 2.4.1
+:::
+
+```{r addition_241, exercise = TRUE}
+my_lista <- list(vector = 1:10,
+                 matriz = matrix(1:25,ncol = 5),
+                 dataframe = Starwars[1:10,],
+                 tible = as_tibble(mtcars_3))
+my_lista
+```
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+my_lista <- list(vector = 1:10,
+                 matriz = matrix(1:25,ncol = 5),
+                 dataframe = Starwars[1:10,],
+                 tible = as_tibble(mtcars_3))
+```
+
+```{r,eval=FALSE}
+save(my_lista, file="data_pkg/my_lista.rda")
+```
+
+Como se puede ver crear listas es relativamente sencillo, se recomienda nombrar los objetos para facilitar el acceso a estos, sin embargo no es estrictamente necesario.
+
+Ya vimos lo sencillo que es crear una lista con las clases de objetos que conocíamos previamente, ahora con el siguiente ejercicio debes crear una lista que contenga otras listas dentro de ella, la lista principal se llamará `mis_listas`,  las listas dentro de ella no tendrán nombre. La primera lista debe contener los bases de datos `Starwars` y `mtcars_3` y la segunda lista debe contar con dos subconjuntos de datos, el primero debe tener los personajes de Starwars de la especie humana y el segundo los autos de mtcars_3 con más de dos carburadores. Adicionalmente se agregarán nombres a la lista principal con la función `names()`.
+
+:::exercise
+#### Ejercicio 2.4.1
+:::
+
+```{r exe_241, exercise = TRUE}
+mis_listas <- 
+mis_listas
+#nombres 
+names(mis_listas) <- c("dataset","subconjuntos")
+mis_listas
+```
+
+```{r exe_241-solution}
+mis_listas <- list(list(Starwars,mtcars_3),
+                   list(subset(Starwars,species == "Human"),
+                        subset(mtcars_3,carb>2)))
+mis_listas
+#nombres 
+names(mis_listas) <- c("dataset","subconjuntos")
+mis_listas
+```
+
+```{r exe_241-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Veamos cómo funciona la indexación y el acceso a elementos individuales de una lista utilizando `my_lista`. Primero vamos a llamar a dataframe, después añadiremos nombres a la matriz, seguido seleccionaremos los autos del tibble con más de dos carburadores  y por último vamos a reemplazar cada elemento del vector por su correspondiente raíz cuadrada.
+
+:::example
+#### Ejemplo 2.4.2
+:::
+
+```{r addition_242, exercise = TRUE}
+#lista
+my_lista
+#dataframe
+my_lista[["dataframe"]] #Opcion 1
+my_lista$dataframe #Opcion 2
+#nombres de la matriz
+row.names(my_lista$matriz) <-c(paste("fila",1:5))
+colnames(my_lista[["matriz"]]) <- c(paste("col",1:5))
+my_lista$matriz
+#tibble
+subset(my_lista$tible,carb>2)
+#vector
+my_lista$vector <- sqrt(my_lista$vector)
+my_lista$vector
+```
+
+El próximo ejercicio consiste en modificar una lista a partir de la siguiente tabla que contiene datos de los padres, hermanos e hijos de carlos; una lista `carlos_fam` fue creada para almacenar la información, sin embargo se presentaron errores en la transcripción y la lista es imprecisa. 
+
++-------------+----------------+------+
+| Relación    | Nombre         | Edad |
++=============+================+======+
+| Padre       | Juan Carlos    |  55  |
++-------------+----------------+------+
+| Madre       | Luz Estela     |  53  |
++-------------+----------------+------+
+| Hijo        | Juan Camilo    |  3   |
++-------------+----------------+------+
+| Hijo        | Juan Fernado   |  5   |
++-------------+----------------+------+
+| Hijo        | Juliana        |  1   |
++-------------+----------------+------+
+| Hermano     | Andres Felipe  |  25  |
++-------------+----------------+------+
+| Hermano     | Maria Camila   |  21  |
++-------------+----------------+------+
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+carlos_fam <- list(Padres = list(Relacion=c("Padre","Madre"),
+                                 Nombre = c("Juan Camilo","Maria Camila"),
+                                 Edad=c(32,3)),
+                   Hijos = list(Relacion=c(rep("Hijo",2),"Hija"),
+                                 Nombre = c("Juan Camilo","Luz Estela","Juan Fernado"),
+                                 Edad=c(3,25,1)),
+                   Hermanos = list(Relacion=c("Hermano","Hermana"),
+                                 Nombre = c("Andres Felipe","Juliana"),
+                                 Edad=c(5,21)))
+```
+
+```{r,eval=FALSE}
+save(carlos_fam, file="data_pkg/carlos_fam.rda")
+```
+
+Debes modificar la lista `carlos_fam` de modo que coincida con los datos proporcionados en la tabla. Pueden existir múltiples formas de lograr este objetivo, en la solución encontraras solo una de ellas.
+
+:::exercise
+#### Ejercicio 2.4.2
+:::
+
+```{r exe_242, exercise = TRUE}
+#lista imprecisa
+carlos_fam
+str(carlos_fam)
+#modificaciones
+```
+
+```{r exe_242-solution}
+#lista imprecisa
+carlos_fam
+str(carlos_fam)
+#modificaciones
+carlos_fam$Padres$Nombre <- c("Juan Carlos","Luz Estela")
+carlos_fam$Padres$Edad <- c(55,53)
+carlos_fam$Hijos$Nombre[2:3] <- c("Juan Fernado","Juliana")
+carlos_fam$Hijos$Edad[2:3] <- c(5,1)
+carlos_fam$Hermanos$Nombre[2] <- "Maria Camila" 
+carlos_fam$Hermanos$Edad[1] <- 25 
+```
+
+```{r exe_242-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Dándole continuidad al ejercicio anterior se propone que se agregue la estatura de cada uno de los integrantes de la familia conforme a la siguiente tabla.
+
++-------------+----------------+------+--------+
+| Relación    | Nombre         | Edad | Altura |
++=============+================+======+========+
+| Padre       | Juan Carlos    |  55  |   180  |
++-------------+----------------+------+--------+
+| Madre       | Luz Estela     |  53  |   165  |
++-------------+----------------+------+--------+
+| Hijo        | Juan Camilo    |  3   |   95   |
++-------------+----------------+------+--------+
+| Hijo        | Juan Fernado   |  5   |   105  |
++-------------+----------------+------+--------+
+| Hijo        | Juliana        |  1   |   77   |
++-------------+----------------+------+--------+
+| Hermano     | Andres Felipe  |  25  |   183  |
++-------------+----------------+------+--------+
+| Hermano     | Maria Camila   |  21  |   176  |
++-------------+----------------+------+--------+
+
+Recuerda que el acceso individual a las variables de una lista es muy similar al acceso a un dataframe, por lo que debe resultar familiar crear nuevas variable en una lista utilizando el mismo método `$`. Crea la variable __Estatura__ para padres, hijos y Hermanos en `carlos_fam_g`.
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+carlos_fam_g <- list(Padres = list(Relacion=c("Padre","Madre"),
+                                 Nombre = c("Juan Carlos","Luz Estela"),
+                                 Edad=c(55,53)),
+                   Hijos = list(Relacion=c(rep("Hijo",2),"Hija"),
+                                 Nombre = c("Juan Camilo","Juan Fernado","Juliana"),
+                                 Edad=c(3,5,1)),
+                   Hermanos = list(Relacion=c("Hermano","Hermana"),
+                                 Nombre = c("Andres Felipe","Maria Camila"),
+                                 Edad=c(25,21)))
+```
+
+```{r,eval=FALSE}
+save(carlos_fam_g, file="data_pkg/carlos_fam_g.rda")
+```
+
+:::exercise
+#### Ejercicio 2.4.3
+:::
+
+```{r exe_243, exercise = TRUE}
+#Datos
+carlos_fam_g
+str(carlos_fam_g)
+#Estatura
+
+```
+
+```{r exe_243-solution}
+#Datos
+carlos_fam_g
+str(carlos_fam_g)
+#Estatura
+carlos_fam_g$Padres$Estatura <- c(180,165)
+carlos_fam_g$Hijos$Estatura <- c(95,105,77)
+carlos_fam_g$Hermanos$Estatura <- c(183,176)
+```
+
+```{r exe_243-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Ya que sabemos un poco más de las listas retomemos el ejemplo 2.3.11  y veamos cómo funciona el acceso individual para nuestro set de datos `amigos`. Cabe mencionar que altura esta en cm y la masa en kg. Encontremos las edades de maria y julian y verifiquemos si Andres tiene hijos.
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+amigos <- tribble(
+  ~nombre ,         ~fisico          ,  ~ sentimental    ,
+  "Andres", c(edad=23,altura=181,masa=98) , c(soltero=T,hijos=F) ,
+  "Julian", c(edad=24,altura=179,masa=75) , c(soltero=F,hijos=T) ,
+  "Maria" , c(edad=19,altura=167,masa=71) , c(soltero=T,hijos=F) ,
+  "sandra", c(edad=21,altura=174,masa=68) , c(soltero=T,hijos=F) ,
+  "Karol" , c(edad=26,altura=171,masa=70) , c(soltero=F,hijos=T) ,
+  "Javier", c(edad=18,altura=164,masa=64) , c(soltero=T,hijos=F) ,
+)
+```
+
+```{r,eval=FALSE}
+save(amigos, file="data_pkg/amigos.rda")
+```
+
+:::example
+#### Ejemplo 2.4.3
+:::
+
+```{r addition_243, exercise = TRUE}
+#Datos
+amigos
+#Edades
+amigos$fisico[[3]][1] #Maria
+amigos$fisico[[2]][1] #Julian
+#Hijos
+amigos$sentimental[[1]][2]
+```
+
+Como ultimo ejercicio trabajaremos con el IMC ($IMC = \frac{Masa\ (kg)}{Altura(m)^2}$), ahora debes calcularlo para Karol y Javier utilizando la indexación que ya conoces.
+
+:::exercise
+#### Ejercicio 2.4.4
+:::
+
+```{r exe_244, exercise = TRUE}
+#Caculo IMC
+```
+
+```{r exe_244-solution}
+#Caculo IMC
+amigos$fisico[[5]][3] / (amigos$fisico[[5]][2]/100)^2 #Karol
+amigos$fisico[[6]][3] / (amigos$fisico[[6]][2]/100)^2 #Javier
+```
+
+```{r exe_244-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
 
 </details>
+
+## 3. Bucles, funciones y condiciones 
 
 ## 4. Datos ordenados y el tidyverse
 
