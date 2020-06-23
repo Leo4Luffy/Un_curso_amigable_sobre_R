@@ -6527,11 +6527,11 @@ Diamante_3 <- data.frame(
 )
 
 punto <- data.frame(
-  x = 5.0, y = 8.0 
+  x = 5.0, y = 7.8 
 )
 
 triangulo <- data.frame(
-  x = 4.2, y = 7.3 
+  x = 4.6, y = 7.3 
 )
 
 cuadrado <- data.frame(
@@ -6542,40 +6542,154 @@ Diamante_4 <- data.frame(
   x = c(3.0, 5.0, 7.0, 5.0), y = c(9.5, 11.5, 9.5, 7.5)
 )
 
+rombo_1 <- data.frame(
+  x = c(3.8, 4.2, 4.6, 4.2), y = c(9.5, 9.9, 9.5, 9.1)
+)
+
+rombo_2 <- data.frame(
+  x = c(4.2, 4.6, 5.0, 4.6), y = c(9.9, 10.3, 9.9, 9.5)
+)
+
+rombo_3 <- data.frame(
+  x = c(4.6, 5.0, 5.4, 5.0), y = c(10.3, 10.7, 10.3, 9.9)
+)
+
+rombo_4 <- data.frame(
+  x = c(4.2, 4.6, 5.0, 4.6), y = c(9.1, 9.5, 9.1, 8.7)
+)
+
+rombo_5 <- data.frame(
+  x = c(4.6, 5.0, 5.4, 5.0), y = c(9.5, 9.9, 9.5, 9.1)
+)
+
+rombo_6 <- data.frame(
+  x = c(5.0, 5.4, 5.8, 5.4), y = c(9.9, 10.3, 9.9, 9.5)
+)
+
+rombo_7 <- data.frame(
+  x = c(4.6, 5.0, 5.4, 5.0), y = c(8.7, 9.1, 8.7, 8.3)
+)
+
+rombo_8 <- data.frame(
+  x = c(5.0, 5.4, 5.8, 5.4), y = c(9.1, 9.5, 9.1, 8.7)
+)
+
+rombo_9 <- data.frame(
+  x = c(5.4, 5.8, 6.2, 5.8), y = c(9.5, 9.9, 9.5, 9.1)
+)
+
+Diamante_5 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(12.0, 14.0, 12.0, 10.0)
+)
+
+barras_1 <- data.frame(
+  x = c(3.4, 5.0, 5.4, 3.8), y = c(12.0, 13.6, 13.2, 11.6)
+)
+
+barras_2 <- data.frame(
+  x = c(3.8, 5.0, 5.4, 4.2), y = c(11.6, 12.8, 12.4, 11.2)
+)
+
+barras_3 <- data.frame(
+  x = c(4.2, 5.0, 5.4, 4.6), y = c(11.2, 12.0, 11.6, 10.8)
+)
+
+barras_4 <- data.frame(
+  x = c(4.6, 5.0, 5.4, 5.0), y = c(10.8, 11.2, 10.8, 10.4)
+)
+
+Diamante_6 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(14.5, 16.5, 14.5, 12.5)
+)
+
+Diamante_7 <- data.frame(
+  x = c(3.0, 5.0, 7.0, 5.0), y = c(17.0, 19.0, 17.0, 15.0)
+)
+
+rombo_10 <- data.frame(
+  x = c(3.8, 4.4, 5.0, 4.4), y = c(17.0, 17.6, 17.0, 16.4)
+)
+
+rombo_11 <- data.frame(
+  x = c(4.4, 5.0, 5.6, 5.0), y = c(17.6, 18.2, 17.6, 17.0)
+)
+
+rombo_12 <- data.frame(
+  x = c(4.4, 5.0, 5.6, 5.0), y = c(16.4, 17.0, 16.4, 15.8)
+)
+
+rombo_13 <- data.frame(
+  x = c(5.0, 5.6, 6.4, 5.6), y = c(17.0, 17.6, 17.0, 16.4)
+)
+
 data.frame(
   x = c(0.0:10.0), y = c(0.0:10.0)
 ) %>%
   ggplot(aes(x, y)) +
   geom_blank() +
   geom_polygon(data = Diamante_1, aes(x = x, y = y), fill = 'yellow', colour = 'yellow', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 3.2, label = '192.45', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 6.1, y = 2.25, label = '6.223', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.0, y = 2.95, label = '263.21', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.85, y = 2.0, label = '8.224', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.75, y = 2.70, label = '532.34', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.60, y = 1.75, label = '1.229', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.50, y = 2.45, label = '643.09', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.35, y = 1.50, label = '0.983', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.25, y = 2.20, label = '325.11', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.10, y = 1.25, label = '3.205', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.0, y = 1.95, label = '867.42', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.85, y = 1.0, label = '3.017', family = 'gochi', size = 8.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 5.25, y = 3.2, label = '192.45', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.695, y = 2.715, label = '0.245', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 6.1, y = 2.25, label = '6.223', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.0, y = 2.95, label = '263.21', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.445, y = 2.465, label = '0.444', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.85, y = 2.0, label = '8.224', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.75, y = 2.70, label = '532.34', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.195, y = 2.215, label = '0.348', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.60, y = 1.75, label = '1.229', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.50, y = 2.45, label = '643.09', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.945, y = 1.965, label = 'NA', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.35, y = 1.50, label = '0.983', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.25, y = 2.20, label = '325.11', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.695, y = 1.715, label = '0.356', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 5.10, y = 1.25, label = '3.205', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.0, y = 1.95, label = '867.42', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.445, y = 1.465, label = 'NA', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
+  annotate(geom = 'text', x = 4.85, y = 1.0, label = '3.017', family = 'gochi', size = 8.0, colour = 'black', angle = -7) +
   geom_polygon(data = Diamante_2, aes(x = x, y = y), fill = 'cyan', colour = 'cyan', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.9, y = 5.3, label = 'A', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 5.75, y = 4.35, label = 'X', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.1, y = 4.5, label = 'B', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
-  annotate(geom = 'text', x = 4.95, y = 3.55, label = 'Y', family = 'gochi', size = 15.0, colour = 'black', angle = -35) +
+  annotate(geom = 'text', x = 4.9, y = 5.4, label = 'A', family = 'gochi', size = 16.0, colour = 'black', angle = -32) +
+  annotate(geom = 'text', x = 5.75, y = 4.45, label = 'X', family = 'gochi', size = 16.0, colour = 'black', angle = -32) +
+  geom_curve(x = 5.0, xend = 5.65, y = 5.4, yend = 4.45, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 4.1, y = 4.6, label = 'B', family = 'gochi', size = 16.0, colour = 'black', angle = -60) +
+  annotate(geom = 'text', x = 4.95, y = 3.65, label = 'Y', family = 'gochi', size = 16.0, colour = 'black', angle = -60) +
+  geom_curve(x = 4.2, xend = 4.85, y = 4.6, yend = 3.65, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
   geom_polygon(data = Diamante_3, aes(x = x, y = y), fill = 'red', colour = 'red', alpha = 0.2) +
-  geom_point(data = punto, aes(x = x, y = y), pch = 21, colour = 'black', fill = 'black', alpha = 0.7, size = 8.8) +
-  geom_point(data = triangulo, aes(x = x, y = y), pch = 25, colour = 'black', fill = 'black', alpha = 0.7, size = 8.2) +
-  geom_point(data = cuadrado, aes(x = x, y = y), pch = 22, colour = 'black', fill = 'black', alpha = 0.7, size = 8.8) +
+  geom_point(data = punto, aes(x = x, y = y), pch = 21, colour = 'black', fill = 'black', alpha = 1.2, size = 6.8) +
+  geom_point(data = triangulo, aes(x = x, y = y), pch = 25, colour = 'black', fill = 'black', alpha = 1.2, size = 6.2) +
+  geom_point(data = cuadrado, aes(x = x, y = y), pch = 22, colour = 'black', fill = 'black', alpha = 1.2, size = 6.8) +
+  annotate(geom = 'segment', x = 4.8, xend = 5.6, y = 6.6, yend = 7.6, colour = 'black', size = 1.2) +
   geom_polygon(data = Diamante_4, aes(x = x, y = y), fill = 'green', colour = 'green', alpha = 0.2) +
-  annotate(geom = 'text', x = 2.1, y = 2.0, label = 'Datos', family = 'gochi', size = 15.0, colour = 'black') +
-  annotate(geom = 'text', x = 1.9, y = 4.5, label = 'Estética', family = 'gochi', size = 15.0, colour = 'black') +
-  annotate(geom = 'text', x = 1.75, y = 7.0, label = 'Geometrías', family = 'gochi', size = 15.0, colour = 'black') +
-  annotate(geom = 'text', x = 1.9, y = 9.5, label = 'Facetas', family = 'gochi', size = 15.0, colour = 'black') +
+  geom_polygon(data = rombo_1, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_2, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_3, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_4, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_5, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_6, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_7, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_8, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = rombo_9, aes(x = x, y = y), fill = 'white', colour = 'black', alpha = 1.2) +
+  geom_polygon(data = Diamante_5, aes(x = x, y = y), fill = 'gray48', colour = 'gray48', alpha = 0.2) +
+  geom_polygon(data = barras_1, aes(x = x, y = y), fill = 'black', colour = 'black', alpha = 0.6) +
+  geom_polygon(data = barras_2, aes(x = x, y = y), fill = 'black', colour = 'black', alpha = 0.6) +
+  geom_polygon(data = barras_3, aes(x = x, y = y), fill = 'black', colour = 'black', alpha = 0.6) +
+  geom_polygon(data = barras_4, aes(x = x, y = y), fill = 'black', colour = 'black', alpha = 0.6) +
+  geom_polygon(data = Diamante_6, aes(x = x, y = y), fill = 'yellow', colour = 'yellow', alpha = 0.2) +
+  geom_curve(x = 3.8, xend = 5.0, y = 14.45, yend = 13.30, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.8, xend = 5.2, y = 14.45, yend = 15.35, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_polygon(data = Diamante_7, aes(x = x, y = y), fill = 'cyan', colour = 'cyan', alpha = 0.2) +
+  geom_polygon(data = rombo_10, aes(x = x, y = y), fill = 'red', colour = 'red', alpha = 0.6) +
+  geom_polygon(data = rombo_11, aes(x = x, y = y), fill = 'yellow', colour = 'yellow', alpha = 0.6) +
+  geom_polygon(data = rombo_12, aes(x = x, y = y), fill = 'green', colour = 'green', alpha = 0.6) +
+  geom_polygon(data = rombo_13, aes(x = x, y = y), fill = 'cyan', colour = 'cyan', alpha = 0.6) +
+  annotate(geom = 'text', x = 6.8, y = 1.2, label = 'Datos', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.6, y = 3.6, label = 'Estética', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.5, y = 6.1, label = 'Geometrías', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.6, y = 8.6, label = 'Facetas', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.4, y = 11.1, label = 'Estadísticas', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.5, y = 13.6, label = 'Coordenadas', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
+  annotate(geom = 'text', x = 6.8, y = 16.2, label = 'Tema', angle = 10, family = 'gochi', size = 12.0, colour = 'black') +
   #scale_y_continuous(limits = c(-5.8, 6.0)) +
-  #scale_x_continuous(limits = c(1, 6.0)) #+
+  scale_x_continuous(limits = c(3.0, 7.0)) +
   theme_void() +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
