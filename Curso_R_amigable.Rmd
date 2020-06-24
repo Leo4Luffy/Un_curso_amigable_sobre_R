@@ -3966,19 +3966,9 @@ Cita de datos: Gorman KB, Williams TD, Fraser WR (2014) Dimorfismo sexual ecoló
 
 Estructura general de lo datos: A continuación podrá hechar un vistazo de la estructura del conjunto de datos `penguins`:
 
-```{r, echo = FALSE, eval = FALSE, message = FALSE}
-
-penguins <- palmerpenguins::penguins
-penguins
-```
-
-```{r,eval=FALSE}
-save(penguins, file = "data_pkg/penguins.rda")
-```
-
 ```{r datos_pinguinos, exercise = TRUE}
 
-penguins
+palmerpenguins::penguins
 ```
 
   1) En `species`podrá encontrar las tres especies existentes del genéro de pingüinos _Pygoscelis_.
