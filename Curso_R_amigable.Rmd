@@ -322,7 +322,7 @@ knitr::include_graphics("images/consola_R_base.jpg")
   <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
 
-knitr::include_graphics("images/RStudio.jpg")
+knitr::include_graphics("images/RStudio_2.jpg")
 ```
   <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
   </div>
@@ -548,7 +548,7 @@ Además de usar proyectos, también es una buena práctica estructurar el direct
 carpeta <- readJPEG('images/imagen_carpeta.jpg', native = TRUE)
 carpeta <- rasterGrob(carpeta, interpolate = FALSE)
 
-rstudio_imagen <- readJPEG('images/rstudio.jpg', native = TRUE)
+rstudio_imagen <- readJPEG('images/rstudio_1.jpg', native = TRUE)
 rstudio_imagen <- rasterGrob(rstudio_imagen, interpolate = FALSE)
 
 data.frame(
