@@ -2353,7 +2353,7 @@ if(10>20) {
 }
 ```
 
-La sintaxis para este caso tendría una modificación, siendo expresada por `si expresión lógica se cumple realice determinada acción, de lo contrario realice otra acción`, en este caso en especifico seria, si determinado numero es mayor a 20 imprima es mayor de lo contrario imprima es menor. Podríamos además agregar una condición extra en la que verifiquemos si el número es igual a 20, para ello podemos valernos del argumento `else if`. Para evidenciar su funcionamiento te invito a que cambies el valor de `x` por distintos números incluyendo el 20.
+La sintaxis para este caso tendría una modificación, siendo expresada por `si expresión lógica se cumple realice determinada acción, de lo contrario realice otra acción`, en este caso en especifico seria, si determinado numero es mayor a 20 imprima es mayor de lo contrario imprima es menor. Podríamos además agregar una condición extra en la que verifiquemos si el número es igual a 20, para ello podemos valernos del argumento `else if{}`. Para evidenciar su funcionamiento te invito a que cambies el valor de `x` por distintos números incluyendo el 20.
 
 ```{r addition_3121, exercise = TRUE}
 #para cada modificacion de x ejecute "Run code"
