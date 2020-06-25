@@ -2295,8 +2295,8 @@ Como ultimo ejercicio trabajaremos con el IMC ($IMC = \frac{Masa\ (kg)}{Altura(m
 
 ```{r exe_244-solution}
 #Caculo IMC
-amigos$fisico[[5]][3] / (amigos$fisico[[5]][2]/100)^2 #Karol
-amigos$fisico[[6]][3] / (amigos$fisico[[6]][2]/100)^2 #Javier
+amigos$fisico[[5]][3][[1]] / (amigos$fisico[[5]][2][[1]]/100)^2 #Karol
+amigos$fisico[[6]][3][[1]] / (amigos$fisico[[6]][2][[1]]/100)^2 #Javier
 ```
 
 ```{r exe_244-check}
