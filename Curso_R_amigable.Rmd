@@ -4,6 +4,8 @@ output:
   learnr::tutorial:
     css: css/Estilo.css
 runtime: shiny_prerendered
+bibliography: Documentos/biblio.bib
+nocite: '@*'
 description: "Este tutorial contiene un curso básico sobre el lenguaje de programación R, enfocando en el tidyverse"
 ---
 
@@ -36,7 +38,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("images/Mundo_R.jpg")  
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
 
 ### Descripción
 
@@ -284,7 +286,7 @@ Finalmente, el uso del `R` garantiza que otro investigador pueda repetir el expe
 knitr::include_graphics("images/al_principio_pero_ahora.jpg")
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
 
 __¡No se desanime!__ Los lenguajes de programación como el `R` no son sencillos de aprender, pero con trabajo y motivación vera como en poco tiempo se lograrán grandes avances. 
 
@@ -324,7 +326,7 @@ knitr::include_graphics("images/consola_R_base.jpg")
 
 knitr::include_graphics("images/RStudio_2.jpg")
 ```
-  <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+  <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
 
@@ -416,7 +418,7 @@ Existen dos formas de instalar nuevos paquetes en `R`:
 
 knitr::include_graphics("images/Lenguajes_en_paquetes_R.jpg")
 ```
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@spren9er</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@spren9er</u></font>.</small></section>
   </div>
 </div>
 
@@ -535,7 +537,7 @@ Sin embargo como señala [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/wo
 knitr::include_graphics("images/Proyectos.jpg")
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
 
@@ -3956,7 +3958,7 @@ En esta parte del curso sobre la __manipulación de datos__ se empleara el conju
 knitr::include_graphics("images/Pygoscelis_penguins.png")  
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
 
 #### 5.1.1 Información sobre el conjunto de datos
 
@@ -3987,7 +3989,7 @@ palmerpenguins::penguins
 knitr::include_graphics("images/culmen_penguins.png")
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
 
@@ -4008,7 +4010,7 @@ El paquete `dplyr` es un paquete que permite obtener partes de los datos de una 
 knitr::include_graphics("images/tidyverse_war.jpg")  
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
 
 #### 5.2.1 Una gramática para la manipulación de datos
 
@@ -4036,7 +4038,7 @@ El paquete `dplyr` tiene como objetivo proporcionar una función para cada verbo
 knitr::include_graphics("images/dplyr_relocate.png")  
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
 
@@ -6995,3 +6997,6 @@ data.frame(
 
 knitr::include_graphics("images/ggplot2_3.png")  
 ```
+
+
+## 8. Referencias
