@@ -2653,6 +2653,290 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 <details><summary>3.2 Bucles </summary> 
 
+Los bucles o ciclos son estructuras de control que permiten recorrer los elementos de un objeto iterable (vector,lista,dataframe,tibble, array,...) repitiendo determinado número de veces el bloque de código o instrucción para cada iteración. Las estructuras de control asociadas con los ciclos  son:
+
++------------+-------------------+
+| Estructura | Descripción       |
++============+===================+
+| `for()`    | Para cada uno en  |
++------------+-------------------+
+| `while()`  | Mientras          |
++------------+-------------------+
+| `break`    | Interrupción      |
++------------+-------------------+
+| `next`     | Siguiente         |
++------------+-------------------+
+| `repeat`   | Repetir           |
++------------+-------------------+
+
+Para empezar trabajaremos con el ciclo `for` ilustrando cómo funcionan las iteraciones en cada elemento del vector `letras` el cual posee una longitud de 15. 
+
+:::example
+#### Ejemplo 3.2.1
+:::
+
+```{r addition_321, exercise = TRUE}
+#vector
+letras
+#ciclo for
+for (i in 1:length(letras)){
+  print(paste("la letra en la posición",i,"es",letras[i]))
+}
+```
+
+Una modificación con la cual podemos obtener el mismo resultado del fragmento de código anterior es utilizando la función `seq_along()` de la siguiente forma.
+
+```{r addition_3211, exercise = TRUE}
+#vector
+letras
+#ciclo for
+for (i in seq_along(letras)){
+  print(paste("la letra en la posición",i,"es",letras[i]))
+}
+```
+
+Si la posición no es relevante para nuestras operaciones podemos utilizar el ciclo `for` de la siguiente forma, olvidándonos de la longitud y del índice de cada iteración.
+
+```{r addition_3212, exercise = TRUE}
+#vector
+letras
+#ciclo for
+for (i in letras){
+  print(i)
+}
+```
+
+Veamos una modificación del ejemplo anterior en el cual nos interesa obtener los elementos con índices pares del vector `letras`. 
+
+:::example
+#### Ejemplo 3.2.2
+:::
+
+```{r addition_322, exercise = TRUE}
+#vector
+letras
+#ciclo for
+for (i in seq(2,length(letras),2)){
+  print(paste("la letra en la posición",i,"es",letras[i]))
+}
+```
+
+También podemos utilizar condicionales y `seq_along()` de una forma estratégica para lograr el mismo objetivo.
+
+```{r addition_3221, exercise = TRUE}
+#vector
+letras
+#ciclo for con condicional
+for (i in seq_along(letras)){
+  if(i%%2 == 0){
+    print(paste("la letra en la posición",i,"es",letras[i]))
+  }
+}
+```
+
+Hagamos un ejemplo un poco más elaborado usando el ejemplo 3.1.4 del descuento de comida de perro, utilizando en esta ocasión dos vectores, `x` vector con distintos números de bolsas de comida (cada número una compra diferente) y `des` vector que se señala cuando se aplica descuento y cuando no (1= Hay descuento, 0= No hay descuento). Cabe recordar que las ocasiones en la aplica el descuento este es de un 50% con un 10% adicional si el número de bolsas de comida es mayor a 10. El precio por bolsa es de 6800 pesos.
+
+:::example
+#### Ejemplo 3.2.3
+:::
+
+```{r addition_323, exercise = TRUE}
+#Información
+x = c(10,0,2,15,13,18,4,9,7,2,8,16) #numero de bolsas
+des = c(1,0,0,1,0,0,1,1,1,0,0,10) #clasificación
+#ciclo for
+for (i in seq_along(x)){
+  cobro = 6800 * x[i]
+  #cuando no hay descuento
+  if(des[i]==0){
+    if(x[i]<=0){
+      print("No es un número de compra válido")
+    } else{
+      print(paste("Total a pagar:",cobro))
+    }
+  #cuando hay descuento
+  } else if(des[i]==1){
+    if(x[i]<=0){
+      print("No es un número de compra válido")
+    } else if(x[i]<10){
+      print(paste("Total a pagar:",cobro*.5))
+    } else{
+      print(paste("Total a pagar:",cobro*.4))
+    }
+  } else{
+    print(paste(des[i],"No es un opción válida de clasificación de descuento"))
+  }
+}
+```
+
+Ya vimos cómo funciona el ciclo for con vectores, veamos un ejemplo con `my_lista`, y obtengamos el resumen con `summary()` para cada objeto de la lista.
+
+:::example
+#### Ejemplo 3.2.4
+:::
+
+```{r addition_324, exercise = TRUE}
+for (i in seq_along(my_lista)){
+  objeto <- my_lista[[i]]
+  print(summary(objeto))
+}
+```
+
+Se puede ver que el proceso con las listas es tan simple como con los vectores, por ello en el siguiente ejercicio debes retomar la lista `carlos_fam_g` del ejercicio 2.4.3 y obtener todos los nombres de los familiares de carlos e imprimirlos en pantalla junto con el tipo de relación que tienen y su edad. Por ejemplo para el padre se debe mostrar en pantalla : “El padre de carlos es Juan carlos y tiene 55 años”.
+
+:::exercise
+#### Ejercicio 3.2.1
+:::
+
+```{r exe_321, exercise = TRUE}
+# carlos_fam_g
+```
+
+```{r exe_321-solution}
+# carlos_fam_g
+for (objeto in carlos_fam_g){
+  for (i in seq_along(objeto[[1]])){
+    print(paste("Relacion con carlos:",objeto[[1]][i],"su nombre es",objeto[[2]][i], "y tiene",objeto[[3]][i],"años"))
+  }
+}
+```
+
+```{r exe_321-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Como se puede notar el ejercicio se ve más sencillo de lo que es, veamos otro ejercicio para reforzar el aprendizaje del ciclo `for`. Para este ejercicio usaremos los datos `amigos` y retomaremos el ejercicio 2.4.4 calculando el IMC ($IMC = \frac{Masa\ (kg)}{Altura(m)^2}$) para todas las personas del conjunto de datos imprimiendo en pantalla una expresión del tipo: “Andres tiene un altura de 1,81 m, una masa de 98 kg y su IMC es 29.91”
+
+:::exercise
+#### Ejercicio 3.2.2
+:::
+
+```{r exe_322, exercise = TRUE}
+# amigos
+```
+
+```{r exe_322-solution}
+# amigos
+for (i in seq_along(amigos$nombre)){
+  nombre <- amigos$nombre[i]
+  masa <- amigos$fisico[[i]][3][[1]]
+  altura <- amigos$fisico[[i]][2][[1]]/100
+  IMC <- masa/altura^2
+  print(paste(nombre,"tiene una altura de",altura,"m, una masa de",masa,"u su IMC es",round(IMC,2)))
+}
+```
+
+```{r exe_322-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Modifica el código del ejercicio anterior y úsalo para incluir la variable IMC en la lista de fisco del dataset `amigos`. Recuerda la indexación y creación de variables tanto en los dataframe como en las listas.
+
+:::exercise
+#### Ejercicio 3.2.3
+:::
+
+```{r exe_323, exercise = TRUE}
+# amigos
+```
+
+```{r exe_323-solution}
+# amigos
+for (i in seq_along(amigos$nombre)){
+  masa <- amigos$fisico[[i]][3][[1]]
+  altura <- amigos$fisico[[i]][2][[1]]/100
+  IMC <- masa/altura^2
+  amigos$fisico[[i]][4] <- round(IMC,2)
+  names(amigos$fisico[[i]]) <- c("edad","altura","masa","IMC")
+}
+amigos$fisico
+```
+
+```{r exe_323-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Ya sabemos un poco mas de como acceder y crear variables con el ciclo `for`, ahora tendrás que usarlo para crear una variable adicional en el dataset `amigos`. La nueva variable se obtuvo de preguntarle a los personajes cuantos meses llevaban solteros, sin embargo se descubrió que los personajes que no están solteros mintieron al respecto. Las respuestas están alojadas en el vector `tsoltero` y tu tarea es crear la variable adicional `tiempo_soltero` en el dataset amigos, asignando a los mentirosos el valor de `NA`.
+
+:::exercise
+#### Ejercicio 3.2.4
+:::
+
+```{r exe_324, exercise = TRUE}
+# amigos
+tsoltero <- c(4,1,9,5,2,6) #tiempo soltero en meses
+#tiempo_soltero
+
+```
+
+```{r exe_324-solution}
+# amigos
+tsoltero <- c(4,1,9,5,2,6) #tiempo soltero en meses
+#tiempo_soltero
+for (i in seq_along(amigos$nombre)){
+  soltero <- amigos$sentimental[[i]][1][[1]]
+  if (soltero == T){
+    amigos$tiempo_soltero[i]<- tsoltero[i]
+  } else{
+    amigos$tiempo_soltero[i] <- NA
+  }
+}
+amigos
+```
+
+```{r exe_324-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+En R también está presente el ciclo `while()` el cual permite repetir la ejecución de un grupo de instrucciones mientras se cumpla una condición, debemos ser precavidos ya que es muy fácil programar un bucle infinito en el cual la condición siempre se cumpla. Iniciemos adaptando el ejemplo 3.2.1 para las primeras 10 letras del vector `letras`,usando además un contador. Veamos cómo funciona.
+
+:::example
+#### Ejemplo 3.2.5
+:::
+
+```{r addition_325, exercise = TRUE}
+i =1 #contador
+while(i<=10){
+  print(letras[i])
+  i =i+1
+}
+```
+
+El siguiente ejemplo consiste en la comparación de números de un vector `x`, que solo funciona mientras los números sean cada vez más grandes, al terminar el ciclo se muestra la razón y el índice por el cual se finalizó.
+
+:::example
+#### Ejemplo 3.2.6
+:::
+
+```{r addition_326, exercise = TRUE}
+x = c(5,8,12,19,48,95,106,208,406,512,683,791,790,805,900,931)
+i = 1
+while(x[i]<x[i+1]){
+  print(paste(x[i],"es menor que",x[i+1]))
+  i=i+1
+}
+print(paste(x[i],"no es menor que",x[i+1],",error en el indice",i+1,"del vector x"))
+```
+
+Veamos con un ejemplo cómo usar el ciclo `while` para generar los primeros 20 números de la sucesión de Fibonacci.
+
+:::example
+#### Ejemplo 3.2.7
+:::
+
+```{r addition_327, exercise = TRUE}
+a = 0
+b = 1
+count = 0
+while(count<=20){
+  print(a)
+  c<-a+b
+  a<-b
+  b<-c
+  count = count +1
+}
+```
+
 </details>
 
 <details><summary>3.3 Funciones </summary> 
