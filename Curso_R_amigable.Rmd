@@ -2689,7 +2689,7 @@ for (i in 1:length(letras)){
 
 Una modificación con la cual podemos obtener el mismo resultado del fragmento de código anterior es utilizando la función `seq_along()` de la siguiente forma.
 
-```{r addition_3211, exercise = TRUE}
+```{r addition_321_1, exercise = TRUE}
 #vector
 letras
 #ciclo for
@@ -2700,7 +2700,7 @@ for (i in seq_along(letras)){
 
 Si la posición no es relevante para nuestras operaciones podemos utilizar el ciclo `for` de la siguiente forma, olvidándonos de la longitud y del índice de cada iteración.
 
-```{r addition_3212, exercise = TRUE}
+```{r addition_321_2, exercise = TRUE}
 #vector
 letras
 #ciclo for
