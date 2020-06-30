@@ -2943,7 +2943,7 @@ while(count<=20){
 
 </details>
 
-
+####### ACa irira el grafico de las funciones
 
 ## 4. Datos ordenados y el tidyverse
 
