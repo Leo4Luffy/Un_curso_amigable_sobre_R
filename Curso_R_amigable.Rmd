@@ -2312,7 +2312,7 @@ grade_code("Excelente lo lograste, sigamos adelante")
 
 ## 3. Condiciones, bucles y funciones
 
-En esta sección aprenderemos a crear y utilizar estructuras de control como funciones de usuario, bucles y condicionales que nos permitan automatizar nuestra manipulación y análisis de datos. Además esta sección nos permitirá entender cómo trabajan algunas de las funciones que conocemos, dejándonos entender y manipular mejor el `R` como lenguaje de programación. Cuando utilizamos programación para resolver algún problema académico, laboral u de otra índole es común encontrarnos con particularidades que corresponde únicamente a nuestro problema, por ello en muchos casos funciones generales o procesos generales no aplican para nuestra situación, es allí donde entran las famosas funciones de usuario que conoceremos a lo largo de la sección. La sección cuenta con cuatro subsecciones 1) Condicionales, 2) Bucles, 3) Funciones y 4) Colección, donde la última posee una recapitulación de ejercicios y ejemplos de  las subsecciones anteriores.
+En esta sección aprenderemos a crear y utilizar estructuras de control como funciones de usuario, bucles y condicionales que nos permitan automatizar nuestra manipulación y análisis de datos. Además esta sección nos permitirá entender cómo trabajan algunas de las funciones que conocemos, dejándonos entender y manipular mejor el `R` como lenguaje de programación. Cuando utilizamos programación para resolver algún problema académico, laboral u de otra índole es común encontrarnos con particularidades que corresponde únicamente a nuestro problema, por ello en muchos casos funciones generales o procesos generales no aplican para nuestra situación, es allí donde entran las famosas funciones de usuario que conoceremos a lo largo de la sección. La sección cuenta con cuatro subsecciones 1) Condicionales, 2) Bucles, 3) Funciones y 4) Familia `apply`.
 
 * Algunas de las funciones nuevas que utilizaremos en esta sección deberás consultar en la ayuda de `R` , cada vez que no entiendas un función que utilicemos puedes ejecutar un comando de la forma `?mean()` 
 
@@ -2942,13 +2942,7 @@ while(count<=20){
 
 </details>
 
-<details><summary>3.3 Funciones </summary> 
 
-</details>
-
-<details><summary>3.4 Colección </summary> 
-
-</details>
 
 ## 4. Datos ordenados y el tidyverse
 
