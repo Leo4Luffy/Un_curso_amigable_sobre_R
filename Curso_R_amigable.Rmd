@@ -25,6 +25,7 @@ require(patchwork)
 require(palmerpenguins)
 require(showtext)
 require(tibble)
+require(timevis)
 require(fontawesome)
 font_add_google('Gochi Hand', 'gochi')
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
@@ -7135,14 +7136,18 @@ full_join(
 ```
 
 :::caution
-Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y profundizar a las presentadas anteriormente, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf).
+Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y profundizar más en su uso, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf).
 :::
 
 ## 6. Visualización de datos
 
 ### 6.1 ¿Que es la visualización de datos? Definición e historia
 
+La __visualización de datos__ es la práctica de convertir datos en una representación gráfica. Para comprender cuán significativa es la visualización de los datos, un hecho simple es que a los cerebros humanos les resulta más difícil comprender datos complejos cuando están codificados en números y texto en comparación con los gráficos.
 
+Es impensable cualquier sector profesional sin el uso de elementos de visualización, pues estos facilitan la transmisión de información. Es erróneo considerar a la visualización de datos como un recurso secundario o adicional, finalmente prescindible.
+
+El concepto de visualización de datos no es nuevo, sino que ha existido durante siglos.
 
 ### 6.2 La gramática de los gráficos
 
