@@ -7144,7 +7144,7 @@ La __visualización de datos__ es la práctica de convertir datos en una represe
 
 Es impensable cualquier sector profesional sin el uso de elementos de visualización, pues estos facilitan la transmisión de información. Es erróneo considerar a la visualización de datos como un recurso secundario o adicional, finalmente prescindible.
 
-El concepto de visualización de datos no es nuevo, sino que ha existido durante siglos.
+La representación gráfica de la información tiene [raíces profundas](https://jorge-leonardo-lopez-martinez.shinyapps.io/historia_visualizacion/?_ga=2.152978873.160297420.1593535028-503089247.1593365860). Estas raíces alcanzan historias de cartografía temática, gráficos estadísticos y visualización de datos, que se entrelazan entre sí. También se conectan con el auge del pensamiento estadístico del siglo XIX y el desarrollo tecnológico en el siglo XX.
 
 ### 6.2 La gramática de los gráficos
 
