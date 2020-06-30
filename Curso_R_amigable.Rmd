@@ -1728,7 +1728,7 @@ with(subset(Starwars,mass<=medfem),name[])
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Ya vimos como obtener medidas resumen como la media para las mujeres o los hombres, veamos en este momento como obtener la media de la altura para los dos generos utlizando la función `aggregate()`.
+Ya vimos como obtener medidas resumen como la media para las mujeres o los hombres, veamos en este momento como obtener la media de la altura para los dos generos utilizando la función `aggregate()`.
 
 :::example
 #### Ejemplo 2.3.6
@@ -1746,7 +1746,7 @@ Pero qué sucede si necesitamos la media para la altura y la masa, la primera op
 aggregate(cbind(height,mass)~gender,Starwars,mean)
 ```
 
-Genial verdad?, es mucho más rápido que utlizar `with()` y `subset()` varias veces, pero hagamos algo más interesante, veamos la media de la altura y la masa por género teniendo en cuenta su lugar de origen.
+Genial verdad?, es mucho más rápido que utilizar `with()` y `subset()` varias veces, pero hagamos algo más interesante, veamos la media de la altura y la masa por género teniendo en cuenta su lugar de origen.
 
 ```{r addition_2362, exercise = TRUE, comment=""}
 #Media de altura y masa por genero y mundo natal
@@ -2869,6 +2869,7 @@ Ya sabemos un poco mas de como acceder y crear variables con el ciclo `for`, aho
 ```{r exe_324, exercise = TRUE}
 # amigos
 tsoltero <- c(4,1,9,5,2,6) #tiempo soltero en meses
+amigos$tiempo_soltero <- 0
 #tiempo_soltero
 
 ```
@@ -2876,6 +2877,7 @@ tsoltero <- c(4,1,9,5,2,6) #tiempo soltero en meses
 ```{r exe_324-solution}
 # amigos
 tsoltero <- c(4,1,9,5,2,6) #tiempo soltero en meses
+amigos$tiempo_soltero <- 0
 #tiempo_soltero
 for (i in seq_along(amigos$nombre)){
   soltero <- amigos$sentimental[[i]][1][[1]]
