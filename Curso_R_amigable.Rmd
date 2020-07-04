@@ -104,7 +104,7 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
+```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
 
 datos_ordenados <- readJPEG('images/datos_ordenados.jpg', native = TRUE)
 datos_ordenados <- rasterGrob(datos_ordenados, interpolate = FALSE)
@@ -137,7 +137,12 @@ ciencia_datos <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 
-ciencia_datos
+#ciencia_datos
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
+
+knitr::include_graphics("images/1ra_imagen.png")  
 ```
 
 A lo largo del curso podrá encontrar fragmentos de código para realizar ejemplos y ejercicios de codificación. Abajo encontrara como podrán ser usados:
@@ -549,7 +554,7 @@ knitr::include_graphics("images/Proyectos.jpg")
 
 Además de usar proyectos, también es una buena práctica estructurar el directorio de una manera que ayude a cualquier persona con la que se esta colaborando, o una versión futura de usted intente reproducir algunos análisis.
 
-```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
+```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
 
 carpeta <- readJPEG('images/imagen_carpeta.jpg', native = TRUE)
 carpeta <- rasterGrob(carpeta, interpolate = FALSE)
@@ -599,6 +604,11 @@ data.frame(
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
+
+knitr::include_graphics("images/2da_imagen.png")  
 ```
 
 ## 2. Operaciones básicas en R
@@ -2465,7 +2475,7 @@ if(des == "No hay descuento"){
 
 Este ejemplo contiene una condición principal, que es si hay descuento o no;  dependiendo de ella se despliega el cobro con o sin descuento con condiciones para cada caso, esta forma de incluir condiciones dentro de otras condiciones se conoce como __anidar__ y aplica también para funciones, procesos y bucles. Para solucionar problemas con condicionales podemos apoyarnos de los diagramas de flujo como el siguiente, que simplifica el proceso cuando las entradas son correctas.
 
-```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '720'}
+```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '720'}
 
 rombo_1 <- data.frame(
   x = c(3.1, 3.6, 4.1, 3.6), y = c(3.0, 3.55, 3.0, 2.45)
@@ -2514,8 +2524,14 @@ data.frame(
         axis.title = element_blank())
 ```
 
-![](./images/comida_perro.png)
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 
+knitr::include_graphics("images/3ra_imagen.png")  
+```
+
+<!--
+![](./images/comida_perro.png)
+-->
 Vamos con un ejercicio similar, en el que una heladería ofrece descuentos del 25% sobre  el total de la compra los días lunes, martes y miércoles, adicionalmente si la compra supera el valor de 50.000 ofrece un 10% adicional de descuento, los otros días de la semana ofrece un 15% de descuento sobre el total de la compra si esta supera el valor de 60.000.  el programa debe arrojar el total, el descuento y el total con descuento en cualquiera de los casos. Si se hacen las siguientes compras el programa debe dar las salidas enunciadas:
 
 * Domingo total de la compra 69500:
@@ -2945,13 +2961,63 @@ while(count<=20){
 
 </details>
 
-####### ACa irira el grafico de las funciones
+```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '720'}
+
+data.frame(
+  x = c(1.0:3.0), y = c(1.0:3.0)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'text', x = 1.8, y = 2.2, label = 'f', family = 'gochi', size = 8.4, colour = 'gray') +
+  annotate(geom = 'text', x = 1.85, y = 2.2, label = '<-', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.98, y = 2.2, label = 'function', family = 'gochi', size = 8.4, colour = 'cyan') +
+  annotate(geom = 'text', x = 2.35, y = 2.2, label = '( <                            > ) {', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.327, y = 2.2, label = 'ARGUMENTOS', family = 'gochi', size = 8.4, colour = 'yellow') +
+  geom_curve(x = 2.64, xend = 2.33, y = 1.86, yend = 2.16, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = -0.4) +
+  annotate(geom = 'text', x = 2.64, y = 2.0, label = 'Argumentos', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.64, y = 1.9, label = 'formales', family = 'gochi', size = 7.0, colour = 'black') +
+  geom_curve(x = 1.96, xend = 1.8, y = 2.415, yend = 2.28, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = +0.4) +
+  annotate(geom = 'text', x = 2.18, y = 2.42, label = 'Símbolo asociado', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.19, y = 2.32, label = 'con la función', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 2.0, label = '# Comentarios', family = 'gochi', size = 8.4, colour = 'yellow') +
+  annotate(geom = 'text', x = 2.02, y = 1.8, label = '< Expresiones >', family = 'gochi', size = 8.4, colour = 'yellow') +
+  annotate(geom = 'text', x = 1.85, y = 1.6, label = '}', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'segment', x = 2.23, xend = 2.23, y = 2.0, yend = 1.8, colour = 'black', size = 1.2) +
+  geom_curve(x = 2.7, xend = 2.24, y = 1.66, yend = 1.9, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = -0.4) +
+  annotate(geom = 'text', x = 2.7, y = 1.7, label = 'Cuerpo de la función', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'segment', x = 2.92, xend = 2.92, y = 2.2, yend = 1.6, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 2.96, y = 2.1, label = 'A', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 2.05, label = 't', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 2.0, label = 'r', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.95, label = 'i', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.9, label = 'b', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.85, label = 'u', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.8, label = 't', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.75, label = 'o', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.96, y = 1.7, label = 's', family = 'gochi', size = 7.0, colour = 'black') +
+  #scale_x_continuous(limits = c(1.8, 6.5)) +
+  #scale_y_continuous(limits = c(0.5, 4.2)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/4ta_imagen.png")  
+```
 
 ## 4. Datos ordenados y el tidyverse
 
 ```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
 
-ciencia_datos
+#ciencia_datos
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
+
+knitr::include_graphics("images/1ra_imagen.png")  
 ```
 
 ### 4.1 El `tidyverse`
@@ -3152,7 +3218,7 @@ Los conjuntos de datos anteriores muestran los mismos datos organizados en cuatr
 3) Cada valor se coloca en su propia celda.
 -->
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
 
 Variables <- data.frame(
   x = c(1:8), y = c(1:8)
@@ -3266,6 +3332,11 @@ Valores_2 <- data.frame(
 (Variables)|(Observaciones)|(Valores_2)
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/5ta_imagen.png")  
+```
+
 Los datos que satisfacen estas reglas se conocen como __datos ordenados__.
 
 :::exercise
@@ -3286,7 +3357,7 @@ question(" ",
 
 Los datos ordenados funcionan bien en `R` porque `R` es un lenguaje de programación vectorizado. Los conjuntos de datos en `R` están construidos a partir de vectores y las operaciones de `R` están optimizadas para trabajar con vectores. Los datos ordenados aprovechan estas dos características.
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '460'}
 
 Dato_ordenado_1 <- data.frame(
   x = c(1:8), y = c(1:8)
@@ -3376,6 +3447,11 @@ Dato_ordenado_2 <- data.frame(
 (Dato_ordenado_1)|(Dato_ordenado_2)
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/6ta_imagen.png")  
+```
+
 Los datos ordenados fueron popularizados por __Hadley Wickham__, y sirven como base para muchos paquetes y funciones de `R`. Puede obtener más información sobre datos ordenados leyendo [Tidy Data](www.jstatsoft.org/v59/i10/paper), un documento escrito por __Hadley Wickham__ y publicado en el Journal of Statistical Software.
 
 ### 4.3 Ordenando los datos con `tidyr`
@@ -3412,7 +3488,7 @@ save(datos_2,file = "data_pkg/datos_2.rda")
 datos_2
 ```
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 ancho <- data.frame(
   x = c(1:20), y = c(1:20)
@@ -3600,6 +3676,11 @@ ancho <- data.frame(
 ancho
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/7ma_imagen.png")  
+```
+
 ```{r addition_4_3_1_b, exercise = TRUE}
 
 datos_2_ancho <- pivot_wider(
@@ -3638,7 +3719,7 @@ save(datos_4_a,file = "data_pkg/datos_4_a.rda")
 datos_4_a
 ```
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 largo_1 <- data.frame(
   x = c(12:27), y = c(12:27)
@@ -3726,6 +3807,11 @@ largo_1 <- data.frame(
 largo_1
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/8va_imagen.png")  
+```
+
 ```{r addition_4_3_2_b, exercise = TRUE}
 
 datos_4_a_largo <- pivot_longer(
@@ -3762,7 +3848,7 @@ save(datos_4_b,file = "data_pkg/datos_4_b.rda")
 datos_4_b
 ```
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 largo_2 <- data.frame(
   x = c(12:27), y = c(12:27)
@@ -3850,6 +3936,11 @@ largo_2 <- data.frame(
 largo_2
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/9na_imagen.png")  
+```
+
 ```{r exe_4_3_2_c, exercise = TRUE}
 
 
@@ -3903,7 +3994,7 @@ save(datos_3,file = "data_pkg/datos_3.rda")
 datos_3
 ```
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 combinando_separando <- data.frame(
   x = c(1:21), y = c(1:21)
@@ -4029,6 +4120,11 @@ combinando_separando <- data.frame(
 combinando_separando
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/10ma_imagen.png")  
+```
+
 ```{r addition_4_3_3_b, exercise = TRUE}
 
 datos_3_separado <- separate(
@@ -4083,7 +4179,7 @@ La característica más peculiar del anterior conjunto de datos es su sistema de
 
 El ejercicio de repaso propuesto consiste en que haciendo uso de las funciones mecionadas del paquete `tidyr` trate de ordenar el conjunto de datos `Tuberculosis`, e intente obtener un conjunto de datos similar a como se observa en la imagen a continuación.
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 ejercicio <- data.frame(
   x = c(1:23), y = c(1:23)
@@ -4207,6 +4303,11 @@ ejercicio <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 ejercicio
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/11va_imagen.png")  
 ```
 
 ```{r, eval = FALSE}
@@ -4387,7 +4488,7 @@ Si desea seleccionar un grupo específico de valores de una variable de tipo car
 #### Ejemplo 5.2.1.1.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 filtrado <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -4548,7 +4649,7 @@ filtrado <- data.frame(
   annotate(geom = 'text', x = 28.5, y = 5.25, label = 'FEMALE', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 12.3, xmax = 13.3, ymin = 11.72, ymax = 11.78, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.3, xmax = 13.3, ymin = 11.72, ymax = 11.78, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'filter (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.45, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.72, y = 11.25, label = 'species == "Adelie",', size = 7.4, colour = 'black') +
@@ -4569,6 +4670,11 @@ filtrado <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 filtrado
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/12va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_1_1, exercise = TRUE}
@@ -4638,7 +4744,7 @@ La función `slice()` permite indexar filas por sus ubicaciones dentro del conju
 #### Ejemplo 5.2.1.2.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 punto <- data.frame(
   x = c(13, 13, 13, 13, 13, 13, 15, 15, 15, 15, 15, 15, 17.5, 17.5, 17.5, 17.5, 17.5, 17.5, 20.5, 20.5, 20.5, 20.5, 20.5, 20.5, 23.5, 23.5, 23.5, 23.5, 23.5, 23.5, 26.25, 26.25, 26.25, 26.25, 26.25, 26.25, 28.5, 28.5, 28.5, 28.5, 28.5, 28.5),
@@ -4805,7 +4911,7 @@ posicion <- data.frame(
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
   geom_point(data = punto, aes(x = x, y = y), pch = 'x', size = 18.0, colour = 'black', fill = 'black') +
-  annotate(geom = 'rect', xmin = 12.3, xmax = 13.3, ymin = 11.72, ymax = 11.78, colour = 'burlywood4', fill = 'burlywood4', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.3, xmax = 13.3, ymin = 11.72, ymax = 11.78, colour = 'burlywood4', fill = 'burlywood4', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'slice (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.36, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 13.30, y = 11.25, label = 'c(1:4)', size = 7.4, colour = 'black') +
@@ -4817,6 +4923,11 @@ posicion <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 posicion
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/13va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_2_1_a, exercise = TRUE}
@@ -4869,7 +4980,7 @@ La función `arrange()` permite reordenar las filas un conjunto de datos en func
 #### Ejemplo 5.2.1.3.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 organizar <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -5031,7 +5142,7 @@ organizar <- data.frame(
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'NA', family = 'gochi', size = 7.4, colour = 'black') +
   geom_curve(x = 19.6, xend = 19.6, y = 4.6, yend = 9.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
-  annotate(geom = 'rect', xmin = 12.1, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'gray34', fill = 'gray34', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.1, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'gray34', fill = 'gray34', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'arrange (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.24, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.6, y = 11.25, label = 'desc(culmen_depth)', size = 7.4, colour = 'black') +
@@ -5043,6 +5154,11 @@ organizar <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 organizar
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/14va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_3_1_b, exercise = TRUE}
@@ -5073,7 +5189,7 @@ La función `select()` permite elegir y extraer columnas de interés de un conju
 #### Ejemplo 5.2.1.4.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 seleccion <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -5168,7 +5284,7 @@ seleccion <- data.frame(
   annotate(geom = 'text', x = 26.25, y = 5.25, label = '3725', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 25.0, xmax = 27.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 26.25, y = 4.75, label = '3250', family = 'gochi', size = 7.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'select (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.3, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 13.45, y = 11.25, label = 'species,', size = 7.4, colour = 'black') +
@@ -5183,6 +5299,11 @@ seleccion <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 seleccion
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/15va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_4_1, exercise = TRUE}
@@ -5342,7 +5463,7 @@ La función `rename()` permite cambiar los nombres de las columnas o variables.
 #### Ejemplo 5.2.1.5.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 renombre <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -5503,7 +5624,7 @@ renombre <- data.frame(
   annotate(geom = 'text', x = 28.5, y = 5.25, label = 'FEMALE', family = 'gochi', size = 7.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 27.5, xmax = 29.5, ymin = 4.5, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 28.5, y = 4.75, label = 'MALE', family = 'gochi', size = 7.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'rename (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.2, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 13.85, y = 11.25, label = 'gender = sex', size = 7.4, colour = 'black') +
@@ -5517,6 +5638,11 @@ renombre <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 renombre
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/16va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_5_1, exercise = TRUE}
@@ -5535,7 +5661,7 @@ A menudo es útil agregar nuevas variables o columnas que son funciones de las y
 #### Ejemplo 5.2.1.6.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 mutacion <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -5718,7 +5844,7 @@ mutacion <- data.frame(
   annotate(geom = 'text', x = 31.0, y = 5.25, label = '3.72	', family = 'gochi', size = 6.9, colour = 'black') +
   annotate(geom = 'rect', xmin = 29.5, xmax = 32.5, ymin = 4.5, ymax = 5.0, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
   annotate(geom = 'text', x = 31.0, y = 4.75, label = '3.25', family = 'gochi', size = 6.9, colour = 'black') +
-  annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.2, xmax = 13.5, ymin = 11.72, ymax = 11.78, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'mutate (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.6, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 17.1, y = 11.25, label = 'body_mass_kg = body_mass_g / 1000', size = 7.4, colour = 'black') +
@@ -5730,6 +5856,11 @@ mutacion <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 mutacion
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/17va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_6_1_a, exercise = TRUE}
@@ -5802,7 +5933,7 @@ Una forma fácil de cambiar el orden de las columnas en el conjunto de datos es 
 #### Ejemplo 5.2.1.7.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 paso <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -5964,7 +6095,7 @@ paso <- data.frame(
   annotate(geom = 'rect', xmin = 29.5, xmax = 32.5, ymin = 4.5, ymax = 5.0, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 31.0, y = 4.75, label = '46.1', family = 'gochi', size = 6.9, colour = 'black') +
   geom_curve(x = 17.5, xend = 31.0, y = 10.25, yend = 10.25, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = -0.2) +
-  annotate(geom = 'rect', xmin = 12.0, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
+  #annotate(geom = 'rect', xmin = 12.0, xmax = 13.6, ymin = 11.72, ymax = 11.78, colour = 'red', fill = 'red', alpha = 0.2) +
   annotate(geom = 'text', x = 13.0, y = 11.75, label = 'relocate (', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 14.36, y = 11.5, label = '.data = penguins,', size = 7.4, colour = 'black') +
   annotate(geom = 'text', x = 13.85, y = 11.25, label = 'species:sex,', size = 7.4, colour = 'black') +
@@ -5977,6 +6108,11 @@ paso <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 paso
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/18va_imagen.png")  
 ```
 
 ```{r ejemplo_5_2_1_7_1, exercise = TRUE}
@@ -6045,7 +6181,7 @@ Usar la función `summarise()` puede ser útil por sí sola, pero es aún más �
 #### Ejemplo 5.2.1.8.2
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 resumen <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -6242,6 +6378,11 @@ resumen <- data.frame(
 resumen
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/19va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_8_1_b, exercise = TRUE, message = FALSE}
 
 Grupos <- group_by(
@@ -6269,7 +6410,7 @@ A menudo es útil realizar la misma operación en varias columnas. La función `
 #### Ejemplo 5.2.1.9.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 resumen <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -6458,6 +6599,11 @@ resumen <- data.frame(
 resumen
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/20va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_9_1, exercise = TRUE, message = FALSE}
 
 summarise(
@@ -6533,7 +6679,7 @@ Para solucionar el problema que puede resultar del enfoque anterior, el paquete 
 #### Ejemplo 5.2.1.10.2
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '520'}
 
 tuberia <- data.frame(
   x = c(12:29.5), y = c(12:29.5)
@@ -6738,6 +6884,11 @@ tuberia <- data.frame(
 tuberia
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+knitr::include_graphics("images/21va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_10_1_b, exercise = TRUE}
 
 Peso_fem_kg <- penguins %>%
@@ -6826,7 +6977,7 @@ Esta unión retorna todas las columnas del primer y segundo conjunto de datos, p
 #### Ejemplo 5.2.1.11.1
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
 union_interior <- data.frame(
   x = c(1:5), y = c(1:5)
@@ -6880,6 +7031,11 @@ union_interior <- data.frame(
 union_interior
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/22va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_11_1, exercise = TRUE}
 
 inner_join(
@@ -6901,7 +7057,7 @@ Esta unión retorna todas las columnas del primer y segundo conjunto de datos, p
 #### Ejemplo 5.2.1.11.2
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
 union_izquierda <- data.frame(
   x = c(1:5), y = c(1:5)
@@ -6962,6 +7118,11 @@ union_izquierda <- data.frame(
 union_izquierda
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/23va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_11_2, exercise = TRUE}
 
 left_join(
@@ -6979,7 +7140,7 @@ Esta función es opuesta a la función `left_join()`, en el sentido de que solo 
 #### Ejemplo 5.2.1.11.3
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
 union_derecha <- data.frame(
   x = c(1:5), y = c(1:5)
@@ -7040,6 +7201,11 @@ union_derecha <- data.frame(
 union_derecha
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/24va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_11_3, exercise = TRUE}
 
 right_join(
@@ -7057,7 +7223,7 @@ Esta unión retorna toda las columnas y filas de ambos conjunto de datos. De est
 #### Ejemplo 5.2.1.11.4
 :::
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '380'}
 
 union_total <- data.frame(
   x = c(1:5), y = c(1:5)
@@ -7125,6 +7291,11 @@ union_total <- data.frame(
 union_total
 ```
 
+```{r, echo = FALSE, eval = FALSE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/25va_imagen.png")  
+```
+
 ```{r ejemplo_5_2_1_11_4, exercise = TRUE}
 
 full_join(
@@ -7150,7 +7321,7 @@ La representación gráfica de la información tiene [raíces profundas](https:/
 
 ### 6.2 La gramática de los gráficos
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
 
 Diamante_1 <- data.frame(
   x = c(3.0, 5.0, 7.0, 5.0), y = c(2.0, 4.0, 2.0, 0.0)
@@ -7332,6 +7503,11 @@ data.frame(
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/26va_imagen.png")  
 ```
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
