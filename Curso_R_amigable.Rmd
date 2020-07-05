@@ -2959,54 +2959,229 @@ while(count<=20){
 }
 ```
 
+Como se puede ver el ciclo `while` puede adaptarse para funcionar igual que el ciclo `for`, sin embargo su uso en el lenguaje `R` es poco frecuente y suele ser más común utilizar el ciclo `for` acompañado de condicionales. Veamos los anteriores ejemplos adaptados al ciclo `for` utilizando un nuevo argumento denominado `break`. El ejemplo 3.2.5 utilizando el ciclo `for` se ve de la siguiente manera:
+
+:::example
+#### Ejemplo 3.2.8
+:::
+
+```{r addition_328, exercise = TRUE}
+for (i in seq_along(letras)){
+  print(letras[i])
+  if(i==10){
+    break
+  }
+}
+```
+
+La adaptación del ejemplo 3.2.6 sería la siguiente:
+
+```{r addition_3281, exercise = TRUE}
+x = c(5,8,12,19,48,95,106,208,406,512,683,791,790,805,900,931)
+for (i in seq_along(x)){
+  if (x[i]<x[i+1]){
+    print(paste(x[i],"es menor que",x[i+1]))
+  }else{
+    print(paste(x[i],"no es menor que",x[i+1],",error en el indice",i+1,"del vector x"))
+    break
+  }
+}
+```
+
+Ahora debes adaptar el ejemplo 3.2.7 de la sucesión de Fibonacci usando el ciclo `for`.
+
+:::exercise
+#### Ejercicio 3.2.5
+:::
+
+```{r exe_325, exercise = TRUE}
+
+```
+
+```{r exe_325-solution}
+a=0
+b=1
+for (i in 1:20){
+  print(a)
+  c<-a+b
+  a<-b
+  b<-c
+}
+
+```
+
+```{r exe_325-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Otro de los ciclos que posee R es `repeat{}`, que es incluso de menor uso que el ciclo `while`. En general `repeat{}` repite un grupo de instrucciones indefinidamente, por ello el uso del argumento `break` resulta obligatorio en este ciclo. veamos algunos de los ejemplos anteriores adaptados al ciclo `repeat{}`
+
+:::example
+#### Ejemplo 3.2.9
+:::
+
+Iniciemos adaptando el ejemplo 3.2.2
+
+```{r addition_329, exercise = TRUE}
+# letras
+i=0
+repeat{
+  i=i+2
+  if(i<=length(letras)){
+    print(paste("la letra en la posición",i,"es",letras[i]))
+  } else{ break }
+}
+```
+
+Veamos la adaptación del ejercicio 3.2.2 con el ciclo `repeat{}`
+
+```{r addition_3291, exercise = TRUE}
+# amigos
+j=0
+repeat{
+  j=j+1
+  if(is.na(amigos$nombre[j])){break}
+  nombre <- amigos$nombre[j]
+  masa <- amigos$fisico[[j]][3][[1]]
+  altura <- amigos$fisico[[j]][2][[1]]/100
+  IMC <- masa/altura^2
+  print(paste(nombre,"tiene una altura de",altura,"m, una masa de",masa,"u su IMC es",round(IMC,2)))
+}
+
+```
+
+Para finalizar esta subsección entendamos cómo trabaja el argumento `next` con un ejemplo simple, en el cual evitaremos imprimir los números de 8 y 12 en la serie de números de 1 a 15.
+
+:::example
+#### Ejemplo 3.2.10
+:::
+
+```{r addition_3210, exercise = TRUE}
+for (i in 1:15){
+  if(i == 8 | i == 12){
+    next
+  }
+  print(i)
+}
+```
+
+Apliquemos también el argumento `next` al ejemplo 3.2.3 del descuento de comida para perro, en este caso el argumento nos ayuda a hacer un poco más corto el código desarrollado anteriormente, evitando seguir el proceso cuando encontramos opciones de descuento o de compra inválidos. 
+
+:::example
+#### Ejemplo 3.2.11
+:::
+
+```{r addition_3211, exercise = TRUE}
+x = c(10,0,2,15,13,18,4,9,7,2,8,16) #numero de bolsas
+des = c(1,0,0,1,0,0,1,1,1,0,0,10) #clasificación
+for (i in seq_along(x)){
+  cobro = 6800*x[i]
+  if(x[i]<=0){
+    print("No es un número de compra válido")
+    next
+  }
+  if(des[i]!=0 & des[i]!=1){
+    print(paste(des[i],"No es un opción válida de clasificación de descuento"))
+    next
+  }
+  if(des[i]==1 & x[i]<10){
+    cobro = cobro *.5
+  } else if(des[i]==1 & x[i]>=10){
+    cobro = cobro * .4
+  }
+  print(paste("Total a pagar:",cobro))
+}
+```
+
+Modifiquemos la respuesta del ejercicio 3.2.1 utilizando el ciclo `for` en compañía del argumento `next` para múltiples compras en la heladería, de modo que obtengamos el número de compra, el total correspondiente, el descuento y el total con descuento para cada caso. 
+
+:::example
+#### Ejemplo 3.2.12
+:::
+
+```{r addition_3212, exercise = TRUE}
+dia = c("Domingo", "Lunes","Miercoles","jueves","Domingo","Martes","Viernes")
+total_compra = c(69500,71350,33700,54000,0,38000,52300)
+for (i in seq_along(dia)){
+  print(paste("Número de compra", i))  
+  descuento = 0
+  if(total_compra[i]<=0){
+    print("No es un valor de compra válido")
+    next
+  }
+  if(dia[i] =="Lunes" | dia[i] =="Martes" | dia[i] =="Miercoles"){
+    if(total_compra[i]>50000){
+      descuento = total_compra[i] * .35
+    }else{
+      descuento = total_compra[i] * .25
+    }
+  }else if(dia[i] =="Jueves" | dia[i] =="Viernes" | dia[i] =="Sabado" | dia[i] =="Domingo"){
+    if(total_compra[i]>60000){
+      descuento = total_compra[i] * .15
+    }
+  } else{
+    print("No es una dia de la semana valido")
+    next
+  }
+  print(paste("Total:", total_compra[i]))
+  print(paste("Descuento:", descuento))
+  print(paste("Total con descuento:",total_compra[i]-descuento)) 
+}
+```
+
+Como se ha dicho anteriormente algunos de los ciclos son de poco uso en el lenguaje `R` 
+, por lo que es más común utilizar funciones vectoriales como `ifelse()` y funciones derivadas de la familia `apply`. Primero apliquemos `ifelse()` a algunos de los ejemplos y ejercicios de esta subsección modificandolos como dataframe o tibble. La familia apply se verá en una subsección posterior. 
+
+Retomando el ejemplo 3.1.3 de la promoción en la floristería, observemos su adaptación en un tibble usando `ifelse()` para multiples compras 
+
+:::example
+#### Ejemplo 3.2.13
+:::
+
+```{r addition_3213, exercise = TRUE}
+#promocion de rosas
+tibble(rosas= c(2,5,10,21,17,10,2,0,8,3),
+       rosas_extra = ifelse(rosas<=0,NA, #numero de rosas validas
+                            ifelse(rosas<10,0, # rosas menores a 10
+                                   ifelse(rosas==10,1,3))), # Adicion de rosas en 10 unidades y mayores 
+       rosas_total = rosas +rosas_extra
+       )
+```
+
+La siguiente adaptación corresponde a la promoción de comida de perro.
+
+```{r addition_3213_1, exercise = TRUE}
+#descuento comida de perro
+tibble(bolsas= c(10,0,2,15,13,18,4,9,7,2,8,16),
+       des = c(1,0,0,1,0,0,1,1,1,0,0,10),
+       descuento = ifelse(bolsas<=0,NA, #numero de bolsas validas
+                          ifelse(des==0,0, #ocasiones sin descuento
+                                 ifelse(des!=1,NA, #descuento valido
+                                        ifelse(bolsas<10,.5,.6)))), # descuento del 50% general y 60% por al menos diaz bolsas
+       cobro = ifelse(bolsas<=0,NA,
+                      ifelse(des==0,bolsas*6800,
+                             ifelse(des!=1,NA,(1-descuento)*bolsas*6800)))
+       )
+```
+
+Y como último ejemplo de esta subsección veremos la adaptación del ejercicio 3.1.2 como un tible con `ifelse()`.
+
+```{r addition_3213_2, exercise = TRUE}
+#descuentos heladeria
+dias_semana = c("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo")
+tibble(dia = c("Domingo", "Lunes","Miercoles","jueves","Domingo","Martes","Viernes"),
+       total_compra = c(69500,71350,33700,54000,0,38000,53200),
+       descuento_porcentaje = ifelse(total_compra<= 0,NA, #Valor de compra valido
+                                     ifelse(dia %in% dias_semana, #dias validos
+                                            ifelse(dia %in% dias_semana[1:3], # Descuento de lunes a miercoles
+                                                   ifelse(total_compra>50000,.35,.25), # Descuento de lunes a miercoles por compras superiores a 50mil
+                                                   ifelse(total_compra>60000,.15,0)),NA)), # Descuento por compras mayores a 60mil en el resto de dias
+       descuento_valor = total_compra * descuento_porcentaje,
+       total_a_pagar = total_compra - descuento_valor
+       )
+```
+
 </details>
-
-```{r, eval = FALSE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '720'}
-
-data.frame(
-  x = c(1.0:3.0), y = c(1.0:3.0)
-) %>%
-  ggplot(aes(x, y)) +
-  geom_blank() +
-  annotate(geom = 'text', x = 1.8, y = 2.2, label = 'f', family = 'gochi', size = 8.4, colour = 'gray') +
-  annotate(geom = 'text', x = 1.85, y = 2.2, label = '<-', family = 'gochi', size = 8.4, colour = 'black') +
-  annotate(geom = 'text', x = 1.98, y = 2.2, label = 'function', family = 'gochi', size = 8.4, colour = 'cyan') +
-  annotate(geom = 'text', x = 2.35, y = 2.2, label = '( <                            > ) {', family = 'gochi', size = 8.4, colour = 'black') +
-  annotate(geom = 'text', x = 2.327, y = 2.2, label = 'ARGUMENTOS', family = 'gochi', size = 8.4, colour = 'yellow') +
-  geom_curve(x = 2.64, xend = 2.33, y = 1.86, yend = 2.16, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = -0.4) +
-  annotate(geom = 'text', x = 2.64, y = 2.0, label = 'Argumentos', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.64, y = 1.9, label = 'formales', family = 'gochi', size = 7.0, colour = 'black') +
-  geom_curve(x = 1.96, xend = 1.8, y = 2.415, yend = 2.28, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = +0.4) +
-  annotate(geom = 'text', x = 2.18, y = 2.42, label = 'Símbolo asociado', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.19, y = 2.32, label = 'con la función', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.0, y = 2.0, label = '# Comentarios', family = 'gochi', size = 8.4, colour = 'yellow') +
-  annotate(geom = 'text', x = 2.02, y = 1.8, label = '< Expresiones >', family = 'gochi', size = 8.4, colour = 'yellow') +
-  annotate(geom = 'text', x = 1.85, y = 1.6, label = '}', family = 'gochi', size = 8.4, colour = 'black') +
-  annotate(geom = 'segment', x = 2.23, xend = 2.23, y = 2.0, yend = 1.8, colour = 'black', size = 1.2) +
-  geom_curve(x = 2.7, xend = 2.24, y = 1.66, yend = 1.9, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = -0.4) +
-  annotate(geom = 'text', x = 2.7, y = 1.7, label = 'Cuerpo de la función', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'segment', x = 2.92, xend = 2.92, y = 2.2, yend = 1.6, colour = 'black', size = 1.2) +
-  annotate(geom = 'text', x = 2.96, y = 2.1, label = 'A', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 2.05, label = 't', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 2.0, label = 'r', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.95, label = 'i', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.9, label = 'b', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.85, label = 'u', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.8, label = 't', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.75, label = 'o', family = 'gochi', size = 7.0, colour = 'black') +
-  annotate(geom = 'text', x = 2.96, y = 1.7, label = 's', family = 'gochi', size = 7.0, colour = 'black') +
-  #scale_x_continuous(limits = c(1.8, 6.5)) +
-  #scale_y_continuous(limits = c(0.5, 4.2)) +
-  theme_void() +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-```
-
-```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
-
-knitr::include_graphics("images/4ta_imagen.png")  
-```
 
 ## 4. Datos ordenados y el tidyverse
 
