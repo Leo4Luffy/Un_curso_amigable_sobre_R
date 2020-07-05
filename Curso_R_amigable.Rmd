@@ -3183,6 +3183,642 @@ tibble(dia = c("Domingo", "Lunes","Miercoles","jueves","Domingo","Martes","Viern
 
 </details>
 
+<details><summary>3.3 Funciones </summary> 
+
+`R` en su instalación base cuenta por lo menos con 1302 funciones para realizar diversas tareas, sin embargo es común crear nuevas funciones que se ajusten a nuestras necesidades. Pero antes de crear una función debemos entenderla y reconocer sus 3 componentes:  1) argumentos, 2) cuerpo y 3) entorno. Iniciemos creando con `function()` una función simple para ilustrar los tres componentes y sus atributos.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+knitr::include_graphics("images/4ta_imagen.png")  
+```
+
+:::example
+#### Ejemplo 3.3.1
+:::
+
+```{r addition_331, exercise = TRUE}
+# Funcion
+fun_1 <- function(x,y){
+  # comentario
+  x+y
+}
+# Argumentos
+formals(fun_1)
+# Cuerpo
+body(fun_1)
+# Entorno
+environment(fun_1)
+# Atributos
+attr(fun_1,"srcref")
+```
+
+En general cualquier función creada en lenguaje `R` posee componentes y atributos, sin embargo algunas funciones base como `sum()` `mean()` y otras no posee poseen estos componentes, debido a que llaman código C directamente. Intenta hallar los componentes y atributos para la funciones `prod()` y `abs()`.
+
+:::exercise
+#### Ejercicio 3.3.1
+:::
+
+```{r exe_331, exercise = TRUE}
+
+```
+
+```{r exe_331-solution}
+# Argumentos
+formals(prod)
+formals(abs)
+# Cuerpo
+body(prod)
+body(abs)
+# Entorno
+environment(prod)
+environment(abs)
+# Atributos
+attr(prod,"srcref")
+attr(abs,"srcref")
+```
+
+```{r exe_331-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Como se puede ver estas funciones no poseen componentes y atributos propios de una función creada en `R` sin embargo no todas las funciones base llaman código C. Veamos los componentes y atributos de la función `rowMeans()`
+
+```{r exe_331_1, exercise = TRUE}
+# Argumentos
+formals(rowMeans)
+# Cuerpo
+body(rowMeans)
+# Entorno
+environment(rowMeans)
+# Atributos
+attr(rowMeans,"srcref")
+```
+
+En la sección anterior en los ejemplos y ejercicios 2.3.6 y 2.3.7  usamos `function()` en conjunto con otras funciones, en esos casos utilizamos lo que se denomina funciones anónimas, las cuales se caracterizan por ser breves (se pueden escribir en una sola línea de código) y por no poseer frecuentemente los  `{}`.  Veamos un ejemplo de una función anónima para la integral $\pi \int_{0}^{6}  \frac{x}{12} \sqrt{36-x^2}$, donde la función anónima corresponde al integrando.
+
+:::example
+#### Ejemplo 3.3.2
+:::
+
+```{r addition_332, exercise = TRUE}
+integrate(function(x) pi * (x/12) * sqrt(36- x^2),0,6 )
+```
+
+El ejemplo muestra que el integrando es lo suficientemente corto como para escribirlo en una línea de código, sin embargo observemos una escritura un poco más extensa para el mismo ejemplo. 
+
+```{r addition_332_1, exercise = TRUE}
+integrando <- function(x){
+  pi * (x/12) * sqrt(36- x^2)
+}
+integrate(integrando,0,6 )
+```
+
+Una cuestión importante en las funciones, es el léxico que se maneja, en él debemos entender que los argumentos son válidos dentro de la función y que crearlos o nombrarlos en el exterior no siempre los afecta. Veamos las salidas del siguiente ejemplo para entender mejor este concepto. 
+
+:::example
+#### Ejemplo 3.3.3
+:::
+
+```{r addition_333, exercise = TRUE}
+# Función
+fun_2 <- function() {
+  x = 5
+  y=10
+  x+y
+}
+#variables independientes
+x = 7
+y = 3
+# Usando fun_2
+fun_2()
+```
+
+Retomemos `fun_1` y selecciona la salida correcta para el siguiente fragmento de código.
+
+:::exercise
+#### Ejercicio 3.3.2
+:::
+
+```{r,echo=TRUE, eval= FALSE}
+#funcion
+fun_1 <- function(x,y){
+  # suma de x y y
+  x+y
+}
+#variables independientes
+x= 30
+y = x
+x = 5
+#usando fun_1
+fun_1(6,7)
+```
+
+```{r exe_332, echo=FALSE}
+question(" ",
+  answer("[1] 30", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("[1] 60", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("[1] 10", message = "No estas en lo correcto, sigue intentandolo."),
+  answer("[1] 13",correct = TRUE, message = "Estas en lo correcto.."),
+  answer("[1] 35", message = "No estas en lo correcto, sigue intentandolo."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+Pero qué sucedería con el léxico, si nuestra función no posee argumentos pero requiere de una variable? o si los argumentos de nuestra función no son declarados y se requiere una variable ?. Veamos primero una función sin argumentos y cómo funciona la denominada búsqueda dinámica.
+
+:::example
+#### Ejemplo 3.3.4
+:::
+
+```{r addition_334, exercise = TRUE}
+# Función
+fun_3 <- function() x+y
+# Usando fun_2
+fun_3()
+```
+
+Como nuestra función requiere internamente de un `x` y un `y` obtenemos un error que nos notifica que el objeto `x` no se encuentra, es aquí donde podemos aplicar el concepto de búsqueda dinámica, agregando `x` y `y` como variables independientes.
+
+```{r addition_334_1, exercise = TRUE}
+# Variables independientes
+x = 5
+y = 10
+# Función
+fun_3 <- function() x+y
+# Usando fun_2
+fun_3()
+```
+
+Ensayemos con el caso en el que nuestra función tiene un argumento pero falta una variable interna.
+
+:::example
+#### Ejemplo 3.3.5
+:::
+
+```{r addition_335, exercise = TRUE}
+# Función
+fun_4 <- function(x) x+y
+# Usando fun_2
+fun_4(10)
+```
+
+Apliquemos el concepto de búsqueda dinámica añadiendo como variable independiente `y` e incluyendo el argumento `x` requerido al usar la función.
+
+```{r addition_335_1, exercise = TRUE}
+#variable independiente 
+y = 15
+# Función
+fun_4 <- function(x) x+y
+# Usando fun_2
+fun_4(10)
+```
+
+Ya que entendimos ciertos conceptos básicos de las funciones creemos algunas que cumplan las mismas tareas que las funciones base, como por ejemplo `mean()`.
+
+:::example
+#### Ejemplo 3.3.6
+:::
+
+```{r addition_336, exercise = TRUE}
+my.mean <- function(x){
+  #calculo
+  sum(x) / length(x)
+}
+#prueba
+my.mean(1:956)
+#comparación
+mean(1:956)
+```
+
+Personalicemos un poco `my.mean` con la función `message()` para que envíe un mensaje mientras hace las operaciones necesarias y además incluyamos `return()` para devolver los resultados de las operaciones. Para ver la salida de los mensajes debes copiar la función en `R` y ejecutarla allí, la versión dinámica del curso no permite mostrar en pantalla los mensajes.
+
+```{r addition_336_1, exercise = TRUE}
+my.mean <- function(x){
+  message("Calulando...")
+  calc <- sum(x) / length(x)
+  message("Cálculo terminado")
+  return(calc)
+}
+#prueba
+my.mean(1:956)
+#comparación
+mean(1:956)
+```
+
+Es tu turno de crear funciones y comparar el resultado con una función predeterminada de `R`. En esta ocasión debes crear la funciones `my.var` y `my.sd` para comparar tus resultados con las funciones `var()` y `sd()`. Recuerda que la varianza obedece a la siguiente ecuación $\mathrm{Var}(x) = \frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x}) ^2$. Compara tus resultados con los vectores de prueba.
+
+:::exercise
+#### Ejercicio 3.3.3
+:::
+
+```{r exe_333, exercise = TRUE}
+#vectores de prueba 
+x = seq(1,50,5)
+y = seq(1,15,length.out = 30)
+#Funciones
+my.var <-function(){}
+my.sd <-function(){}
+#pruebas
+my.var(x)
+my.sd(x)
+my.var(y)
+my.sd(y)
+#comparacion
+var(x)
+sd(x)
+var(y)
+sd(y)
+```
+
+```{r exe_333-hint}
+#vectores de prueba 
+x = seq(1,50,5)
+y = seq(1,15,length.out = 30)
+#Funciones
+my.var <-function(x){
+  var = sum((x -mean(x))^2) / (length(x)-1)
+  return(var)
+}
+my.sd <-function(){}
+#pruebas
+my.var(x)
+my.sd(x)
+my.var(y)
+my.sd(y)
+#comparacion
+var(x)
+sd(x)
+var(y)
+sd(y)
+```
+
+```{r exe_333-solution}
+#vectores de prueba 
+x = seq(1,50,5)
+y = seq(1,15,length.out = 30)
+#Funciones
+my.var <-function(x){
+  var = sum((x -mean(x))^2) / (length(x)-1)
+  return(var)
+}
+my.sd <-function(x){
+  sd = sqrt(my.var(x))
+  return(sd)
+}
+#pruebas
+my.var(x)
+my.sd(x)
+my.var(y)
+my.sd(y)
+#comparacion
+var(x)
+sd(x)
+var(y)
+sd(y)
+```
+
+```{r exe_333-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Retomemos el ejemplo 3.1.4 de descuento de comida para perro y creemos una función que haga todo el trabajo cada vez que lo necesitemos, al ser una función cambiaremos algunos argumentos y detendremos el proceso con `stop()` cada vez que se encuentre un error, sea en los valores de compra o en los de descuento. Además se incluirá un argumento predeterminado que define si la salida es impresiones en pantalla o un vector.
+
+:::example
+#### Ejemplo 3.3.7
+:::
+
+```{r addition_337, exercise = TRUE}
+descuento_perros <- function(bolsas,descuentos,to_vector = FALSE){
+  total <- c()
+  if(length(bolsas) != length(descuentos)){
+    stop("La longitud de bolsas y descuentos no es la misma")
+  }
+  for( i in seq_along(bolsas)){
+    cobro = 6800*bolsas[i]
+    if(bolsas[i]<=0){
+      stop(paste("El número de bolsas en la posición",i,"no es válido"))
+    }
+    if(descuentos[i]!=0 &descuentos[i]!=1){
+      stop(paste("El código de descuento en la posición",i,"no es válido"))
+    }
+    if(descuentos[i]==1 & bolsas[i]<10){
+      cobro = cobro *.5
+    } else if(descuentos[i]==1 & bolsas[i]>=10){
+      cobro = cobro * .4
+    }
+    if(to_vector == F){
+      print(paste("Total a pagar:",cobro))
+    } else{
+      total <- c(total,cobro)
+    }
+  }
+  if(to_vector==T){
+    return(total)
+  }
+}
+```
+
+Creada la función podemos realizar múltiples pruebas sin necesidad de escribir repetidamente el código. Veamos algunas pruebas e intenta otras por tu cuenta. Para ejecutar las pruebas debes comentar las que presenten errores, ya que para ilustrar su funcionamiento hay pruebas que arrojan error, estas están marcadas con el comentario `#error` al final.
+
+```{r addition_337_1, exercise = TRUE}
+#Prueba 1
+descuento_perros(c(10,0,2,15,13,18,4,9,7,2,8,16),c(1,0,0,1,0,0,1,1,1,0,0,10)) #error
+#Prueba 2
+descuento_perros(c(10,2,15,18,16),c(1,0,0,1,10)) # error
+#prueba 3
+descuento_perros(c(10,2,15,18,16),c(1,0,0,1)) #error
+#prueba 4
+descuento_perros(c(10,2,15,18,16),c(1,0,0,1,0))
+#prueba 5
+descuento_perros(c(10,2,15,18,16),c(1,0,0,1,0),to_vector = TRUE)
+```
+
+Es tu turno de adaptar una función al ejercicio de las rosas tratado en el ejemplo 3.1.3. Como ya sabes en esta sección hay muchas posibles soluciones a los problemas planteados, en `solution` encontraras una sola de todas las posibles. Verifica los resultados de la función con los dos objetos de prueba. Para ejecutar las pruebas debes comentar las que presenten errores, ya que para ilustrar su funcionamiento hay pruebas que arrojan error, estas están marcadas con el comentario `#error` al final.
+
+:::exercise
+#### Ejercicio 3.3.4
+:::
+
+```{r exe_334, exercise = TRUE}
+# Objetos de prueba
+val_1 <- -13
+val_2 <- 16
+vec_1 <- c(2,5,10,21,17,10,2,0,8,3)
+vec_2 <- c(5,10,8,19,21,16,9,3)
+#función
+promocion_rosas <- function(){}
+#Pruebas
+promocion_rosas(val_1) #error
+promocion_rosas(val_2)
+promocion_rosas(vec_1) #error
+promocion_rosas(vec_2)
+```
+
+```{r exe_334-solution}
+# Objetos de prueba
+val_1 <- -13
+val_2 <- 16
+vec_1 <- c(2,5,10,21,17,10,2,0,8,3)
+vec_2 <- c(5,10,8,19,21,16,9,3)
+#función
+promocion_rosas <- function(rosas){
+  for (i in seq_along(rosas)){
+    rosas_total = rosas[i]
+    if (rosas[i]<=0){
+      stop(paste("El número de rosas en la posición",i,"no es válido"))
+    }else if(rosas[i]==10){
+      rosas_total = rosas[i] + 1
+    }else if(rosas[i]>10){
+      rosas_total = rosas[i] +3
+    }
+    print(paste("levarás",rosas_total - rosas[i], "rosas extra, total de rosas",rosas_total))
+  }
+}
+#Pruebas
+promocion_rosas(val_1) #error
+promocion_rosas(val_2)
+promocion_rosas(vec_1) #error
+promocion_rosas(vec_2)
+```
+
+```{r exe_334-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Implementa ahora una función para el ejercicio 3.1.2 de descuentos en la heladeria. Recuerda el operador %in% utilizado en el ejemplo 3.2.13. Verifica los resultados de la función con los dos objetos de prueba. Para ejecutar las pruebas debes comentar las que presenten errores, ya que para ilustrar su funcionamiento hay pruebas que arrojan error, estas están marcadas con el comentario `#error` al final.
+
+:::exercise
+#### Ejercicio 3.3.5
+:::
+
+```{r exe_335, exercise = TRUE}
+#objetos de prueba
+dia_x = "Miercoles"
+total_x = 33700
+vec_dias_1 = c("Domingo", "Lunes","Miercoles","jueves","Domingo","Martes","Viernes")
+vec_total_1 = c(69500,71350,33700,54000,0,38000,53200)
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+# funcion
+descuento_helados <- function(){}
+#pruebas
+descuento_helados(dia_x,total_x)
+descuento_helados(vec_dias_1,vec_total_1) #error
+descuento_helados(vec_dias_2,vec_total_2)
+```
+
+```{r exe_335-solution}
+#objetos de prueba
+dia_x = "Miercoles"
+total_x = 33700
+vec_dias_1 = c("Domingo", "Lunes","Miercoles","jueves","Domingo","Martes","Viernes")
+vec_total_1 = c(69500,71350,33700,54000,0,38000,53200)
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+# funcion
+descuento_helados <- function(dias,totales){
+  dias_semana = c("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo")
+  if(length(dias)!=length(totales)){
+    stop("La longitud de dias y totales no es la misma")
+  }
+  for (i in seq_along(dias)){
+    descuento = 0
+    if(totales[i]<=0){
+      stop(paste("El valor proporcionado en la posición",i,"no es válido"))
+    }
+    if(!dias[i] %in% dias_semana ){
+      stop(paste("El día proporcionado en la posición",i,"no es válido"))
+    }else if(dias[i] %in% dias_semana[1:3]){
+      descuento = descuento + .25
+      if (totales[i]>50000){
+        descuento = descuento + .1
+      }
+    }else if(totales[i]>60000){
+      descuento = descuento + .15
+    }
+    print(paste("Total:",totales[i],"Descuento:",totales[i]*descuento,"Total a pagar:" ,totales[i]*(1-descuento)))
+  }
+  
+}
+#pruebas
+descuento_helados(dia_x,total_x)
+descuento_helados(vec_dias_1,vec_total_1) #error
+descuento_helados(vec_dias_2,vec_total_2)
+```
+
+```{r exe_335-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Continuando con teoría acerca de las funciones trabajaremos el argumento especial `...`, el cual tiene dos usos comunes: 1) Para extender una función y 2) Para permitir que la función posea cualquier número de argumentos adicionales. El primer caso es usado comúnmente cuando se anidan funciones, como se vio en los ejemplos y ejercicios 2.3.7. Veamos un ejemplo de este primer caso utilizando dos funciones `my_fun_1` y `my_fun_2`.
+
+:::example
+#### Ejemplo 3.3.8
+:::
+
+```{r addition_338, exercise = TRUE}
+#Funcion 1 : suma
+my_fun_1<- function(v,w,x,y,z){v+w+x+y+z}
+my_fun_1(1,2,3,4,5)
+#Funcion 2 : suma * 2
+my_fun_2 <- function(...){
+  my_fun_1(...)*2
+}
+my_fun_2(1,2,3,4,5)
+```
+
+Para este ejemplo el argumento especial `...` permite que `my_fun_2` herede los mismos argumentos que `my_fun_1`, permitiendo hacer operaciones sobre el calculo de `my_fun_1`. Otro ejemplo simple del uso de `...` que puede resultar un poco más familiar es una adaptación de las funciones `my.var` y `my.sd` en la solución del ejercicio 3.3.3. Veamos esta adaptación:
+
+:::example
+#### Ejemplo 3.3.9
+:::
+
+```{r addition_339, exercise = TRUE}
+#Funcion de calculo de varianza
+my.var <-function(x){
+  var = sum((x -mean(x))^2) / (length(x)-1)
+  return(var)
+}
+#Funcion de calculo de sd
+my.sd <-function(...){
+  sd = sqrt(my.var(...))
+  return(sd)
+}
+# Prueba
+my.sd(1:15)
+sd(1:15)
+```
+
+Tratemos una adaptación un poco más elaborada, en la cual se extiendan al mismo tiempo las funciones de  `descuento_perros` y `descuento_helados` cada una con sus respectivos argumentos.
+
+:::example
+#### Ejemplo 3.3.10
+:::
+
+```{r addition_3310, exercise = TRUE}
+#objetos de prueba
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+#Funcion descuentos 
+descuentos <- function(...,perros=F,helados=F){
+  if(helados==T & perros == F){
+    message("Descuento en heladería")
+    descuento_helados(...)
+  }else if(perros == T & helados==F){
+    message("Descuento en comida para perro")
+    descuento_perros(...)
+  }else{
+    stop("Seleccione adecuadamente la opción de descuento")
+  }
+}
+
+#pruebas
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T)
+descuentos(vec_dias_2,vec_total_2,helados = T)
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T,to_vector=T)
+```
+
+Aunque el ejercicio de la floristería no corresponde exactamente a un descuento, en el siguiente problema debes volver a crear la función `descuentos` añadiendo la función `promocion_rosas()` usando el argumento especial `...`.
+
+:::exercise
+#### Ejercicio 3.3.6
+:::
+
+```{r exe_336, exercise = TRUE}
+#objetos de prueba
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+#Funcion descuentos 
+descuentos <- function(...,perros=F,helados=F,rosas=F){}
+#pruebas
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T)
+descuentos(vec_dias_2,vec_total_2,helados = T)
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T,to_vector=T)
+descuentos(c(5,6,8,10,12,47),rosas = T)
+```
+
+```{r exe_336-hint}
+#objetos de prueba
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+#Funcion descuentos 
+descuentos <- function(...,perros=F,helados=F,rosas=F){
+  if(helados==T & perros == F & rosas ==F){
+    message("Descuento en heladería")
+    descuento_helados(...)
+  }else if(perros == T & helados==F & rosas==F){
+    message("Descuento en comida para perro")
+    descuento_perros(...)
+  }else if(rosas==T & perros==F & helados==F){
+    
+  }else{
+    stop("Seleccione adecuadamente la opción de descuento")
+  }
+}
+
+#pruebas
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T)
+descuentos(vec_dias_2,vec_total_2,helados = T)
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T,to_vector=T)
+descuentos(c(5,6,8,10,12,47),rosas = T)
+```
+
+```{r exe_336-solution}
+#objetos de prueba
+vec_dias_2 = c("Domingo", "Lunes","Miercoles","Jueves","Domingo","Martes","Viernes")
+vec_total_2 = c(69500,71350,33700,54000,12000,38000,53200)
+#Funcion descuentos 
+descuentos <- function(...,perros=F,helados=F,rosas=F){
+  if(helados==T & perros == F & rosas ==F){
+    message("Descuento en heladería")
+    descuento_helados(...)
+  }else if(perros == T & helados==F & rosas==F){
+    message("Descuento en comida para perro")
+    descuento_perros(...)
+  }else if(rosas==T & perros==F & helados==F){
+    message("Promoción de rosas")
+    promocion_rosas(...)
+  }else{
+    stop("Seleccione adecuadamente la opción de descuento")
+  }
+}
+
+#pruebas
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T)
+descuentos(vec_dias_2,vec_total_2,helados = T)
+descuentos(c(10,2,15,18,16),c(1,0,0,1,0),perros = T,to_vector=T)
+descuentos(c(5,6,8,10,12,47),rosas = T)
+```
+
+```{r exe_336-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+El otro uso del argumento especial `...` es en funciones que reciben cualquier número de argumentos, como ejemplo de ellas tenemos `sum()` , `prod()`, `paste()`, `paste0()` y otras más. veamos cómo funcionan estas y creemos una que reciba cualquier cantidad de argumentos.
+
+:::example
+#### Ejemplo 3.3.11
+:::
+
+```{r addition_3311, exercise = TRUE}
+#Funciones base
+sum(1,3,5,7,89,c=5,b=8)
+prod(3,5,d=8,9)
+paste("Hola","Soy una función","con",ar=4,"argumentos")
+paste0("c","i","n","c","o")
+#Funcion
+fun_5 <- function(...){
+  list(...)
+}
+#pruebas
+fun_5(1,3,5,7,89,c=5,b=8)
+fun_5("Hola","Soy una función","con",ar=4,"argumentos")
+```
+
+`fun_5` recibe cualquier cantidad de elementos y los guarda en una lista , el uso que le demos a ella depende de nuestras necesidades y habilidades con las listas. 
+
+</details>
+
 ## 4. Datos ordenados y el tidyverse
 
 ```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, fig.showtext = TRUE, out.width = '520'}
