@@ -6167,6 +6167,7 @@ data.frame(
 ```
 
 ```{r, echo = FALSE, eval = FALSE, out.width = "54%", fig.align = "center"}
+
 knitr::include_graphics("images/26va_imagen.png")  
 ```
 
