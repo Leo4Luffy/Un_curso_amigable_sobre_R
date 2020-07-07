@@ -3612,6 +3612,347 @@ fun_5("Hola","Soy una función","con",ar=4,"argumentos")
 
 </details>
 
+<details><summary>3.4 Familia apply </summary> 
+
+Se conoce como familia `apply` al conjunto de funciones usadas para aplicar funciones en matrices, dataframe, arreglos y listas, corresponden a una de las características distintivas de R como lenguaje de programación y se utilizan frecuentemente para automatizar tareas complejas. Las funciones de la familia `apply` se caracterizan por recibir como argumentos a un objeto y al menos una función. Las funciones pertenecientes a esta familia son las siguientes:
+
+* `apply()`
+* `lapply()`
+* `sapply()`
+* `eapply()`
+* `mapply()`
+* `rapply()`
+* `tapply()`
+* `vapply()`
+
+Algunas de estas funciones tienen aplicaciones sumamente específicas y profundizar en ellas no resulta apropiado para un curso corto; por esta razón se profundizará solo en algunas de ellas iniciando con la función `apply()`.
+
+```{r, echo=TRUE,eval=FALSE}
+apply(X,MARGIN,FUN,...)
+```
+
+Esta función recibe 3 argumentos esenciales y argumentos adicionales inherentes a una función específica, donde:
+
+* `X` : Una matriz o un objeto que pueda coercionarse a una matriz.
+* `MARGIN` : 1 para operar sobre filas, 2 para operar sobre columnas.
+* `FUN` : Operador o función aplicada.
+* `...` : Argumentos adicionales de la función aplicada.
+
+`apply()` devuelve generalmente un vector y en los casos donde la función devuelve un vector de longitud n devuelve una matriz. Veamos algunos ejemplos.
+
+:::example
+#### Ejemplo 3.4.1
+:::
+
+```{r addition_341, exercise = TRUE}
+#objetos de prueba
+df = data.frame(x=1:10,y=11:20,z=21:30)
+m = matrix(1:25,ncol = 5)
+#producto de elementos por filas
+apply(X = df,MARGIN = 1,FUN = prod)
+apply(X = m,MARGIN = 1,FUN = prod)
+#producto de elementos por columna
+apply(X = df,MARGIN = 2,FUN = prod)
+apply(X = m,MARGIN = 2,FUN = prod)
+#raiz cuadrada orientacíon filas
+apply(df,1,sqrt)
+```
+
+También podemos usar `apply()` con funciones de usuario e incluso con funciones anónimas. Para ilustrar un ejemplo con estas funciones recordemos el ejemplo de la floristería, tomando como objeto de prueba un dataset que contiene la venta de tres días en la semana. 
+
+:::example
+#### Ejemplo 3.4.2
+:::
+
+```{r addition_342, exercise = TRUE}
+#objetos de prueba
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#apply por columna
+apply(rosas,2,promocion_rosas)
+#funcion anonima filas
+apply(rosas,1, function(x) ifelse(x<10,x,ifelse(x==10,x+1,x+3)))
+#funcion anonima columnas
+apply(rosas,2, function(x) ifelse(x<10,x,ifelse(x==10,x+1,x+3)))
+```
+
+Para entender cómo funcionan los argumentos adicionales al usar `apply()` utilizaremos la función `quantile()`, sobre los tres días de ventas de rosas. Primero utilizaremos la función sin argumentos adicionales, de la siguiente forma:
+
+:::example
+#### Ejemplo 3.4.3
+:::
+
+```{r addition_343, exercise = TRUE}
+#objetos de prueba
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#apply por dias
+apply(rosas,2,quantile)
+```
+
+Recuerda para conocer los argumentos de una función y la ayuda de la misma puedes ejecutar `?quantile`. Ahora usemos los argumentos adicionales para seleccionar cuantiles de interés diferentes a los que están por defecto.
+
+```{r addition_343_1, exercise = TRUE}
+#objetos de prueba
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#apply por dias
+apply(rosas,2,quantile,probs=c(.33,.66,.99))
+```
+
+Recordemos el ejemplo 2.2.3 en el cual determinamos la representación en porcentual de cada elemento de la columna sobre la suma total de la misma, en aquella ocasión determinar esa representación porcentual nos tomó aproximadamente 8 líneas de código, ahora con `apply()` debes lograrlo en una sola línea.
+
+:::exercise
+#### Ejercicio 3.4.1
+:::
+
+```{r exe_341, exercise = TRUE}
+#Matriz de prueba 1
+m <- matrix(seq(18, 2, length.out = 16), ncol = 4, byrow = TRUE)
+m
+#porcentaje columna
+```
+
+```{r exe_341-solution}
+#Matriz de prueba 1
+m <- matrix(seq(18, 2, length.out = 16), ncol = 4, byrow = TRUE)
+m
+#porcentaje columna
+apply(m,2,function(x) round(100*x/sum(x),2))
+```
+
+```{r exe_341-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Intenta ahora la estandarización por columnas de la siguiente matriz. Recuerda que la estandarización para este caso corresponde a restar la media de la columna y dividir por la desviación estándar a cada elemento de la misma columna.
+
+:::exercise
+#### Ejercicio 3.4.2
+:::
+
+```{r}
+set.seed(20)
+```
+
+```{r exe_342, exercise = TRUE}
+#Matriz de prueba 1
+m <- matrix(seq(8, 2, length.out = 16), ncol = 4, byrow = TRUE)
+m
+#estandarización
+```
+
+```{r}
+set.seed(20)
+```
+
+```{r exe_342-solution}
+#Matriz de prueba 1
+m <- matrix(sample(1:8, 16, replace = TRUE), ncol = 4, byrow = TRUE)
+m
+#estandarización
+apply(m,2,function(x) (x-mean(x))/sd(x))
+```
+
+```{r exe_342-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+La siguiente función de la familia `apply` en la que profundizaremos es `lapply()`
+
+```{r, echo=TRUE,eval=FALSE}
+lapply(X,FUN,...)
+```
+
+Esta función recibe 2 argumentos esenciales y argumentos adicionales inherentes a una función específica, donde:
+
+* `X` : Es una lista o un objeto que pueda coercionarse a una lista.
+* `FUN` : Operador o función aplicada.
+* `...` : Argumentos adicionales de la función aplicada.
+
+`lapply()` devuelve una lista. Veamos algunos ejemplos, iniciando con la adaptación del ejemplo 3.4.1
+
+:::example
+#### Ejemplo 3.4.4
+:::
+
+```{r addition_344, exercise = TRUE}
+#objetos de prueba
+df = data.frame(x=1:10,y=11:20,z=21:30)
+m = matrix(1:25,ncol = 5)
+#producto de elementos por columnas
+lapply(X = df,FUN = prod)
+lapply(X = as.data.frame(m),FUN = prod)
+#raiz cuadrada de cada elemento
+lapply(df,sqrt)
+```
+
+Al igual que `apply()`, `lapply()` admite funciones anónimas, usemos el ejemplo 3.4.2 para verlo.  
+
+:::example
+#### Ejemplo 3.4.5
+:::
+
+```{r addition_345, exercise = TRUE}
+#venta de rosas
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#promoción 
+lapply(rosas, function(x) ifelse(x<10,x,ifelse(x==10,x+1,x+3)))
+```
+
+Veamos un ejemplo involucrando el descuento en comida de perro, en el cual se registraron ventas en tres días de la semana en una lista `ventas`, cada una con una lista contiene el número de bolsas compradas y el código de descuento. En este ejemplo usaremos además una función anónima que llama una función de usuario.
+
+:::example
+#### Ejemplo 3.4.6
+:::
+
+```{r addition_346, exercise = TRUE}
+#ventas
+ventas = list(lunes=list(bolsas=c(10,2,15,18,16),des=c(1,0,0,1,0)),
+              martes=list(bolsas=c(11,13,1,4,6,9),des=c(0,0,1,1,0,1)),
+              miercoles=list(bolsas=c(3,10,4,1),des=c(1,1,0,1)))
+#descuento comida de perros
+lapply(ventas,function(x) descuento_perros(x[[1]],x[[2]],to_vector = T))
+```
+
+Tratemos un ejemplo más familiar recordando el dataset `amigos` y calculemos el IMC de cada individuo utilizando `lapply()`.
+
+:::example
+#### Ejemplo 3.4.7
+:::
+
+```{r addition_347, exercise = TRUE}
+#datos 
+amigos$fisico
+#Calculo IMC
+lapply(amigos$fisico,function(list) unname(list[3]/(list[2]/100)**2))
+```
+
+Para terminar con la función `lapply()` veamos un ejemplo en el que utilicemos una función anónima para llamar la función `apply()` y aplicarla sobre tres matrices tal cual como se hizo en el ejercicio 3.4.2.
+
+:::example
+#### Ejemplo 3.4.8
+:::
+
+```{r addition_348, exercise = TRUE}
+#Matrices de prueba 
+m1 <- matrix(seq(18, 2, length.out = 16), ncol = 4, byrow = TRUE)
+m2 <- matrix(1:16, ncol = 4)
+m3 <- matrix(seq(10, 74, length.out = 16), ncol = 4, byrow = TRUE)
+#lista de matrices
+mm <- list(m1,m2,m3)
+#porcentaje
+lapply(mm,function(m) apply(m,2,function(x) round(100*x/sum(x),2)))
+```
+
+La última función de la familia `apply` que trataremos será `sappply()`, la cual es muy similar a `lapply()` salvo por la devolución, ya que `sapply()` devuelve, cuando es posible un objeto mas simple (vector o matriz) en lugar de una lista.
+
+```{r, echo=TRUE,eval=FALSE}
+sapply(X,FUN,...,simplify = TRUE)
+```
+
+Esta función recibe 2 argumentos esenciales, y argumentos adicionales inherentes a una función específica, además permite modificar dos argumentos por defecto,donde:
+
+* `X` : Es una lista o un objeto que pueda coercionarse a una lista.
+* `FUN` : Operador o función aplicada.
+* `...` : Argumentos adicionales de la función aplicada.
+* `simplify` : TRUE, devuelve un vector cuando sea posible; FALSE, cumple la misma función que `lapply()`
+
+Para entender los casos en los que `sapply()` funciona debes adaptar los ejemplo de `lapply()`, iniciando con el ejemplo 3.4.4.
+
+:::exercise
+#### Ejercicio 3.4.3
+:::
+
+```{r exe_343, exercise = TRUE}
+#objetos de prueba
+df = data.frame(x=1:10,y=11:20,z=21:30)
+m = matrix(1:25,ncol = 5)
+#producto de elementos por columnas
+sapply()
+sapply()
+#raiz cuadrada de cada elemento
+sapply()
+```
+
+```{r exe_343-solution}
+#objetos de prueba
+df = data.frame(x=1:10,y=11:20,z=21:30)
+m = matrix(1:25,ncol = 5)
+#producto de elementos por columnas
+sapply(X = df,FUN = prod)
+sapply(X = as.data.frame(m),FUN = prod)
+#raiz cuadrada de cada elemento
+sapply(df,sqrt)
+```
+
+```{r exe_343-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Intenta ahora con el ejemplo 3.4.5 de la promoción de rosas.
+
+:::exercise
+#### Ejercicio 3.4.4
+:::
+
+```{r exe_344, exercise = TRUE}
+#venta de rosas
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#promoción 
+```
+
+```{r exe_344-solution}
+#venta de rosas
+rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
+                     martes=c(5,10,8,19,21,16,9,3,19),
+                     miercoles=c(10,4,8,19,29,1,2,10,2))
+#promoción 
+sapply(rosas, function(x) ifelse(x<10,x,ifelse(x==10,x+1,x+3)))
+```
+
+```{r exe_344-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+Por último para evidenciar un caso en el que la simplificación no es posible intenta la adaptación del ejemplo 3.4.6.
+
+:::exercise
+#### Ejercicio 3.4.5
+:::
+
+```{r exe_345, exercise = TRUE}
+#ventas
+ventas = list(lunes=list(bolsas=c(10,2,15,18,16),des=c(1,0,0,1,0)),
+              martes=list(bolsas=c(11,13,1,4,6,9),des=c(0,0,1,1,0,1)),
+              miercoles=list(bolsas=c(3,10,4,1),des=c(1,1,0,1)))
+#descuento comida de perros
+```
+
+```{r exe_345-solution}
+#ventas
+ventas = list(lunes=list(bolsas=c(10,2,15,18,16),des=c(1,0,0,1,0)),
+              martes=list(bolsas=c(11,13,1,4,6,9),des=c(0,0,1,1,0,1)),
+              miercoles=list(bolsas=c(3,10,4,1),des=c(1,1,0,1)))
+#descuento comida de perros
+sapply(ventas,function(x) descuento_perros(x[[1]],x[[2]],to_vector = T))
+```
+
+```{r exe_345-check}
+grade_code("Excelente lo lograste, sigamos adelante")
+```
+
+A partir de las funciones de la familia `apply` nombradas anteriormente se obtiene una noción básica del funcionamiento de la familia completa, para abordar y conocer mejor las otras funciones de la familia te recomendamos revisar la documentación de `R`.
+
+</details>
+
 ## 4. Datos ordenados y el tidyverse
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
