@@ -5525,29 +5525,25 @@ data.frame(
         axis.title = element_blank())
 ```
 
+Para explicar el concepto de la gramática de gráficos implementado en el paquete `ggplot2` se empleara el conjunto de datos [`pokemon`](https://github.com/cienciadedatos/datos-de-miercoles/tree/master/datos/2019/2019-07-10). Estos datos es uno de los muchos conjuntos de datos del proyecto [_Datos de miércoles_](https://github.com/cienciadedatos/datos-de-miercoles) cuyo propósito consiste en buscar que lo ususraios de `R` desarrollen habilidades de visualización y procesado de datos usando las herramientas del `tidyverse`.
+
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 
-minion_1 <- readJPEG('images/minion_1.jpg', native = TRUE)
-minion_1 <- rasterGrob(minion_1, interpolate = FALSE)
+charmander <- readJPEG('images/charmander.jpg', native = TRUE)
+charmander <- rasterGrob(charmander, interpolate = FALSE)
 
-minion_2 <- readJPEG('images/minion_2.jpg', native = TRUE)
-minion_2 <- rasterGrob(minion_2, interpolate = FALSE)
+bulbasaur <- readJPEG('images/bulbasaur.jpg', native = TRUE)
+bulbasaur <- rasterGrob(bulbasaur, interpolate = FALSE)
 
-minion_3 <- readJPEG('images/minion_3.jpg', native = TRUE)
-minion_3 <- rasterGrob(minion_3, interpolate = FALSE)
+squirtle <- readJPEG('images/squirtle.jpg', native = TRUE)
+squirtle <- rasterGrob(squirtle, interpolate = FALSE)
 
-minion_4 <- readJPEG('images/minion_4.jpg', native = TRUE)
-minion_4 <- rasterGrob(minion_4, interpolate = FALSE)
+butterfree <- readJPEG('images/butterfree.jpg', native = TRUE)
+butterfree <- rasterGrob(butterfree, interpolate = FALSE)
 
-minion_5 <- readJPEG('images/minion_5.jpg', native = TRUE)
-minion_5 <- rasterGrob(minion_5, interpolate = FALSE)
-
-minion_6 <- readJPEG('images/minion_6.jpg', native = TRUE)
-minion_6 <- rasterGrob(minion_6, interpolate = FALSE)
-
-minion_7 <- readJPEG('images/minion_7.jpg', native = TRUE)
-minion_7 <- rasterGrob(minion_7, interpolate = FALSE)
+pikachu <- readJPEG('images/pikachu.jpg', native = TRUE)
+pikachu <- rasterGrob(pikachu, interpolate = FALSE)
 
 data.frame(
   x = c(1:7), y = c(-1:5)
@@ -5557,105 +5553,114 @@ data.frame(
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 1.25, y = 4.5, label = 'id', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.25, y = 3.5, label = '1', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.25, y = 3.5, label = '4', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.25, y = 2.5, label = '2', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.25, y = 2.5, label = '1', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.25, y = 1.5, label = '3', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.25, y = 1.5, label = '12', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.25, y = 0.5, label = '4', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.25, y = 0.5, label = '25', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.25, y = -0.5, label = '5', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.25, y = -0.5, label = '7', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 2.0, y = 4.5, label = 'minion', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 4.5, label = 'nombre', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_1, xmin = 1.59, xmax = 2.51, ymin = 3.1, ymax = 3.9) +
+  annotation_custom(charmander, xmin = 1.59, xmax = 2.51, ymin = 3.1, ymax = 3.9) +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_2, xmin = 1.59, xmax = 2.51, ymin = 2.1, ymax = 2.9) +
+  annotation_custom(bulbasaur, xmin = 1.59, xmax = 2.51, ymin = 2.1, ymax = 2.9) +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_5, xmin = 1.59, xmax = 2.51, ymin = 1.1, ymax = 1.9) +
+  annotation_custom(butterfree, xmin = 1.59, xmax = 2.51, ymin = 1.1, ymax = 1.9) +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_6, xmin = 1.59, xmax = 2.51, ymin = 0.1, ymax = 0.9) +
+  annotation_custom(pikachu, xmin = 1.59, xmax = 2.51, ymin = 0.1, ymax = 0.9) +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_3, xmin = 1.59, xmax = 2.51, ymin = -0.9, ymax = -0.1) +
+  annotation_custom(squirtle, xmin = 1.59, xmax = 2.51, ymin = -0.9, ymax = -0.1) +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.0, y = 4.5, label = 'lider', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.0, y = 4.5, label = 'tipo', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_4, xmin = 2.59, xmax = 3.51, ymin = 3.1, ymax = 3.9) +
+  annotate(geom = 'text', x = 3.0, y = 3.5, label = 'Fuego', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_4, xmin = 2.59, xmax = 3.51, ymin = 2.1, ymax = 2.9) +
+  annotate(geom = 'text', x = 3.0, y = 2.5, label = 'Césped', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_7, xmin = 2.59, xmax = 3.51, ymin = 1.1, ymax = 1.9) +
+  annotate(geom = 'text', x = 3.0, y = 1.5, label = 'Bicho', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_7, xmin = 2.59, xmax = 3.51, ymin = 0.1, ymax = 0.9) +
+  annotate(geom = 'text', x = 3.0, y = 0.5, label = 'Eléctrico', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 3.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotation_custom(minion_4, xmin = 2.59, xmax = 3.51, ymin = -0.9, ymax = -0.1) +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = 4.5, label = 'tipo', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = 3.5, label = 'amarillo', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = 2.5, label = 'amarillo', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = 1.5, label = 'purpura', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = 0.5, label = 'purpura', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 3.5, xmax = 4.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.0, y = -0.5, label = 'amarillo', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = 4.5, label = 'edad', family = 'gochi', size = 9.5, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = 3.5, label = '2', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = 2.5, label = '6', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = 1.5, label = '10', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = 0.5, label = '16', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 4.5, xmax = 5.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.75, y = -0.5, label = '5', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 4.5, label = 'peso', family = 'gochi', size = 9.5, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 3.5, label = '8.8', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 2.5, label = '9.4', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 1.5, label = '10.8', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = 0.5, label = '12.8', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.0, xmax = 5.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.25, y = -0.5, label = '12.0', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 4.5, label = 'altura', family = 'gochi', size = 9.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 3.5, label = '1.05', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 2.5, label = '1.20', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 1.5, label = '1.34', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 0.5, label = '1.40', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 5.5, xmax = 6.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = -0.5, label = '1.37', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = 4.5, label = 'misiones', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = 3.5, label = '8', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = 2.5, label = '32', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = 1.5, label = '55', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = 0.5, label = '60', family = 'gochi', size = 11.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 6.0, xmax = 7.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.5, y = -0.5, label = '20', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.0, y = -0.5, label = 'Agua', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = 4.5, label = 'ataque', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = 3.5, label = '52', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = 2.5, label = '49', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = 1.5, label = '45', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = 0.5, label = '55', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.875, y = -0.5, label = '48', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = 4.5, label = 'defensa', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = 3.5, label = '43', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = 2.5, label = '49', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = 1.5, label = '50', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = 0.5, label = '40', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.625, y = -0.5, label = '65', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = 4.5, label = 'velocidad', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = 3.5, label = '65', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = 2.5, label = '45', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = 1.5, label = '70', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = 0.5, label = '90', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.4375, y = -0.5, label = '43', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = 4.5, label = 'puntos_vida', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = 3.5, label = '39', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = 2.5, label = '45', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = 1.5, label = '60', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = 0.5, label = '35', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.875, xmax = 7.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.4375, y = -0.5, label = '44', family = 'gochi', size = 11.0, colour = 'black') +
   #scale_y_continuous(limits = c(2.05, 5.0)) +
   scale_x_continuous(limits = c(1.0, 7.0)) +
   theme_void() +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
+```
+
+Como puedes ver, este conjunto de datos contiene siete variables:
+
+1. En `id` se describe la identificación de cada pokémon.
+2. En `nombre` podrá encontrar el nombre del pokémon.
+3. En `tipo` se describe el tipo de pokémon (eléctrico, agua, veneno, fantasma, hielo, psíquico, entre otros).
+4. En `ataque` podrá encontrar el daño que el pokémon puede causar en ataques.
+5. En `defensa` podrá encontrar la resistencia del pokémon al daño ante ataques.
+6. En `velocidad` se describe la velocidad del pokémon al atacar en cada ronda.
+7. En `puntos_vida` se describe la cantidad de daño que puede resistir cada pokémon.
+
+```{r, eval = FALSE}
+
+pokemon <- readr::read_csv("https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-07-10/pokemon.csv")
+
+pokemon <- pokemon %>%
+  select(ID_poke, nombre_ingles, tipo_1, ataque, defensa, velocidad, puntos_vida) %>%
+  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1)
+
+save(pokemon, file = 'data_pkg/pokemon.rda')
 ```
 
 ##### 6.2.1.1 Capas 1-2-3: datos-estética-geometrías
