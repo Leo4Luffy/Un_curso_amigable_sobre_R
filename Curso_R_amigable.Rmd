@@ -5381,7 +5381,7 @@ knitr::include_graphics("images/ggplot2_3.png")
 
 #### 6.2.1 Una gramática para la visualización de datos
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
 
 Diamante_1 <- data.frame(
   x = c(3.0, 5.0, 7.0, 5.0), y = c(2.0, 4.0, 2.0, 0.0)
@@ -5525,9 +5525,16 @@ data.frame(
         axis.title = element_blank())
 ```
 
+Una gramática de gráficos es un marco que sigue un enfoque en capas para describir y construir visualizaciones o gráficos de manera estructurada.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
+
+knitr::include_graphics("images/26va_imagen.png")  
+```
+
 Para explicar el concepto de la gramática de gráficos implementado en el paquete `ggplot2` se empleara el conjunto de datos [`pokemon`](https://github.com/cienciadedatos/datos-de-miercoles/tree/master/datos/2019/2019-07-10). Estos datos es uno de los muchos conjuntos de datos del proyecto [_Datos de miércoles_](https://github.com/cienciadedatos/datos-de-miercoles) cuyo propósito consiste en buscar que lo ususraios de `R` desarrollen habilidades de visualización y procesado de datos usando las herramientas del `tidyverse`.
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 
 charmander <- readJPEG('images/charmander.jpg', native = TRUE)
@@ -5589,27 +5596,27 @@ data.frame(
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 3.875, y = 4.5, label = 'ataque', family = 'gochi', size = 9.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.875, y = 3.5, label = '52', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.875, y = 3.5, label = '112', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.875, y = 2.5, label = '49', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.875, y = 2.5, label = '114', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.875, y = 1.5, label = '45', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.875, y = 1.5, label = '135', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.875, y = 0.5, label = '55', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.875, y = 0.5, label = '105', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 4.25, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.875, y = -0.5, label = '48', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.875, y = -0.5, label = '98', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 4.625, y = 4.5, label = 'defensa', family = 'gochi', size = 9.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.625, y = 3.5, label = '43', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.625, y = 3.5, label = '93', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.625, y = 2.5, label = '49', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.625, y = 2.5, label = '114', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.625, y = 1.5, label = '50', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.625, y = 1.5, label = '130', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.625, y = 0.5, label = '40', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.625, y = 0.5, label = '90', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 4.25, xmax = 5.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 4.625, y = -0.5, label = '65', family = 'gochi', size = 11.0, colour = 'black') +
+  annotate(geom = 'text', x = 4.625, y = -0.5, label = '129', family = 'gochi', size = 11.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 5.4375, y = 4.5, label = 'velocidad', family = 'gochi', size = 9.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 5.0, xmax = 5.875, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
@@ -5642,6 +5649,11 @@ data.frame(
         axis.title = element_blank())
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/27va_imagen.png")  
+```
+
 Como puedes ver, este conjunto de datos contiene siete variables:
 
 1. En `id` se describe la identificación de cada pokémon.
@@ -5657,8 +5669,10 @@ Como puedes ver, este conjunto de datos contiene siete variables:
 pokemon <- readr::read_csv("https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-07-10/pokemon.csv")
 
 pokemon <- pokemon %>%
+  mutate(ataque = ataque + fuerza_especial_ataque, defensa = defensa + fuerza_especial_defensa) %>%
   select(ID_poke, nombre_ingles, tipo_1, ataque, defensa, velocidad, puntos_vida) %>%
-  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1)
+  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1) #%>%
+  #filter(nombre %in% c('Charmander', 'Bulbasaur', 'Butterfree', 'Pikachu', 'Squirtle'))
 
 save(pokemon, file = 'data_pkg/pokemon.rda')
 ```
@@ -6514,9 +6528,8 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = FALSE, out.width = "54%", fig.align = "center"}
-
-knitr::include_graphics("images/26va_imagen.png")  
-```
+:::caution
+Si deseas conocer más sobre la gramática en capas de gráficos propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/tree/master/Documentos) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre su paquete `ggplot2`.
+:::
 
 ## 8. Referencias
