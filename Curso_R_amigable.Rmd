@@ -6533,6 +6533,3 @@ Si deseas conocer más sobre la gramática en capas de gráficos propuesto por H
 :::
 
 ## 8. Referencias
-
-
-EL experimento ja
