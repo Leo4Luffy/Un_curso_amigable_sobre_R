@@ -5725,7 +5725,7 @@ load('data_pkg/pokemon.rda')
 
 ##### 6.2.1.1 Capas 1-2-3: datos-estética-geometrías
 
-Para asociar el gráfico a un conjunto de datos en específico se emplea el argumento `data`. Luego se define un mapeo haciendo uso de la función `aes()` dentro de `ggplot()`, lo cual, permite seleccionar las variables a graficar y cómo deben ser presentadas. Con `geoms` por último se indica cómo se representaran los datos en el gráfico.
+Para asociar el gráfico a un conjunto de datos en específico se emplea el argumento `data`. Luego se define un mapeo haciendo uso de la función `aes()` dentro de `ggplot()` para seleccionar las variables a graficar. Por último, con `geoms` se indica cómo se representaran los datos en el gráfico.
 
 :::example
 #### Ejemplo 6.2.1.1.1
@@ -5733,12 +5733,117 @@ Para asociar el gráfico a un conjunto de datos en específico se emplea el argu
 
 ```{r ejemplo_6_2_1_1_1, exercise = TRUE, fig.align = "center"}
 
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
 ggplot(
   data = pokemon,
-  mapping = aes(x = ataque, y = defensa)
+  aes(x = ataque, y = fuerza_total)
+  ) +
+  geom_point()
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total)
+  ) +
+  geom_point(
+    size = 3.4,
+    colour = 'yellow',
+    fill = 'yellow',
+    alpha = 0.4
+    )
+```
+
+<p align="left"><details><summary>Lista de colores en `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_1.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_2.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_3.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_4.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_5.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_6.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/colores_7.png")  
+```
+
+</details></p>
+
+:::exercise
+#### Ejercicio 6.2.1.1.1
+En el ejemplo anterior se uso la función `aes()` para indicarle al `geom_point()` cuáles serían las posiciones `x` y `y` para cada punto. Sin embargo otra propiedad estetica que se puede modificar es el color de los puntos por medio del argumento `colour`. Intente por favor modificar el código anterior de modo que se coloreen los puntos de acuerdo al tipo de pokemon.
+:::
+
+```{r ejercicio_6_2_1_1_1, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+```
+
+```{r ejercicio_6_2_1_1_1-solution, message = FALSE}
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo)
   ) +
   geom_point()
 ```
+
+:::caution
+
+:::
+
+:::example
+#### Ejemplo 6.2.1.1.2
+:::
+
+```{r ejemplo_6_2_1_1_2, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = defensa, size = fuerza_total)
+  ) +
+  geom_point(
+    alpha = 0.4
+    )
+```
+
+:::caution
+<!--Colocar aqui las otras opciones de geom_-->
+:::
 
 ##### 6.2.1.2 Capa 4: facetas
 
