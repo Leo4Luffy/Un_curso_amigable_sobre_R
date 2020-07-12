@@ -5716,11 +5716,18 @@ pokemon <- pokemon %>%
   #filter(nombre %in% c('Charmander', 'Bulbasaur', 'Butterfree', 'Pikachu', 'Squirtle'))
 
 save(pokemon, file = 'data_pkg/pokemon.rda')
+
+pokemon_2 <- pokemon %>%
+  select(nombre_ingles, tipo_2) %>%
+  rename('nombre' = nombre_ingles, 'tipo_2' = tipo_2)
+
+save(pokemon_2, file = 'data_pkg/pokemon_2.rda')
 ```
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
 
 load('data_pkg/pokemon.rda')
+load('data_pkg/pokemon_2.rda')
 ```
 
 ##### 6.2.1.1 Capas 1-2-3: datos-estética-geometrías
@@ -5837,6 +5844,10 @@ Las asignaciones estéticas, definidas con la función `aes()`, describen cómo 
 <!--Colocar aqui las otras opciones de geom_-->
 :::
 
+:::example
+#### Ejemplo 6.2.1.1.2
+:::
+
 <div class="row">
   <div class="col-md-6" markdown="1">
 ```{r ejemplo_6_2_1_1_2, exercise = TRUE, fig.align = "center", out.width='340'}
@@ -5879,12 +5890,169 @@ pokemon %>%
 ```
   </div>
   <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_5, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  filter(tipo == 'Fuego') %>%
+  ggplot(
+    data = .,
+    aes(x = velocidad)
+    ) +
+  geom_dotplot()
+```
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_6, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  select(tipo, ataque) %>%
+  ggplot(
+    data = .,
+    aes(x = tipo, y = ataque)
+    ) +
+  geom_boxplot()
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_7, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  select(tipo, ataque) %>%
+  ggplot(
+    data = .,
+    aes(x = tipo, y = ataque)
+    ) +
+  geom_violin()
+```
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_8, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  inner_join(pokemon_2, 'nombre') #%>%
+  #select(nombre, tipo, tipo_2) %>%
+  #ggplot(
+    #data = .,
+    #aes(x = tipo, y = tipo_2)
+    #) +
+  #geom_count()
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+
   </div>
 </div>
 
 ##### 6.2.1.2 Capa 4: facetas
 
+<div class="row">
+  <div class="col-md-6" markdown="1">
++ __Facet wrap__
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
 
+
+data.frame(
+  x = c(1:2.5), y = c(1.5:3)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.45, ymin = 2.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.45, ymin = 2.05, ymax = 2.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.45, ymin = 1.55, ymax = 2.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 1.95, ymin = 2.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 1.95, ymin = 2.05, ymax = 2.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 1.95, ymin = 1.55, ymax = 2.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.45, ymin = 2.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.45, ymin = 2.05, ymax = 2.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.45, ymin = 1.55, ymax = 2.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.225, y = 2.775, label = '1', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.225, y = 2.275, label = '4', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.225, y = 1.775, label = '7', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 2.775, label = '2', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 2.275, label = '5', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 1.775, label = '8', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 2.775, label = '3', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 2.275, label = '6', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 1.775, label = '9', family = 'gochi', size = 24.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/29va_imagen.png")  
+```
+  </div>
+</div>
+
+:::example
+#### Ejemplo 6.2.1.2.1
+:::
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
++ __Facet grid__
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
+
+
+data.frame(
+  x = c(1:2.5), y = c(1.5:3)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.45, ymin = 1.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.45, ymin = 2.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 1.95, ymin = 1.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.45, ymin = 2.05, ymax = 2.5, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.45, ymin = 1.55, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.45, ymin = 1.55, ymax = 2.0, colour = 'yellow', fill = 'yellow', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.225, y = 2.775, label = 'A1', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.225, y = 2.275, label = 'A2', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.225, y = 1.775, label = 'A3', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 2.775, label = 'B1', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 2.275, label = 'B2', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 1.775, label = 'B3', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 2.775, label = 'C1', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 2.275, label = 'C2', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 1.775, label = 'C3', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.225, y = 3.125, label = 'A', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.725, y = 3.125, label = 'B', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.225, y = 3.125, label = 'C', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.875, y = 2.775, label = '1', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.875, y = 2.275, label = '2', family = 'gochi', size = 24.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.875, y = 1.775, label = '3', family = 'gochi', size = 24.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/28va_imagen.png")  
+```
+  </div>
+</div>
+
+:::example
+#### Ejemplo 6.2.1.2.2
+:::
 
 ##### 6.2.1.3 Capa 5: estadísticas
 
