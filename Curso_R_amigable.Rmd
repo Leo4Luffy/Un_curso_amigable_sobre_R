@@ -5744,19 +5744,20 @@ ggplot(
   ) +
   geom_point()
 
-ggplot(
-  data = pokemon,
-  aes(x = ataque, y = fuerza_total)
-  ) +
-  geom_point(
-    size = 3.4,
-    colour = 'yellow',
-    fill = 'yellow',
-    alpha = 0.4
-    )
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total)
+  #) +
+  #geom_point(
+    #size = 3.4,
+    #colour = 'yellow',
+    #fill = 'yellow',
+    #alpha = 0.4,
+    #shape = 'square filled'
+    #)
 ```
 
-<details><summary>Lista de colores en `R`</summary>
+<details><summary>Lista de colores en `R` y formas de puntos</summary>
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
@@ -5793,6 +5794,11 @@ knitr::include_graphics("images/colores_6.png")
 knitr::include_graphics("images/colores_7.png")  
 ```
 
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/puntos.png")  
+```
+
 </details>
 
 :::exercise
@@ -5810,40 +5816,71 @@ pokemon <- pokemon %>%
 
 ```{r ejercicio_6_2_1_1_1-solution, message = FALSE}
 
-ggplot(
+ggplot( # Primera forma
   data = pokemon,
   aes(x = ataque, y = fuerza_total, colour = tipo)
   ) +
   geom_point()
+  
+ggplot( # Segunda forma
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total)
+  ) +
+  geom_point(aes(colour = tipo))
 ```
 
 :::caution
-
+Las asignaciones estéticas, definidas con la función `aes()`, describen cómo las variables se asignan a propiedades visuales o estéticas. Además de una posición horizontal (`x`) y vertical (`y`), cada punto puede tener también un tamaño (`size`), un color (`colour` y `fill`) y una forma (`shape`).
 :::
-
-:::example
-#### Ejemplo 6.2.1.1.2
-:::
-
-```{r ejemplo_6_2_1_1_2, exercise = TRUE, fig.align = "center"}
-
-pokemon <- pokemon %>%
-  mutate(
-    fuerza_total = ataque + defensa + velocidad + puntos_vida
-    )
-
-ggplot(
-  data = pokemon,
-  aes(x = ataque, y = defensa, size = fuerza_total)
-  ) +
-  geom_point(
-    alpha = 0.4
-    )
-```
 
 :::caution
 <!--Colocar aqui las otras opciones de geom_-->
 :::
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_2, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  group_by(tipo) %>%
+  summarise(Total_puntos_vida = sum(puntos_vida)) %>%
+  ggplot(
+    data = .,
+    aes(x = tipo, y = Total_puntos_vida)
+    ) +
+  geom_bar(stat = 'identity')
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_3, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  filter(tipo == 'Fuego') %>%
+  ggplot(
+    data = .,
+    aes(x = velocidad)
+    ) +
+  geom_density()
+```
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_1_4, exercise = TRUE, fig.align = "center", out.width='340'}
+
+pokemon %>%
+  filter(tipo == 'Fuego') %>%
+  ggplot(
+    data = .,
+    aes(x = velocidad)
+    ) +
+  geom_histogram()
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+  </div>
+</div>
 
 ##### 6.2.1.2 Capa 4: facetas
 
@@ -5862,7 +5899,7 @@ ggplot(
 
 
 :::caution
-Si deseas conocer más sobre la gramática de gráficos en capas propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/tree/master/Documentos) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre el paquete `ggplot2`.
+Si deseas conocer más sobre la gramática de gráficos en capas propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/A%20Layered%20Grammar%20of%20Graphics.pdf) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre el paquete `ggplot2`.
 :::
 
 ## 8. Referencias
