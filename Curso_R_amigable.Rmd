@@ -5756,7 +5756,7 @@ ggplot(
     )
 ```
 
-<p align="left"><details><summary>Lista de colores en `R`</summary>
+<details><summary>Lista de colores en `R`</summary>
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
@@ -5793,7 +5793,7 @@ knitr::include_graphics("images/colores_6.png")
 knitr::include_graphics("images/colores_7.png")  
 ```
 
-</details></p>
+</details>
 
 :::exercise
 #### Ejercicio 6.2.1.1.1
