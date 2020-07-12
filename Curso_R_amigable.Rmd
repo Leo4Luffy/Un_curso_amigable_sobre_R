@@ -20,12 +20,12 @@ require(palmerpenguins)
 require(tibble)
 require(timevis)
 require(ggplot2)
+require(patchwork)
 #PARA COMENTAR AL FINALIZAR
 require(fontawesome)
 require(jpeg)
 require(grid)
 require(gridGraphics)
-require(patchwork)
 require(showtext)
 font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
