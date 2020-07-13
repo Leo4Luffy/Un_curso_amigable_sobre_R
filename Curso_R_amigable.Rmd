@@ -1300,9 +1300,9 @@ logicos <- c(TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FA
 ```
 
 ```{r,eval=FALSE}
-save(letras,file = "data_pkg/letras.rda")
-save(numeros,file = "data_pkg/numeros.rda")
-save(logicos,file = "data_pkg/logicos.rda")
+save(letras,file = "data_pkg/letras.rda", compress='xz')
+save(numeros,file = "data_pkg/numeros.rda", compress='xz')
+save(logicos,file = "data_pkg/logicos.rda", compress='xz')
 ```
 
 ```{r addition_231_1, exercise = TRUE}
@@ -1364,7 +1364,7 @@ Starwars <- as.data.frame(Starwars)
 ```
 
 ```{r,eval=FALSE}
-save(Starwars, file="data_pkg/Starwars.rda")
+save(Starwars, file="data_pkg/Starwars.rda", compress='xz')
 ```
 
 El ejercicio consiste en seleccionar las primeras 5 columnas de nuestra base de datos, seleccionar las primeras 20 filas de la columna name y por último  seleccionar las filas entre 20 y 40 para las columnas height y mass.
@@ -1709,9 +1709,9 @@ mtcars_3 <- mtcars %>% mutate(cars = rownames(mtcars)) %>% relocate(cars)%>%
 ```
 
 ```{r,eval=FALSE}
-save(mtcars_1, file="data_pkg/mtcars_1.rda")
-save(mtcars_2, file="data_pkg/mtcars_2.rda")
-save(mtcars_3, file="data_pkg/mtcars_3.rda")
+save(mtcars_1, file="data_pkg/mtcars_1.rda", compress='xz')
+save(mtcars_2, file="data_pkg/mtcars_2.rda", compress='xz')
+save(mtcars_3, file="data_pkg/mtcars_3.rda", compress='xz')
 ```
 
 Trabajaremos ahora con tres bases de datos modificadas para cierta cantidad de autos de la revista Motor Trend US de 1974 que comprenden 5 variables, `mpg` millas por galón, `hp` potencia bruta, `wt` peso, `am` transmisión y `carb` número de carburadores. A diferencia del ejemplo anterior en el que todas bases de datos separadas tenían exactamente los mismos nombre en esta solo coinciden algunos nombres de carros.  En el siguiente ejemplo veremos en la primera parte cómo unir solo las coincidencias, en la segunda parte veremos cómo unir conservando inclusive los carros que no coinciden.
@@ -1930,7 +1930,7 @@ my_lista <- list(vector = 1:10,
 ```
 
 ```{r,eval=FALSE}
-save(my_lista, file="data_pkg/my_lista.rda")
+save(my_lista, file="data_pkg/my_lista.rda", compress='xz')
 ```
 
 Como se puede ver crear listas es relativamente sencillo, se recomienda nombrar los objetos para facilitar el acceso a estos, sin embargo no es estrictamente necesario.
@@ -2019,7 +2019,7 @@ carlos_fam <- list(Padres = list(Relacion=c("Padre","Madre"),
 ```
 
 ```{r,eval=FALSE}
-save(carlos_fam, file="data_pkg/carlos_fam.rda")
+save(carlos_fam, file="data_pkg/carlos_fam.rda", compress='xz')
 ```
 
 Debes modificar la lista `carlos_fam` de modo que coincida con los datos proporcionados en la tabla. Pueden existir múltiples formas de lograr este objetivo, en la solución encontraras solo una de ellas.
@@ -2087,7 +2087,7 @@ carlos_fam_g <- list(Padres = list(Relacion=c("Padre","Madre"),
 ```
 
 ```{r,eval=FALSE}
-save(carlos_fam_g, file="data_pkg/carlos_fam_g.rda")
+save(carlos_fam_g, file="data_pkg/carlos_fam_g.rda", compress='xz')
 ```
 
 :::exercise
@@ -2131,7 +2131,7 @@ amigos <- tribble(
 ```
 
 ```{r,eval=FALSE}
-save(amigos, file="data_pkg/amigos.rda")
+save(amigos, file="data_pkg/amigos.rda", compress='xz')
 ```
 
 :::example
@@ -4210,7 +4210,7 @@ datos_2 <- DSR::table2 %>%
 ```
 
 ```{r,eval=FALSE}
-save(datos_2,file = "data_pkg/datos_2.rda")
+save(datos_2,file = "data_pkg/datos_2.rda", compress='xz')
 ```
 
 ```{r addition_4_3_1_a, exercise = TRUE}
@@ -4251,7 +4251,7 @@ datos_4_a <- DSR::table4 %>%
 ```
 
 ```{r,eval=FALSE}
-save(datos_4_a,file = "data_pkg/datos_4_a.rda")
+save(datos_4_a,file = "data_pkg/datos_4_a.rda", compress='xz')
 ```
 
 ```{r addition_4_3_2_a, exercise = TRUE}
@@ -4290,7 +4290,7 @@ datos_4_b <- DSR::table5 %>%
 ```
 
 ```{r,eval=FALSE}
-save(datos_4_b,file = "data_pkg/datos_4_b.rda")
+save(datos_4_b,file = "data_pkg/datos_4_b.rda", compress='xz')
 ```
 
 ```{r addition_4_3_2_c, exercise = TRUE}
@@ -4346,7 +4346,7 @@ datos_3 <- DSR::table3 %>%
 ```
 
 ```{r,eval=FALSE}
-save(datos_3,file = "data_pkg/datos_3.rda")
+save(datos_3,file = "data_pkg/datos_3.rda", compress='xz')
 ```
 
 ```{r addition_4_3_3_a, exercise = TRUE}
@@ -4415,7 +4415,7 @@ knitr::include_graphics("images/11va_imagen.png")
 
 ```{r, eval = FALSE}
 
-save(Tuberculosis, file = 'data_pkg/Tuberculosis.rda')
+save(Tuberculosis, file = 'data_pkg/Tuberculosis.rda', compress='xz')
 ```
 
 ```{r addition_ejercicio, exercise = TRUE}
@@ -5234,8 +5234,8 @@ Datos_b <- tribble(
 
 ```{r, eval = FALSE}
 
-save(Datos_a, file = 'data_pkg/Datos_a.rda')
-save(Datos_b, file = 'data_pkg/Datos_b.rda')
+save(Datos_a, file = 'data_pkg/Datos_a.rda', compress='xz')
+save(Datos_b, file = 'data_pkg/Datos_b.rda', compress='xz')
 ```
 
 <div class="row">
@@ -5712,16 +5712,16 @@ pokemon <- readr::read_csv("https://raw.githubusercontent.com/cienciadedatos/dat
 pokemon <- pokemon %>%
   mutate(ataque = ataque + fuerza_especial_ataque, defensa = defensa + fuerza_especial_defensa) %>%
   select(ID_poke, nombre_ingles, tipo_1, ataque, defensa, velocidad, puntos_vida) %>%
-  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1) #%>%
+  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1) 
   #filter(nombre %in% c('Charmander', 'Bulbasaur', 'Butterfree', 'Pikachu', 'Squirtle'))
 
-save(pokemon, file = 'data_pkg/pokemon.rda')
+save(pokemon, file = 'data_pkg/pokemon.rda', compress='xz')
 
 pokemon_2 <- pokemon %>%
   select(nombre_ingles, tipo_2) %>%
   rename('nombre' = nombre_ingles, 'tipo_2' = tipo_2)
 
-save(pokemon_2, file = 'data_pkg/pokemon_2.rda')
+save(pokemon_2, file = 'data_pkg/pokemon_2.rda', compress='xz')
 ```
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE}
