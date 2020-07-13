@@ -21,8 +21,8 @@ require(tibble)
 require(timevis)
 require(ggplot2)
 require(patchwork)
-#PARA COMENTAR AL FINALIZAR
 require(fontawesome)
+#PARA COMENTAR AL FINALIZAR
 require(jpeg)
 require(grid)
 require(gridGraphics)
@@ -5722,12 +5722,6 @@ pokemon_2 <- pokemon %>%
   rename('nombre' = nombre_ingles, 'tipo_2' = tipo_2)
 
 save(pokemon_2, file = 'data_pkg/pokemon_2.rda', compress='xz')
-```
-
-```{r, echo = FALSE, eval = TRUE, message = FALSE}
-
-load('data_pkg/pokemon.rda')
-load('data_pkg/pokemon_2.rda')
 ```
 
 ##### 6.2.1.1 Capas 1-2-3: datos-estética-geometrías
