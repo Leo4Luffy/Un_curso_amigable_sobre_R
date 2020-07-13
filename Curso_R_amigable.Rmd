@@ -6070,4 +6070,391 @@ knitr::include_graphics("images/28va_imagen.png")
 Si deseas conocer más sobre la gramática de gráficos en capas propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/A%20Layered%20Grammar%20of%20Graphics.pdf) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre el paquete `ggplot2`.
 :::
 
+
+### 6.3 Gráficos estadísticos con `ggplot2`
+
+Ya vimos como funciona la gramática de gráficas y las distintas capas que ponemos agregar y utilizar para crearlos, es hora de que pongamos en practica estos conceptos. Iniciemos viendo las capas individualmente partiendo de un esquema que no posee datos, para ello debemos cargar el paquete `ggplot2` y ejecutar la siguiente linea de código.
+
+:::example
+#### Ejemplo 6.3.1
+:::
+
+```{r addition_631, exercise = TRUE,fig.align='center'}
+# Cargando paquete
+library(ggplot2)
+# Esquema base
+ggplot()
+```
+
+Generalmente en la función `ggplot()` asignamos los datos que vamos a graficar usando el argumento data. Supongamos que tenemos un set de datos llamado "mis_datos", en este caso la función del esquema base con la capa de los datos quedaría de la forma `ggplot(data=mis_datos)`.
+
+Continuemos manejando el esquema de un gráfico sin usar datos. El siguiente paso es agregar la capa de estética, la cual puede añadirse directamente en la función `ggplot()` con el argumento `mapping = aes()` o de manera independiente con la función `aes()`. Para el segundo caso debemos agregar una capa usando el operador `+`. Veamos los dos casos estableciendo valores arbitrarios tanto para x como para y.
+
+```{r addition_631_1, exercise = TRUE, fig.align='center'}
+# Cargando paquete
+library(ggplot2)
+# Esquema base con mapping
+ggplot(mapping = aes(x=0,y=0))
+# Esquema base con aes()
+ggplot()+
+  aes(x=0,y=0)
+```
+
+Después de estas dos capas se agrega la capa de geometrías, que en general depende de el tipo de gráfico que necesitemos o el que mejor se adapte a nuestros datos. Para conocer algunos gráficos  agruparemos algunos de ellos en 7 conjuntos:  1) Gráficos de distribución, 2) Gráficos de correlación, 3) Gráficos de clasificación y 4)Mapas.
+
+#### 6.3.1 Gráficos de distribución
+
+Estos gráficos se utilizan generalmente en variables continuas como edad, altura, masa, etc. Para iniciar esta sección de gráficos haremos el gráfico de densidad para la altura de los personajes de Starwars.
+
+```{r,echo=FALSE}
+Starwars
+```
+
+:::example
+#### Ejemplo 6.3.1.1
+:::
+
+```{r addition_6311, exercise = TRUE,fig.align='center'}
+ggplot(data = Starwars)+ # Datos
+  aes(x=height)+ # Estética
+  geom_density() # Geometría 
+```
+
+Sabemos que los personajes de Starwars no son todos del mismo genero, entonces modifiquemos el gráfico anterior utilizando facetas para distinguir por genero usando `facet_wrap()` y eliminado los personajes que no tiene genero definido. Ademas usemos el operador tubería ` %>% ` para realizar una operación secuencial que una directamente nuestros datos con el gráfico.
+
+```{r addition_6311_1, exercise = TRUE,fig.align='center'}
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=height)+ # Estética
+  geom_density()+ # Geometría
+  facet_wrap(~gender) #Faceta
+```
+
+Otra forma de diferenciar por género sin usar las facetas, es otorgar color a la variable distintiva, esto podemos hacerlo en la capa estética del gráfico agregando para este caso “color= gender”. Veamos cómo quedaría el gráfico.
+
+```{r addition_6311_2, exercise = TRUE,fig.align='center'}
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=height,color=gender)+ # Estética con color
+  geom_density() # Geometría
+```
+
+Ahora hagamos modificaciones de imagen para personalizar y embellecer los dos gráficos anteriores, para ello utilizaremos argumentos como “alpha” y "fill" agregando ademas la capa de tema. También nos apoyaremos en la librería`patchwork` para fusionar los dos gráficos en uno solo. 
+
+* Te recomendamos revisar la documentación de `patchwork` para entender su funcionamiento 
+
+```{r addition_6311_3, exercise = TRUE,fig.align='center'}
+#libreria
+library(patchwork)
+base <- Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=height,color=gender,fill=gender)+ # Estética con color y relleno
+  geom_density(alpha=.3) # Geometría
+
+(base +theme_classic()) / # base con tema clásico
+  (base +theme_dark()+facet_wrap(~gender)) #base con faceta y tema oscuro 
+```
+
+Sigamos usando la misma variable “height” de Starwars para aprender cómo se hacen los gráficos de histograma, en este caso reuniremos todos los tipos de gráficos que hicimos en el ejemplo anterior en uno solo. Fijate muy bien en la sintaxis del código y todos los comentarios en él. El argumento “alpha” hace referencia a transparencia y el argumento “fill” a relleno.
+
+:::example
+#### Ejemplo 6.3.1.2
+:::
+
+```{r addition_6312, exercise = TRUE,fig.align='center',fig.height=6.5}
+# Gráfico base
+base <- Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=height)+ # Estética básica 
+  geom_histogram(alpha=.5) # Geometría
+# opciones sobre la base 
+base /
+  (base +aes(fill=gender)+theme_classic()) / #base + estética con color +  tema clásico 
+  (base +aes(fill=gender)+theme_dark()+facet_wrap(~gender)) #base + estética con color + faceta + tema clasico 
+```
+
+Veamos otro tipo de gráfico que es conocido como Boxplot, para estos gráficos seguiremos usando los mismos datos que en los anteriores ejemplo, agregando las capas de estadísticas y coordenadas. Veamos un ejemplo para la variable “height” para cada genero.
+
+:::example
+#### Ejemplo 6.3.1.3
+:::
+
+```{r addition_6313, exercise = TRUE,fig.align='center'}
+# Gráfico base
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=gender,y=height)+ # Estética básica 
+  geom_boxplot(fill=NA)+ # geometría sin relleno
+  stat_summary(fun=mean,geom="point", color="red") + # Estadísticas con geometría
+  coord_flip() # Coordenadas invertidas
+```
+
+El siguiente gráfico es conocido como el gráfico de violín y lo implementaremos igual que el boxplot salvo por la geometría.
+
+:::example
+#### Ejemplo 6.3.1.4
+:::
+
+```{r addition_6314, exercise = TRUE,fig.align='center'}
+# Gráfico base
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=gender,y=height,fill=gender)+ # Estética básica con relleno
+  geom_violin(alpha=.3)+ # geometría con transparencia
+  stat_summary(fun=mean,geom="point", color="red") + # Estadísticas con geometría
+  coord_flip() # Coordenadas invertidas
+```
+
+Hasta el momento hemos visto gráficas con una sola geometría, ahora veamos gráficas con varias geometrías que incluya las dos gráficas anteriores y una tercera geometría conocida como `geom_jitter()`.
+
+:::example
+#### Ejemplo 6.3.1.5
+:::
+
+```{r addition_6315, exercise = TRUE,fig.align='center'}
+# Gráfico base
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  ggplot(data=.)+ # Datos (.)
+  aes(x=gender,y=height,fill=gender,color=gender)+ # Estética color y  con relleno
+  geom_boxplot(alpha=.2)+ # geometría boxplot con transparencia
+  geom_violin(alpha=.3)+ # geometría violín con transparencia
+  geom_jitter()+
+  stat_summary(fun=mean,geom="point",size=6,shape=23,color="black") + # Estadísticas con geometría puntos
+  coord_flip() + # Coordenadas invertidas
+  theme_light() #tema
+```
+
+#### 6.3.2 Gráficos de relación
+
+Los siguientes gráficos corresponde a ilustraciones que muestran la relación entre dos o más variables continuas. Veamos el primero de ellos el cual se denomina gráfico de dispersión entre dos variables. Usaremos los datos de masa y altura de `Starwars` para relacionarlas en este gráfico.
+
+:::example
+#### Ejemplo 6.3.2.1
+:::
+
+```{r addition_6321, exercise = TRUE,fig.align='center'}
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  filter(mass<quantile(Starwars$mass,probs = .99,na.rm = T)) %>% 
+  ggplot(data = .)+ #Datos
+  aes(x=height,y=mass,color=gender)+ #estética
+  geom_point() # geometría
+```
+
+Usando las mismas variables del ejemplo anterior veamos un gráfico de densidad de dos dimensiones. En general este gráfico es útil cuando nuestras variables a relacionar tiene una gran cantidad de observaciones que son difíciles de procesar por un `geom_point()`.
+
+:::example
+#### Ejemplo 6.3.2.2
+:::
+
+```{r addition_6322, exercise = TRUE,fig.align='center'}
+Starwars %>% 
+  filter(!is.na(gender)) %>% 
+  filter(mass<quantile(Starwars$mass,probs = .99,na.rm = T)) %>% 
+  ggplot(data = .)+ #Datos
+  aes(x=height,y=mass)+ # Estética
+  stat_density_2d(aes(fill = ..density..), geom = "raster", contour = FALSE) #Estadística con geometría
+```
+
+Otro tipo de gráfico que podemos realizar es el que relaciona el tiempo con una variable continua, estas son las denominadas series de tiempo. Para el siguiente ejemplo tomaremos la variable de precio del petróleo de el dataset `Seatbelts`, el cual corresponde  a una serie temporal que muestra los totales mensuales de conductores de automóviles en Gran Bretaña que murieron o resultaron gravemente heridos desde enero de 1969 hasta diciembre de 1984.  Para mayor  información del dataset ejecuta `?Seatbelts`
+
+:::example
+#### Ejemplo 6.3.2.3
+:::
+
+```{r addition_6323, exercise = TRUE,fig.align='center'}
+as.matrix(Seatbelts) %>% 
+  data.frame()  %>% 
+  mutate(date=seq(as.Date("1969-01-01"),as.Date("1984-12-01"), by="month")) %>% 
+  ggplot(data=.)+ #Datos
+  aes(x=date,y=PetrolPrice)+ #Estética
+  geom_line()+ # Geometría de lineas
+  geom_point()+ # Geometría de puntos 
+  scale_x_date(date_breaks = "12 month",date_labels = "%y-%m")+ #Coordenadas 
+  theme_light() # Tema
+```
+
+Ya vimos cómo relacionar gráficamente dos variables continuas y una variable continua con el tiempo, veamos ahora cómo relacionar más de dos variables continuas en un gráfico. Para ello nos valdremos de la matriz de correlación de las 4 variables numéricas del dataset `iris`. Consulta la información del dataset con `?iris` para obtener más información.  
+
+:::example
+#### Ejemplo 6.3.2.4
+:::
+
+```{r addition_6324, exercise = TRUE,fig.align='center'}
+iris %>% 
+  select_if(is.numeric) %>%
+  cor(method = "pearson") %>% 
+  as_tibble() %>%
+  mutate(name=colnames(iris)[1:4]) %>% 
+  relocate(name) %>% 
+  pivot_longer(cols = 2:5,names_to="name_2",values_to="Corr") %>% 
+  ggplot(data=.)+ #Datos
+  aes(x=name,y=name_2,fill=Corr)+ # Estética
+  geom_tile()+ # Geometría
+  scale_fill_gradientn(colours = topo.colors(5),limits=c(-1,1),breaks=seq(-1,1,.2)) #Coordenadas
+```
+
+#### 6.3.3 Gráficos de clasificación
+
+Los gráficos de clasificación corresponden generalmente a conteos o resúmenes numéricos de variables categóricas. Como primer ejemplo veamos un gráfico de barras de el número de autos que tienen 4, 6 u 8 cilindros en el dataset `mtcars`. Para este caso la función `geom_bar()` hace automáticamente el conteo de los autos, `width` corresponde al grosor de las barras.
+
+:::example
+#### Ejemplo 6.3.3.1
+:::
+
+```{r addition_6331, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  ggplot(data = .)+ #Datos
+  aes(x=factor(cyl),fill=factor(cyl))+ #Estética
+  geom_bar(width = .5) + #Geometría
+  theme_linedraw() #tema
+```
+
+En el casos de que nuestros datos tengan el conteo o variable de interés de nuestra variable categórica, podemos usar el  argumento `stat=”identity”` en `geom_bar()` para que este no sea calculado por la función, en cuyo caso debemos asignar adicionalmente el conteo o variable `y`.
+
+```{r addition_6331_1, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(n=n()) %>% 
+  ggplot(data = .)+ #Datos
+  aes(x=factor(cyl),fill=factor(cyl),y=n)+ # Estética
+  geom_bar(stat ="identity", width = .5)+ # Geometría
+  coord_flip() # Coordenadas invertidas
+```
+
+Otra forma de generar un gráfico de barras es combinar dos geometrías y crear el gráfico denominado “lollipop”, el cual es una visualización un poco más llamativa que cumple el mismo fin con algunos toques estéticos.
+
+:::example
+#### Ejemplo 6.3.3.2
+:::
+
+```{r addition_6332, exercise = TRUE,fig.align='center'}
+data.frame( x=letters,
+            y=sample(1:60,26,replace = T)) %>% 
+  ggplot(data=.)+ #Datos
+  aes(x=x,y=y)+ #Estética base
+  geom_point(color="blue", size=4,alpha=0.5)+ #Geometría de puntos
+  geom_segment(aes(x=x, xend=x, y=0, yend=y),color="skyblue")+ #Geometría de segmentos con estética adicional
+  theme_classic() # Tema
+```
+
+Retomemos los datos del número de cilindros de `mtcars` con su respectivo conteo y veamos un gráfico de barras modificado utilizando `coord_polar()`. Recuerda consultar la documentación de esta función para tener mayor claridad respecto al gráfico.
+
+:::example
+#### Ejemplo 6.3.3.3
+:::
+
+```{r addition_6333, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(n=n()) %>% 
+  ggplot(data=.)+ #Datos 
+  aes(x=factor(cyl),y=n, fill=factor(cyl))+ # Estética
+  geom_bar(stat = "identity")+ #Geometría
+  scale_y_continuous(breaks = seq(0,16,2))+ #coordenadas
+  coord_polar(theta="y") #Coordenadas
+```
+
+Otro gráfico que se puede realizar con `coord_polar()` usando los datos del número de cilindros de `mtcars` es el siguiente.
+
+:::example
+#### Ejemplo 6.3.3.4
+:::
+
+```{r addition_6334, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  ggplot(data=.) + #Datos
+  aes(x = factor(1), fill = factor(cyl))+ #Estética
+  geom_bar(width = 1, color="white")+ # Geometría
+  coord_polar(theta = "y",start = pi / 3)+ #Coordenadas
+  scale_fill_brewer(palette = 7)+  #Coordenadas
+  theme_void() #Tema
+```
+
+Otra forma de representar los datos del número de cilindros de `mtcars` con su respectivo conteo es con el gráfico de rosca, el cual combina dos geometrías y aplicar retoques estéticos para lograr una visualización más llamativa. Para este caso se necesita manipular los datos de una forma específica que veremos a continuación.
+
+:::example
+#### Ejemplo 6.3.3.5
+:::
+
+```{r addition_6335, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(n=n()) %>% 
+  mutate(frac=n/sum(n),
+         ymax=cumsum(frac),
+         ymin=c(0,head(ymax,-1)),
+         pos=(ymax+ymin)/2,
+         label=paste0(cyl,"\n valor:",n)) %>% 
+  ggplot(data=.)+ #Datos
+  aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=factor(cyl))+ #Estética
+  geom_rect() + #Geometría 1
+  geom_text( x=2.5, aes(y=pos, label=label, color=factor(cyl)), size=4)+ #Geometría 2
+  xlim(c(1, 4))+ # Coordenadas limites eje x
+  coord_polar(theta="y")+ #Coordenadas
+  scale_fill_viridis_d() + # Coordenadas escala de relleno
+  scale_color_viridis_d() + # Coordenadas escala de color
+  theme_void() #Tema
+```
+
+Como último gráfico de esta sección tenemos las barras apiladas, que pueden ser útiles para ver conteos en simultáneo de dos variables categóricas. Para este caso representamos el conteo de cilindros y carburadores de los automóviles de `mtcars`.
+
+:::example
+#### Ejemplo 6.3.3.6
+:::
+
+```{r addition_6336, exercise = TRUE,fig.align='center'}
+mtcars %>% 
+  ggplot(data=.)+ #Datos
+  aes(x=factor(cyl),fill=factor(carb))+ #Estética
+  geom_bar()+ #Geometría
+  scale_fill_viridis_d(option = "plasma") #Coordenadas
+```
+
+#### 6.3.4 Mapas
+
+La cuestión con los mapas es un poco más compleja y para graficarlos tenemos múltiples geometrías que nos pueden ayudar como `geom_map()`, `geom_sf()`, `geom_polygon()`, etc. Sin embargo el uso de cada una de ellas depende exclusivamente del formato de los datos y para ello debemos relacionarnos más con análisis geoespacial. Para no adentrarnos y extendernos en los formatos de datos espaciales presentaremos dos breves ejemplos nombrando paquetes útiles para graficar mapas.
+
+El primer ejemplo consiste en graficar el número de asesinatos por cada 100.000 personas en los distintos estados de norte america. Para graficar este mapa usamos los datos `USArrests`, te invito a que consultes su estructura y lo explores detalladamente. 
+
+:::example
+#### Ejemplo 6.3.4.1
+:::
+
+```{r addition_6341, exercise = TRUE,fig.align='center'}
+USArrests %>% 
+  ggplot(data=.)+#Datos
+  aes(x=long,y=lat,group=group,order=order,fill=Murder)+ #Estética
+  geom_polygon(color="white")+ # Geometría
+  scale_fill_distiller(palette = 4)+ #Coordenadas
+  labs(title = "Asesinatos USA - 1973")+ # Etiquetas
+  theme_void() #Tema
+```
+
+El segundo ejemplo es un gráfico de homicidios en Colombia por departamentos para el año 2013.
+
+:::example
+#### Ejemplo 6.3.4.2
+:::
+
+```{r addition_6342, exercise = TRUE,fig.align='center',fig.height=5,fig.width=5.3}
+departamentos %>% 
+  ggplot(data=.)+ #Datos
+  geom_polygon(aes(x=long,y=lat,group=group,order=order,fill=homicidios))+ #Geometría de forma
+  geom_text(data = . %>% distinct(depto,lab_long,lab_lat), 
+            aes(x=lab_long,y=lab_lat, label=depto),size=1.5)+ #Geometría de texto
+  scale_fill_viridis_c()+ #Coordenadas escala de color
+  labs(title = "Homicidios Colombia - 2013")+ # Etiquetas
+  theme_void() #Tema
+```
+
+Otros paquetes paquetes que podemos utilizar para graficar mapas y datos geoespaciales son `tmap` , `leaflet` , `ggmap` y algunas de sus dependencias, aunque estas tres son las más relacionadas con el `tidyverse`.
+
 ## 8. Referencias
