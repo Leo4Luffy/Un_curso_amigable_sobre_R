@@ -5834,11 +5834,7 @@ ggplot( # Segunda forma
 Las asignaciones estéticas, definidas con la función `aes()`, describen cómo las variables se asignan a propiedades visuales o estéticas. Además de una posición horizontal (`x`) y vertical (`y`), cada punto puede tener también un tamaño (`size`), un color (`colour` y `fill`) y una forma (`shape`).
 :::
 
-:::caution
-<!--Colocar aqui las otras opciones de geom_-->
-:::
-
-:::example
+<!--:::example
 #### Ejemplo 6.2.1.1.2
 :::
 
@@ -5941,15 +5937,16 @@ pokemon %>%
   <div class="col-md-6" markdown="1">
 
   </div>
-</div>
+</div>-->
 
 ##### 6.2.1.2 Capa 4: facetas
 
+Las facetas son una de las capas más poderosos para construir una visualización de datos efectiva. Las facetas consisten de múltiples gráficos de lado a lado utilizados para mostrar los niveles de una variable categórica. Hay dos tipos de facetado:
+
 <div class="row">
   <div class="col-md-6" markdown="1">
-+ __Facet wrap__
-  </div>
-  <div class="col-md-6" markdown="1">
++ `facet_wrap()`
+
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
 
 
@@ -5989,17 +5986,10 @@ data.frame(
 knitr::include_graphics("images/29va_imagen.png")  
 ```
   </div>
-</div>
-
-:::example
-#### Ejemplo 6.2.1.2.1
-:::
-
-<div class="row">
   <div class="col-md-6" markdown="1">
-+ __Facet grid__
-  </div>
-  <div class="col-md-6" markdown="1">
+
++ `facet_grid()`
+
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
 
 
@@ -6045,8 +6035,57 @@ knitr::include_graphics("images/28va_imagen.png")
 </div>
 
 :::example
+#### Ejemplo 6.2.1.2.1
+:::
+
+```{r ejemplo_6_2_1_2_1, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo)
+  ) +
+  geom_point() #+
+  #facet_wrap(~ tipo)
+
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total, colour = tipo)
+  #) +
+  #geom_point() +
+  #facet_wrap(~ tipo, ncol = 3, dir = 'h') # "h" de horizontal.
+
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total, colour = tipo)
+  #) +
+  #geom_point() +
+  #facet_wrap(~ tipo, nrow = 6, dir = 'v') # "v" de vertical.
+```
+
+:::example
 #### Ejemplo 6.2.1.2.2
 :::
+
+```{r ejemplo_6_2_1_2_2, exercise = TRUE, fig.align = "center"}
+
+pokemon_2 <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    ) %>%
+  inner_join(pokemon_2, 'nombre')
+
+ggplot(
+  data = pokemon_2,
+  aes(x = ataque, y = fuerza_total)
+  ) +
+  geom_point() +
+  facet_grid(tipo_2 ~ tipo)
+```
 
 ##### 6.2.1.3 Capa 5: estadísticas
 
