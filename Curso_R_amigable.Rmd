@@ -17,6 +17,7 @@ require(curl)
 require(gradethis)
 require(kableExtra)
 require(palmerpenguins)
+library(gapminder)
 require(tibble)
 require(timevis)
 require(ggplot2)
@@ -5834,111 +5835,6 @@ ggplot( # Segunda forma
 Las asignaciones estéticas, definidas con la función `aes()`, describen cómo las variables se asignan a propiedades visuales o estéticas. Además de una posición horizontal (`x`) y vertical (`y`), cada punto puede tener también un tamaño (`size`), un color (`colour` y `fill`) y una forma (`shape`).
 :::
 
-<!--:::example
-#### Ejemplo 6.2.1.1.2
-:::
-
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_2, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  group_by(tipo) %>%
-  summarise(Total_puntos_vida = sum(puntos_vida)) %>%
-  ggplot(
-    data = .,
-    aes(x = tipo, y = Total_puntos_vida)
-    ) +
-  geom_bar(stat = 'identity')
-```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_3, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  filter(tipo == 'Fuego') %>%
-  ggplot(
-    data = .,
-    aes(x = velocidad)
-    ) +
-  geom_density()
-```
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_4, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  filter(tipo == 'Fuego') %>%
-  ggplot(
-    data = .,
-    aes(x = velocidad)
-    ) +
-  geom_histogram()
-```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_5, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  filter(tipo == 'Fuego') %>%
-  ggplot(
-    data = .,
-    aes(x = velocidad)
-    ) +
-  geom_dotplot()
-```
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_6, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  select(tipo, ataque) %>%
-  ggplot(
-    data = .,
-    aes(x = tipo, y = ataque)
-    ) +
-  geom_boxplot()
-```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_7, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  select(tipo, ataque) %>%
-  ggplot(
-    data = .,
-    aes(x = tipo, y = ataque)
-    ) +
-  geom_violin()
-```
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_1_8, exercise = TRUE, fig.align = "center", out.width='340'}
-
-pokemon %>%
-  inner_join(pokemon_2, 'nombre') #%>%
-  #select(nombre, tipo, tipo_2) %>%
-  #ggplot(
-    #data = .,
-    #aes(x = tipo, y = tipo_2)
-    #) +
-  #geom_count()
-```
-  </div>
-  <div class="col-md-6" markdown="1">
-
-  </div>
-</div>-->
-
 ##### 6.2.1.2 Capa 4: facetas
 
 Las facetas son una de las capas más poderosos para construir una visualización de datos efectiva. Las facetas consisten de múltiples gráficos de lado a lado utilizados para mostrar los niveles de una variable categórica. Hay dos tipos de facetado:
@@ -6157,15 +6053,74 @@ Las funciones [`geom_`](https://ggplot2.tidyverse.org/reference/index.html#secti
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_3_2_1, exercise = TRUE, fig.align = "center", out.width='340'}
+```{r ejemplo_6_2_1_3_2_1, exercise = TRUE, fig.align = "center", out.width='380'}
 
+pokemon <- pokemon
 
+ggplot(
+  data = pokemon,
+  aes(x = tipo)
+  ) +
+  geom_bar() +
+  stat_count()
 ```
   </div>
   <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_3_2_2, exercise = TRUE, fig.align = "center", out.width='340'}
+```{r ejemplo_6_2_1_3_2_2, exercise = TRUE, fig.align = "center", out.width='380'}
 
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
 
+ggplot(
+  data = pokemon,
+  aes(x = fuerza_total)
+  ) +
+  geom_histogram() +
+  stat_bin(binwidth = 24)
+
+#ggplot(
+  #data = pokemon,
+  #aes(x = fuerza_total, y = ..density..)
+  #) +
+  #geom_histogram() +
+  #stat_bin(binwidth = 24)
+```
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_3_2_3, exercise = TRUE, fig.align = "center", out.width='380'}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = tipo, y = fuerza_total)
+  ) +
+  geom_point() +
+  stat_summary(fun = mean, fun.min = min, fun.max = max, colour = 'yellow')
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_3_2_4, exercise = TRUE, fig.align = "center", out.width='380'}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = tipo)
+  ) +
+  geom_bar() +
+  stat_summary(aes(y = fuerza_total), fun = mean, geom = 'bar')
 ```
   </div>
 </div>
@@ -6580,6 +6535,13 @@ knitr::include_graphics("images/gganimate.png")
 ```
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
+
+A continuación podrá hechar un vistazo de la estructura del conjunto de datos `gapminder`:
+
+```{r datos_gapminder, exercise = TRUE}
+
+gapminder::gapminder
+```
 
 ## 8. Comunicación de resultados
 
