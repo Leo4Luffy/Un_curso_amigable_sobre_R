@@ -5726,7 +5726,7 @@ save(pokemon_2, file = 'data_pkg/pokemon_2.rda', compress='xz')
 
 ##### 6.2.1.1 Capas 1-2-3: datos-estética-geometrías
 
-Para asociar el gráfico a un conjunto de datos en específico se emplea el argumento `data`. Luego se define un mapeo haciendo uso de la función `aes()` dentro de `ggplot()` para seleccionar las variables a graficar. Por último, con `geoms` se indica cómo se representaran los datos en el gráfico.
+Estas son las capas que dterminan la representación visual de los datos. Para asociar el gráfico a un conjunto de datos en específico se emplea el argumento `data`. Luego se define un mapeo haciendo uso de la función `aes()` dentro de `ggplot()` para seleccionar las variables a graficar. Por último, con `geoms` se indica cómo se representaran los datos en el gráfico.
 
 :::example
 #### Ejemplo 6.2.1.1.1
@@ -6100,7 +6100,75 @@ pokemon_2
 
 ##### 6.2.1.3 Capa 5: estadísticas
 
+La capa 5 de estadística (`stat_`), permite presentar resumenes estadísticos dentro de los gráficos por medio de una transformación de datos.
 
+:::example
+#### Ejemplo 6.2.1.3.1
+:::
+
+```{r ejemplo_6_2_1_3_1, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+Modelo <- lm(fuerza_total ~ ataque, data = pokemon)
+summary(Modelo)
+
+Int_Pend <- tribble(
+  ~Intercepto, ~Pendiente,
+       138.24,       1.96
+  )
+
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total, colour = tipo)
+  #) +
+  #geom_point() +
+  #geom_abline(
+    #data = Int_Pend, 
+    #aes(intercept = Intercepto, slope = Pendiente)
+    #)
+  
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total, colour = tipo)
+  #) +
+  #geom_point() +
+  #stat_smooth(method = 'lm', colour = 'black')
+
+#ggplot(
+  #data = pokemon,
+  #aes(x = ataque, y = fuerza_total, colour = tipo)
+  #) +
+  #geom_point() +
+  #facet_wrap(~ tipo) +
+  #stat_smooth(method = 'lm', colour = 'black')
+```
+
+:::caution
+Las funciones [`geom_`](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) tienen asociada una función `stat_` por defecto, que se encarga de realizar los cálculos pertinentes para obtener las variables necesarias para dibujar una determinada gráfica.
+:::
+
+:::example
+#### Ejemplo 6.2.1.3.2
+:::
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_3_2_1, exercise = TRUE, fig.align = "center", out.width='340'}
+
+
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_3_2_2, exercise = TRUE, fig.align = "center", out.width='340'}
+
+
+```
+  </div>
+</div>
 
 ##### 6.2.1.4 Capa 6: coordenadas
 
@@ -6501,10 +6569,20 @@ departamentos %>%
 
 Otros paquetes paquetes que podemos utilizar para graficar mapas y datos geoespaciales son `tmap` , `leaflet` , `ggmap` y algunas de sus dependencias, aunque estas tres son las más relacionadas con el `tidyverse`.
 
+:::caution
+Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y profundizar más en su uso, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_ggplot2.pdf).
+:::
+
 ### 6.4 Animando sus visualizaciones de datos
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
-knitr::include_graphics("images/gganimate.png")  
+knitr::include_graphics("images/gganimate.png")
 ```
 
-## 8. Referencias
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
+
+## 8. Comunicación de resultados
+
+
+
+## 9. Referencias
