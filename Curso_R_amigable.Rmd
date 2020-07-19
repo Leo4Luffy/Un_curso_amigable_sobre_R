@@ -6058,14 +6058,17 @@ Las funciones [`geom_`](https://ggplot2.tidyverse.org/reference/index.html#secti
   <div class="col-md-6" markdown="1">
 ```{r ejemplo_6_2_1_3_2_1, exercise = TRUE, fig.align = "center", out.width='380'}
 
-pokemon <- pokemon
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
 
 ggplot(
   data = pokemon,
-  aes(x = tipo)
+  aes(x = tipo, y = fuerza_total)
   ) +
-  geom_bar() +
-  stat_count()
+  geom_point() #+
+  #stat_summary(fun = mean, fun.min = min, fun.max = max, colour = 'yellow')
 ```
   </div>
   <div class="col-md-6" markdown="1">
@@ -6080,44 +6083,52 @@ ggplot(
   data = pokemon,
   aes(x = fuerza_total)
   ) +
-  geom_histogram() +
-  stat_bin(binwidth = 24)
+  geom_histogram() #+
+  #stat_bin(bins = 12)
 
 #ggplot(
   #data = pokemon,
-  #aes(x = fuerza_total, y = ..density..)
+  #aes(x = fuerza_total, after_stat(density))
   #) +
-  #geom_histogram() +
-  #stat_bin(binwidth = 24)
+  #geom_histogram()
 ```
   </div>
 </div>
 
+##### 6.2.1.4 Capa 6: coordenadas
+
+:::example
+#### Ejemplo 6.2.1.4.1
+:::
+
 <div class="row">
   <div class="col-md-6" markdown="1">
-```{r ejemplo_6_2_1_3_2_3, exercise = TRUE, fig.align = "center", out.width='380'}
+```{r ejemplo_6_2_1_4_1_1, exercise = TRUE, fig.align = "center", out.width='380'}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    ) %>%
+  group_by(tipo) %>%
+  summarise(
+    Prom_fuerza_total = mean(fuerza_total)
+    )
+
+
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_6_2_1_4_1_2, exercise = TRUE, fig.align = "center", out.width='380'}
 
 pokemon <- pokemon %>%
   mutate(
     fuerza_total = ataque + defensa + velocidad + puntos_vida
     )
 
-ggplot(
-  data = pokemon,
-  aes(x = tipo, y = fuerza_total)
-  ) +
-  geom_point() +
-  stat_summary(fun = mean, fun.min = min, fun.max = max, colour = 'yellow')
+
 ```
   </div>
-  <div class="col-md-6" markdown="1">
-
-  </div>
 </div>
-
-##### 6.2.1.4 Capa 6: coordenadas
-
-
 
 ##### 6.2.1.5 Capa 7: tema
 
