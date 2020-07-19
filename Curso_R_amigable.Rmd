@@ -5361,7 +5361,7 @@ La __visualización de datos__ es la práctica de convertir datos en una represe
 Es impensable cualquier sector profesional sin el uso de elementos de visualización, pues estos facilitan la transmisión de información. De las misma forma, es erróneo considerar a la visualización de datos como un recurso secundario o adicional, finalmente prescindible.
 
 :::caution
-El concepto de visualización de datos no es nuevo. De hecho, la visualización de datos ha [existido durante siglos](https://jorge-leonardo-lopez-martinez.shinyapps.io/historia_visualizacion/?_ga=2.152978873.160297420.1593535028-503089247.1593365860).
+El concepto de visualización de datos no es nuevo. De hecho, la visualización de datos ha existido durante siglos. [Aquí](https://jorge-leonardo-lopez-martinez.shinyapps.io/historia_visualizacion/?_ga=2.152978873.160297420.1593535028-503089247.1593365860) podrás encontrar una visualización que corresponde a una línea de tiempo sobre el desarrollo de los gráficos estadísticos.
 :::
 
 <div class="row">
@@ -6047,7 +6047,7 @@ Int_Pend <- tribble(
 ```
 
 :::caution
-Las funciones [`geom_`](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) tienen asociada una función `stat_` por defecto, que se encarga de realizar los cálculos pertinentes para obtener las variables necesarias para dibujar una determinada gráfica.
+Además de la función `geom_point()`, existen otras funciones `geom_` que permiten indicar la forma en como se desea representar los datos en la visualización. Cada una de estas funciones pueden estar asociadas con una función `stat_` que se encargan de realizar los cálculos para obtener los parámetros necesarios para realizar una determinada gráfica. [Aquí](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) podrás encontrar una lista de estas funciones. 
 :::
 
 :::example
@@ -6097,6 +6097,95 @@ ggplot(
 
 ##### 6.2.1.4 Capa 6: coordenadas
 
+<div class="row">
+  <div class="col-md-6" markdown="1">
++ Sistema de coordenadas cartesianas
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
+
+data.frame(
+  x = c(1:2.5), y = c(1:2.5)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.5, colour = 'black', fill = 'white') +
+  annotate(geom = 'segment', x = 0.995, xend = 2.5, y = 2.25, yend = 2.25, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 0.995, xend = 2.5, y = 2.0, yend = 2.0, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 0.995, xend = 2.5, y = 1.75, yend = 1.75, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 0.995, xend = 2.5, y = 1.5, yend = 1.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 0.995, xend = 2.5, y = 1.25, yend = 1.25, colour = 'black', size = 1.0) +
+  annotate(geom = 'text', x = 0.96, y = 2.25, label = '5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.96, y = 2.0, label = '4', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.96, y = 1.75, label = '3', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.96, y = 1.5, label = '2', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 0.96, y = 1.25, label = '1', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'segment', x = 1.25, xend = 1.25, y = 0.96, yend = 2.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.5, y = 0.96, yend = 2.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.75, xend = 1.75, y = 0.96, yend = 2.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 2.0, xend = 2.0, y = 0.96, yend = 2.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 2.25, xend = 2.25, y = 0.96, yend = 2.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'text', x = 1.25, y = 0.9, label = '2.5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.5, y = 0.9, label = '5.0', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 0.9, label = '7.5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 0.9, label = '10.0', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.25, y = 0.9, label = '12.5', family = 'gochi', size = 8.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/30va_imagen.png")  
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+
++ Sistema de coordenadas polar
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '440'}
+
+library(ggforce)
+
+ggplot() +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 1.6, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white') +
+  geom_point(aes(x = 1.5, y = 1.5), size = 43, pch = 1) +
+  geom_point(aes(x = 1.5, y = 1.5), size = 83, pch = 1) +
+  geom_point(aes(x = 1.5, y = 1.5), size = 123, pch = 1) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.435, y = 1.5, yend = 1.53, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.462, y = 1.5, yend = 1.9, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.462, y = 1.5, yend = 1.1, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.535, y = 1.5, yend = 1.1, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.565, y = 1.5, yend = 1.48, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.5, xend = 1.548, y = 1.5, yend = 1.78, colour = 'black', size = 1.0) +
+  annotate(geom = 'text', x = 1.395, y = 1.9, label = '5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.395, y = 1.8, label = '4', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.395, y = 1.7, label = '3', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.395, y = 1.6, label = '2', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.395, y = 1.5, label = '1', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.556, y = 1.785, label = '2.5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.54, y = 1.1, label = '5.0', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.455, y = 1.1, label = '7.5', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.427, y = 1.53, label = '10.0', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.456, y = 1.9, label = '12.5', family = 'gochi', size = 8.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/31va_imagen.png")  
+```
+  </div>
+</div>
+
 :::example
 #### Ejemplo 6.2.1.4.1
 :::
@@ -6113,8 +6202,12 @@ pokemon <- pokemon %>%
   summarise(
     Prom_fuerza_total = mean(fuerza_total)
     )
-
-
+    
+ggplot(
+  data = pokemon,
+  aes(x = tipo, y = Prom_fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_bar(stat = 'identity')
 ```
   </div>
   <div class="col-md-6" markdown="1">
@@ -6123,9 +6216,18 @@ pokemon <- pokemon %>%
 pokemon <- pokemon %>%
   mutate(
     fuerza_total = ataque + defensa + velocidad + puntos_vida
+    ) %>%
+  group_by(tipo) %>%
+  summarise(
+    Prom_fuerza_total = mean(fuerza_total)
     )
-
-
+    
+ggplot(
+  data = pokemon,
+  aes(x = tipo, y = Prom_fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_bar(stat = 'identity') +
+  coord_polar()
 ```
   </div>
 </div>
