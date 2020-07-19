@@ -6546,6 +6546,57 @@ gapminder::gapminder
 
 ## 8. Comunicación de resultados
 
+La comunicación de resultados es un aspecto muy importante en cualquier campo de la ciencia y en el análisis estadístico no es la excepción. A lo largo de los años se usado el enfoque manual (cortar y pegar) para comunicar resultados en forma de informes, artículos científicos, presentaciones académicas, libros, sitios web, etc. Sin embargo este enfoque manual se a visto reemplazado por la automatización permitiendo emitir resultados reproducibles y dinámicos con mayor simplicidad. En `R` y en muchos otros lenguajes de programación el formato de documento Markdown abrió las puertas a la interacción entre código de programación y texto plano, dando como resultado documentos que integran sus características y emiten distintos formatos de acuerdo a las necesidades del usuario. Markdown en conjunto con [Pandoc](https://pandoc.org/) permiten compilar formatos como PDF, HTML, Word, LaTex, PowerPoint, Beamer, etc. con una sintaxis bastante simple, dando como resultado documentos básicos susceptibles de personalización con algunos conocimientos de CSS y LaTex. 
+
+Aunque la sintaxis de Markdown es simple y admite muchos lenguajes incluyendo todos los inherentes a los formatos de salida, en R existe su propia versión en el paquete `rmarkdown` creado a principios de 2014. Esta versión en conjunto con `knitr` se han convertido en una de las herramientas más conocidas, divulgadas y avaluadas en toda la comunidad de programadores de `R`, por lo que conocerla y manejarla resulta apropiado para los usuarios de `R`.
+
+
+Como primer paso para el uso de `rmarkdown` es necesario instalarlo:
+
+```{r addition_8_01, exercise = TRUE}
+#install.packages("rmarkdown",dependencies = T)
+```
+
+No obstante si cuenta con la IDE de Rstudio no es explícitamente necesario que lo instale ya que el lo hace por usted. Tenga en cuenta que `rmarkdown` maneja la sintaxis de Markdown, para familiarizarse con ella puede realizar el [Tutorial Rmarkdown](https://www.markdowntutorial.com/).
+
+Como primer paso para aprender sobre las opciones de `rmarkdown` debemos conocer las plantillas que posee abriendo `Rstudio` y creando un nuevo Rmarkdown de la siguiente forma: 
+
+
+```{r, echo = FALSE, eval = TRUE, out.width = "100%", fig.align = "center"}
+knitr::include_graphics("images/rmarkdown_1.gif")
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/rmarkdown_2.png")
+```
+
+En la segunda imagen se ilustra el panel de opciones de Rmarkdown mostrando los formatos de salida que podemos usar para generar documentos ya sean HTML,PDF o Word. Los formatos disponibles para presentaciones, Shiny y plantillas se ven a continuación.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/rmarkdown_3.png")
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/rmarkdown_4.png")
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/rmarkdown_5.png")
+```
+
+Generar cualquier tipo de documento, presentación, Shiny o plantilla es tan simple como seleccionar la opción que prefiera y dar click en **OK**. Después de pulsar OK se abrirá un archivo Rmd con instrucciones básicas correspondientes al formato seleccionado, para crear el archivo con el formato de interés debe buscar el icono de `knit` o ejecutar el comando `CTRL + SHIFT + K`.
+
+```{r, echo = FALSE, out.width = "100%", eval = TRUE, fig.align = "center"}
+knitr::include_graphics("images/rmarkdownflow.png")
+```
+
+Cada uno de los archivos posee la extensión .Rmd y cuenta por lo menos con tres tipos de contenidos:
+
+* Un encabezado YAML (opcional) rodeado de `---`
+* Trozos de código R rodeados por ` ``` `
+* Texto mezclado con formato de texto simple
+
+El encabezado YAML denota las características del archivo, como título, autor, fecha, opciones de tabla de contenido, condiciones estéticas, opciones de referencias, opciones figuras, etc.
 
 
 ## 9. Referencias
