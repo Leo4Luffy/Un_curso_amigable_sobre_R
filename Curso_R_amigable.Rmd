@@ -5828,7 +5828,7 @@ ggplot( # Segunda forma
   data = pokemon,
   aes(x = ataque, y = fuerza_total)
   ) +
-  geom_point(aes(colour = tipo))
+  geom_point(aes(colour = tipo, fill = tipo))
 ```
 
 :::caution
@@ -6245,6 +6245,87 @@ ggplot(
   #scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4'))
 ```
 
+El sistema de temas está compuesto por varios componentes principales:
+  
++ Temas completos
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+
+tema_grey <- readJPEG('images/theme_grey.jpg', native = TRUE)
+tema_grey <- rasterGrob(tema_grey, interpolate = FALSE)
+
+tema_bw <- readJPEG('images/theme_bw.jpg', native = TRUE)
+tema_bw <- rasterGrob(tema_bw, interpolate = FALSE)
+
+tema_linea <- readJPEG('images/theme_linedraw.jpg', native = TRUE)
+tema_linea <- rasterGrob(tema_linea, interpolate = FALSE)
+
+tema_claro <- readJPEG('images/theme_light.jpg', native = TRUE)
+tema_claro <- rasterGrob(tema_claro, interpolate = FALSE)
+
+tema_oscuro <- readJPEG('images/theme_dark.jpg', native = TRUE)
+tema_oscuro <- rasterGrob(tema_oscuro, interpolate = FALSE)
+
+tema_minimo <- readJPEG('images/theme_minimal.jpg', native = TRUE)
+tema_minimo <- rasterGrob(tema_minimo, interpolate = FALSE)
+
+tema_clasico <- readJPEG('images/theme_classic.jpg', native = TRUE)
+tema_clasico <- rasterGrob(tema_clasico, interpolate = FALSE)
+
+tema_poquito <- readJPEG('images/theme_void.jpg', native = TRUE)
+tema_poquito <- rasterGrob(tema_poquito, interpolate = FALSE)
+
+data.frame(
+  x = c(1:9), y = c(1:9)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 7.0, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.0, y = 7.5, label = 'theme_grey()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 5.0, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_grey, xmin = 1.01, xmax = 2.99, ymin = 5.01, ymax = 6.99) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 7.0, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.0, y = 7.5, label = 'theme_bw()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 5.0, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_bw, xmin = 3.01, xmax = 4.99, ymin = 5.01, ymax = 6.99) +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 7.0, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 7.5, label = 'theme_linedraw()', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 5.0, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_linea, xmin = 5.01, xmax = 6.99, ymin = 5.01, ymax = 6.99) +
+  annotate(geom = 'rect', xmin = 7.0, xmax = 9.0, ymin = 7.0, ymax = 8.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 8.0, y = 7.5, label = 'theme_light()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 7.0, xmax = 9.0, ymin = 5.0, ymax = 7.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_claro, xmin = 7.01, xmax = 8.99, ymin = 5.01, ymax = 6.99) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.0, y = 4.5, label = 'theme_dark()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 3.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_oscuro, xmin = 1.01, xmax = 2.99, ymin = 2.01, ymax = 3.99) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.0, y = 4.5, label = 'theme_minimal()', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_minimo, xmin = 3.01, xmax = 4.99, ymin = 2.01, ymax = 3.99) +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 4.5, label = 'theme_classic()', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_clasico, xmin = 5.01, xmax = 6.99, ymin = 2.01, ymax = 3.99) +
+  annotate(geom = 'rect', xmin = 7.0, xmax = 9.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 8.0, y = 4.5, label = 'theme_void()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 7.0, xmax = 9.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotation_custom(tema_poquito, xmin = 7.01, xmax = 8.99, ymin = 2.01, ymax = 3.99) +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/32va_imagen.png")  
+```
+
 :::caution
 Si deseas conocer más sobre la gramática de gráficos en capas propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/A%20Layered%20Grammar%20of%20Graphics.pdf) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre el paquete `ggplot2`.
 :::
@@ -6279,7 +6360,7 @@ ggplot()+
   aes(x=0,y=0)
 ```
 
-Después de estas dos capas se agrega la capa de geometrías, que en general depende de el tipo de gráfico que necesitemos o el que mejor se adapte a nuestros datos. Para conocer algunos gráficos  agruparemos algunos de ellos en 7 conjuntos:  1) Gráficos de distribución, 2) Gráficos de correlación, 3) Gráficos de clasificación y 4)Mapas.
+Después de estas dos capas se agrega la capa de geometrías, que en general depende de el tipo de gráfico que necesitemos o el que mejor se adapte a nuestros datos. Para conocer algunos gráficos  agruparemos algunos de ellos en 7 conjuntos:  1) Gráficos de distribución, 2) Gráficos de correlación, 3) Gráficos de clasificación y 4) Mapas.
 
 #### 6.3.1 Gráficos de distribución
 
