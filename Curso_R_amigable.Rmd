@@ -7205,6 +7205,10 @@ Cuantos más subconjuntos de datos se tienen, mejor será su visualización anim
 <div class="row">
   <div class="col-md-6" markdown="1">
 #### 6.4.2 Construccion de visualizaciones animadas mediante el uso del paquete `gganimate`
+
+El paquete `gganimate` extiende la gramática de gráficos implementada en el paquete `ggplot2` para permitir una visualización animada de los gráficos.
+
+Esto lo hace al proporcionar una gama de nuevas clases de gramática o funciones que se pueden agregar al código de graficación y personalizar de este modo como la gráfica debe cambiar con el tiempo. Estas nuevas funciones son:
   </div>
   <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
