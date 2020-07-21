@@ -6103,7 +6103,7 @@ Un sistema de coordenadas asigna la posición de los objetos geométricos en la 
 #### Ejemplo 6.2.1.4.1
 :::
 
-```{r ejemplo_6_2_1_4, exercise = TRUE, fig.align = "center", out.width='380'}
+```{r ejemplo_6_2_1_4, exercise = TRUE, fig.align = "center"}
 
 pokemon <- pokemon %>%
   mutate(
@@ -6222,7 +6222,7 @@ knitr::include_graphics("images/Astronauts_tidytuesday.png")
 
 La capa 7 de tema (`theme`), ayudan a que las gráficas sean estéticamente agradables o coincidan con una guía de estilo existente, sin afectar lo ya hecho a partir de las capas anteriormente presentadas.
 
-```{r ejemplo_6_2_5, exercise = TRUE, fig.align = "center", out.width='380'}
+```{r ejemplo_6_2_5, exercise = TRUE, fig.align = "center"}
 
 pokemon <- pokemon %>%
   mutate(
@@ -6245,9 +6245,7 @@ ggplot(
   #scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4'))
 ```
 
-El sistema de temas está compuesto por varios componentes principales:
-  
-+ Temas completos
+El paquete `ggplot2` viene con una serie de temas integrados. Estos son:
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -6306,7 +6304,7 @@ data.frame(
   annotate(geom = 'rect', xmin = 3.0, xmax = 5.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotation_custom(tema_minimo, xmin = 3.01, xmax = 4.99, ymin = 2.01, ymax = 3.99) +
   annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 6.0, y = 4.5, label = 'theme_classic()', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 6.0, y = 4.5, label = 'theme_classic()', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 2.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotation_custom(tema_clasico, xmin = 5.01, xmax = 6.99, ymin = 2.01, ymax = 3.99) +
   annotate(geom = 'rect', xmin = 7.0, xmax = 9.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'black', alpha = 0.2) +
@@ -6326,10 +6324,462 @@ data.frame(
 knitr::include_graphics("images/32va_imagen.png")  
 ```
 
+:::example
+#### Ejemplo 6.2.1.5.1
+:::
+
+```{r ejemplo_6_2_1_5_1, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ tipo, ncol = 6) +
+  stat_smooth(method = 'lm', colour = 'black') +
+  labs(
+    x = 'Ataque',
+    y = 'Fuerza total',
+    title = 'Relación entre ataque y fuerza total de acuerdo al tipo de pokemon'
+  ) +
+  scale_colour_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  theme_bw()
+```
+
+:::caution
+`ggplot2` no está limitado a los temas que tiene integrados. Puede hacer uso de otros paquetes, como `ggthemes` de Jeffrey Arnold, para disponer de muchos más temas. [Aquí](https://github.com/jrnold/ggthemes) podrá encontrar información sobre este paquete.
+:::
+
+El sistema de temas está compuesto por varios componentes principales:
+  
++ Componentes del gráfico
+
+Estos pueden afectar la apariencia del gráfico en su conjunto. Estos son:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Componente', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'plot.background', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'plot.title', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'plot.margin', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 5.5, label = 'Función', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 4.5, label = 'element_rect()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 3.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 2.5, label = 'margin()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 4.5, label = 'Fondo del gráfico.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 3.5, label = 'Título del gráfico.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 2.5, label = 'Márgen alrededor del gráfico.', family = 'gochi', size = 4.5, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/33va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 6.2.1.5.2
+:::
+
+```{r ejemplo_6_2_1_5_2, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ tipo, ncol = 6) +
+  stat_smooth(method = 'lm', colour = 'black') +
+  labs(
+    x = 'Ataque',
+    y = 'Fuerza total',
+    title = 'Relación entre ataque y fuerza total de acuerdo al tipo de pokemon'
+  ) +
+  scale_colour_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  theme_bw() +
+  theme(
+    plot.background = element_rect(colour = 'black', size = 1.4),
+    plot.title = element_text(size = 10, colour = 'black', face = 'bold')
+  )
+```
+
++ Componentes de los ejes
+
+Estos pueden controlar la apariencia de los ejes. Estos son:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Componente', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'axis.line', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'axis.text', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'axis.text.x', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'axis.text.y', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'axis.title', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -0.5, label = 'axis.title.x', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -1.5, label = 'axis.title.y', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -2.5, label = 'axis.ticks', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 5.5, label = 'Función', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 4.5, label = 'element_line()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 3.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 2.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 1.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 0.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -0.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -1.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -2.5, label = 'element_line()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 4.5, label = 'Línea paralela al eje.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 3.5, label = 'Etiquetas de marca.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 2.5, label = 'Etiquetas de marca del eje x.', family = 'gochi', size = 4.6, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 1.5, label = 'Etiquetas de marca del eje y.', family = 'gochi', size = 4.6, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 0.5, label = 'Títulos de los ejes.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -0.5, label = 'Título del eje x.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -1.5, label = 'Título del eje y.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -2.5, label = 'Marcas de los ejes.', family = 'gochi', size = 5.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/34va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 6.2.1.5.3
+:::
+
+```{r ejemplo_6_2_1_5_3, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ tipo, ncol = 6) +
+  stat_smooth(method = 'lm', colour = 'black') +
+  labs(
+    x = 'Ataque',
+    y = 'Fuerza total',
+    title = 'Relación entre ataque y fuerza total de acuerdo al tipo de pokemon'
+  ) +
+  scale_colour_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  theme_bw() +
+  theme(
+    plot.background = element_rect(colour = 'black', size = 1.4),
+    plot.title = element_text(size = 10, colour = 'black', face = 'bold'),
+    axis.text.x = element_text(size = 10, face = 'bold', angle = -45, hjust = 0, vjust = 1),
+    axis.title = element_text(size = 12, face = 'bold')
+  )
+```
+
++ Componentes de la leyenda
+
+Estos pueden controlar la apariencia de todas las leyendas. Estos son:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Componente', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'legend.background', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'legend.key', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'legend.key.size', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'legend.key.height', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'legend.key.width', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -0.5, label = 'legend.margin', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -1.5, label = 'legend.text', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -2.5, label = 'legend.title', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -4.0, ymax = -3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -3.5, label = 'legend.position', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 5.5, label = 'Función', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 4.5, label = 'element_rect()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 3.5, label = 'element_rect()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 2.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 1.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 0.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -0.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -1.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -2.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -4.0, ymax = -3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 4.5, label = 'Fondo de la leyenda.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 3.5, label = 'Fondo de la clave de la leyenda.', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 2.5, label = 'Tamaño de la clave de la leyenda.', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 1.5, label = 'Altura de la clave de la leyenda.', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 0.5, label = 'Ancho de la clave de la leyenda.', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -0.5, label = 'Margen de la leyenda.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -1.5, label = 'Etiquetas de la leyenda.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -3.0, ymax = -2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -2.5, label = 'Nombre de la leyenda.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -4.0, ymax = -3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -3.5, label = 'Posición de la leyenda.', family = 'gochi', size = 5.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/35va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 6.2.1.5.4
+:::
+
+```{r ejemplo_6_2_1_5_4, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ tipo, ncol = 6) +
+  stat_smooth(method = 'lm', colour = 'black') +
+  labs(
+    x = 'Ataque',
+    y = 'Fuerza total',
+    title = 'Relación entre ataque y fuerza total de acuerdo al tipo de pokemon'
+  ) +
+  scale_colour_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  theme_bw() +
+  theme(
+    plot.background = element_rect(colour = 'black', size = 1.4),
+    plot.title = element_text(size = 10, colour = 'black', face = 'bold'),
+    axis.text.x = element_text(size = 10, face = 'bold', angle = -45, hjust = 0, vjust = 1),
+    axis.title = element_text(size = 12, face = 'bold'),
+    legend.position = 'none'
+  )
+```
+
++ Componentes de facetado
+
+Estos pueden controlar la apariencia de los gráficos facetados. Estos son:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Componente', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'strip.background', family = 'gochi', size = 4.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'strip.text', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'strip.text.x', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'strip.text.y', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'panel.margin', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -0.5, label = 'panel.margin.x', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -1.5, label = 'panel.margin.y', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 5.5, label = 'Función', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 4.5, label = 'element_rect()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 3.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 2.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 1.5, label = 'element_text()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 0.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -0.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = -1.5, label = 'unit()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 4.5, label = 'Fondo de cada franja de panel.', family = 'gochi', size = 4.6, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 3.5, label = 'Texto de la franja del panel.', family = 'gochi', size = 4.8, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 2.5, label = 'Texto de la franja horizontal.', family = 'gochi', size = 4.6, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 1.5, label = 'Texto de la franja vertical.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = 0.5, label = 'Margen entre facetas.', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -0.5, label = 'Margen entre facetas (vertical).', family = 'gochi', size = 4.6, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 6.0, ymin = -2.0, ymax = -1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.0, y = -1.5, label = 'Margen entre facetas (horizontal).', family = 'gochi', size = 4.4, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/36va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 6.2.1.5.5
+:::
+
+```{r ejemplo_6_2_1_5_5, exercise = TRUE, fig.align = "center"}
+
+pokemon <- pokemon %>%
+  mutate(
+    fuerza_total = ataque + defensa + velocidad + puntos_vida
+    )
+
+ggplot(
+  data = pokemon,
+  aes(x = ataque, y = fuerza_total, colour = tipo, fill = tipo)
+  ) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ tipo, ncol = 6) +
+  stat_smooth(method = 'lm', colour = 'black') +
+  labs(
+    x = 'Ataque',
+    y = 'Fuerza total',
+    title = 'Relación entre ataque y fuerza total de acuerdo al tipo de pokemon'
+  ) +
+  scale_colour_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  scale_fill_manual(values = c('cyan', 'gray34', 'deeppink', 'orangered', 'yellow', 'turquoise', 'springgreen', 'red', 'black', 'darkmagenta', 'green', 'blue', 'maroon', 'violetred', 'chocolate', 'coral4', 'thistle', 'pink4')) +
+  theme_bw() +
+  theme(
+    plot.background = element_rect(colour = 'black', size = 1.4),
+    plot.title = element_text(size = 10, colour = 'black', face = 'bold'),
+    axis.text.x = element_text(size = 10, face = 'bold', angle = -45, hjust = 0, vjust = 1),
+    axis.title = element_text(size = 12, face = 'bold'),
+    legend.position = 'none',
+    strip.background = element_rect(colour = 'black', fill = 'black'),
+    strip.text = element_text(size = 10, colour = 'white', face = 'bold')
+  )
+```
+
 :::caution
 Si deseas conocer más sobre la gramática de gráficos en capas propuesto por Hadley Wickham, te invitamos a revisar su articulo titulado [A layered grammar of graphics](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/A%20Layered%20Grammar%20of%20Graphics.pdf) que cubre en detalle su propuesta en la construcción de gráficos y también habla sobre el paquete `ggplot2`.
 :::
-
 
 ### 6.3 Gráficos estadísticos con `ggplot2`
 
