@@ -7171,23 +7171,114 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y 
 
 ### 6.4 Animando sus visualizaciones de datos
 
-Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que hasta ahora hemos visto? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
+Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
 
-Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`. Para explicar como hacer estas visualizaciones se empleara el conjunto de datos `gapminder`. A continuación podrá hechar un vistazo de la estructura de este conjunto de datos :
+Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`. Para explicar como hacer estas visualizaciones se empleará los conjuntos de datos que observan a continuación:
 
-```{r datos_gapminder, exercise = TRUE}
+```{r, eval = FALSE, message = FALSE, echo = FALSE}
 
-gapminder::gapminder
+load(file = 'data_pkg/england.rda')
+
+# Antes de la temporada de 1981, el equipo ganador se llevaba 2 puntos, y posteriormente se llevaba 3 puntos. El equipo derrotado por otra parte se llevaba 0 puntos, mientras que si el juego terminaba en empate, ambos equipos se llevaban 1 punto... se crean dos nuevas columnas para asignar punto de local y puntos de visitante. ----
+premier_league <- england %>%
+  mutate(
+    Pts_local = case_when(
+      Season <= 1980 & result == 'H' ~ 2,
+      Season > 1980 & result == 'H' ~ 3,
+      result == 'D' ~ 1,
+      result == 'A' ~ 0
+      ),
+    Pts_visitante = case_when(
+      Season <= 1980 & result == 'A' ~ 2,
+      Season > 1980 & result == 'A' ~ 3,
+      result == 'D' ~ 1,
+      result == 'H' ~ 0
+      )
+    )
+
+# Ahora, se obtendra el total de puntos de local y vistante para cada equipo y cada temporada, y solo de juegos jugados en primera división. ----
+Pts_local <- premier_league %>%
+  filter(tier == 1) %>%
+  group_by(Season, home) %>%
+  summarise(Pts = sum(Pts_local))
+
+Pts_visitante <- premier_league %>%
+  filter(tier == 1) %>%
+  group_by(Season, visitor) %>%
+  summarise(Pts = sum(Pts_visitante))
+
+#  Ahora se unen los dos anteriores conjuntos de datos y se suman los puntos locales y de visitante para obtener los puntos totales de cada equipo en cada temporada. ----
+Pts_temporada <- Pts_local %>%
+  rename(Equipo = home) %>%
+  bind_rows(
+    Pts_visitante %>%
+      rename(Equipo = visitor)
+  ) %>%
+  group_by(Season, Equipo) %>%
+  summarise(Pts = sum(Pts)) #%>%
+  #ungroup() %>%
+  #mutate(Season = as.factor(Season))
+
+# Mediante un bucle for, se desea que en cada temporada se muestre la suma de todos los puntos ganados o acumulados hasta esa temporada. ----
+Tabla <- Pts_temporada %>%
+  filter(Season == 1888) %>%
+  select(Season, Equipo, Puntos = Pts)
+
+for(i in 1889:2017){
+  Tabla <- Pts_temporada %>%
+    filter(Season <= i) %>%
+    group_by(Equipo) %>%
+    summarise(Puntos = sum(Pts, na.rm = TRUE)) %>%
+    mutate(Season = i) %>%
+    bind_rows(Tabla)
+  }
+
+# Se incluyen algunos hechos historicos. ----
+Pts_temporada_acumulada <- Tabla %>%
+  mutate(
+    Hecho_hist = case_when(
+      Season <= 1891 ~ paste(Season, 'La Football League se forma con 12 equipos en 1888.', sep = '-'),
+      between(Season, 1892, 1895) ~ paste(Season, 'Se introduce la segunda división en el año de 1892.', sep = '-'),
+      between(Season, 1914, 1918) ~ paste(Season, 'Se suspende el torneo durante la primera guerra mundial.', sep = '-'),
+      between(Season, 1920, 1924) ~ paste(Season, 'Se introduce la tercera división entre los años de 1920 a 1921.', sep = '-'),
+      between(Season, 1925, 1928) ~ paste(Season, 'Se introduce la nueva ley de fuera de juego en el años de 1925.', sep = '-'),
+      between(Season, 1939, 1945) ~ paste(Season, 'Se suspende el torneo durante la segunda guerra mundial.', sep = '-'),
+      between(Season, 1958, 1961) ~ paste(Season, 'Se introduce la cuarta división en el año de 1958.', sep = '-'),
+      between(Season, 1965, 1968) ~ paste(Season, 'Se permiten los sustitutos por primera vez.', sep = '-'),
+      between(Season, 1974, 1977) ~ paste(Season, 'Se juego por primera vez en el año de 1974 un partido el día domingo.', sep = '-'),
+      between(Season, 1981, 1984) ~ paste(Season, 'Se introduce tres puntos por una victoria en el año de 1981.', sep = '-'),
+      between(Season, 1986, 1989) ~ paste(Season, 'Se introduce los Play-offs para decidir promociones.', sep = '-'),
+      between(Season, 1992, 1995) ~ paste(Season, 'Se forma la Premier League en el año de 1992, reduciendo la Football League a tres divisiones más inferiores.', sep = '-'),
+      between(Season, 2004, 2007) ~ paste(Season, 'La Football League cambia el nombre de las divisiones a Championsip, League One y League Two.', sep = '-'),
+      between(Season, 2013, 2016) ~ paste(Season, 'Se introduce la Goal Line Technology en la Premier League en el año 2013.', sep = '-'),
+      1L == 1L ~ as.character(Season)
+      )
+    )
+
+# Se guarda algunas de las bases de datos anteriores. ----
+save(Pts_temporada, file = "data_pkg/Ptos_premier_league.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
+save(Pts_temporada_acumulada, file = "data_pkg/Hist_premier_league.rda", compress='xz') # Base de datos que contiene los puntos acumulados por cada uno de los equipos entre las temporadas de 1888 a 2017, con una columna adicional de algunos hechos historicos. Se oberva mayor número de observaciones porque algunos equipos (como por ejemplo el Accrington F.C.) aun cuando no siguieron en la Premier League en años posteriores, en esos años se consideraron el último puntaje acumulado.
 ```
 
-Este conjunto de datos contiene las siguientes variables:
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
 
-1. En `country` podrá encontrar el nombre del país.
-2. En `continent` podrá encontrar el nombre del continente del respectivo país.
-3. En `year` podrá encontrar el año en el que hubo el registro.
-4. En `lifeExp` se describe la expectativa de vida al nacer en el respectivo año, continente y país.
-5. En `popular` se  describe la población total en el respectivo año, continente y país.
-6. En `gdpPercap` se describe el PIB per cápita en el respectivo año, continente y país.
+load(file = 'data_pkg/Ptos_premier_league.rda')
+```
+
+```{r datos_premier_1, exercise = TRUE}
+
+Pts_temporada
+```
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+
+load(file = 'data_pkg/Hist_premier_league.rda')
+```
+
+```{r datos_premier_2, exercise = TRUE}
+
+Pts_temporada_acumulada
+```
 
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
 
@@ -7208,7 +7299,7 @@ Cuantos más subconjuntos de datos se tienen, mejor será su visualización anim
 
 El paquete `gganimate` extiende la gramática de gráficos implementada en el paquete `ggplot2` para permitir una visualización animada de los gráficos.
 
-Esto lo hace al proporcionar una gama de nuevas clases de gramática o funciones que se pueden agregar al código de graficación y personalizar de este modo como la gráfica debe cambiar con el tiempo. Estas nuevas funciones son:
+Esto lo hace al proporcionar una nueva gama de funciones que se pueden agregar al código de graficación de la misma manera que agrega un `geom_` u otra capa gráfica, lo cual, permite personalizar como la misma debe cambiar. Estos son:
   </div>
   <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
@@ -7218,6 +7309,60 @@ knitr::include_graphics("images/gganimate.png")
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
+
++ `transition_*()`: ¿Qué variables control cambian y cómo?
++ `view_*()`: ¿Deberían cambiar los ejes con los datos?
++ `enter_*()/exit_*()`: ¿Cómo deben aparecer los nuevos datos y cómo deben desaparecer los datos antiguos durante el proceso de animación?
++ `shadow_*()`: ¿Deberían "recordarse los datos anteriores y mostrarse con los datos actuales"?
++ `ease_aes()`: ¿Cómo desea manejar el ritmo de cambio entre los valores de transición?
+
+```{r paquete_gganimate, exercise = TRUE, fig.align = "center"}
+
+#install.packages('gganimate')
+#devtools::install_github('thomasp85/gganimate')
+
+#library(gganimate)
+```
+
+:::example
+#### Ejemplo 6.4.2.1
+:::
+
+```{r ejemplo_6_4_2_1, exercise = TRUE, fig.align = "center", out.width='580'}
+
+Pts_temporada %>%
+  filter(
+    Equipo == 'Liverpool' | Equipo == 'Manchester City' | Equipo == 'Manchester United' | Equipo == 'Tottenham Hotspur' | Equipo == 'Chelsea' | Equipo == 'Arsenal') %>%
+  ggplot(
+    data = .,
+    aes(x = Season, y = Pts, colour = Equipo, fill = Equipo)
+    ) +
+  geom_line() +
+  geom_point(alpha = 0.4, size = 2.4) +
+  labs(
+    x = 'Temporadas de la Premier League',
+    y = 'Puntos por temporada'
+  ) +
+  facet_wrap(~ Equipo, ncol = 2) +
+  scale_colour_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
+  scale_fill_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
+  theme_bw() +
+  theme(
+    axis.text = element_text(size = 12, face = 'bold'),
+    axis.title = element_text(size = 14, face = 'bold'),
+    legend.position = 'none',
+    strip.background = element_rect(colour = 'gray64', fill = 'gray64'),
+    strip.text = element_text(size = 12, colour = 'black', face = 'bold')
+    ) #+
+  #transition_reveal(Season) +
+  #exit_shrink()
+#anim_save('images/1ra_animacion.gif')
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
+
+knitr::include_graphics("images/1ra_animacion.gif")
+```
 
 ## 8. Comunicación de resultados
 
