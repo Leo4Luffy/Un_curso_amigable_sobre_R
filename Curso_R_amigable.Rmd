@@ -7173,7 +7173,7 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y 
 
 Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
 
-Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`. Para explicar como hacer estas visualizaciones se empleará los conjuntos de datos que observan a continuación:
+Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`. Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:
 
 ```{r, eval = FALSE, message = FALSE, echo = FALSE}
 
@@ -7270,16 +7270,6 @@ load(file = 'data_pkg/Ptos_premier_league.rda')
 Pts_temporada
 ```
 
-```{r, eval = TRUE, message = FALSE, echo = FALSE}
-
-load(file = 'data_pkg/Hist_premier_league.rda')
-```
-
-```{r datos_premier_2, exercise = TRUE}
-
-Pts_temporada_acumulada
-```
-
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
 
 Al crear animaciones, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:
@@ -7297,9 +7287,11 @@ Cuantos más subconjuntos de datos se tienen, mejor será su visualización anim
   <div class="col-md-6" markdown="1">
 #### 6.4.2 Construccion de visualizaciones animadas mediante el uso del paquete `gganimate`
 
-El paquete `gganimate` extiende la gramática de gráficos implementada en el paquete `ggplot2` para permitir una visualización animada de los gráficos.
+El paquete `gganimate` extiende la gramática de gráficos implementada en el paquete `ggplot2` proporcionando una rica gramática o funciones de animación.
 
-Esto lo hace al proporcionar una nueva gama de funciones que se pueden agregar al código de graficación de la misma manera que agrega un `geom_` u otra capa gráfica, lo cual, permite personalizar como la misma debe cambiar. Estos son:
+Esta nueva gama de funciones se pueden agregar al código de graficación de la misma manera que se agrega un `geom_` u otra capa gráfica.
+
+Estas son funciones son:
   </div>
   <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
@@ -7315,6 +7307,61 @@ knitr::include_graphics("images/gganimate.png")
 + `enter_*()/exit_*()`: ¿Cómo deben aparecer los nuevos datos y cómo deben desaparecer los datos antiguos durante el proceso de animación?
 + `shadow_*()`: ¿Deberían "recordarse los datos anteriores y mostrarse con los datos actuales"?
 + `ease_aes()`: ¿Cómo desea manejar el ritmo de cambio entre los valores de transición?
+
+<!--
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_gganimate_1, exercise = TRUE, fig.align = "center", out.width = '480'}
+
+tribble(
+  ~Nombre, ~Peso, ~Año,
+   'Juan',    60, 2018,
+  'Luisa',    54, 2018,
+  'Maria',    72, 2018,
+   'Luis',    68, 2018,
+   'Juan',    52, 2020,
+  'Luisa',    66, 2020,
+  'Maria',    80, 2020,
+   'Luis',    60, 2020
+  ) %>%
+  ggplot(aes(x = Nombre, y = Peso)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  facet_wrap(~ Año)
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "98%", fig.align = "center"}
+knitr::include_graphics("images/Ejemplo_gganimate_1.png")
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r ejemplo_gganimate_2, exercise = TRUE, fig.align = "center", out.width = '480'}
+
+tribble(
+  ~Nombre, ~Peso, ~Año,
+   'Juan',    60, 2018,
+  'Luisa',    54, 2018,
+  'Maria',    72, 2018,
+   'Luis',    68, 2018,
+   'Juan',    52, 2020,
+  'Luisa',    66, 2020,
+  'Maria',    80, 2020,
+   'Luis',    60, 2020
+  ) %>%
+  ggplot(aes(x = Nombre, y = Peso)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  labs(title = "Año: {closest_state}") +
+  transition_states(Año)
+```  
+
+```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/Ejemplo_gganimate_2.gif")
+```
+  </div>
+</div>
+
+-->
 
 ```{r paquete_gganimate, exercise = TRUE, fig.align = "center"}
 
@@ -7353,16 +7400,20 @@ Pts_temporada %>%
     legend.position = 'none',
     strip.background = element_rect(colour = 'gray64', fill = 'gray64'),
     strip.text = element_text(size = 12, colour = 'black', face = 'bold')
-    ) #+
-  #transition_reveal(Season) +
-  #exit_shrink()
-#anim_save('images/1ra_animacion.gif')
+    ) +
+  transition_reveal(Season) +
+  exit_shrink()
+anim_save('images/1ra_animacion.gif')
 ```
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
 
 knitr::include_graphics("images/1ra_animacion.gif")
 ```
+
+:::caution
+Si deseas ver un resumen de las posibilidades que ofrece el paquete `dplyr` y profundizar más en su uso, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_dplyr.pdf). De igual forma, si deseas conocer más sobre el paquete `gganimate` puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_gganimate.pdf).
+:::
 
 ## 8. Comunicación de resultados
 
