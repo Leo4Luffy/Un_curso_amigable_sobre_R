@@ -6442,51 +6442,13 @@ Pts_temporada <- Pts_local %>%
       rename(Equipo = visitor)
   ) %>%
   group_by(Season, Equipo) %>%
-  summarise(Pts = sum(Pts))
+  summarise(Pts = sum(Pts)) %>%
+  rename('Temporada' = Season)
 
-# Mediante un bucle for, se desea que en cada temporada se muestre la suma de todos los puntos ganados o acumulados hasta esa temporada. ----
-Tabla <- Pts_temporada %>%
-  filter(Season == 1888) %>%
-  select(Season, Equipo, Puntos = Pts)
-
-for(i in 1889:2017){
-  Tabla <- Pts_temporada %>%
-    filter(Season <= i) %>%
-    group_by(Equipo) %>%
-    summarise(Puntos = sum(Pts, na.rm = TRUE)) %>%
-    mutate(Season = i) %>%
-    bind_rows(Tabla)
-  }
-
-# Se incluyen algunos hechos historicos. ----
-Pts_temporada_acumulada <- Tabla %>%
-  mutate(
-    Hecho_hist = case_when(
-      Season <= 1891 ~ paste(Season, 'La Football League se forma con 12 equipos en 1888.', sep = '-'),
-      between(Season, 1892, 1895) ~ paste(Season, 'Se introduce la segunda división en el año de 1892.', sep = '-'),
-      between(Season, 1914, 1918) ~ paste(Season, 'Se suspende el torneo durante la primera guerra mundial.', sep = '-'),
-      between(Season, 1920, 1924) ~ paste(Season, 'Se introduce la tercera división entre los años de 1920 a 1921.', sep = '-'),
-      between(Season, 1925, 1928) ~ paste(Season, 'Se introduce la nueva ley de fuera de juego en el años de 1925.', sep = '-'),
-      between(Season, 1939, 1945) ~ paste(Season, 'Se suspende el torneo durante la segunda guerra mundial.', sep = '-'),
-      between(Season, 1958, 1961) ~ paste(Season, 'Se introduce la cuarta división en el año de 1958.', sep = '-'),
-      between(Season, 1965, 1968) ~ paste(Season, 'Se permiten los sustitutos por primera vez.', sep = '-'),
-      between(Season, 1974, 1977) ~ paste(Season, 'Se juego por primera vez en el año de 1974 un partido el día domingo.', sep = '-'),
-      between(Season, 1981, 1984) ~ paste(Season, 'Se introduce tres puntos por una victoria en el año de 1981.', sep = '-'),
-      between(Season, 1986, 1989) ~ paste(Season, 'Se introduce los Play-offs para decidir promociones.', sep = '-'),
-      between(Season, 1992, 1995) ~ paste(Season, 'Se forma la Premier League en el año de 1992, reduciendo la Football League a tres divisiones más inferiores.', sep = '-'),
-      between(Season, 2004, 2007) ~ paste(Season, 'La Football League cambia el nombre de las divisiones a Championsip, League One y League Two.', sep = '-'),
-      between(Season, 2013, 2016) ~ paste(Season, 'Se introduce la Goal Line Technology en la Premier League en el año 2013.', sep = '-'),
-      1L == 1L ~ as.character(Season)
-      )
-    )
-
-# Se guarda algunas de las bases de datos anteriores. ----
+# Se guarda la base de datos anterior. ----
 save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
-save(Pts_temporada_acumulada, file = "data_pkg/Pts_temporada_acumulada.rda", compress='xz') # Base de datos que contiene los puntos acumulados por cada uno de los equipos entre las temporadas de 1888 a 2017, con una columna adicional de algunos hechos historicos. Se oberva mayor número de observaciones porque algunos equipos (como por ejemplo el Accrington F.C.) aun cuando no siguieron en la Premier League en años posteriores, en esos años se consideraron el último puntaje acumulado.
 ```
 
-<<<<<<< HEAD
-=======
 ```{r, eval = TRUE, message = FALSE, echo = FALSE}
 
 load(file = 'data_pkg/Pts_temporada.rda')
@@ -6497,7 +6459,15 @@ load(file = 'data_pkg/Pts_temporada.rda')
 Pts_temporada
 ```
 
->>>>>>> 244941314b98cacf6263020ec1682a8a57ad552f
+<!-- 
+Duvan hola, que pena apenas enviarte esta info. La base de datos "England" la obtuve de un ejemplo que compartieron aquí https://towardsdatascience.com/how-to-do-that-animated-race-bar-chart-57f3a8ff27a8. Ellos en el primer parrafo comparten el GitHub (https://github.com/keithmcnulty/english_football_league/tree/master/data) de donde extraje la base de datos england.rda. Luego ellos explican un procedimiento que fue el que replique anteriormente para obtener la base de datos Pts_temporada.rda. Esa base de datos contiene tres variables:
+- Temporada, que va desde el año de 1888 al 2017 y corresponde al año en el que se llevo a cabo la competición.
+- Equipo, que corresponde al nombre del los equipos pertenecientes a la primera división, desde el año de 1888 al 2017.
+- Pts, que son los puntos logrados por el respectivo equipo en esa temporada de futbol.
+
+No habia visto lo que se podia hacer al colocar "?" antes de la base de datos. Esta muy bacano!!!!
+-->
+
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
 
 Al crear animaciones, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:
@@ -6534,10 +6504,7 @@ knitr::include_graphics("images/gganimate.png")
 + `view_*()`: ¿Deberían cambiar los ejes con los datos?
 + `enter_*()/exit_*()`: ¿Cómo deben aparecer los nuevos datos y cómo deben desaparecer los datos antiguos durante el proceso de animación?
 + `shadow_*()`: ¿Deberían "recordarse los datos anteriores y mostrarse con los datos actuales"?
-<<<<<<< HEAD
 + `ease_aes()`: ¿Cómo desea manejar el ritmo de cambio entre los valores de transición?-->
-=======
-+ `ease_aes()`: ¿Cómo desea manejar el ritmo de cambio entre los valores de transición?
 
 <!--
 <div class="row">
@@ -6593,8 +6560,6 @@ knitr::include_graphics("images/Ejemplo_gganimate_2.gif")
 </div>
 
 -->
->>>>>>> 244941314b98cacf6263020ec1682a8a57ad552f
-
 ```{r paquete_gganimate, exercise = TRUE, fig.align = "center"}
 
 #install.packages('gganimate')
@@ -6607,17 +6572,8 @@ knitr::include_graphics("images/Ejemplo_gganimate_2.gif")
 #### Ejemplo 6.4.2.1
 :::
 
-<<<<<<< HEAD
-```{r, eval = FALSE, message = FALSE, echo = FALSE}
-
-load(file = 'data_pkg/Ptos_premier_league.rda')
-```
-
 ```{r ejemplo_6_4_2_1, exercise = TRUE, fig.align = "center", out.width='580'}
 
-=======
-```{r,eval=FALSE,echo=TRUE}
->>>>>>> 244941314b98cacf6263020ec1682a8a57ad552f
 Pts_temporada %>%
   filter(
     Equipo == 'Liverpool' | Equipo == 'Manchester City' | Equipo == 'Manchester United' | Equipo == 'Tottenham Hotspur' | Equipo == 'Chelsea' | Equipo == 'Arsenal') %>%
@@ -6642,14 +6598,9 @@ Pts_temporada %>%
     strip.background = element_rect(colour = 'gray64', fill = 'gray64'),
     strip.text = element_text(size = 12, colour = 'black', face = 'bold')
     ) +
-<<<<<<< HEAD
   transition_reveal(Temporada) #+
   #exit_shrink()
 #anim_save('images/1ra_animacion.gif')
-=======
-  transition_reveal(Season) +
-  exit_shrink()
->>>>>>> 244941314b98cacf6263020ec1682a8a57ad552f
 ```
 
 
