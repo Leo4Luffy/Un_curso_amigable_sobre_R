@@ -24,11 +24,11 @@ require(ggplot2)
 require(patchwork)
 require(fontawesome)
 #PARA COMENTAR AL FINALIZAR
-require(jpeg)
-require(grid)
-require(gridGraphics)
-require(showtext)
-font_add_google('Gochi Hand', 'gochi')
+#require(jpeg)
+#require(grid)
+#require(gridGraphics)
+#require(showtext)
+#font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
