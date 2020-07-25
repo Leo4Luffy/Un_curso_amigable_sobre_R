@@ -6487,13 +6487,13 @@ Pts_temporada_acumulada <- Tabla %>%
     )
 
 # Se guarda algunas de las bases de datos anteriores. ----
-save(Pts_temporada, file = "data_pkg/Ptos_premier_league.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
-save(Pts_temporada_acumulada, file = "data_pkg/Hist_premier_league.rda", compress='xz') # Base de datos que contiene los puntos acumulados por cada uno de los equipos entre las temporadas de 1888 a 2017, con una columna adicional de algunos hechos historicos. Se oberva mayor número de observaciones porque algunos equipos (como por ejemplo el Accrington F.C.) aun cuando no siguieron en la Premier League en años posteriores, en esos años se consideraron el último puntaje acumulado.
+save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
+save(Pts_temporada_acumulada, file = "data_pkg/Pts_temporada_acumulada.rda", compress='xz') # Base de datos que contiene los puntos acumulados por cada uno de los equipos entre las temporadas de 1888 a 2017, con una columna adicional de algunos hechos historicos. Se oberva mayor número de observaciones porque algunos equipos (como por ejemplo el Accrington F.C.) aun cuando no siguieron en la Premier League en años posteriores, en esos años se consideraron el último puntaje acumulado.
 ```
 
 ```{r, eval = TRUE, message = FALSE, echo = FALSE}
 
-load(file = 'data_pkg/Ptos_premier_league.rda')
+load(file = 'data_pkg/Pts_temporada.rda')
 ```
 
 ```{r datos_premier_1, exercise = TRUE}
