@@ -6404,8 +6404,6 @@ Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bas
 
 ```{r, eval = FALSE, message = FALSE, echo = FALSE}
 
-load(file = 'data_pkg/england.rda')
-
 # Antes de la temporada de 1981, el equipo ganador se llevaba 2 puntos, y posteriormente se llevaba 3 puntos. El equipo derrotado por otra parte se llevaba 0 puntos, mientras que si el juego terminaba en empate, ambos equipos se llevaban 1 punto... se crean dos nuevas columnas para asignar punto de local y puntos de visitante. ----
 premier_league <- england %>%
   mutate(
@@ -6449,10 +6447,6 @@ Pts_temporada <- Pts_local %>%
 save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
 ```
 
-```{r, eval = TRUE, message = FALSE, echo = FALSE}
-
-load(file = 'data_pkg/Pts_temporada.rda')
-```
 
 ```{r datos_premier_1, exercise = TRUE}
 
@@ -6563,7 +6557,7 @@ knitr::include_graphics("images/Ejemplo_gganimate_2.gif")
 #### Ejemplo 6.4.2.1
 :::
 
-```{r ejemplo_6_4_2_1, exercise = TRUE, fig.align = "center", out.width='580'}
+```{r ejemplo_6_4_2_1, echo= TRUE ,eval=FALSE , fig.align = "center", out.width='580'}
 
 Pts_temporada %>%
   filter(
@@ -6594,6 +6588,7 @@ Pts_temporada %>%
 #anim_save('images/1ra_animacion.gif')
 ```
 
+<!-- Hola leo Cambie este chunk para no tener problemas con el paquete , recuerda que llamar gganimate complicaria un poco las cosas en el paquete -->
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
 knitr::include_graphics("images/1ra_animacion.gif")
