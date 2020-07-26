@@ -6459,15 +6459,6 @@ load(file = 'data_pkg/Pts_temporada.rda')
 Pts_temporada
 ```
 
-<!-- 
-Duvan hola, que pena apenas enviarte esta info. La base de datos "England" la obtuve de un ejemplo que compartieron aquí https://towardsdatascience.com/how-to-do-that-animated-race-bar-chart-57f3a8ff27a8. Ellos en el primer parrafo comparten el GitHub (https://github.com/keithmcnulty/english_football_league/tree/master/data) de donde extraje la base de datos england.rda. Luego ellos explican un procedimiento que fue el que replique anteriormente para obtener la base de datos Pts_temporada.rda. Esa base de datos contiene tres variables:
-- Temporada, que va desde el año de 1888 al 2017 y corresponde al año en el que se llevo a cabo la competición.
-- Equipo, que corresponde al nombre del los equipos pertenecientes a la primera división, desde el año de 1888 al 2017.
-- Pts, que son los puntos logrados por el respectivo equipo en esa temporada de futbol.
-
-No habia visto lo que se podia hacer al colocar "?" antes de la base de datos. Esta muy bacano!!!!
--->
-
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
 
 Al crear animaciones, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:
