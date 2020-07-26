@@ -5771,7 +5771,7 @@ knitr::include_graphics("images/Astronauts_tidytuesday.png")
 
 ##### 6.2.1.5 Capa 7: tema
 
-La capa 7 de tema (`theme`), ayudan a que las gráficas sean estéticamente agradables o coincidan con una guía de estilo existente, sin afectar lo ya hecho a partir de las capas anteriormente presentadas.
+La capa 7 de tema, ayuda a que las gráficas sean estéticamente agradables o coincidan con una guía de estilo existente, sin afectar lo ya hecho a partir de las capas anteriormente presentadas.
 
 ```{r ejemplo_6_2_5, exercise = TRUE, fig.align = "center"}
 
@@ -5834,8 +5834,9 @@ ggplot(
 `ggplot2` no está limitado a los temas que tiene integrados. Puede hacer uso de otros paquetes, como `ggthemes` de Jeffrey Arnold, para disponer de muchos más temas. [Aquí](https://github.com/jrnold/ggthemes) podrá encontrar información sobre este paquete.
 :::
 
-El sistema de temas está compuesto por varios componentes principales:
-  
+Los temas integrados anteriores cuentan con componentes individuales que a su
+vez pueden ser modificados usando la función `theme()`. Una manera general del código que se puede emplear para esto es de la forma: `plot + theme(element.name = element_function())`.
+
 + Componentes del gráfico
 
 Estos pueden afectar la apariencia del gráfico en su conjunto. Estos son:

@@ -4419,7 +4419,7 @@ Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la hab
 <p>La característica más peculiar del anterior conjunto de datos es su sistema de codificación. Las columnas cinco a sesenta codifican cuatro partes de información que separadas significan lo siguiente:</p>
 <ol style="list-style-type: decimal">
 <li><p>Las primeras tres letras de cada columna indican si los casos de tuberculosis corresponden a casos nuevos o antiguos. En este conjunto de datos, cada columna contiene solo nuevos casos.</p></li>
-<li><p>Las siguientes dos letras describen el tipo de caso de tuberculosis:</p></li>
+<li>Las siguientes dos letras describen el tipo de caso de tuberculosis:</li>
 </ol>
 <ul>
 <li><code>rel</code> significa casos de recaída,</li>
@@ -4429,7 +4429,7 @@ Esto puede parecer un lugar extraño para comenzar, pero ordenar datos es la hab
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li><p>La sexta parte describe el sexo de los pacientes con tuberculosis: <code>m</code> para hombres y <code>f</code> para mujeres.</p></li>
-<li><p>La última parte describe el grupo de edad de los pacientes con tuberculosis. El conjunto de datos agrupa los casos en siete grupos de edad:</p></li>
+<li>La última parte describe el grupo de edad de los pacientes con tuberculosis. El conjunto de datos agrupa los casos en siete grupos de edad:</li>
 </ol>
 <ul>
 <li><code>014</code> significa pacientes de 0 a 14 años de edad,</li>
@@ -4529,7 +4529,7 @@ Tuberculosis_5 &lt;- pivot_wider(
 <div class="col-md-6" markdown="1">
 <ol start="3" style="list-style-type: decimal">
 <li><p>En <code>culmen_length_mm</code> se registró la longitud del culmen (margen superior del pico) de las tres especies de pingüinos.</p></li>
-<li><p>En <code>culmen_depth_mm</code> se registró la profundidad del culmen de las tres especies de pingüinos.</p>
+<li>En <code>culmen_depth_mm</code> se registró la profundidad del culmen de las tres especies de pingüinos.
 </div>
 <div class="col-md-6" markdown="1">
 <p><img src="images/culmen_penguins.png" width="38%" style="display: block; margin: auto;" /></p></li>
@@ -5599,7 +5599,7 @@ ggplot(
 </div>
 <div id="section-capa-7-tema" class="section level5">
 <h5>6.2.1.5 Capa 7: tema</h5>
-<p>La capa 7 de tema (<code>theme</code>), ayudan a que las gráficas sean estéticamente agradables o coincidan con una guía de estilo existente, sin afectar lo ya hecho a partir de las capas anteriormente presentadas.</p>
+<p>La capa 7 de tema, ayuda a que las gráficas sean estéticamente agradables o coincidan con una guía de estilo existente, sin afectar lo ya hecho a partir de las capas anteriormente presentadas.</p>
 <div class="tutorial-exercise" data-label="ejemplo_6_2_5" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>pokemon &lt;- pokemon %&gt;%
   mutate(
@@ -5653,7 +5653,7 @@ ggplot(
 <div class="caution">
 <p><code>ggplot2</code> no está limitado a los temas que tiene integrados. Puede hacer uso de otros paquetes, como <code>ggthemes</code> de Jeffrey Arnold, para disponer de muchos más temas. <a href="https://github.com/jrnold/ggthemes">Aquí</a> podrá encontrar información sobre este paquete.</p>
 </div>
-<p>El sistema de temas está compuesto por varios componentes principales:</p>
+<p>Los temas integrados anteriores cuentan con componentes individuales que a su vez pueden ser modificados usando la función <code>theme()</code>. Una manera general del código que se puede emplear para esto es de la forma: <code>plot + theme(element.name = element_function())</code>.</p>
 <ul>
 <li>Componentes del gráfico</li>
 </ul>
@@ -8011,7 +8011,7 @@ output$`tutorial-exercise-addition_8_01-output` <- renderUI({
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","blob","broom","cellranger","checkmate","cli","colorspace","compiler","crayon","curl","CursoR","datasets","DBI","dbplyr","digest","dplyr","DSR","ellipsis","evaluate","fansi","fastmap","fontawesome","forcats","fs","gapminder","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jsonlite","kableExtra","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","palmerpenguins","patchwork","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timevis","tools","utils","vctrs","viridisLite","webshot","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.8","3.6.3","1.2.1","0.7.0","1.1.0","2.0.0","2.0.2","1.4-1","3.6.3","1.3.4","4.3","0.1.0","3.6.3","1.1.0","1.4.4","0.6.25","1.0.0","0.1","0.3.1","0.14","0.4.1","1.0.1","0.1.0","0.5.0","1.4.2","0.3.0","0.0.2","3.3.2","1.4.1","0.1.0.9002","3.6.3","3.6.3","3.6.3","0.3.0","2.3.1","0.8","0.5.3","0.5.0","1.5.1","1.5.4","1.4.2","1.7.0","1.1.0","1.29","1.1.0.1","0.10.1","0.2.0","1.7.9","1.5","1.1","3.6.3","0.9","0.1.8","0.5.0","0.1.0","1.0.1","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","1.3.1","1.3.1","0.3.0","0.4.7","2.3","1.3-2","0.11","0.3.5","1.1.1","1.5.0","3.6.3","1.4.6","1.4.0","3.0.3","1.1.0","1.1.0","1.3.0","0.5","3.6.3","3.6.3","0.3.2","0.3.0","0.5.2","2.2.0","0.16","1.3.2","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","blob","broom","cellranger","checkmate","cli","colorspace","compiler","crayon","curl","CursoR","datasets","DBI","dbplyr","digest","dplyr","DSR","ellipsis","evaluate","fansi","fastmap","fontawesome","forcats","fs","gapminder","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jsonlite","kableExtra","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","palmerpenguins","patchwork","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timevis","tools","utils","vctrs","viridisLite","webshot","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.8","3.6.0","1.2.1","0.7.0","1.1.0","2.0.0","2.0.2","1.4-1","3.6.0","1.3.4","4.3","0.1.0","3.6.0","1.1.0","1.4.4","0.6.25","1.0.0","0.1","0.3.1","0.14","0.4.1","1.0.1","0.1.0","0.5.0","1.4.2","0.3.0","0.0.2","3.3.2","1.4.1.9000","0.1.0.9002","3.6.0","3.6.0","3.6.0","0.3.0","2.3.1","0.8","0.5.3","0.5.0","1.5.1","1.5.4.9000","1.4.2","1.7.0","1.1.0","1.29","1.1.0.1","0.10.1","0.2.0","1.7.9","1.5","1.1","3.6.0","0.9","0.1.8","0.5.0","0.1.0","1.0.1.9000","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","1.3.1","1.3.1","0.3.0","0.4.7","2.3","1.3-2","0.11","0.3.6","1.1.1","1.5.0","3.6.0","1.4.6","1.4.0","3.0.3","1.1.0","1.1.0","1.3.0","0.5.0.9005","3.6.0","3.6.0","0.3.2","0.3.0","0.5.2","2.2.0","0.16","1.3.2","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
 <div id="section-refs" class="references">
@@ -8025,7 +8025,7 @@ output$`tutorial-exercise-addition_8_01-output` <- renderUI({
 <p>KB, Gorman, Williams TD, and Fraser WR. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” <em>PLoS ONE</em> 9(3) (e90081): –13. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.</p>
 </div>
 <div id="section-ref-DSR">
-<p>Last". 2020. <em>DSR: Data Sets for Data Science with R</em>.</p>
+<p>Last&quot;. 2020. <em>DSR: Data Sets for Data Science with R</em>.</p>
 </div>
 <div id="section-ref-MendozaVega">
 <p>Mendoza Vega, Juan Bosco. n.d. “R para principiantes.” Accessed June 25, 2020. <a href="https://bookdown.org/jboscomendoza/r-principiantes4/">https://bookdown.org/jboscomendoza/r-principiantes4/</a>.</p>
@@ -8049,7 +8049,7 @@ output$`tutorial-exercise-addition_8_01-output` <- renderUI({
 <p>Richard A. Becker, Original S code by, Allan R. Wilks. R version by Ray Brownrigg. Enhancements by Thomas P Minka, and Alex Deckmyn. 2018. <em>Maps: Draw Geographical Maps</em>. <a href="https://CRAN.R-project.org/package=maps">https://CRAN.R-project.org/package=maps</a>.</p>
 </div>
 <div id="section-ref-santana2014arte">
-<p>Santana, Julio Sergio, and Efraı́n Mateos Farfán. 2014. “El Arte de Programar En R: Un Lenguaje Para La Estadı́stica.” <em>Instituto Mexicano de Tecnologı́a Del Agua</em> 1.</p>
+<p>Santana, Julio Sergio, and Efraı'n Mateos Farfán. 2014. “El Arte de Programar En R: Un Lenguaje Para La Estadı'stica.” <em>Instituto Mexicano de Tecnologı'a Del Agua</em> 1.</p>
 </div>
 <div id="section-ref-learnr">
 <p>Schloerke, Barret, JJ Allaire, and Barbara Borges. 2020. <em>Learnr: Interactive Tutorials for R</em>. <a href="https://CRAN.R-project.org/package=learnr">https://CRAN.R-project.org/package=learnr</a>.</p>
@@ -8064,7 +8064,7 @@ output$`tutorial-exercise-addition_8_01-output` <- renderUI({
 <p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>
 </div>
 <div id="section-ref-wickham2016r">
-<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".</p>
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. &quot; O’Reilly Media, Inc.&quot;.</p>
 </div>
 </div>
 </div>
