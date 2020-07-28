@@ -4302,7 +4302,9 @@ China
 </div>
 <p>Los datos ordenados funcionan bien en <code>R</code> porque <code>R</code> es un lenguaje de programación vectorizado. Los conjuntos de datos en <code>R</code> están construidos a partir de vectores y las operaciones de <code>R</code> están optimizadas para trabajar con vectores. Los datos ordenados aprovechan estas dos características.</p>
 <p><img src="images/6ta_imagen.png" width="64%" style="display: block; margin: auto;" /></p>
+<div class="caution">
 <p>Los datos ordenados fueron popularizados por <strong>Hadley Wickham</strong>, y sirven como base para muchos paquetes y funciones de <code>R</code>. Puede obtener más información sobre datos ordenados leyendo <a href="www.jstatsoft.org/v59/i10/paper">Tidy Data</a>, un documento escrito por <strong>Hadley Wickham</strong> y publicado en el Journal of Statistical Software.</p>
+</div>
 </div>
 <div id="section-ordenando-los-datos-con-tidyr" class="section level3">
 <h3>4.3 Ordenando los datos con <code>tidyr</code></h3>
@@ -6164,11 +6166,7 @@ Starwars %&gt;%
 <div id="section-animando-sus-visualizaciones-de-datos" class="section level3">
 <h3>6.4 Animando sus visualizaciones de datos</h3>
 <p>Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">Hans Rosling</a> donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.</p>
-<p>Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de <code>R</code>. <!--Para explicar como hacer estas visualizaciones se empleará los dos conjuntos de datos que se observan a continuación:--></p>
-<div class="tutorial-exercise" data-label="datos_premier_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>Pts_temporada</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
-</div>
+<p>Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de <code>R</code>.</p>
 <div id="section-como-se-crean-las-animaciones-gráficas" class="section level4">
 <h4>6.4.1 ¿Como se crean las animaciones gráficas?</h4>
 <p>Al crear animaciones, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:</p>
@@ -6252,6 +6250,11 @@ tribble(
 </div>
 
 -->
+<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:-->
+<div class="tutorial-exercise" data-label="datos_premier_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>Pts_temporada</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
+</div>
 <div class="tutorial-exercise" data-label="paquete_gganimate" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>#install.packages(&#39;gganimate&#39;)
 #devtools::install_github(&#39;thomasp85/gganimate&#39;)
@@ -6289,13 +6292,15 @@ tribble(
   transition_reveal(Temporada) #+
   #exit_shrink()
 #anim_save(&#39;images/1ra_animacion.gif&#39;)</code></pre>
-<!-- Hola leo Cambie este chunk para no tener problemas con el paquete , recuerda que llamar gganimate complicaria un poco las cosas en el paquete -->
 <p><img src="images/1ra_animacion.gif" width="50%" style="display: block; margin: auto;" /></p>
 <div class="caution">
 <p>Si deseas ver un resumen de las posibilidades que ofrece el paquete <code>ggplot2</code> y profundizar más en su uso, puedes mirar su hoja de trucos <a href="https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_ggplot2.pdf">aquí</a>. De igual forma, si deseas conocer más sobre el paquete <code>gganimate</code> puedes mirar su hoja de trucos <a href="https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_gganimate.pdf">aquí</a>.</p>
 </div>
 </div>
 </div>
+</div>
+<div id="section-análisis-estadístico-de-datos" class="section level2">
+<h2>7. Análisis estadístico de datos</h2>
 </div>
 <div id="section-comunicación-de-resultados" class="section level2">
 <h2>8. Comunicación de resultados</h2>
@@ -7974,13 +7979,6 @@ output$`tutorial-exercise-addition_6342-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-datos_premier_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-datos_premier_1-code-editor`)), session)
-output$`tutorial-exercise-datos_premier_1-output` <- renderUI({
-  `tutorial-exercise-datos_premier_1-result`()
-})
-</script>
- 
-<script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-ejemplo_gganimate_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_gganimate_1-code-editor`)), session)
 output$`tutorial-exercise-ejemplo_gganimate_1-output` <- renderUI({
   `tutorial-exercise-ejemplo_gganimate_1-result`()
@@ -7991,6 +7989,13 @@ output$`tutorial-exercise-ejemplo_gganimate_1-output` <- renderUI({
 `tutorial-exercise-ejemplo_gganimate_2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_gganimate_2-code-editor`)), session)
 output$`tutorial-exercise-ejemplo_gganimate_2-output` <- renderUI({
   `tutorial-exercise-ejemplo_gganimate_2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-datos_premier_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-datos_premier_1-code-editor`)), session)
+output$`tutorial-exercise-datos_premier_1-output` <- renderUI({
+  `tutorial-exercise-datos_premier_1-result`()
 })
 </script>
  

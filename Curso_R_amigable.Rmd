@@ -4180,7 +4180,9 @@ Los datos ordenados funcionan bien en `R` porque `R` es un lenguaje de programac
 knitr::include_graphics("images/6ta_imagen.png")  
 ```
 
+:::caution
 Los datos ordenados fueron popularizados por __Hadley Wickham__, y sirven como base para muchos paquetes y funciones de `R`. Puede obtener más información sobre datos ordenados leyendo [Tidy Data](www.jstatsoft.org/v59/i10/paper), un documento escrito por __Hadley Wickham__ y publicado en el Journal of Statistical Software.
+:::
 
 ### 4.3 Ordenando los datos con `tidyr`
 
@@ -6404,58 +6406,7 @@ Otros paquetes paquetes que podemos utilizar para graficar mapas y datos geoespa
 
 Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
 
-Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`. <!--Para explicar como hacer estas visualizaciones se empleará los dos conjuntos de datos que se observan a continuación:-->
-
-```{r, eval = FALSE, message = FALSE, echo = FALSE}
-
-# Antes de la temporada de 1981, el equipo ganador se llevaba 2 puntos, y posteriormente se llevaba 3 puntos. El equipo derrotado por otra parte se llevaba 0 puntos, mientras que si el juego terminaba en empate, ambos equipos se llevaban 1 punto... se crean dos nuevas columnas para asignar punto de local y puntos de visitante. ----
-premier_league <- england %>%
-  mutate(
-    Pts_local = case_when(
-      Season <= 1980 & result == 'H' ~ 2,
-      Season > 1980 & result == 'H' ~ 3,
-      result == 'D' ~ 1,
-      result == 'A' ~ 0
-      ),
-    Pts_visitante = case_when(
-      Season <= 1980 & result == 'A' ~ 2,
-      Season > 1980 & result == 'A' ~ 3,
-      result == 'D' ~ 1,
-      result == 'H' ~ 0
-      )
-    )
-
-# Ahora, se obtendra el total de puntos de local y vistante para cada equipo y cada temporada, y solo de juegos jugados en primera división. ----
-Pts_local <- premier_league %>%
-  filter(tier == 1) %>%
-  group_by(Season, home) %>%
-  summarise(Pts = sum(Pts_local))
-
-Pts_visitante <- premier_league %>%
-  filter(tier == 1) %>%
-  group_by(Season, visitor) %>%
-  summarise(Pts = sum(Pts_visitante))
-
-#  Ahora se unen los dos anteriores conjuntos de datos y se suman los puntos locales y de visitante para obtener los puntos totales de cada equipo en cada temporada. ----
-Pts_temporada <- Pts_local %>%
-  rename(Equipo = home) %>%
-  bind_rows(
-    Pts_visitante %>%
-      rename(Equipo = visitor)
-  ) %>%
-  group_by(Season, Equipo) %>%
-  summarise(Pts = sum(Pts)) %>%
-  rename('Temporada' = Season)
-
-# Se guarda la base de datos anterior. ----
-save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
-```
-
-
-```{r datos_premier_1, exercise = TRUE}
-
-Pts_temporada
-```
+Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`.
 
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
 
@@ -6549,6 +6500,59 @@ knitr::include_graphics("images/Ejemplo_gganimate_2.gif")
 </div>
 
 -->
+
+<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:-->
+
+```{r, eval = FALSE, message = FALSE, echo = FALSE}
+
+# Antes de la temporada de 1981, el equipo ganador se llevaba 2 puntos, y posteriormente se llevaba 3 puntos. El equipo derrotado por otra parte se llevaba 0 puntos, mientras que si el juego terminaba en empate, ambos equipos se llevaban 1 punto... se crean dos nuevas columnas para asignar punto de local y puntos de visitante. ----
+premier_league <- england %>%
+  mutate(
+    Pts_local = case_when(
+      Season <= 1980 & result == 'H' ~ 2,
+      Season > 1980 & result == 'H' ~ 3,
+      result == 'D' ~ 1,
+      result == 'A' ~ 0
+      ),
+    Pts_visitante = case_when(
+      Season <= 1980 & result == 'A' ~ 2,
+      Season > 1980 & result == 'A' ~ 3,
+      result == 'D' ~ 1,
+      result == 'H' ~ 0
+      )
+    )
+
+# Ahora, se obtendra el total de puntos de local y vistante para cada equipo y cada temporada, y solo de juegos jugados en primera división. ----
+Pts_local <- premier_league %>%
+  filter(tier == 1) %>%
+  group_by(Season, home) %>%
+  summarise(Pts = sum(Pts_local))
+
+Pts_visitante <- premier_league %>%
+  filter(tier == 1) %>%
+  group_by(Season, visitor) %>%
+  summarise(Pts = sum(Pts_visitante))
+
+#  Ahora se unen los dos anteriores conjuntos de datos y se suman los puntos locales y de visitante para obtener los puntos totales de cada equipo en cada temporada. ----
+Pts_temporada <- Pts_local %>%
+  rename(Equipo = home) %>%
+  bind_rows(
+    Pts_visitante %>%
+      rename(Equipo = visitor)
+  ) %>%
+  group_by(Season, Equipo) %>%
+  summarise(Pts = sum(Pts)) %>%
+  rename('Temporada' = Season)
+
+# Se guarda la base de datos anterior. ----
+save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
+```
+
+```{r datos_premier_1, exercise = TRUE}
+
+Pts_temporada
+```
+
 ```{r paquete_gganimate, exercise = TRUE, fig.align = "center"}
 
 #install.packages('gganimate')
@@ -6592,8 +6596,6 @@ Pts_temporada %>%
 #anim_save('images/1ra_animacion.gif')
 ```
 
-<!-- Hola leo Cambie este chunk para no tener problemas con el paquete , recuerda que llamar gganimate complicaria un poco las cosas en el paquete -->
-
 ```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
 knitr::include_graphics("images/1ra_animacion.gif")
 ```
@@ -6601,6 +6603,10 @@ knitr::include_graphics("images/1ra_animacion.gif")
 :::caution
 Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y profundizar más en su uso, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_ggplot2.pdf). De igual forma, si deseas conocer más sobre el paquete `gganimate` puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_gganimate.pdf).
 :::
+
+## 7. Análisis estadístico de datos
+
+
 
 ## 8. Comunicación de resultados
 
