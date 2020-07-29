@@ -6406,6 +6406,63 @@ Otros paquetes paquetes que podemos utilizar para graficar mapas y datos geoespa
 
 Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
 
+```{r ejemplo_gapminder, echo= FALSE ,eval=FALSE , fig.align = "center", out.width='580'}
+
+gapminder %>%
+  rename('Continente' = continent) %>%
+  mutate(
+    Continente = recode(
+      .x = Continente,
+      'Africa' = 'Africa', 
+      'Americas' = 'America', 
+      'Asia' = 'Asia', 
+      'Europe' = 'Europa', 
+      'Oceania' = 'Oceania'
+      )
+    ) %>%
+  ggplot(
+    data = .,
+    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    ) +
+  geom_point(alpha = 0.4) +
+  #stat_smooth(
+    #formula = y ~ log10(x), 
+    #se = FALSE, 
+    #size = 0.5, 
+    #color = 'black', 
+    #linetype = 'dotted'
+    #) +
+  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_size(range = c(2, 12)) +
+  scale_size(guide = FALSE) +
+  scale_x_log10() +
+  #facet_wrap(~ continent) +
+  labs(title = 'Año: {frame_time}', x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
+  theme_bw() +
+  theme(
+    axis.text = element_text(size = 12, face = 'bold'),
+    axis.title = element_text(size = 14, face = 'bold'),
+    plot.title = element_text(size = 14, face = 'bold'),
+    legend.position = c(0.8, 0.2),
+    legend.title = element_text(size = 10, face = 'bold'),
+    legend.text = element_text(size = 10)
+    ) +
+  transition_time(year) +
+  ease_aes('linear') +
+  enter_fade() +
+  exit_fade()
+anim_save('images/ejemplo_animacion.gif')
+```
+
+<details><summary>Animación similar a la de Hans Rosling</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
+knitr::include_graphics("images/ejemplo_animacion.gif")
+```
+
+</details>
+
 Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`.
 
 #### 6.4.1 ¿Como se crean las animaciones gráficas?
