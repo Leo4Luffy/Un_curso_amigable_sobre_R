@@ -6171,19 +6171,11 @@ Starwars %&gt;%
 <p><img src="images/ejemplo_animacion.gif" width="50%" style="display: block; margin: auto;" /></p>
 </details>
 <p>Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de <code>R</code>.</p>
-<div id="section-como-se-crean-las-animaciones-gráficas" class="section level4">
-<h4>6.4.1 ¿Como se crean las animaciones gráficas?</h4>
-<p>Al crear animaciones, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:</p>
-<p><img src="images/37va_imagen.png" width="54%" style="display: block; margin: auto;" /></p>
-<div class="caution">
-<p>Cuantos más subconjuntos de datos se tienen, mejor será su visualización animada. Si los subconjuntos de datos generado son pocos, mejor será realizar un gráfico estático mediante el uso de facetas en lugar de una animación.</p>
-</div>
 <div class="row">
 <div class="col-md-6" markdown="1">
-<h4 id="section-construccion-de-visualizaciones-animadas-mediante-el-uso-del-paquete-gganimate">6.4.2 Construccion de visualizaciones animadas mediante el uso del paquete <code>gganimate</code></h4>
+<h4 id="section-construcción-de-visualizaciones-animadas-mediante-el-uso-del-paquete-gganimate">6.4.1 Construcción de visualizaciones animadas mediante el uso del paquete <code>gganimate</code></h4>
 <p>El paquete <code>gganimate</code> extiende la gramática de gráficos implementada en el paquete <code>ggplot2</code> proporcionando una rica gramática o funciones de animación.</p>
-<p>Esta nueva gama de funciones se pueden agregar al código de graficación de la misma manera que se agrega un <code>geom_</code> u otra capa gráfica.</p>
-<!--Estas funciones son:-->
+Esta nueva gama de funciones se pueden agregar al código de graficación de la misma manera que se agrega un <code>geom_</code> u otra capa gráfica.
 </div>
 <div class="col-md-6" markdown="1">
 <p><img src="images/gganimate.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -6192,92 +6184,34 @@ Starwars %&gt;%
 </section>
 </div>
 </div>
-<!--
-+ `transition_*()`: ¿Qué variables control cambian y cómo?
-+ `view_*()`: ¿Deberían cambiar los ejes con los datos?
-+ `enter_*()/exit_*()`: ¿Cómo deben aparecer los nuevos datos y cómo deben desaparecer los datos antiguos durante el proceso de animación?
-+ `shadow_*()`: ¿Deberían "recordarse los datos anteriores y mostrarse con los datos actuales"?
-+ `ease_aes()`: ¿Cómo desea manejar el ritmo de cambio entre los valores de transición?-->
-<!--
-<div class="row">
-  <div class="col-md-6" markdown="1">
-<div class="tutorial-exercise" data-label="ejemplo_gganimate_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-
-```text
-tribble(
-  ~Nombre, ~Peso, ~Año,
-   'Juan',    60, 2018,
-  'Luisa',    54, 2018,
-  'Maria',    72, 2018,
-   'Luis',    68, 2018,
-   'Juan',    52, 2020,
-  'Luisa',    66, 2020,
-  'Maria',    80, 2020,
-   'Luis',    60, 2020
-  ) %>%
-  ggplot(aes(x = Nombre, y = Peso)) +
-  geom_bar(stat = 'identity') +
-  coord_flip() +
-  facet_wrap(~ Año)
-```
-
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":"480","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script></div>
-
-
-  </div>
-  <div class="col-md-6" markdown="1">
-<div class="tutorial-exercise" data-label="ejemplo_gganimate_2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-
-```text
-tribble(
-  ~Nombre, ~Peso, ~Año,
-   'Juan',    60, 2018,
-  'Luisa',    54, 2018,
-  'Maria',    72, 2018,
-   'Luis',    68, 2018,
-   'Juan',    52, 2020,
-  'Luisa',    66, 2020,
-  'Maria',    80, 2020,
-   'Luis',    60, 2020
-  ) %>%
-  ggplot(aes(x = Nombre, y = Peso)) +
-  geom_bar(stat = 'identity') +
-  coord_flip() +
-  labs(title = "Año: {closest_state}") +
-  transition_states(Año)
-```
-
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":"480","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script></div>
-
-
-  </div>
-</div>
-
--->
-<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:-->
-<div class="tutorial-exercise" data-label="datos_premier_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>Pts_temporada</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
-</div>
-<div class="tutorial-exercise" data-label="paquete_gganimate" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<p>Al crear gráficas animadas, el gráfico no se mueve sino que en realidad son muchos gráficos individuales que luego se unen como si tratase de cuadros de película:</p>
+<p><img src="images/37va_imagen.png" width="54%" style="display: block; margin: auto;" /></p>
+<p>Para usar el paquete <code>gganimate</code> se debe instalar primero. Para esto, el paquete se pueden instalar de dos formas:</p>
+<div class="tutorial-exercise" data-label="paquete_gganimate_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>#install.packages(&#39;gganimate&#39;)
-#devtools::install_github(&#39;thomasp85/gganimate&#39;)
-
-#library(gganimate)</code></pre>
+#devtools::install_github(&#39;thomasp85/gganimate&#39;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
-<div class="example">
-<h4 id="section-ejemplo-6.4.2.1">Ejemplo 6.4.2.1</h4>
+<p>y luego se debe cargar una vez se necesite:</p>
+<div class="tutorial-exercise" data-label="paquete_gganimate_2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>#library(gganimate)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
-<pre class="r"><code>Pts_temporada %&gt;%
+<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:-->
+<div id="section-definición-de-la-animación-transition_" class="section level4">
+<h4>6.4.1.1 Definición de la animación: <code>transition_*</code></h4>
+<div class="example">
+<h4 id="section-ejemplo-6.4.1.1">Ejemplo 6.4.1.1</h4>
+</div>
+<div class="tutorial-exercise" data-label="ejemplo_6_4_1_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>Pts_temporada %&gt;%
   filter(
     Equipo == &#39;Liverpool&#39; | Equipo == &#39;Manchester City&#39; | Equipo == &#39;Manchester United&#39; | Equipo == &#39;Tottenham Hotspur&#39; | Equipo == &#39;Chelsea&#39; | Equipo == &#39;Arsenal&#39;) %&gt;%
   ggplot(
     data = .,
     aes(x = Temporada, y = Pts, colour = Equipo, fill = Equipo)
     ) +
-  geom_line() +
-  geom_point(alpha = 0.4, size = 2.4) +
+  geom_point(alpha = 0.4, size = 4.4) +
   labs(
     x = &#39;Temporadas de la Premier League&#39;,
     y = &#39;Puntos por temporada&#39;
@@ -6292,11 +6226,48 @@ tribble(
     legend.position = &#39;none&#39;,
     strip.background = element_rect(colour = &#39;gray64&#39;, fill = &#39;gray64&#39;),
     strip.text = element_text(size = 12, colour = &#39;black&#39;, face = &#39;bold&#39;)
-    ) +
-  transition_reveal(Temporada) #+
-  #exit_shrink()
+    ) #+
+  #transition_reveal(Temporada)
 #anim_save(&#39;images/1ra_animacion.gif&#39;)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
+</div>
 <p><img src="images/1ra_animacion.gif" width="50%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-indicando-datos-anteriores-shadow_" class="section level4">
+<h4>6.4.1.2 Indicando datos anteriores: <code>shadow_*</code></h4>
+<div class="example">
+<h4 id="section-ejemplo-6.4.1.2">Ejemplo 6.4.1.2</h4>
+</div>
+<div class="tutorial-exercise" data-label="ejemplo_6_4_1_2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>Pts_temporada %&gt;%
+  filter(
+    Equipo == &#39;Liverpool&#39; | Equipo == &#39;Manchester City&#39; | Equipo == &#39;Manchester United&#39; | Equipo == &#39;Tottenham Hotspur&#39; | Equipo == &#39;Chelsea&#39; | Equipo == &#39;Arsenal&#39;) %&gt;%
+  ggplot(
+    data = .,
+    aes(x = Temporada, y = Pts, colour = Equipo, fill = Equipo)
+    ) +
+  geom_point(alpha = 0.4, size = 4.4) +
+  labs(
+    x = &#39;Temporadas de la Premier League&#39;,
+    y = &#39;Puntos por temporada&#39;
+  ) +
+  facet_wrap(~ Equipo, ncol = 2) +
+  scale_colour_manual(values = c(&#39;red&#39;, &#39;cyan&#39;, &#39;black&#39;, &#39;gray34&#39;, &#39;green&#39;, &#39;yellow&#39;)) +
+  scale_fill_manual(values = c(&#39;red&#39;, &#39;cyan&#39;, &#39;black&#39;, &#39;gray34&#39;, &#39;green&#39;, &#39;yellow&#39;)) +
+  theme_bw() +
+  theme(
+    axis.text = element_text(size = 12, face = &#39;bold&#39;),
+    axis.title = element_text(size = 14, face = &#39;bold&#39;),
+    legend.position = &#39;none&#39;,
+    strip.background = element_rect(colour = &#39;gray64&#39;, fill = &#39;gray64&#39;),
+    strip.text = element_text(size = 12, colour = &#39;black&#39;, face = &#39;bold&#39;)
+    ) #+
+  #transition_reveal(Temporada)  +
+  #shadow_wake(wake_length = 0.4) 
+#anim_save(&#39;images/2da_animacion.gif&#39;)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
+</div>
+<p><img src="images/2da_animacion.gif" width="50%" style="display: block; margin: auto;" /></p>
 <div class="caution">
 <p>Si deseas ver un resumen de las posibilidades que ofrece el paquete <code>ggplot2</code> y profundizar más en su uso, puedes mirar su hoja de trucos <a href="https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_ggplot2.pdf">aquí</a>. De igual forma, si deseas conocer más sobre el paquete <code>gganimate</code> puedes mirar su hoja de trucos <a href="https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_gganimate.pdf">aquí</a>.</p>
 </div>
@@ -7983,30 +7954,30 @@ output$`tutorial-exercise-addition_6342-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-ejemplo_gganimate_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_gganimate_1-code-editor`)), session)
-output$`tutorial-exercise-ejemplo_gganimate_1-output` <- renderUI({
-  `tutorial-exercise-ejemplo_gganimate_1-result`()
+`tutorial-exercise-paquete_gganimate_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-paquete_gganimate_1-code-editor`)), session)
+output$`tutorial-exercise-paquete_gganimate_1-output` <- renderUI({
+  `tutorial-exercise-paquete_gganimate_1-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-ejemplo_gganimate_2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_gganimate_2-code-editor`)), session)
-output$`tutorial-exercise-ejemplo_gganimate_2-output` <- renderUI({
-  `tutorial-exercise-ejemplo_gganimate_2-result`()
+`tutorial-exercise-paquete_gganimate_2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-paquete_gganimate_2-code-editor`)), session)
+output$`tutorial-exercise-paquete_gganimate_2-output` <- renderUI({
+  `tutorial-exercise-paquete_gganimate_2-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-datos_premier_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-datos_premier_1-code-editor`)), session)
-output$`tutorial-exercise-datos_premier_1-output` <- renderUI({
-  `tutorial-exercise-datos_premier_1-result`()
+`tutorial-exercise-ejemplo_6_4_1_1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_6_4_1_1-code-editor`)), session)
+output$`tutorial-exercise-ejemplo_6_4_1_1-output` <- renderUI({
+  `tutorial-exercise-ejemplo_6_4_1_1-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-paquete_gganimate-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-paquete_gganimate-code-editor`)), session)
-output$`tutorial-exercise-paquete_gganimate-output` <- renderUI({
-  `tutorial-exercise-paquete_gganimate-result`()
+`tutorial-exercise-ejemplo_6_4_1_2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ejemplo_6_4_1_2-code-editor`)), session)
+output$`tutorial-exercise-ejemplo_6_4_1_2-output` <- renderUI({
+  `tutorial-exercise-ejemplo_6_4_1_2-result`()
 })
 </script>
  
