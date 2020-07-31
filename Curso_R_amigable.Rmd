@@ -5389,7 +5389,7 @@ Una gramática de gráficos es un marco que sigue un enfoque en capas para descr
 knitr::include_graphics("images/26va_imagen.png")  
 ```
 
-Para explicar el concepto de la gramática de gráficos en capas implementado en el paquete `ggplot2` se empleara el conjunto de datos [`pokemon`](https://github.com/cienciadedatos/datos-de-miercoles/tree/master/datos/2019/2019-07-10). Estos datos es uno de los muchos conjuntos de datos del proyecto [_Datos de miércoles_](https://github.com/cienciadedatos/datos-de-miercoles) cuyo propósito consiste en buscar que lo ususraios de `R` desarrollen habilidades de visualización y procesado de datos usando las herramientas del `tidyverse`.
+Para explicar el concepto de la gramática de gráficos en capas implementado en el paquete `ggplot2` se empleara el conjunto de datos [`pokemon`](https://github.com/cienciadedatos/datos-de-miercoles/tree/master/datos/2019/2019-07-10). Estos datos es uno de los muchos conjuntos de datos del proyecto [_Datos de miércoles_](https://github.com/cienciadedatos/datos-de-miercoles) cuyo propósito consiste en buscar que lo usuarios de `R` desarrollen habilidades de visualización y procesado de datos usando las herramientas del `tidyverse`.
 
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
@@ -6427,7 +6427,7 @@ gapminder %>%
   geom_point(alpha = 0.4) +
   scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
   scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size(range = c(2, 12)) +
+  scale_size(range = c(4, 14)) +
   scale_size(guide = FALSE) +
   scale_x_log10() +
   #facet_wrap(~ continent) +
@@ -6447,14 +6447,6 @@ gapminder %>%
   exit_fade()
 anim_save('images/ejemplo_animacion.gif')
 ```
-
-<details><summary>Animación similar a la de Hans Rosling</summary>
-
-```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
-knitr::include_graphics("images/ejemplo_animacion.gif")
-```
-
-</details>
 
 Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`.
 
@@ -6482,6 +6474,70 @@ Al crear gráficas animadas, el gráfico no se mueve sino que en realidad son mu
 knitr::include_graphics("images/37va_imagen.png")  
 ```
 
+:::example
+#### Ejemplo 6.4.1.1
+:::
+
+<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos gapminder:-->
+
+```{r datos_gapminder, echo = FALSE, eval = FALSE, message = FALSE}
+
+library(ggrepel)
+
+gapminder_2 <- gapminder %>%
+  filter(country == 'China')
+
+gapminder %>%
+  rename(
+    'Continente' = continent
+    ) %>%
+  mutate(
+    Continente = recode(
+      .x = Continente,
+      'Africa' = 'África', 
+      'Americas' = 'América', 
+      'Asia' = 'Asia', 
+      'Europe' = 'Europa', 
+      'Oceania' = 'Oceanía'
+      )
+    ) %>%
+  ggplot(
+    data = .,
+    aes(x = gdpPercap, y = lifeExp)
+    ) +
+  geom_point(aes(size = pop, colour = Continente, fill = Continente), alpha = 0.4) +
+  facet_wrap(~ year) +
+  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_x_log10() +
+  labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
+  theme_bw() +
+  theme(
+    axis.text = element_text(size = 12, face = 'bold'),
+    axis.title = element_text(size = 14, face = 'bold'),
+    plot.title = element_text(size = 14, face = 'bold'),
+    legend.position = 'top',
+    legend.title = element_text(size = 14, face = 'bold'),
+    legend.text = element_text(size = 12),
+    strip.text = element_text(size = 12, face = 'bold'),
+    strip.background = element_rect(colour = 'black', fill = 'gray64')
+    ) +
+  geom_text_repel(
+    data = gapminder_2,
+    aes(label = country),
+    size = 5,
+    box.padding = unit(1.0, 'lines'),
+    point.padding = unit(0.8, 'lines'),
+    segment.color = 'black'
+    )
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
+
+knitr::include_graphics("images/ejemplo_gapminder.png")  
+```
+
 Para usar el paquete `gganimate` se debe instalar primero. Para esto, el paquete se pueden instalar de dos formas:
 
 ```{r paquete_gganimate_1, exercise = TRUE, fig.align = "center"}
@@ -6497,129 +6553,154 @@ y luego se debe cargar una vez se necesite:
 #library(gganimate)
 ```
 
-<!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos que se observa a continuación:-->
-
-```{r, eval = FALSE, message = FALSE, echo = FALSE}
-
-# Antes de la temporada de 1981, el equipo ganador se llevaba 2 puntos, y posteriormente se llevaba 3 puntos. El equipo derrotado por otra parte se llevaba 0 puntos, mientras que si el juego terminaba en empate, ambos equipos se llevaban 1 punto... se crean dos nuevas columnas para asignar punto de local y puntos de visitante. ----
-premier_league <- england %>%
-  mutate(
-    Pts_local = case_when(
-      Season <= 1980 & result == 'H' ~ 2,
-      Season > 1980 & result == 'H' ~ 3,
-      result == 'D' ~ 1,
-      result == 'A' ~ 0
-      ),
-    Pts_visitante = case_when(
-      Season <= 1980 & result == 'A' ~ 2,
-      Season > 1980 & result == 'A' ~ 3,
-      result == 'D' ~ 1,
-      result == 'H' ~ 0
-      )
-    )
-
-# Ahora, se obtendra el total de puntos de local y vistante para cada equipo y cada temporada, y solo de juegos jugados en primera división. ----
-Pts_local <- premier_league %>%
-  filter(tier == 1) %>%
-  group_by(Season, home) %>%
-  summarise(Pts = sum(Pts_local))
-
-Pts_visitante <- premier_league %>%
-  filter(tier == 1) %>%
-  group_by(Season, visitor) %>%
-  summarise(Pts = sum(Pts_visitante))
-
-#  Ahora se unen los dos anteriores conjuntos de datos y se suman los puntos locales y de visitante para obtener los puntos totales de cada equipo en cada temporada. ----
-Pts_temporada <- Pts_local %>%
-  rename(Equipo = home) %>%
-  bind_rows(
-    Pts_visitante %>%
-      rename(Equipo = visitor)
-  ) %>%
-  group_by(Season, Equipo) %>%
-  summarise(Pts = sum(Pts)) %>%
-  rename('Temporada' = Season)
-
-# Se guarda la base de datos anterior. ----
-save(Pts_temporada, file = "data_pkg/Pts_temporada.rda", compress='xz') # Base de datos que contiene los puntos obtenidos por cada equipo en cada una de las temporadas.
-```
-
 #### 6.4.1.1 Definición de la animación: `transition_*`
 
+Las funciones `transition_*` definen como los datos se dividen en subconjuntos de datos, que variables cambian en la animación y cómo cambian (transición).
+
 :::example
-#### Ejemplo 6.4.1.1
+#### Ejemplo 6.4.1.1.1
 :::
 
-```{r ejemplo_6_4_1_1, exercise = TRUE}
+```{r ejemplo_6_4_1_1_1, exercise = TRUE}
 
-Pts_temporada %>%
-  filter(
-    Equipo == 'Liverpool' | Equipo == 'Manchester City' | Equipo == 'Manchester United' | Equipo == 'Tottenham Hotspur' | Equipo == 'Chelsea' | Equipo == 'Arsenal') %>%
+gapminder %>%
+  rename(
+    'Continente' = continent
+    ) %>%
+  mutate(
+    Continente = recode(
+      .x = Continente,
+      'Africa' = 'África', 
+      'Americas' = 'América', 
+      'Asia' = 'Asia', 
+      'Europe' = 'Europa', 
+      'Oceania' = 'Oceanía'
+      )
+    ) %>%
   ggplot(
     data = .,
-    aes(x = Temporada, y = Pts, colour = Equipo, fill = Equipo)
+    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
     ) +
-  geom_point(alpha = 0.4, size = 4.4) +
-  labs(
-    x = 'Temporadas de la Premier League',
-    y = 'Puntos por temporada'
-  ) +
-  facet_wrap(~ Equipo, ncol = 2) +
-  scale_colour_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
-  scale_fill_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
+  geom_point(alpha = 0.4) +
+  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_x_log10() +
+  labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
   theme_bw() +
   theme(
     axis.text = element_text(size = 12, face = 'bold'),
     axis.title = element_text(size = 14, face = 'bold'),
-    legend.position = 'none',
-    strip.background = element_rect(colour = 'gray64', fill = 'gray64'),
-    strip.text = element_text(size = 12, colour = 'black', face = 'bold')
+    legend.position = c(0.8, 0.2),
+    legend.title = element_text(size = 14, face = 'bold'),
+    legend.text = element_text(size = 12)
     ) #+
-  #transition_reveal(Temporada)
-#anim_save('images/1ra_animacion.gif')
+  #transition_time(year)
 ```
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
 knitr::include_graphics("images/1ra_animacion.gif")
 ```
 
-#### 6.4.1.2 Indicando datos anteriores: `shadow_*`
-
-:::example
-#### Ejemplo 6.4.1.2
+:::caution
+Además de la función `transition_time()`, existen otras funciones `transition_` que permiten realizar ditintos gráficos animados. [Aquí](https://gganimate.com/reference/index.html) podrás encontrar una lista de estas funciones y de otras funciones implementadas en el paquete `gganimate`.
 :::
 
-```{r ejemplo_6_4_1_2, exercise = TRUE}
+#### 6.4.1.2 Indicar los datos anteriores: `shadow_*`
 
-Pts_temporada %>%
-  filter(
-    Equipo == 'Liverpool' | Equipo == 'Manchester City' | Equipo == 'Manchester United' | Equipo == 'Tottenham Hotspur' | Equipo == 'Chelsea' | Equipo == 'Arsenal') %>%
+:::example
+#### Ejemplo 6.4.1.2.1
+:::
+
+```{r ejemplo_6_4_1_2_1, exercise = TRUE}
+
+gapminder %>%
+  rename(
+    'Continente' = continent
+    ) %>%
+  mutate(
+    Continente = recode(
+      .x = Continente,
+      'Africa' = 'África', 
+      'Americas' = 'América', 
+      'Asia' = 'Asia', 
+      'Europe' = 'Europa', 
+      'Oceania' = 'Oceanía'
+      )
+    ) %>%
   ggplot(
     data = .,
-    aes(x = Temporada, y = Pts, colour = Equipo, fill = Equipo)
+    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
     ) +
-  geom_point(alpha = 0.4, size = 4.4) +
-  labs(
-    x = 'Temporadas de la Premier League',
-    y = 'Puntos por temporada'
-  ) +
-  facet_wrap(~ Equipo, ncol = 2) +
-  scale_colour_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
-  scale_fill_manual(values = c('red', 'cyan', 'black', 'gray34', 'green', 'yellow')) +
+  geom_point(alpha = 0.4) +
+  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_x_log10() +
+  labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
   theme_bw() +
   theme(
     axis.text = element_text(size = 12, face = 'bold'),
     axis.title = element_text(size = 14, face = 'bold'),
-    legend.position = 'none',
-    strip.background = element_rect(colour = 'gray64', fill = 'gray64'),
-    strip.text = element_text(size = 12, colour = 'black', face = 'bold')
+    legend.position = c(0.8, 0.2),
+    legend.title = element_text(size = 14, face = 'bold'),
+    legend.text = element_text(size = 12)
     ) #+
-  #transition_reveal(Temporada)  +
-  #shadow_wake(wake_length = 0.4) 
-#anim_save('images/2da_animacion.gif')
+  #transition_time(year) +
+  #shadow_wake(wake_length = 0.1)
 ```
+
 ```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
 knitr::include_graphics("images/2da_animacion.gif")
+```
+
+#### 6.4.1.3 Etiquetado dinámico: `{ }`
+
+:::example
+#### Ejemplo 6.4.1.3.1
+:::
+
+```{r ejemplo_6_4_1_3_1, exercise = TRUE}
+
+gapminder %>%
+  rename(
+    'Continente' = continent
+    ) %>%
+  mutate(
+    Continente = recode(
+      .x = Continente,
+      'Africa' = 'África', 
+      'Americas' = 'América', 
+      'Asia' = 'Asia', 
+      'Europe' = 'Europa', 
+      'Oceania' = 'Oceanía'
+      )
+    ) %>%
+  ggplot(
+    data = .,
+    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    ) +
+  geom_point(alpha = 0.4) +
+  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
+  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_x_log10() +
+  labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer', title = 'Año: {frame_time}') +
+  theme_bw() +
+  theme(
+    axis.text = element_text(size = 12, face = 'bold'),
+    axis.title = element_text(size = 14, face = 'bold'),
+    legend.position = c(0.8, 0.2),
+    legend.title = element_text(size = 14, face = 'bold'),
+    legend.text = element_text(size = 12),
+    plot.title = element_text(size = 14, face = 'bold')
+    ) #+
+  #transition_time(year) +
+  #shadow_wake(wake_length = 0.1)
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = "center"}
+knitr::include_graphics("images/3ra_animacion.gif")
 ```
 
 :::caution
