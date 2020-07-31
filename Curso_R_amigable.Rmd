@@ -6480,7 +6480,7 @@ knitr::include_graphics("images/37va_imagen.png")
 
 <!--Para explicar como hacer estas visualizaciones se empleará el conjunto de datos gapminder:-->
 
-```{r datos_gapminder, echo = FALSE, eval = FALSE, message = FALSE}
+```{r grafica_gapminder, echo = FALSE, eval = FALSE, message = FALSE}
 
 library(ggrepel)
 
@@ -6527,20 +6527,33 @@ gapminder %>%
     data = gapminder_2,
     aes(label = country),
     size = 5,
-    box.padding = unit(1.0, 'lines'),
+    box.padding = unit(2.8, 'lines'),
     point.padding = unit(0.8, 'lines'),
     segment.color = 'black'
     )
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
+```{r datos_gapminder, exercise = TRUE}
+
+gapminder::gapminder
+```
+
++ Gráfico estático
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
 
 knitr::include_graphics("images/ejemplo_gapminder.png")  
 ```
 
++ Gráfico animado
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+knitr::include_graphics("images/ejemplo_gapminder_animado.gif")
+```
+
 Para usar el paquete `gganimate` se debe instalar primero. Para esto, el paquete se pueden instalar de dos formas:
 
-```{r paquete_gganimate_1, exercise = TRUE, fig.align = "center"}
+```{r paquete_gganimate_1, exercise = TRUE}
 
 #install.packages('gganimate')
 #devtools::install_github('thomasp85/gganimate')
@@ -6548,7 +6561,7 @@ Para usar el paquete `gganimate` se debe instalar primero. Para esto, el paquete
 
 y luego se debe cargar una vez se necesite:
 
-```{r paquete_gganimate_2, exercise = TRUE, fig.align = "center"}
+```{r paquete_gganimate_2, exercise = TRUE}
 
 #library(gganimate)
 ```
@@ -6561,7 +6574,7 @@ Las funciones `transition_*` definen como los datos se dividen en subconjuntos d
 #### Ejemplo 6.4.1.1.1
 :::
 
-```{r ejemplo_6_4_1_1_1, exercise = TRUE}
+```{r ejemplo_6_4_1_1_1, exercise = TRUE, fig.align = "center"}
 
 gapminder %>%
   rename(
@@ -6612,7 +6625,7 @@ Además de la función `transition_time()`, existen otras funciones `transition_
 #### Ejemplo 6.4.1.2.1
 :::
 
-```{r ejemplo_6_4_1_2_1, exercise = TRUE}
+```{r ejemplo_6_4_1_2_1, exercise = TRUE, fig.align = "center"}
 
 gapminder %>%
   rename(
@@ -6660,7 +6673,7 @@ knitr::include_graphics("images/2da_animacion.gif")
 #### Ejemplo 6.4.1.3.1
 :::
 
-```{r ejemplo_6_4_1_3_1, exercise = TRUE}
+```{r ejemplo_6_4_1_3_1, exercise = TRUE, fig.align = "center"}
 
 gapminder %>%
   rename(
