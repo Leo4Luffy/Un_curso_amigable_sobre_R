@@ -6741,28 +6741,15 @@ No obstante si cuenta con la IDE de Rstudio no es explícitamente necesario que 
 
 Como primer paso para aprender sobre las opciones de `rmarkdown` debemos conocer las plantillas que posee abriendo `Rstudio` y creando un nuevo Rmarkdown de la siguiente forma: 
 
+<p align="center">
+  <img src="images/rmarkdown_1.gif" width=1050"/>
+</p>
 
-```{r, echo = FALSE, eval = TRUE, out.width = "100%", fig.align = "center"}
-knitr::include_graphics("images/rmarkdown_1.gif")
-```
+En la siguiente imagen se ilustra el panel de opciones de Rmarkdown mostrando los formatos de salida que podemos usar para generar documentos ya sean HTML,PDF, Word, presentaciones, Shiny y otras plantillas.
 
-```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
-knitr::include_graphics("images/rmarkdown_2.png")
-```
-
-En la segunda imagen se ilustra el panel de opciones de Rmarkdown mostrando los formatos de salida que podemos usar para generar documentos ya sean HTML,PDF o Word. Los formatos disponibles para presentaciones, Shiny y plantillas se ven a continuación.
-
-```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
-knitr::include_graphics("images/rmarkdown_3.png")
-```
-
-```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
-knitr::include_graphics("images/rmarkdown_4.png")
-```
-
-```{r, echo = FALSE, eval = TRUE, out.width = "70%", fig.align = "center"}
-knitr::include_graphics("images/rmarkdown_5.png")
-```
+<p align="center">
+  <img src="images/rmarkdown_2.gif" />
+</p>
 
 Generar cualquier tipo de documento, presentación, Shiny o plantilla es tan simple como seleccionar la opción que prefiera y dar click en **OK**. Después de pulsar OK se abrirá un archivo Rmd con instrucciones básicas correspondientes al formato seleccionado, para crear el archivo con el formato de interés debe buscar el icono de `knit` o ejecutar el comando `CTRL + SHIFT + K`.
 
