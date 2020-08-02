@@ -6211,7 +6211,7 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
 </div>
 <div id="section-definición-de-la-animación-transition_" class="section level4">
 <h4>6.4.1.1 Definición de la animación: <code>transition_*()</code></h4>
-<p>Las funciones <code>transition_*()</code> definen como los datos se dividen en subconjuntos de datos, que variables cambian en la animación y cómo cambian (transición). Algunos tipos de transición son <code>transition_states()</code> y <code>transition_time()</code>.</p>
+<p>Las funciones <code>transition_*()</code> son un conjunto de funciones encargadas de interpretar los datos y distribuirlos en subconjuntos de datos de acuerdo a una de sus variables, la variable de transición.</p>
 <div class="example">
 <h4 id="section-ejemplo-6.4.1.1.1">Ejemplo 6.4.1.1.1</h4>
 </div>
@@ -6232,12 +6232,12 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
     ) %&gt;%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
   scale_fill_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = &#39;PIB per cápita&#39;, y = &#39;Expectativa de vida al nacer&#39;) +
   theme_bw() +
@@ -6249,16 +6249,16 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
     legend.text = element_text(size = 12)
     ) #+
   #transition_time(year)</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"center","fig.keep":"high","fig.show":"asis","out.width":"380","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
 <p><img src="images/1ra_animacion.gif" width="50%" style="display: block; margin: auto;" /></p>
 <div class="caution">
 <p>Además de la función <code>transition_time()</code>, existen otras funciones <code>transition_</code> que permiten realizar ditintos gráficos animados. <a href="https://gganimate.com/reference/index.html">Aquí</a> podrás encontrar una lista de estas funciones y de otras funciones implementadas en el paquete <code>gganimate</code>.</p>
 </div>
 </div>
-<div id="section-indicar-los-datos-anteriores-shadow_" class="section level4">
-<h4>6.4.1.2 Indicar los datos anteriores: <code>shadow_*()</code></h4>
-<p>Con el conjunto de funciones <code>shadow_*()</code> se pueden aplicar “sombras” que muestran los puntos de datos anteriores. Estas funciones son <code>shadow_wake()</code>, <code>shadow_trail()</code> y <code>shadow_mark()</code>.</p>
+<div id="section-crear-estelas-de-sombra-shadow_" class="section level4">
+<h4>6.4.1.2 Crear estelas de sombra: <code>shadow_*()</code></h4>
+<p>Con el conjunto de funciones <code>shadow_*()</code> se pueden aplicar sombras que muestran los puntos de datos anteriores. Estas funciones son <code>shadow_wake()</code>, <code>shadow_trail()</code> y <code>shadow_mark()</code>.</p>
 <div class="example">
 <h4 id="section-ejemplo-6.4.1.2.1">Ejemplo 6.4.1.2.1</h4>
 </div>
@@ -6279,12 +6279,12 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
     ) %&gt;%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
   scale_fill_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = &#39;PIB per cápita&#39;, y = &#39;Expectativa de vida al nacer&#39;) +
   theme_bw() +
@@ -6324,12 +6324,12 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
     ) %&gt;%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
   scale_fill_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = &#39;PIB per cápita&#39;, y = &#39;Expectativa de vida al nacer&#39;, title = &#39;Año: {frame_time}&#39;) +
   theme_bw() +
@@ -6349,7 +6349,7 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
 </div>
 <div id="section-guardar-como-un-gif" class="section level4">
 <h4>6.4.1.4 Guardar como un GIF</h4>
-<p>El paquete <code>gganimate</code> permite también finalizar y guardar las animaciones como un GIF.</p>
+<p>El paquete <code>gganimate</code> permite también guardar los gráficos animados como un GIF.</p>
 <div class="example">
 <h4 id="section-ejemplo-6.4.1.4.1">Ejemplo 6.4.1.4.1</h4>
 </div>
@@ -6370,12 +6370,12 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
     ) %&gt;%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
   scale_fill_manual(values = c(&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;, &#39;cyan&#39;, &#39;green&#39;)) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = &#39;PIB per cápita&#39;, y = &#39;Expectativa de vida al nacer&#39;, title = &#39;Año: {frame_time}&#39;) +
   theme_bw() +
@@ -6402,6 +6402,10 @@ Esta nueva gama de funciones se pueden agregar al código de graficación de la 
 </div>
 <div id="section-modelación-estadística-básica" class="section level2">
 <h2>7. Modelación estadística básica</h2>
+<p><img src="images/broom.png" width="30%" style="display: block; margin: auto;" /></p>
+<section style="text-align: center;">
+<small>Ilustracíon hecha por <font color = "black"><u>@allison_horst</u></font>.</small>
+</section>
 </div>
 <div id="section-comunicación-de-resultados" class="section level2">
 <h2>8. Comunicación de resultados</h2>

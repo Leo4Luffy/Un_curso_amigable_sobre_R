@@ -6406,48 +6406,6 @@ Otros paquetes paquetes que podemos utilizar para graficar mapas y datos geoespa
 
 Ya en este punto de seguro se preguntará ¿es posible ir más alla de lo que se ha visto hasta ahora? La respuesta es definitivamente un si. Un ejemplo de ello es la famosa visualización de [Hans Rosling](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) donde representaba la población mundial, la expectativa de vida y varios indicadores económicos mediante una visualización animada.
 
-```{r ejemplo_gapminder, echo= FALSE ,eval=FALSE , fig.align = "center", out.width='580'}
-
-gapminder %>%
-  rename('Continente' = continent) %>%
-  mutate(
-    Continente = recode(
-      .x = Continente,
-      'Africa' = 'Africa', 
-      'Americas' = 'America', 
-      'Asia' = 'Asia', 
-      'Europe' = 'Europa', 
-      'Oceania' = 'Oceania'
-      )
-    ) %>%
-  ggplot(
-    data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
-    ) +
-  geom_point(alpha = 0.4) +
-  scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size(range = c(4, 14)) +
-  scale_size(guide = FALSE) +
-  scale_x_log10() +
-  #facet_wrap(~ continent) +
-  labs(title = 'Año: {frame_time}', x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
-  theme_bw() +
-  theme(
-    axis.text = element_text(size = 12, face = 'bold'),
-    axis.title = element_text(size = 14, face = 'bold'),
-    plot.title = element_text(size = 14, face = 'bold'),
-    legend.position = c(0.8, 0.2),
-    legend.title = element_text(size = 10, face = 'bold'),
-    legend.text = element_text(size = 10)
-    ) +
-  transition_time(year) +
-  ease_aes('linear') +
-  enter_fade() +
-  exit_fade()
-anim_save('images/ejemplo_animacion.gif')
-```
-
 Afortunadamente, hacer este tipo de visualizaciones se ha vuelto hoy en día bastante simple mediante el uso de paquetes de `R`.
 
 <div class="row">
@@ -6568,13 +6526,13 @@ y luego se debe cargar una vez se necesite:
 
 #### 6.4.1.1 Definición de la animación: `transition_*()`
 
-Las funciones `transition_*()` definen como los datos se dividen en subconjuntos de datos, que variables cambian en la animación y cómo cambian (transición). Algunos tipos de transición son `transition_states()` y `transition_time()`.
+Las funciones `transition_*()` son un conjunto de funciones encargadas de interpretar los datos y distribuirlos en subconjuntos de datos de acuerdo a una de sus variables, la variable de transición.
 
 :::example
 #### Ejemplo 6.4.1.1.1
 :::
 
-```{r ejemplo_6_4_1_1_1, exercise = TRUE, fig.align = "center"}
+```{r ejemplo_6_4_1_1_1, exercise = TRUE, fig.align = "center", out.width='380'}
 
 gapminder %>%
   rename(
@@ -6592,12 +6550,12 @@ gapminder %>%
     ) %>%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
   scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
   theme_bw() +
@@ -6619,9 +6577,9 @@ knitr::include_graphics("images/1ra_animacion.gif")
 Además de la función `transition_time()`, existen otras funciones `transition_` que permiten realizar ditintos gráficos animados. [Aquí](https://gganimate.com/reference/index.html) podrás encontrar una lista de estas funciones y de otras funciones implementadas en el paquete `gganimate`.
 :::
 
-#### 6.4.1.2 Indicar los datos anteriores: `shadow_*()`
+#### 6.4.1.2 Crear estelas de sombra: `shadow_*()`
 
-Con el conjunto de funciones `shadow_*()` se pueden aplicar "sombras" que muestran los puntos de datos anteriores. Estas funciones son `shadow_wake()`, `shadow_trail()` y `shadow_mark()`.
+Con el conjunto de funciones `shadow_*()` se pueden aplicar sombras que muestran los puntos de datos anteriores. Estas funciones son `shadow_wake()`, `shadow_trail()` y `shadow_mark()`.
 
 :::example
 #### Ejemplo 6.4.1.2.1
@@ -6645,12 +6603,12 @@ gapminder %>%
     ) %>%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
   scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer') +
   theme_bw() +
@@ -6695,12 +6653,12 @@ gapminder %>%
     ) %>%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
   scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer', title = 'Año: {frame_time}') +
   theme_bw() +
@@ -6722,7 +6680,7 @@ knitr::include_graphics("images/3ra_animacion.gif")
 
 #### 6.4.1.4 Guardar como un GIF
 
-El paquete `gganimate` permite también finalizar y guardar las animaciones como un GIF.
+El paquete `gganimate` permite también guardar los gráficos animados como un GIF.
 
 :::example
 #### Ejemplo 6.4.1.4.1
@@ -6746,12 +6704,12 @@ Graf_animado <- gapminder %>%
     ) %>%
   ggplot(
     data = .,
-    aes(x = gdpPercap, y = lifeExp, size = pop, colour = Continente, fill = Continente)
+    aes(x = gdpPercap, y = lifeExp)
     ) +
-  geom_point(alpha = 0.4) +
+  geom_point(aes(colour = Continente, fill = Continente, size = pop), alpha = 0.4) +
   scale_colour_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
   scale_fill_manual(values = c('yellow', 'red', 'black', 'cyan', 'green')) +
-  scale_size_area(guide = FALSE, max_size = 14) +
+  scale_size_area(max_size = 14, guide = FALSE) +
   scale_x_log10() +
   labs(x = 'PIB per cápita', y = 'Expectativa de vida al nacer', title = 'Año: {frame_time}') +
   theme_bw() +
@@ -6776,7 +6734,11 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y 
 
 ## 7. Modelación estadística básica
 
+```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
+knitr::include_graphics("images/broom.png")
+```
 
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
 
 ## 8. Comunicación de resultados
 
