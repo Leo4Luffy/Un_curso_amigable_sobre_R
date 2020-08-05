@@ -2584,6 +2584,14 @@ Los bucles o ciclos son estructuras de control que permiten recorrer los element
 
 Para empezar trabajaremos con el ciclo `for` ilustrando cómo funcionan las iteraciones en cada elemento del vector `letras` el cual posee una longitud de 15. 
 
+Para empezar trabajaremos con el ciclo `for` viendo la siguiente ilustracion y observando el funcionamiento de las iteraciones en cada elemento en el vector `letras` del ejemplo 3.2.1. Recordemos que `letras`  posee 15 elementos.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "95%", fig.align = "center"}
+knitr::include_graphics("images/for_loops.jpeg")
+```
+
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section> 
+
 :::example
 #### Ejemplo 3.2.1
 :::
