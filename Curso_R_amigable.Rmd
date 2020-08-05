@@ -27,8 +27,8 @@ require(fontawesome)
 #require(jpeg)
 #require(grid)
 #require(gridGraphics)
-#require(showtext)
-#font_add_google('Gochi Hand', 'gochi')
+require(showtext)
+font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
@@ -503,7 +503,7 @@ Los escalares son el tipo de objeto más simple en `R`. Un objeto escalar es un 
 
 + `character` (caracteres)
 + `integer` (números enteros)
-+ `numeric` (números reales)
++ `double` (números reales)
 + `complex` (números complejos)
 + `logical` (lógicos o boleanos)
 
@@ -519,6 +519,9 @@ typeof(a)
 b <- 1L
 typeof(b)
 
+b_2 <- 1
+typeof(b_2)
+
 c <- 12.3
 typeof(c)
 
@@ -530,12 +533,160 @@ typeof(e)
 ```
 
 :::caution
-En `R` existen las llamadas __palabras clave__ o __palabras reservadas__. Estas no se deben usar como nombres ni para crear variables, ni para crear funciones.
+En `R` existen las llamadas __palabras clave__ o __palabras reservadas__. Estas no se deben usar como nombres ni para crear objetos, ni para crear funciones.
 :::
 
 ### 2.2 Vectores
 
-Los vectores son una colección de elementos de la misma clase atómica. Es decir que un vector puede contener n elementos del mismo tipo, ya sean estos números, caracteres o lógicos, pero nunca podrán ser de dos o más tipos diferentes.
+Un vector consiste en una colección de escalares de la misma clase atómica. Es decir que un vector puede contener n elementos de la misma clase, ya sean estos números, caracteres o lógicos, pero nunca podrán ser de dos o más clases diferentes.
+
+Hay muchas formas de crear vectores en `R`. A continuación podrá encontrar una tabla con ejemplos de estas formas:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Función', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'c(a, b)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'a:b', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'seq(from, to, by)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'rep(x, times, each)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Ejemplo', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 4.5, label = 'c(1, 5, 9)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 3.5, label = '(5:10)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.5, label = 'seq(from = 0, to = 6, by = 2)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 1.5, label = 'rep(x = c(1, 5), times = 2, each = 2)', family = 'gochi', size = 4.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 5.5, label = 'Resultado', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 4.5, label = '[1, 5, 9]', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 3.5, label = '[5, 6, 7, 8, 9, 10]', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 2.5, label = '[0, 2, 4, 6]', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 1.5, label = '[1, 1, 5, 5, 1, 1, 5, 5]', family = 'gochi', size = 4.5, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/39va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.2.1
+:::
+
+<details><summary> Lista de funciones útiles</summary>
+
+En `R` se cuenta con las conocidas funciones base, muchas con utilidades estadísticas o en cualquier proyecto de análisis. A continuación podrá ver algunas de ellas: 
+
++-------------+-------------------------------------------------------------------+
+| Función     | Acción                                                            |
++=============+===================================================================+
+| `str()`     | Devuelve la estructura de un objeto                               |
++-------------+-------------------------------------------------------------------+
+| `sample()`  | Toma una muestra del tamaño especificado de determiando objeto    |
++-------------+-------------------------------------------------------------------+
+| `length()`  | Calcula el número de elementos del objeto                         |
++-------------+-------------------------------------------------------------------+
+| `nrow()`    | Calcula el número de filas en un objeto de dos dimensiones        |
++-------------+-------------------------------------------------------------------+
+| `ncol()`    | Calcula el número de columnas en un objeto de dos dimensiones     |
++-------------+-------------------------------------------------------------------+
+| `table()`   | Devuelve tablas de contingencia de conteos                        |
++-------------+-------------------------------------------------------------------+
+| `sort()`    | Ordena los elementos de un vector ascendentemente                 |
++-------------+-------------------------------------------------------------------+
+| `order()`   | Devuelve una permutación que reorganiza su primer argumento       |
++-------------+-------------------------------------------------------------------+
+| `round()`   | Redondea los valor sin decimales por defecto                      |
++-------------+-------------------------------------------------------------------+
+| `floor()`   | Devuelve el entero más grande que no sea mayor que el número dado |
++-------------+-------------------------------------------------------------------+
+| `sqrt()`    | Calcula la raíz cuadrada de un vector numérico                    |
++-------------+-------------------------------------------------------------------+
+| `sum()`     | Calcula la suma de los elementos del objeto                       |
++-------------+-------------------------------------------------------------------+
+| `prod()`    | Calcula la producto de los elementos del objeto                   |
++-------------+-------------------------------------------------------------------+
+| `abs()`     | Devuelve el valor absoluto de un vector numérico                  |
++-------------+-------------------------------------------------------------------+
+| `mean()`    | Calcula la media de un vector numérico                            |
++-------------+-------------------------------------------------------------------+
+| `median()`  | Calcula la media de un vector numérico                            |
++-------------+-------------------------------------------------------------------+
+| `sd()`      | Calcula la desviacion estandar de un vector numérico              |
++-------------+-------------------------------------------------------------------+
+| `IQR()`     | Calcula el rango intercuartílico de un vector numérico            |
++-------------+-------------------------------------------------------------------+
+| `var()`     | Calcula la varianza estandar de un vector numérico                |
++-------------+-------------------------------------------------------------------+
+| `cor()`     | Calcula la correlación de dos vectores numéricos                  |
++-------------+-------------------------------------------------------------------+
+| `quantile()`| Devuelve los cuantiles seleccionados de un vector numérico        |
++-------------+-------------------------------------------------------------------+
+
+</details>
+
+:::caution
+Una __función__ en `R` es un procedimiento que generalmente toma un objeto como argumentos (también conocido como entrada), hace algo con ese objeto y luego devuelve un nuevo objeto (la salida).
+:::
+
+```{r, echo = FALSE, eval = TRUE, out.width = "28%", fig.align = "center"}
+
+knitr::include_graphics("images/40va_imagen.png")  
+```
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:2), y = c(1:2)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.3, xmax = 1.7, ymin = 1.3, ymax = 1.7, colour = 'cyan', fill = 'cyan', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.5, y = 1.5, label = 'Función', family = 'gochi', size = 8.3, colour = 'black') +
+  annotate(geom = 'segment', x = 1.32, xend = 1.32, y = 1.7, yend = 1.75, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.32, xend = 1.31, y = 1.75, yend = 1.76, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.36, xend = 1.36, y = 1.7, yend = 1.75, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.36, xend = 1.37, y = 1.75, yend = 1.76, colour = 'cyan', size = 1.0) +
+  geom_curve(x = 1.34, xend = 1.34, y = 1.78, yend = 1.72, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.34, y = 1.82, label = 'Entrada', family = 'gochi', size = 7.0, colour = 'black') +
+  annotate(geom = 'segment', x = 1.68, xend = 1.68, y = 1.3, yend = 1.25, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.68, xend = 1.69, y = 1.25, yend = 1.24, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.64, xend = 1.64, y = 1.3, yend = 1.25, colour = 'cyan', size = 1.0) +
+  annotate(geom = 'segment', x = 1.64, xend = 1.63, y = 1.25, yend = 1.24, colour = 'cyan', size = 1.0) +
+  geom_curve(x = 1.66, xend = 1.66, y = 1.28, yend = 1.22, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.66, y = 1.18, label = 'Salida', family = 'gochi', size = 7.0, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
