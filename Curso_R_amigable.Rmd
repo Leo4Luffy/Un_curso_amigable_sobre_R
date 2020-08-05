@@ -649,10 +649,10 @@ En `R` se cuenta con las conocidas funciones base, muchas con utilidades estadí
 </details>
 
 :::caution
-Una __función__ en `R` es un procedimiento que generalmente toma un objeto como argumentos (también conocido como entrada), hace algo con ese objeto y luego devuelve un nuevo objeto (la salida).
+Una __función__ en `R` es un procedimiento que generalmente toma un objeto como argumento, hace algo con ese objeto y luego devuelve un nuevo objeto.
 :::
 
-```{r, echo = FALSE, eval = TRUE, out.width = "28%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "32%", fig.align = "center"}
 
 knitr::include_graphics("images/40va_imagen.png")  
 ```
