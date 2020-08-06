@@ -660,12 +660,12 @@ knitr::include_graphics("images/40va_imagen.png")
 
 <details><summary> Lista de funciones útiles</summary>
 
-En `R` se cuenta con las conocidas funciones base, muchas con utilidades estadísticas o en cualquier proyecto de análisis. A continuación podrá ver algunas de ellas: 
-
 +-------------+-------------------------------------------------------------------+
 | Función     | Acción                                                            |
 +=============+===================================================================+
 | `str()`     | Devuelve la estructura de un objeto.                               |
++-------------+-------------------------------------------------------------------+
+| `typeof()`   | Permite reconocer la clase atómica de un vector.                  |
 +-------------+-------------------------------------------------------------------+
 | `sample()`  | Toma una muestra del tamaño especificado de determiando objeto.    |
 +-------------+-------------------------------------------------------------------+
@@ -711,7 +711,7 @@ En `R` se cuenta con las conocidas funciones base, muchas con utilidades estadí
 </details>
 
 :::caution
-El __argumento__ de una función
+Los __argumentos__ de una función son una serie de valores (objetos o incluso el resultado de otra función) que se pasan dentro de la función para que esta realice un proceso.
 :::
 
 :::example
@@ -720,11 +720,76 @@ El __argumento__ de una función
 
 ```{r ejemplo_2_2_2, exercise = TRUE}
 
-str(rnorm)
+args(round)
+#?round
+#help(round)
 ```
 
-#### 2.2.1 Funciones vectoriales
+#### 2.2.1 Operaciones sencillas con vectores
 
+Las operaciones aritméticas más comunes están definidas para vectores. A continuación podrá encontrar una tabla con los operadores básicos:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.5, y = 5.5, label = 'Operador', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.5, y = 4.5, label = 'Suma', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.5, y = 3.5, label = 'Diferencia', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.5, y = 2.5, label = 'Producto', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 3.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.5, y = 5.5, label = 'Expresión', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 3.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.5, y = 4.5, label = '+', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 3.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.5, y = 3.5, label = '-', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 3.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 2.5, y = 2.5, label = '*', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.1, xmax = 4.1, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.6, y = 5.5, label = 'Operador', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.1, xmax = 4.1, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.6, y = 4.5, label = 'División', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.1, xmax = 4.1, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.6, y = 3.5, label = 'Potencia', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.1, xmax = 4.1, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.6, y = 2.5, label = 'Residuo', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.1, xmax = 5.1, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.6, y = 5.5, label = 'Expresión', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.1, xmax = 5.1, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.6, y = 4.5, label = '/', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.1, xmax = 5.1, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.6, y = 3.5, label = '^ , **', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.1, xmax = 5.1, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.6, y = 2.5, label = '%%', family = 'gochi', size = 7.5, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "40%", fig.align = "center"}
+
+knitr::include_graphics("images/41va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.2.1.1
+:::
+
+```{r ejemplo_2_2_1_1_1, exercise = TRUE}
+
+primer_examen <- c(3.4, 4.2, 3.8, 3.6, 4.0, 4.4, 4.8, 3.8, 3.0, 4.1)
+segundo_examen <- c(3.5, 4.0, 4.2, 3.6, 3.8, 4.7, 5.0, 3.8, 4.0, 4.5)
+```
 
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
