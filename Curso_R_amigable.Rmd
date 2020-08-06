@@ -785,12 +785,111 @@ knitr::include_graphics("images/41va_imagen.png")
 #### Ejemplo 2.2.1.1
 :::
 
-```{r ejemplo_2_2_1_1_1, exercise = TRUE}
+```{r ejemplo_2_2_1_1, exercise = TRUE}
 
-primer_examen <- c(3.4, 4.2, 3.8, 3.6, 4.0, 4.4, 4.8, 3.8, 3.0, 4.1)
-segundo_examen <- c(3.5, 4.0, 4.2, 3.6, 3.8, 4.7, 5.0, 3.8, 4.0, 4.5)
+vec_1 <- c(1:8)
+vec_2 <- 2
+sum_vec_1_vec_2 <- vec_1 + vec_2
+sum_vec_1_vec_2
 ```
 
+:::example
+#### Ejemplo 2.2.1.2
+:::
+
+```{r ejemplo_2_2_1_2, exercise = TRUE}
+
+vec_1 <- seq(from = 1, to = 4, by = 1)
+vec_2 <- rep(x = 2, times = 4)
+div_vec_1_vec_2 <- vec_1 / vec_2
+div_vec_1_vec_2
+```
+
+#### 2.2.2 Resumen estadístico en vectores
+
+Debido a que el `R` es un lenguaje creado para estadísticas, el mismo contiene muchas funciones básicas que permiten calcular estadísticas descriptivas a partir de un vector de datos. A continuación podrá encontrar una tabla de estas funciones:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 5.5, label = 'Función', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 4.5, label = 'min(x) , max(x)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 3.5, label = 'mean(x) , median(x)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 2.5, label = 'sd(x) , var(x) , range(x)', family = 'gochi', size = 4.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 1.5, label = 'quantile(x, probs)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.8, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.9, y = 0.5, label = 'summary(object)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 5.5, label = 'Ejemplo', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 4.5, label = 'min(x = 1:10)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 3.5, label = 'mean(x = 1:10)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 2.5, label = 'sd(x = 1:10)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 1.5, label = 'quantile(x = 1:10, probs = 0.2)', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.9, y = 0.5, label = 'summary(object = 1:10)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 5.5, label = 'Resultado', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 4.5, label = '1', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 3.5, label = '5.5', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 2.5, label = '3.03', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 1.5, label = '2.8', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 7.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.0, y = 0.8, label = 'Min = 1.00. 1st Qu. = 3.25,', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.0, y = 0.5, label = 'Median = 5.50. Mean = 5.50,', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.0, y = 0.2, label = '3rd Qu. = 7.75. Max = 10.0', family = 'gochi', size = 4.1, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/42va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.2.2.1
+:::
+
+```{r ejemplo_2_2_2_1, exercise = TRUE}
+
+Pesos_rn <- rnorm(n = 12, mean = 3768.3, sd = 572.9)
+Pesos_rn
+
+min(x = Pesos_rn)
+
+mean(x = Pesos_rn)
+
+sd(x = Pesos_rn)
+
+summary(object = Pesos_rn)
+```
+
+:::caution
+Colocar aqui el caso de los valores NA... pagina 64. 
+:::
+
+#### 2.2.3 Indexación de vectores con [ ]
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
