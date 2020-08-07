@@ -873,7 +873,7 @@ knitr::include_graphics("images/42va_imagen.png")
 
 ```{r ejemplo_2_2_2_1, exercise = TRUE}
 
-Pesos_rn <- rnorm(n = 12, mean = 3768.3, sd = 572.9)
+Pesos_rn <- rnorm(n = 12, mean = 3768, sd = 572)
 Pesos_rn
 
 min(x = Pesos_rn)
@@ -882,14 +882,91 @@ mean(x = Pesos_rn)
 
 sd(x = Pesos_rn)
 
+quantile(x = Pesos_rn)
+
 summary(object = Pesos_rn)
 ```
 
 :::caution
-Colocar aqui el caso de los valores NA... pagina 64. 
+En el `R` los datos faltantes se identifican como `NA` (not available). La mayoría de las funciones estadísticas en `R` en presencia de valores `NA` pueden generar resultados inconsistentes.  
 :::
 
-#### 2.2.3 Indexación de vectores con [ ]
+:::example
+#### Ejemplo 2.2.2.2
+:::
+
+```{r ejemplo_2_2_2_2, exercise = TRUE}
+
+val_NA <- c(1, 5, NA, 2, 10)
+mean(val_NA)
+#mean(val_NA, na.rm = TRUE)
+```
+
+#### 2.2.3 Indexación de vectores
+
+Dentro de los múltiples objetos en `R`, sean estos simples como un vector o compuestos como un conjunto de datos, se debe tener claro como manejar o acceder a la información contenida en los mismos. Para estos casos se utiliza la __indexación__.
+
++ Indexación numérica
+
+:::caution
+Colocar antesitos aqui lo del indice [1]
+:::
+
++ Indexación lógica
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:2.5), y = c(1:2.5)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'text', x = 1.2, y = 2.04, label = 'X', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.16, xmax = 1.24, ymin = 1.04, ymax = 1.96, colour = 'yellow', fill = 'yellow', alpha = 0.1) +
+  annotate(geom = 'text', x = 1.2, y = 1.9, label = '4', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.2, y = 1.7, label = '8', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.2, y = 1.5, label = '-1', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.2, y = 1.3, label = '9', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.2, y = 1.1, label = '-3', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.4, y = 2.04, label = 'Y', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.32, xmax = 1.48, ymin = 1.04, ymax = 1.96, colour = 'yellow', fill = 'yellow', alpha = 0.1) +
+  annotate(geom = 'text', x = 1.4, y = 1.9, label = 'TRUE', family = 'gochi', size = 7.0, colour = 'cyan') +
+  annotate(geom = 'text', x = 1.4, y = 1.7, label = 'TRUE', family = 'gochi', size = 7.0, colour = 'cyan') +
+  annotate(geom = 'text', x = 1.4, y = 1.5, label = 'FALSE', family = 'gochi', size = 7.0, colour = 'red') +
+  annotate(geom = 'text', x = 1.4, y = 1.3, label = 'TRUE', family = 'gochi', size = 7.0, colour = 'cyan') +
+  annotate(geom = 'text', x = 1.4, y = 1.1, label = 'FALSE', family = 'gochi', size = 7.0, colour = 'red') +
+  annotate(geom = 'text', x = 1.69, y = 2.04, label = 'X[Y]', family = 'gochi', size = 9.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.64, xmax = 1.72, ymin = 1.24, ymax = 1.76, colour = 'yellow', fill = 'yellow', alpha = 0.1) +
+  annotate(geom = 'text', x = 1.68, y = 1.7, label = '4', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.68, y = 1.5, label = '8', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.68, y = 1.3, label = '9', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'segment', x = 1.25, xend = 1.31, y = 1.9, yend = 1.9, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.25, xend = 1.31, y = 1.7, yend = 1.7, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.25, xend = 1.31, y = 1.5, yend = 1.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.25, xend = 1.31, y = 1.3, yend = 1.3, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.25, xend = 1.31, y = 1.1, yend = 1.1, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.49, xend = 1.55, y = 1.9, yend = 1.9, colour = 'black', size = 1.0) +
+  geom_curve(x = 1.55, xend = 1.63, y = 1.9, yend = 1.7, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'segment', x = 1.49, xend = 1.55, y = 1.7, yend = 1.7, colour = 'black', size = 1.0) +
+  geom_curve(x = 1.55, xend = 1.63, y = 1.7, yend = 1.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'segment', x = 1.49, xend = 1.55, y = 1.3, yend = 1.3, colour = 'black', size = 1.0) +
+  geom_curve(x = 1.55, xend = 1.63, y = 1.3, yend = 1.3, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+
+knitr::include_graphics("images/43va_imagen.png")  
+```
+
++ Cambio de valores de un vector
+
+
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
