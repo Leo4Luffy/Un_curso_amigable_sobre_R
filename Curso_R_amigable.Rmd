@@ -538,7 +538,7 @@ En `R` existen las llamadas __palabras clave__ o __palabras reservadas__. Estas 
 
 ### 2.2 Vectores
 
-Un vector consiste en una colección de escalares de la misma clase atómica. Es decir que un vector puede contener n elementos de la misma clase, ya sean estos números, caracteres o lógicos, pero nunca podrán ser de dos o más clases diferentes.
+Un vector consiste en una colección de escalares de la misma clase atómica, ya sean estos números, caracteres o lógicos, pero nunca podrán ser de dos o más clases diferentes.
 
 Hay muchas formas de crear vectores en `R`. A continuación podrá encontrar una tabla con ejemplos de estas formas:
 
@@ -1083,8 +1083,6 @@ numeros[numeros >= 0 & numeros != 4]
 
 ### 2.3 Matrices y conjuntos de datos
 
-Las matrices son útiles para almacenar muchos datos y son bastante similares a las hojas de cálculo de Excel. Se puede pensar en una matriz como un conjunto de n vectores de la misma longitud.
-
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
 data.frame(
@@ -1134,10 +1132,12 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "34%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "38%", fig.align = "center"}
 
 knitr::include_graphics("images/46va_imagen.png")  
 ```
+
+Las matrices y los conjuntos de datos son dos tipos de objetos que representan estructuras de datos grandes. Si bien las matrices y los conjuntos de datos se ven muy similares, dada su estructura tabular, no son exactamente lo mismo: las matrices pueden contener solo una clase de datos (ya sea numérico o carácter), mientras que los conjuntos de datos pueden contener columnas tanto numéricas como de caracteres.
 
 Hay muchas formas de crear matrices y conjuntos de datos en `R`. A continuación podrá encontrar una tabla de estas formas:
 
@@ -1198,10 +1198,78 @@ data.frame(
 knitr::include_graphics("images/45va_imagen.png")  
 ```
 
+:::example
+#### Ejemplo 2.3.1
+:::
+
+```{r ejemplo_2_3_1, exercise = TRUE}
+
+x <- 1:5
+y <- 6:10
+z <- 11:15
+
+x_y_z <- cbind(x, y, z)
+x_y_z
+
+x_y_z <- rbind(x, y, z)
+x_y_z
+```
+
+:::example
+#### Ejemplo 2.3.2
+:::
+
+```{r ejemplo_2_3_2, exercise = TRUE}
+
+matrices <- matrix(
+  data = 1:15,
+  nrow = 5,
+  ncol = 3
+  )
+matrices
+```
+
+:::example
+#### Ejemplo 2.3.3
+:::
+
+```{r ejemplo_2_3_3, exercise = TRUE}
+
+con_dtos <- data.frame(
+  'Identificación' = 1:5,
+  'Sexo' = c('Mujer', 'Mujer', 'Hombre', 'Mujer', 'Hombre'),
+  'Edad' = c(99, 34, 43, 50, 88)
+  )
+con_dtos
+```
+
+#### 2.4 Crear y convertir conjuntos de datos en `tibbles`
+
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
 knitr::include_graphics("images/tibble.png")  
 ```
+
+#### 2.4 Conjuntos de datos en paquetes de `R`
+
+```{r, eval = TRUE, message = FALSE, echo = FALSE}
+
+data('starwars')
+Starwars <- starwars %>% 
+  select(-c(12:14))
+Starwars <- as.data.frame(Starwars)
+```
+
+```{r, eval=FALSE}
+
+save(Starwars, file = 'data_pkg/Starwars.rda', compress = 'xz')
+```
+
+```{r datos_guerra_galaxias, exercise = TRUE}
+
+Starwars
+```
+
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
