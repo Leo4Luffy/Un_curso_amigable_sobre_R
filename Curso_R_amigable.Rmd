@@ -969,7 +969,7 @@ data.frame(
   annotate(geom = 'text', x = 1.42, y = 2.6, label = '!=  no es igual a', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 1.34, y = 2.4, label = '<  menor a', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 1.47, y = 2.2, label = '<=  menor o igual a', family = 'gochi', size = 6.5, colour = 'black') +
-  annotate(geom = 'text', x = 1.35, y = 2.0, label = '<=  mayor a', family = 'gochi', size = 6.5, colour = 'black') +
+  annotate(geom = 'text', x = 1.35, y = 2.0, label = '>  mayor a', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 1.47, y = 1.8, label = '>=  mayor o igual a', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 1.20, y = 1.6, label = '|  o', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 1.20, y = 1.4, label = '&  y', family = 'gochi', size = 6.5, colour = 'black') +
@@ -981,7 +981,7 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "24%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "26%", fig.align = "center"}
 
 knitr::include_graphics("images/44va_imagen.png")  
 ```
@@ -996,9 +996,11 @@ numeros <- seq(from = 1, to = 40, by = 1)
 numeros >= 34
 ```
 
-La segunda forma de indexar vectores es mediante el uso de __vectores lógicos__.
+La segunda forma de indexar vectores es mediante el uso de __vectores lógicos__ (vector que solo contiene valores `TRUE` y `FALSE` como el ejemplo anterior).
 
-pagina 23, 51
+:::example
+#### Ejemplo 2.2.3.5
+:::
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -1045,16 +1047,102 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "28%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 
 knitr::include_graphics("images/43va_imagen.png")  
 ```
 
+```{r ejemplo_2_2_3_5, exercise = TRUE}
 
+ind_logica <- c(4, 8, -1, 9, -3)
+ind_logica[ind_logica > 0]
+ind_logica[!(ind_logica < 0)]
+```
 
-+ Cambio de valores de un vector
+:::example
+#### Ejemplo 2.2.3.6
+:::
+
+```{r ejemplo_2_2_3_6, exercise = TRUE}
+
+fechas <- c('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic')
+fechas[fechas == 'Nov']
+fechas[fechas != c('Nov')]
+```
+
+:::example
+#### Ejemplo 2.2.3.7
+:::
+
+```{r ejemplo_2_2_3_7, exercise = TRUE}
+
+numeros <- seq(from = -10, to = 10, by = 1)
+numeros[numeros > 0 & numeros >= 8]
+```
 
 ### 2.3 Matrices y conjuntos de datos
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Función', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'cbind(a, b, c)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'rbind(a, b, c)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.6, label = 'matrix(x, nrow, ncol,', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 2.4, label = 'byrow)', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'data.frame()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 4.6, label = 'Combina vectores como', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 4.4, label = 'columnas en una matriz.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 3.6, label = 'Combinar vectores como', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 3.4, label = 'filas en una matriz.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.6, label = 'Crea una matriz a partir', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 2.4, label = 'de un vector x.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 1.6, label = 'Crea un marco de datos a', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 1.4, label = 'partir de columnas con un nombre.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 5.5, label = 'Ejemplo', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 4.5, label = 'cbind(1:5, 6:10, 11:15)', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 3.5, label = 'rbind(1:5, 6:10, 11:15)', family = 'gochi', size = 4.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 2.6, label = 'matrix(x = 1:12, nrow = 3,', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 2.4, label = ' ncol = 4)', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 5.75, y = 1.6, label = 'data.frame("age" = c(19,', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 1.4, label = '21), sex = c("m", "f"))', family = 'gochi', size = 3.7, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/45va_imagen.png")  
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/tibble.png")  
+```
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
