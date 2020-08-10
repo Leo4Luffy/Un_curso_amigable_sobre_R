@@ -1243,6 +1243,19 @@ con_dtos <- data.frame(
 con_dtos
 ```
 
+:::caution
+colocar aqui un mensaje de lo que sucede al crear una matriz con clases atomicas diferentes y colocar luego un ejemplo para motrarlo.
+:::
+
+:::example
+#### Ejemplo 2.3.4
+:::
+
+```{r ejemplo_2_3_4, exercise = TRUE}
+
+
+```
+
 #### 2.4 Crear y convertir conjuntos de datos en `tibbles`
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
