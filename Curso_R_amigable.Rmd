@@ -1155,8 +1155,8 @@ data.frame(
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 1.75, y = 3.5, label = 'rbind(a, b, c)', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 2.6, label = 'matrix(x, nrow, ncol,', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 1.75, y = 2.4, label = 'byrow)', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 2.6, label = 'matrix(data, nrow,', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 2.4, label = 'ncol, byrow)', family = 'gochi', size = 4.4, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 1.75, y = 1.5, label = 'data.frame()', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
@@ -1180,11 +1180,11 @@ data.frame(
   annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 5.75, y = 3.5, label = 'rbind(1:5, 6:10, 11:15)', family = 'gochi', size = 4.2, colour = 'black') +
   annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 2.6, label = 'matrix(x = 1:12, nrow = 3,', family = 'gochi', size = 3.7, colour = 'black') +
-  annotate(geom = 'text', x = 5.75, y = 2.4, label = ' ncol = 4)', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 2.6, label = 'matrix(data = 1:12,', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 2.4, label = 'nrow = 3, ncol = 4)', family = 'gochi', size = 3.7, colour = 'black') +
   annotate(geom = 'rect', xmin = 5.0, xmax = 6.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 5.75, y = 1.6, label = 'data.frame("age" = c(19,', family = 'gochi', size = 3.7, colour = 'black') +
-  annotate(geom = 'text', x = 5.75, y = 1.4, label = '21), sex = c("m", "f"))', family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 1.6, label = "data.frame('Edad' = c(19,", family = 'gochi', size = 3.7, colour = 'black') +
+  annotate(geom = 'text', x = 5.75, y = 1.4, label = "21), 'Sexo' = c('m', 'f'))", family = 'gochi', size = 3.7, colour = 'black') +
   #scale_y_continuous(limits = c(2.05, 5.0)) +
   #scale_x_continuous(limits = c(1.0, 7.0)) +
   theme_void() +
@@ -1221,19 +1221,44 @@ x_y_z
 
 ```{r ejemplo_2_3_2, exercise = TRUE}
 
-matrices <- matrix(
-  data = 1:15,
-  nrow = 5,
-  ncol = 3
-  )
-matrices
+x <- c(1, 2, 3, 4, 5)
+y <- c('a', 'b', 'c', 'd', 'e')
+
+x_y <- cbind(x, y)
+x_y
 ```
+
+:::caution
+Recuerden, las matrices pueden contener números o caracteres, ¡no ambos!. Si intenta crear una matriz con números y caracteres, el `R` convertirá todos los números en caracteres (__coerción implicita__).
+:::
 
 :::example
 #### Ejemplo 2.3.3
 :::
 
 ```{r ejemplo_2_3_3, exercise = TRUE}
+
+matrices_1 <- matrix(
+  data = 1:15,
+  nrow = 5,
+  ncol = 3
+  )
+matrices_1
+
+matrices_2 <- matrix(
+  data = 1:15,
+  nrow = 5,
+  ncol = 3,
+  byrow = TRUE
+  )
+matrices_2
+```
+
+:::example
+#### Ejemplo 2.3.4
+:::
+
+```{r ejemplo_2_3_4, exercise = TRUE}
 
 con_dtos <- data.frame(
   'Identificación' = 1:5,
@@ -1243,27 +1268,66 @@ con_dtos <- data.frame(
 con_dtos
 ```
 
-:::caution
-colocar aqui un mensaje de lo que sucede al crear una matriz con clases atomicas diferentes y colocar luego un ejemplo para motrarlo.
-:::
+#### 2.4 Conjuntos de datos preinstalados en `R` y disponibes en paquetes de `R`
 
-:::example
-#### Ejemplo 2.3.4
-:::
+El lenguaje de programación `R` cuenta con conjuntos de datos preinstalados en un paquete llamado `datasets`, el cual no requiere se instalado una ves el mismo viene incluido en el software `R` base. Una lista completa de estos conjuntos de datos incluidos en el paquete `datasets` se puede ver al ejecutar el código `library(help = 'datasets')`.
 
-```{r ejemplo_2_3_4, exercise = TRUE}
+A continuación podrá encontrar una tabla del nombre de algunos de estos conjuntos de datos acompañado de una pequeña descripción:
 
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Conjunto de datos', family = 'gochi', size = 4.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'iris', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'mtcars', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'InsectSprays', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'PlantGrowth', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'Titanic', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 4.7, label = 'Conjunto de datos sobre medidas (en centimetros) de', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 4.5, label = 'las variables largo y ancho del sépalo y del pétalo, para', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 4.3, label = 'tres especies de la flor Iris (setosa, versicolor y virginica).', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 3.6, label = 'Conjunto de datos sobre el consumo de combustible', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 3.4, label = 'y aspectos de diseño y rendimiento de automóviles.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 2.7, label = 'Conjunto de datos sobre conteos de insectos en', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 2.5, label = 'tratados con diferentes insecticidas en unidades', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 2.3, label = 'experimentales agrícolas.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 1.7, label = 'Conjunto de datos sobre los resultados de un experimento', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 1.5, label = 'para comparar el rendimiento de plantas (en', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 1.3, label = 'peso seco) bajo control y dos tratamiento diferentes.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 4.75, y = 0.7, label = 'Conjunto de datos que proporciona información', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 0.5, label = 'sobre el destino de los pasajeros en el viaje inagural', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 4.75, y = 0.3, label = 'del transatlántico Titanic.', family = 'gochi', size = 4.4, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
 ```
 
-#### 2.4 Crear y convertir conjuntos de datos en `tibbles`
+```{r, echo = FALSE, eval = TRUE, out.width = "56%", fig.align = "center"}
 
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
-
-knitr::include_graphics("images/tibble.png")  
+knitr::include_graphics("images/47va_imagen.png")  
 ```
 
-#### 2.4 Conjuntos de datos en paquetes de `R`
+Por otra parte, 
 
 ```{r, eval = TRUE, message = FALSE, echo = FALSE}
 
@@ -1283,6 +1347,12 @@ save(Starwars, file = 'data_pkg/Starwars.rda', compress = 'xz')
 Starwars
 ```
 
+#### 2.4 Crear y convertir conjuntos de datos en `tibbles`
+
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/tibble.png")  
+```
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
