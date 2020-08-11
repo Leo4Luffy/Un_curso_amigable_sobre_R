@@ -1268,9 +1268,9 @@ con_dtos <- data.frame(
 con_dtos
 ```
 
-#### 2.4 Conjuntos de datos preinstalados en `R` y disponibes en paquetes de `R`
+#### 2.3.1 Conjuntos de datos preinstalados en `R` y disponibes en paquetes de `R`
 
-El lenguaje de programación `R` cuenta con conjuntos de datos preinstalados en un paquete llamado `datasets`, el cual no requiere se instalado una ves el mismo viene incluido en el software `R` base. Una lista completa de estos conjuntos de datos incluidos en el paquete `datasets` se puede ver al ejecutar el código `library(help = 'datasets')`.
+El lenguaje de programación `R` cuenta con conjuntos de datos preinstalados en un paquete llamado `datasets`, el cual no requiere ser instalado una vez el mismo viene incluido en el software `R` base. Una lista completa de estos conjuntos de datos incluidos en el paquete `datasets` se puede ver al ejecutar el código `library(help = 'datasets')`.
 
 A continuación podrá encontrar una tabla del nombre de algunos de estos conjuntos de datos acompañado de una pequeña descripción:
 
@@ -1327,27 +1327,81 @@ data.frame(
 knitr::include_graphics("images/47va_imagen.png")  
 ```
 
-Por otra parte, 
+:::example
+#### Ejemplo 2.3.1.1
+:::
 
-```{r, eval = TRUE, message = FALSE, echo = FALSE}
+```{r ejemplo_2_3_1_1, exercise = TRUE}
 
-data('starwars')
-Starwars <- starwars %>% 
-  select(-c(12:14))
-Starwars <- as.data.frame(Starwars)
+data('iris')
 ```
 
-```{r, eval=FALSE}
+También pueden existir conjuntos de datos disponibles dentro de paquetes del `R`. En la tabla a continuación podrá encontrar el nombre de algunos de estos conjuntos de datos acompañado del nombre del paquete donde se encuentra alojado y una pequeña descripción:
 
-save(Starwars, file = 'data_pkg/Starwars.rda', compress = 'xz')
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Conjunto de datos', family = 'gochi', size = 3.9, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'penguins', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'gapminder', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'starwars', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 5.5, label = 'Paquete', family = 'gochi', size = 4.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 4.5, label = 'palmerpenguins', family = 'gochi', size = 4.3, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 3.5, label = 'gapminder', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 4.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.25, y = 2.5, label = 'dplyr', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 8.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.25, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 8.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.25, y = 4.7, label = 'Conjunto de datos sobre medidas (en diferentes', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 4.5, label = 'unidades) de varias características en pinguinos', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 4.3, label = 'del género Pygoscelis.', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 8.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.25, y = 3.7, label = 'Conjunto de datos que proporciona información', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 3.5, label = 'sobre indicadores o datos socioeconómicos', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 3.3, label = 'a través del tiempo.', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.0, xmax = 8.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 6.25, y = 2.7, label = 'Conjunto que proporciona información sobre', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 2.5, label = 'características de los personajes de la', family = 'gochi', size = 4.1, colour = 'black') +
+  annotate(geom = 'text', x = 6.25, y = 2.3, label = 'serie Star Wars.', family = 'gochi', size = 4.1, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
 ```
 
-```{r datos_guerra_galaxias, exercise = TRUE}
+```{r, echo = FALSE, eval = TRUE, out.width = "56%", fig.align = "center"}
 
-Starwars
+knitr::include_graphics("images/48va_imagen.png")  
 ```
 
-#### 2.4 Crear y convertir conjuntos de datos en `tibbles`
+:::example
+#### Ejemplo 2.3.1.2
+:::
+
+```{r ejemplo_2_3_1_2, exercise = TRUE}
+
+data(package = 'dplyr')
+```
+
+#### 2.3.2 Operaciones sencillas con matrices y conjuntos de datos
+
+
+
+#### 2.3. Crear y convertir conjuntos de datos en `tibbles`
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
