@@ -1539,7 +1539,7 @@ Prom_persona <- rowMeans(x = Notas)
 Prom_persona
 ```
 
-El lenguaje de programación `R` contiene igualmente muchas funciones para ver las matrices y los conjuntos de datos y proporcionar información sobre los mismos. En la tabla a continuación podrá encontrar información sobre estas funciones:
+El lenguaje de programación `R` contiene también funciones para ver matrices y conjuntos de datos y proporcionar información sobre estos tipos de objetos. En la tabla a continuación podrá encontrar el nombre de estas funciones acompañada de una pequeña descripción:
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -1592,6 +1592,8 @@ data.frame(
 
 knitr::include_graphics("images/50va_imagen.png")  
 ```
+
+Para explicar tanto las funciones anteriores como las que se veran posteriormente en lo que resta de este capitulo, se empleara el conjunto de datos `Starwars`.
 
 ```{r Conjuntos_datos, exercise = TRUE}
 
@@ -1769,6 +1771,52 @@ data.frame(
 ```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 
 knitr::include_graphics("images/51va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.3.2.3
+:::
+
+```{r ejemplo_2_3_2_3, exercise = TRUE}
+
+head(Starwars)
+
+tail(Starwars)
+
+#View(Starwars)
+```
+
+<details><summary>Ejemplo de lo que se observa con `View()`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/View_star_wars.png")  
+```
+
+</details>
+
+:::example
+#### Ejemplo 2.3.2.4
+:::
+
+```{r ejemplo_2_3_2_4, exercise = TRUE}
+
+nrow(Starwars)
+
+ncol(Starwars)
+
+dim(Starwars)
+```
+
+:::example
+#### Ejemplo 2.3.2.5
+:::
+
+```{r ejemplo_2_3_2_5, exercise = TRUE}
+
+summary(Starwars)
+
+#str(Starwars)
 ```
 
 #### 2.3. Crear y convertir conjuntos de datos en `tibbles`
