@@ -1820,11 +1820,11 @@ summary(object = Starwars)
 
 #### 2.3.3 Indexación de matrices y conjuntos de datos
 
-Al igual que con los vectores, tanto en matrices como en conjunto de datos el lenguaje de progamación `R` permite usar el operador `[ ]` para acceder a valores específicos dentro de los mismos, y al igual que con los vectores, la indexación de matrices y conjuntos de datos pueden ser de dos tipos:
+Al igual que con los vectores, tanto en matrices como en conjunto de datos el lenguaje de programación `R` permite usar el operador `[ ]` para acceder a valores específicos dentro de los mismos, y al igual que con los vectores, la indexación de matrices y conjuntos de datos pueden ser de dos tipos:
 
 + Indexación numérica
 
-En matrices y conjuntos de datos, el operador `[ ]` toma dos argumentos: el primer argumento el cual se aplica a las filas y el segundo a las columnas.
+En matrices y conjuntos de datos, y a diferencia de lo visto con vectores, el operador `[ ]` requiere de dos argumentos para acceder a los valores de acuerdo a su posición: el primer argumento el cual se aplica a las filas y el segundo a las columnas.
 
 :::example
 #### Ejemplo 2.3.3.1
@@ -1832,17 +1832,14 @@ En matrices y conjuntos de datos, el operador `[ ]` toma dos argumentos: el prim
 
 ```{r ejemplo_2_3_3_1, exercise = TRUE}
 
-con_dtos <- data.frame(
-  'Identificación' = 1:5,
-  'Sexo' = c('Mujer', 'Mujer', 'Hombre', 'Mujer', 'Hombre'),
-  'Edad' = c(99, 34, 43, 50, 88)
-  )
-con_dtos[3, ]
-con_dtos[, 3]
+A <- matrix(data = 1:9, nrow = 3, ncol = 3)
+A
+A[3, ]
+A[, 3]
 ```
 
 :::caution
-Al usar una coma (`,`) dentro del operado `[ ]` se esta dando la instrucción al `R` de buscar los índices solicitados en más de una dimensión. Así, el número antes de la coma será buscado en la primera dimensión del objeto, y el segundo número en su segunda dimensión.
+Al usar una coma (`,`) dentro del operador `[ ]` se esta dando la instrucción al `R` de buscar los valores solicitados en más de una dimensión. Así, el número antes de la coma será buscado en la primera dimensión del objeto, y el número después de la coma en la segunda dimensión.
 :::
 
 :::example
@@ -1851,13 +1848,63 @@ Al usar una coma (`,`) dentro del operado `[ ]` se esta dando la instrucción al
 
 ```{r ejemplo_2_3_3_2, exercise = TRUE}
 
-nivel_academico <- c('Preescolar', 'Primaria', 'Bachillerato', 'Pregrado universitario', 'Posgrado universitario')
-nivel_academico[2, 4]
+a <- c(3, 2, 4, 6, 5, 1)
+a[2, 4]
+#a[c(2, 4)]
 ```
 
-:::caution
-Colocar aquí sobre los mensajes de advertencia y de error.
+:::exercise
+#### Ejercicio 2.3.3.1
+Por favor, haciendo uso del conjunto de datos `Starwars` intente seleccionar las primeras 5 columnas de este conjunto de datos, luego seleccionar las primeras 20 filas de la primera columna y por último seleccionar de forma conjunta las columnas 2 y 3, y las filas 20 a la 40.
 :::
+
+```{r ejercicio_2_3_3_1, exercise = TRUE}
+
+# Primeras 5 columnas ----
+Starwars[]
+# Primeras 20 filas de la columna 1 ----
+Starwars[]
+# Filas de la 20 a la 40 de las columnas 2 y 3 ----
+Starwars[]
+```
+
+```{r ejercicio_2_3_3_1-solution}
+
+# Primeras 5 columnas ----
+Starwars[, 1:5]
+# Primeras 20 filas de la columna 1 ----
+Starwars[1:20, 1]
+# Filas de la 20 a la 40 de las columnas 2 y 3 ----
+Starwars[20:40, c(2, 3)]
+```
+
+```{r ejercicio_2_3_3_1-check}
+
+grade_code("¡Excelente lo lograste, sigamos adelante!")
+```
+
+Una de las ventajas de los conjuntos de datos es que cada una de sus columnas tiene un nombre. En base a esto, se puede hacer uso de estos nombres para extraer columnas sin necesidad de saber el número de la columna que se desea seleccionar.
+
+:::example
+#### Ejemplo 2.3.3.3
+:::
+
+```{r ejemplo_2_3_3_3, exercise = TRUE}
+
+names(Starwars)
+#colnames(Starwars)
+
+# Primeras 5 columnas ----
+Starwars[, c('name', 'height', 'mass', 'hair_color', 'skin_color')]
+# Primeras 20 filas de la columna 1 ----
+Starwars[1:20, 'name']
+# Filas de la 20 a la 40 de las columnas 2 y 3 ----
+Starwars[20:40, c('height', 'mass')]
+```
+
++ Indexación lógica
+
+
 
 #### 2.3. Crear y convertir conjuntos de datos en `tibbles`
 
