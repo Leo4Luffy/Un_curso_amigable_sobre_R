@@ -1539,7 +1539,7 @@ Prom_persona <- rowMeans(x = Notas)
 Prom_persona
 ```
 
-El lenguaje de programación `R` contiene también funciones para ver matrices y conjuntos de datos y proporcionar información sobre estos tipos de objetos. En la tabla a continuación podrá encontrar el nombre de estas funciones acompañada de una pequeña descripción:
+El lenguaje de programación `R` contiene también funciones para ver matrices y conjuntos de datos y proporcionar información sobre ambos tipos de objetos. En la tabla a continuación podrá encontrar el nombre de estas funciones acompañada de una pequeña descripción:
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
 
@@ -1555,14 +1555,15 @@ data.frame(
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
   annotate(geom = 'text', x = 1.75, y = 3.5, label = 'View(x)', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 2.6, label = 'nrow(x) , ncol(x) ,', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'text', x = 1.75, y = 2.4, label = 'dim(x)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 2.65, label = 'nrow(x) , ncol(x) ,', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 2.35, label = 'dim(x)', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 1.7, label = 'rownames(x) ,', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 1.75, label = 'rownames(x) ,', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'text', x = 1.75, y = 1.5, label = 'colnames(x) ,', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'text', x = 1.75, y = 1.3, label = 'names(x)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 1.25, label = 'names(x)', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'str(x) , summary(x)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 0.65, label = 'str(object) ,', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.75, y = 0.35, label = 'summary(object)', family = 'gochi', size = 5.0, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
   annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
@@ -1593,7 +1594,7 @@ data.frame(
 knitr::include_graphics("images/50va_imagen.png")  
 ```
 
-Para explicar tanto las funciones anteriores como las que se veran posteriormente en lo que resta de este capitulo, se empleara el conjunto de datos `Starwars`.
+Para explicar tanto las funciones anteriores como las que se veran posteriormente en lo que resta de este capitulo, se empleara el conjunto de datos `Starwars`:
 
 ```{r Conjuntos_datos, exercise = TRUE}
 
@@ -1779,11 +1780,11 @@ knitr::include_graphics("images/51va_imagen.png")
 
 ```{r ejemplo_2_3_2_3, exercise = TRUE}
 
-head(Starwars)
+head(x = Starwars)
 
-tail(Starwars)
+tail(x = Starwars)
 
-#View(Starwars)
+#View(x = Starwars)
 ```
 
 <details><summary>Ejemplo de lo que se observa con `View()`</summary>
@@ -1801,11 +1802,11 @@ knitr::include_graphics("images/View_star_wars.png")
 
 ```{r ejemplo_2_3_2_4, exercise = TRUE}
 
-nrow(Starwars)
+nrow(x = Starwars)
 
-ncol(Starwars)
+ncol(x = Starwars)
 
-dim(Starwars)
+dim(x = Starwars)
 ```
 
 :::example
@@ -1814,10 +1815,49 @@ dim(Starwars)
 
 ```{r ejemplo_2_3_2_5, exercise = TRUE}
 
-summary(Starwars)
-
-#str(Starwars)
+summary(object = Starwars)
 ```
+
+#### 2.3.3 Indexación de matrices y conjuntos de datos
+
+Al igual que con los vectores, tanto en matrices como en conjunto de datos el lenguaje de progamación `R` permite usar el operador `[ ]` para acceder a valores específicos dentro de los mismos, y al igual que con los vectores, la indexación de matrices y conjuntos de datos pueden ser de dos tipos:
+
++ Indexación numérica
+
+En matrices y conjuntos de datos, el operador `[ ]` toma dos argumentos: el primer argumento el cual se aplica a las filas y el segundo a las columnas.
+
+:::example
+#### Ejemplo 2.3.3.1
+:::
+
+```{r ejemplo_2_3_3_1, exercise = TRUE}
+
+con_dtos <- data.frame(
+  'Identificación' = 1:5,
+  'Sexo' = c('Mujer', 'Mujer', 'Hombre', 'Mujer', 'Hombre'),
+  'Edad' = c(99, 34, 43, 50, 88)
+  )
+con_dtos[3, ]
+con_dtos[, 3]
+```
+
+:::caution
+Al usar una coma (`,`) dentro del operado `[ ]` se esta dando la instrucción al `R` de buscar los índices solicitados en más de una dimensión. Así, el número antes de la coma será buscado en la primera dimensión del objeto, y el segundo número en su segunda dimensión.
+:::
+
+:::example
+#### Ejemplo 2.3.3.2
+:::
+
+```{r ejemplo_2_3_3_2, exercise = TRUE}
+
+nivel_academico <- c('Preescolar', 'Primaria', 'Bachillerato', 'Pregrado universitario', 'Posgrado universitario')
+nivel_academico[2, 4]
+```
+
+:::caution
+Colocar aquí sobre los mensajes de advertencia y de error.
+:::
 
 #### 2.3. Crear y convertir conjuntos de datos en `tibbles`
 
