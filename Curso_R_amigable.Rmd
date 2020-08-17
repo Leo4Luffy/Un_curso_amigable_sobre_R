@@ -1883,8 +1883,6 @@ Starwars[20:40, c(2, 3)]
 grade_code("¡Excelente lo lograste, sigamos adelante!")
 ```
 
-Una de las ventajas de los conjuntos de datos es que cada una de sus columnas tiene un nombre. En base a esto, se puede hacer uso de estos nombres para extraer columnas sin necesidad de saber el número de la columna que se desea seleccionar.
-
 :::example
 #### Ejemplo 2.3.3.3
 :::
@@ -1892,7 +1890,6 @@ Una de las ventajas de los conjuntos de datos es que cada una de sus columnas ti
 ```{r ejemplo_2_3_3_3, exercise = TRUE}
 
 names(Starwars)
-#colnames(Starwars)
 
 # Primeras 5 columnas ----
 Starwars[, c('name', 'height', 'mass', 'hair_color', 'skin_color')]
@@ -1903,6 +1900,24 @@ Starwars[20:40, c('height', 'mass')]
 ```
 
 + Indexación lógica
+
+Indexar matrices y conjuntos de datos mediante el uso de vectores lógicos es muy similar a lo visto con vectores:
+
+  1- Se crea un vector lógico que contiene solo valores `TRUE` y `FALSE`.
+  
+  2- Se indexa un conjunto de datos usando el vector lógico, el cual solo devuelve aquellos valores para los que el vector lógico es `TRUE`.
+
+:::example
+#### Ejemplo 2.3.3.4
+:::
+
+```{r ejemplo_2_3_3_4, exercise = TRUE}
+
+Starwars[, 'species'] == 'Human'
+#Starwars[(Starwars[, 'species'] == 'Human'), ]
+```
+
++ Indexación mediante el uso de los operadores `[[]]` y `$`
 
 
 
