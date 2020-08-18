@@ -2037,27 +2037,151 @@ prom_peso <- subset(
   x = Starwars,
   subset = species == 'Human' & homeworld == 'Tatooine'
   )
-mean(prom_peso$mass, na.rm = TRUE)
+mean(x = prom_peso$mass, na.rm = TRUE)
 ```
 
-#### 2.3.4 Crear y convertir conjuntos de datos en `tibbles`
+#### 2.3.4 Lectura de conjuntos de datos
+
+Frecuentemente, los conjuntos de datos a ser leidos en el programa `R` se almacenan en dos formatos: archivo de texto plano con extensión __.txt__ o archivo de Excel o similar con extensión __.csv__.
+
+<details><summary>Ejemplo de almacenamiento en __.csv__</summary>
 
 <div class="row">
-  <div class="col-md-6" markdown="1">
-  
+  <div class="col-md-5" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_csv.png")  
+```  
   </div>
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+  <div class="col-md-7" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_csv_2.png")  
+```  
+  </div>
+</div>
+
+</details>
+
+<details><summary>Ejemplo de almacenamiento en __.txt__</summary>
+
+<div class="row">
+  <div class="col-md-5" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_txt.png")  
+```  
+  </div>
+  <div class="col-md-7" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_txt_2.png")  
+```  
+  </div>
+</div>
+
+</details>
+
+<br>
+
+Independientemente del tipo de formato con que se guarde el conjunto de datos, se puede emplear una de las funciones incluidas en el software `R` base para llevar a cabo la lectura de dicho conjunto de datos: la función `read.table()`.
+
+La tabla a continuación muestra los argumentos principales de esta función:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Argumento', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'file', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'header', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'sep', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'dec', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 4.65, label = 'Nombre o ruta donde se encuentra', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 4.35, label = 'alojado el conjunto de datos.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 3.65, label = 'Valor lógico que indica si la primera', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 3.35, label = 'fila tiene el nombre de las variables.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.65, label = 'Indica el tipo de separación interna', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 2.35, label = 'de los datos dentro del archivo.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 1.65, label = 'Indica el símbolo con el que los valores', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 1.35, label = ' con valor decimal estan escritos.', family = 'gochi', size = 4.4, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/54va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.3.4.1
+:::
+
+```{r ejemplo_2_3_4_1, exercise = TRUE}
+
+#read.table(file = 'datos_csv.csv', header = TRUE, sep = ',')
+#read.table(file = 'datos_txt.txt', header = TRUE, sep = '\t')
+
+datos_csv <- data.frame(
+  'Edad' = c(34, 25, 28, 19),
+  'Deporte' = c(TRUE, TRUE, FALSE, FALSE),
+  'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
+  'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
+)
+
+str(datos_csv)
+```
+
+#### 2.3.5 Crear y convertir conjuntos de datos en __tibbles__
+
+<div class="row">
+  <div class="col-md-7" markdown="1">
+  Los __tibbles__ son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. De hecho los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
+  
+  Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe mencionar:
+  </div>
+  <div class="col-md-5" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
 
 knitr::include_graphics("images/tibble.png")  
 ```  
   </div>
 </div>
 
+  + Los tibbles tienen un buen método de imprensión que muestra solo las primeras 10 filas y todas las columnas que quepan en la pantalla.
+  + Cuando se ve el conjunto de datos creado como un tibble, se especifica la clase atomica de cada uno de los datos.
+
+Cabe mencionar que este nueva forma de crear conjuntos de datos no hace parte de las funciones básicas del `R`, por lo que es necesario instalar y cargar previamente un paquete para trabajar con ellos:
+
 ```{r instalacion_tibble, exercise = TRUE, comment = ""}
 install.packages('tibble')
 library(tibble)
 ```
+
+:::example
+#### Ejemplo 2.3.5.1
+:::
+
+
 
 ### 2.4 Listas y arreglos
 
