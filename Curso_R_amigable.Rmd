@@ -1957,7 +1957,7 @@ Starwars
 
 + Indexación mediante el uso de la función `subset()`
 
-La función `subset()` es una de las funciones de manejo de datos más útiles en `R`. Esta función permite extraer conjuntos de datos como se haría con el operador `[ ]` mediante los diferentes tipos de indexación ya vistos, pero el código es mucho más fácil de escribir.
+La función `subset()` es una de las funciones de manejo de datos más útiles en `R`. Esta función permite extraer subconjuntos de datos como se haría con el operador `[ ]` mediante los diferentes tipos de indexación ya vistos, pero el código es mucho más fácil de escribir.
 
 La tabla a continuación muestra los argumentos principales de esta función:
 
@@ -2006,13 +2006,57 @@ knitr::include_graphics("images/52va_imagen.png")
 ```{r ejemplo_2_3_3_7, exercise = TRUE}
 
 
+#Starwars[Starwars[, 'species'] == 'Human', ]
+#Starwars[Starwars$species == 'Human', ]
+subset(
+  x = Starwars,
+  subset = species == 'Human'
+  )
+```
+
+:::example
+#### Ejemplo 2.3.3.8
+:::
+
+```{r ejemplo_2_3_3_8, exercise = TRUE}
+
+subconjunto <- subset(
+  x = Starwars,
+  subset = species == 'Human' & homeworld != 'Tatooine'
+  )
+subconjunto
+```
+
+:::example
+#### Ejemplo 2.3.3.9
+:::
+
+```{r ejemplo_2_3_3_9, exercise = TRUE}
+
+prom_peso <- subset(
+  x = Starwars,
+  subset = species == 'Human' & homeworld == 'Tatooine'
+  )
+mean(prom_peso$mass, na.rm = TRUE)
 ```
 
 #### 2.3.4 Crear y convertir conjuntos de datos en `tibbles`
 
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  
+  </div>
+  <div class="col-md-6" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
 knitr::include_graphics("images/tibble.png")  
+```  
+  </div>
+</div>
+
+```{r instalacion_tibble, exercise = TRUE, comment = ""}
+install.packages('tibble')
+library(tibble)
 ```
 
 ### 2.4 Listas y arreglos
@@ -2027,27 +2071,39 @@ data.frame(
   annotate(geom = 'rect', xmin = 1.5, xmax = 3.0, ymin = 3.0, ymax = 3.5, colour = 'yellow', fill = 'yellow', alpha = 0.1) +
   annotate(geom = 'segment', x = 2.0, xend = 2.0, y = 3.0, yend = 3.5, colour = 'yellow', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 2.5, xend = 2.5, y = 3.0, yend = 3.5, colour = 'yellow', size = 1.0, linetype = 'dashed') +
-  annotate(geom = 'text', x = 2.25, y = 3.75, label = 'Vector', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 2.25, y = 3.75, label = 'Vector', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 3.98, ymin = 3.0, ymax = 3.5, colour = 'red', fill = 'red', alpha = 0.1) +
   annotate(geom = 'rect', xmin = 4.0, xmax = 4.48, ymin = 3.0, ymax = 3.5, colour = 'red', fill = 'red', alpha = 0.1) +
   annotate(geom = 'rect', xmin = 4.5, xmax = 4.98, ymin = 3.0, ymax = 3.5, colour = 'red', fill = 'red', alpha = 0.1) +
-  annotate(geom = 'text', x = 4.25, y = 3.75, label = 'Lista', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 4.25, y = 3.75, label = 'Lista', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.5, xmax = 3.0, ymin = 0.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.1) +
   annotate(geom = 'segment', x = 2.0, xend = 2.0, y = 0.5, yend = 2.0, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 2.5, xend = 2.5, y = 0.5, yend = 2.0, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 1.5, xend = 3.0, y = 1.5, yend = 1.5, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 1.5, xend = 3.0, y = 1.0, yend = 1.0, colour = 'black', size = 1.0, linetype = 'dashed') +
-  annotate(geom = 'text', x = 2.25, y = 2.25, label = 'Matriz', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 2.25, y = 2.25, label = 'Matriz', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 3.5, xmax = 5.0, ymin = 0.5, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.1) +
   annotate(geom = 'segment', x = 4.0, xend = 4.0, y = 0.5, yend = 2.0, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 4.5, xend = 4.5, y = 0.5, yend = 2.0, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 3.5, xend = 5.0, y = 1.5, yend = 1.5, colour = 'black', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'segment', x = 3.5, xend = 5.0, y = 1.0, yend = 1.0, colour = 'black', size = 1.0, linetype = 'dashed') +
-  annotate(geom = 'text', x = 4.25, y = 2.25, label = 'Conjunto de datos', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'text', x = 4.25, y = 2.25, label = 'Conjunto de datos', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.5, xmax = 2.5, ymin = -2.0, ymax = -0.5, colour = 'cyan', fill = 'cyan', alpha = 0.1) +
+  annotate(geom = 'segment', x = 1.5, xend = 2.5, y = -1.0, yend = -1.0, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 1.5, xend = 2.5, y = -1.5, yend = -1.5, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 1.83, xend = 1.83, y = -2.0, yend = -0.5, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 2.16, xend = 2.16, y = -2.0, yend = -0.5, colour = 'cyan', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'rect', xmin = 1.75, xmax = 2.75, ymin = -2.25, ymax = -0.75, colour = 'cyan', fill = 'cyan', alpha = 0.1) +
+  annotate(geom = 'segment', x = 2.03, xend = 2.03, y = -2.25, yend = -0.75, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 2.36, xend = 2.36, y = -2.25, yend = -0.75, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 1.75, xend = 2.75, y = -1.25, yend = -1.25, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 1.75, xend = 2.75, y = -1.75, yend = -1.75, colour = 'cyan', size = 1.0, linetype = 'dashed') +
   annotate(geom = 'rect', xmin = 2.0, xmax = 3.0, ymin = -2.5, ymax = -1.0, colour = 'cyan', fill = 'cyan', alpha = 0.1) +
-  annotate(geom = 'text', x = 2.25, y = -0.25, label = 'Arreglo', family = 'gochi', size = 7.5, colour = 'black') +
+  annotate(geom = 'segment', x = 2.33, xend = 2.33, y = -2.5, yend = -1.0, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 2.66, xend = 2.66, y = -2.5, yend = -1.0, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 2.0, xend = 3.0, y = -2.0, yend = -2.0, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'segment', x = 2.0, xend = 3.0, y = -1.5, yend = -1.5, colour = 'cyan', size = 1.0, linetype = 'dashed') +
+  annotate(geom = 'text', x = 2.25, y = -0.25, label = 'Arreglo', family = 'gochi', size = 6.5, colour = 'black') +
   annotate(geom = 'text', x = 2.25, y = 4.8, label = 'Una sola clase', family = 'gochi', size = 7.5, colour = 'gray') +
   annotate(geom = 'text', x = 4.25, y = 4.8, label = 'Varias clases', family = 'gochi', size = 7.5, colour = 'gray') +
   annotate(geom = 'text', x = 1.2, y = 3.25, label = '1D', family = 'gochi', size = 7.5, colour = 'gray', angle = 90) +
@@ -2061,7 +2117,7 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
 
 knitr::include_graphics("images/53va_imagen.png")  
 ```
