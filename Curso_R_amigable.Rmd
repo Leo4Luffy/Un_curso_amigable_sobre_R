@@ -2159,14 +2159,87 @@ Con la función `read.table()` también es posible cargar archivos de texto de l
 
 ```{r ejemplo_2_3_4_2, exercise = TRUE}
 
-datos_web <- read.table(file = '', sep = '\t', header = TRUE)
+datos_web <- read.table(file = 'https://raw.githubusercontent.com/fhernanb/datos/master/orellana', header = TRUE)
 ```
+
+<details><summary>Ejemplo de almacenamiento en la web</summary>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_web.png")  
+```  
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "94%", fig.align = "center"}
+
+knitr::include_graphics("images/datos_web_2.png")  
+```  
+  </div>
+</div>
+
+</details>
+
+<br>
+
+En caso contrario que no desee leer un conjunto de datos sino exportarlo, puede emplear la función `write.table()`. La tabla a continuación muestra los argumentos principales de esta función:
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Argumento', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'x', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'file', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'sep', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'row.names', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 4.65, label = 'Nombre del objeto creado en R,', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 4.35, label = 'generalmente un conjunto de datos.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 3.65, label = 'Ruta del directorio de trabajo', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 3.35, label = 'donde desea guardar el archivo.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.65, label = 'Indica el tipo de separación interna', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 2.35, label = 'de los datos dentro del archivo.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 1.65, label = 'Un valor lógico que indica si se guardan', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 1.35, label = 'o no los nombres de fila en el archivo.', family = 'gochi', size = 4.4, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/55va_imagen.png")  
+```
+
+:::exercise
+
+:::
+
+
 
 #### 2.3.5 Crear y convertir conjuntos de datos en __tibbles__
 
 <div class="row">
   <div class="col-md-7" markdown="1">
-  Los __tibbles__ son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. De hecho los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
+  Los __tibbles__ son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. De hecho, los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
   
   Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe destacar:
   </div>

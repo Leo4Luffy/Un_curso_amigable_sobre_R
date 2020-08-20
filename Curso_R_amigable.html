@@ -1157,15 +1157,32 @@ str(datos_csv)</code></pre>
 <h4 id="section-ejemplo-2.3.4.2">Ejemplo 2.3.4.2</h4>
 </div>
 <div class="tutorial-exercise" data-label="ejemplo_2_3_4_2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>datos_web &lt;- read.table(file = &#39;&#39;, sep = &#39;\t&#39;, header = TRUE)</code></pre>
+<pre class="text"><code>datos_web &lt;- read.table(file = &#39;https://raw.githubusercontent.com/fhernanb/datos/master/orellana&#39;, header = TRUE)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
+</div>
+<details>
+<p><summary>Ejemplo de almacenamiento en la web</summary></p>
+<div class="row">
+<div class="col-md-6" markdown="1">
+<img src="images/datos_web.png" width="94%" style="display: block; margin: auto;" />
+</div>
+<div class="col-md-6" markdown="1">
+<img src="images/datos_web_2.png" width="94%" style="display: block; margin: auto;" />
+</div>
+</div>
+</details>
+<p><br></p>
+<p>En caso contrario que no desee leer un conjunto de datos sino exportarlo, puede emplear la función <code>write.table()</code>. La tabla a continuación muestra los argumentos principales de esta función:</p>
+<p><img src="images/55va_imagen.png" width="44%" style="display: block; margin: auto;" /></p>
+<div class="exercise">
+
 </div>
 </div>
 <div id="section-crear-y-convertir-conjuntos-de-datos-en-tibbles" class="section level4">
 <h4>2.3.5 Crear y convertir conjuntos de datos en <strong>tibbles</strong></h4>
 <div class="row">
 <div class="col-md-7" markdown="1">
-<p>Los <strong>tibbles</strong> son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del <code>R</code> anteriormente descritas. De hecho los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.</p>
+<p>Los <strong>tibbles</strong> son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del <code>R</code> anteriormente descritas. De hecho, los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.</p>
 Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe destacar:
 </div>
 <div class="col-md-5" markdown="1">

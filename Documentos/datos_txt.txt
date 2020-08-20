@@ -1,5 +1,0 @@
-Edad	Deporte		Fuma		Ciudad
-34		TRUE			FALSE	Medellin
-25		TRUE			TRUE		Bogota
-28		FALSE		FALSE	Cerete
-19		FALSE		TRUE		Pasto
