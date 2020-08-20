@@ -2040,9 +2040,9 @@ prom_peso <- subset(
 mean(x = prom_peso$mass, na.rm = TRUE)
 ```
 
-#### 2.3.4 Lectura de conjuntos de datos
+#### 2.3.4 Lectura y exportación de conjuntos de datos
 
-Frecuentemente, los conjuntos de datos a ser leidos en el programa `R` se almacenan en dos formatos: archivo de texto plano con extensión __.txt__ o archivo de Excel o similar con extensión __.csv__.
+Frecuentemente, los conjuntos de datos que seran leidos en el programa `R` se almacenan en dos formatos: archivos de Excel o similares con extensión __.csv__ o archivos de texto plano con extensión __.txt__.
 
 <details><summary>Ejemplo de almacenamiento en __.csv__</summary>
 
@@ -2151,13 +2151,24 @@ datos_csv <- data.frame(
 str(datos_csv)
 ```
 
+Con la función `read.table()` también es posible cargar archivos de texto de la web (suponiendo que la misma se encuentra en línea).
+
+:::example
+#### Ejemplo 2.3.4.2
+:::
+
+```{r ejemplo_2_3_4_2, exercise = TRUE}
+
+datos_web <- read.table(file = '', sep = '\t', header = TRUE)
+```
+
 #### 2.3.5 Crear y convertir conjuntos de datos en __tibbles__
 
 <div class="row">
   <div class="col-md-7" markdown="1">
   Los __tibbles__ son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. De hecho los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
   
-  Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe mencionar:
+  Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe destacar:
   </div>
   <div class="col-md-5" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
@@ -2181,7 +2192,41 @@ library(tibble)
 #### Ejemplo 2.3.5.1
 :::
 
+```{r ejemplo_2_3_5_1, exercise = TRUE}
 
+datos_csv <- data.frame(
+  'Edad' = c(34, 25, 28, 19),
+  'Deporte' = c(TRUE, TRUE, FALSE, FALSE),
+  'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
+  'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
+)
+datos_csv
+
+datos_tibble <- tribble(
+  ~Edad, ~Deporte, ~Fuma,    ~Ciudad,
+     34,     TRUE, FALSE, 'Medellin',
+     25,     TRUE,  TRUE,   'Bogota',
+     28,    FALSE, FALSE,   'Cerete',
+     19,    FALSE,  TRUE,    'Pasto'
+)
+datos_tibble
+```
+
+<details><summary>Ejemplo usando el sistema base</summary>
+```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
+
+knitr::include_graphics("images/consola_base.png")  
+```  
+</details>
+
+<details><summary>Ejemplo usando el paquete `tibble`</summary>
+```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
+
+knitr::include_graphics("images/consola_tibble.png")  
+```  
+</details>
+
+<br>
 
 ### 2.4 Listas y arreglos
 
