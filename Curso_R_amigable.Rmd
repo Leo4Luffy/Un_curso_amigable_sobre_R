@@ -2151,13 +2151,34 @@ datos_csv <- data.frame(
 str(datos_csv)
 ```
 
-Con la función `read.table()` también es posible cargar archivos de texto de la web (suponiendo que la misma se encuentra en línea).
+<details><summary>Ejemplo de lectura de datos</summary>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/imp_datos_csv.png")  
+```  
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/imp_datos_txt.png")  
+```  
+  </div>
+</div>
+
+</details>
+
+<br>
+
+<!--Con la función `read.table()` también es posible cargar archivos de texto de la web (suponiendo que la misma se encuentra en línea).
 
 :::example
 #### Ejemplo 2.3.4.2
 :::
 
-```{r ejemplo_2_3_4_2, exercise = TRUE}
+```{r ejemplo_2_3_4_2, echo = FALSE, eval = FALSE}
 
 datos_web <- read.table(file = 'https://raw.githubusercontent.com/fhernanb/datos/master/orellana', header = TRUE)
 ```
@@ -2224,16 +2245,11 @@ data.frame(
         axis.title = element_blank())
 ```
 
-```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+```{r, echo = FALSE, eval = FALSE, out.width = "44%", fig.align = "center"}
 
 knitr::include_graphics("images/55va_imagen.png")  
 ```
-
-:::exercise
-
-:::
-
-
+-->
 
 #### 2.3.5 Crear y convertir conjuntos de datos en __tibbles__
 
@@ -2273,7 +2289,7 @@ datos_csv <- data.frame(
   'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
   'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
 )
-datos_csv
+str(datos_csv)
 
 datos_tibble <- tribble(
   ~Edad, ~Deporte, ~Fuma,    ~Ciudad,
@@ -2282,7 +2298,7 @@ datos_tibble <- tribble(
      28,    FALSE, FALSE,   'Cerete',
      19,    FALSE,  TRUE,    'Pasto'
 )
-datos_tibble
+str(datos_tibble)
 ```
 
 <details><summary>Ejemplo usando el sistema base</summary>
@@ -2300,6 +2316,27 @@ knitr::include_graphics("images/consola_tibble.png")
 </details>
 
 <br>
+
+:::example
+#### Ejemplo 2.3.5.2
+:::
+
+```{r ejemplo_2_3_5_2, exercise = TRUE}
+
+datos_csv <- as_tibble(
+  data.frame(
+    'Edad' = c(34, 25, 28, 19),
+    'Deporte' = c(TRUE, TRUE, FALSE, FALSE),
+    'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
+    'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
+    )
+  )
+str(datos_csv)
+```
+
+:::exercise
+
+:::
 
 ### 2.4 Listas y arreglos
 
@@ -9153,4 +9190,8 @@ importar imagenes
 hiperbinculos
 pie de pagina
 
-## 9. Referencias
+## 9. Lectura de datos
+
+
+
+## 10. Referencias
