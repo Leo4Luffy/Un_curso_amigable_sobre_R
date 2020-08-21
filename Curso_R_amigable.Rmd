@@ -27,8 +27,8 @@ require(fontawesome)
 #require(jpeg)
 #require(grid)
 #require(gridGraphics)
-require(showtext)
-font_add_google('Gochi Hand', 'gochi')
+#require(showtext)
+#font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
@@ -1342,9 +1342,9 @@ knitr::include_graphics("images/55va_imagen.png")
 
 <div class="row">
   <div class="col-md-7" markdown="1">
-  Los __tibbles__ son una reinvención moderna de la forma en como se crean e importan los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. De hecho, los tibbles heredaron todas las funciones y características disponibles y que funcionan bien del sistema base, y adicionalmente proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
+  Los __tibbles__ son una reinvención de la forma en como se creaban e importaban los conjuntos de datos a partir de las funciones del sistema base del `R` anteriormente descritas. Los tibbles al heredarse de los conjuntos de datos usando el sistema base del `R`, funcionan también con las funciones disponibles para estos últimos. Adicionalmente, los tibbles proporcionan un mejor comportamiento al momento de crear conjuntos de datos.
   
-  Dentro de las ventajas de los tibbles en comparación con los conjuntos de datos creados a partir del sistema base cabe destacar:
+  Cabe mencionar que este nueva forma de crear conjuntos de datos no hace parte de las funciones básicas del `R`, por lo que es necesario instalar y cargar previamente un paquete para trabajar con ellos:
   </div>
   <div class="col-md-5" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
@@ -1354,21 +1354,89 @@ knitr::include_graphics("images/tibble.png")
   </div>
 </div>
 
-  + Los tibbles tienen un buen método de imprensión que muestra solo las primeras 10 filas y todas las columnas que quepan en la pantalla.
-  + Cuando se ve el conjunto de datos creado como un tibble, se especifica la clase atomica de cada uno de los datos.
-
-Cabe mencionar que este nueva forma de crear conjuntos de datos no hace parte de las funciones básicas del `R`, por lo que es necesario instalar y cargar previamente un paquete para trabajar con ellos:
-
 ```{r instalacion_tibble, exercise = TRUE, comment = ""}
 install.packages('tibble')
 library(tibble)
 ```
+
++ Los tibbles proporcionan una mejor forma de escribir los datos a la hora de crear un conjunto de datos, sin necesidad de escribir vectores:
 
 :::example
 #### Ejemplo 2.3.5.1
 :::
 
 ```{r ejemplo_2_3_5_1, exercise = TRUE}
+
+datos_csv <- data.frame(
+  'Edad' = c(34, 25, 28, 19),
+  'Deporte' = c(TRUE, TRUE, FALSE, FALSE),
+  'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
+  'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
+)
+
+datos_tibble <- tribble(
+  ~Edad, ~Deporte, ~Fuma,    ~Ciudad,
+     34,     TRUE, FALSE, 'Medellin',
+     25,     TRUE,  TRUE,   'Bogota',
+     28,    FALSE, FALSE,   'Cerete',
+     19,    FALSE,  TRUE,    'Pasto'
+)
+```
+
++ Cuando se imprime un tibble en la consola del `R`, se especifica la clase atómica de cada una de las variables o columnas del conjunto de datos:
+
+:::example
+#### Ejemplo 2.3.5.2
+:::
+
+```{r ejemplo_2_3_5_2, exercise = TRUE}
+
+datos_csv <- data.frame(
+  'Edad' = c(34, 25, 28, 19),
+  'Deporte' = c(TRUE, TRUE, FALSE, FALSE),
+  'Fuma' = c(FALSE, TRUE, FALSE, TRUE),
+  'Ciudad' = c('Medellin', 'Bogota', 'Cerete', 'Pasto') 
+)
+datos_csv
+
+datos_tibble <- tribble(
+  ~Edad, ~Deporte, ~Fuma,    ~Ciudad,
+     34,     TRUE, FALSE, 'Medellin',
+     25,     TRUE,  TRUE,   'Bogota',
+     28,    FALSE, FALSE,   'Cerete',
+     19,    FALSE,  TRUE,    'Pasto'
+)
+datos_tibble
+```
+
+<details><summary>Ejemplo observado en la consola</summary>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/consola_base.png")  
+```  
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/consola_tibble.png")  
+```    
+  </div>
+</div>
+
+</details>
+
+<br>
+
++ Al crear un tibble, nunca se convierte una variable con clase atómica `character` (caracter) a `Factor` (factor). 
+
+:::example
+#### Ejemplo 2.3.5.3
+:::
+
+```{r ejemplo_2_3_5_3, exercise = TRUE}
 
 datos_csv <- data.frame(
   'Edad' = c(34, 25, 28, 19),
@@ -1388,27 +1456,20 @@ datos_tibble <- tribble(
 str(datos_tibble)
 ```
 
-<details><summary>Ejemplo usando el sistema base</summary>
-```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
-
-knitr::include_graphics("images/consola_base.png")  
-```  
-</details>
-
-<details><summary>Ejemplo usando el paquete `tibble`</summary>
-```{r, echo = FALSE, eval = TRUE, out.width = "48%", fig.align = "center"}
-
-knitr::include_graphics("images/consola_tibble.png")  
-```  
-</details>
-
-<br>
-
-:::example
-#### Ejemplo 2.3.5.2
+:::caution
+La coerción es una característica del lenguaje de programación `R` que permite, implícita o explícitamente, convertir un elemento de una clase de datos en otra. Para ello se cuenta con funciones del tipo `as.*`
 :::
 
-```{r ejemplo_2_3_5_2, exercise = TRUE}
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+
+knitr::include_graphics("images/56va_imagen.png")  
+```
+
+:::example
+#### Ejemplo 2.3.5.4
+:::
+
+```{r ejemplo_2_3_5_4, exercise = TRUE}
 
 datos_csv <- as_tibble(
   data.frame(
@@ -1421,20 +1482,11 @@ datos_csv <- as_tibble(
 str(datos_csv)
 ```
 
-:::caution
-colocar aqui lo de la coerción y los distintos tipos
-:::
-
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
-
-knitr::include_graphics("images/56va_imagen.png")  
-```
-
 :::example
-#### Ejemplo 2.3.5.3
+#### Ejemplo 2.3.5.5
 :::
 
-```{r ejemplo_2_3_5_3, exercise = TRUE}
+```{r ejemplo_2_3_5_5, exercise = TRUE}
 
 amigos <- tribble(
    ~nombre,                    ~fisico,                      ~sentimental,
@@ -1447,10 +1499,6 @@ amigos <- tribble(
 )
 amigos
 ```
-
-:::exercise
-
-:::
 
 ### 2.4 Listas y arreglos
 
