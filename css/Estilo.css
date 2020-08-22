@@ -48,7 +48,7 @@ em {
     background-position: left 100%;
         background-position-y: 100%;
     background-image: url(images/topicProgress.png);
-    border-bottom: 1px solid cyan;
+    border-bottom: 2px solid gray;
     -webkit-transition-property: background-position;
     transition-property: background-position;
     -webkit-transition-duration: 0.25s;

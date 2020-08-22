@@ -1071,6 +1071,35 @@ Starwars[1:20, 'name']
 Starwars[20:40, c('height', 'mass')]
 ```
 
+<!--
+En el siguiente ejemplo, calcularemos la suma de los valores de cada columna y determinaremos su representación en porcentaje de la suma calculada. El porcentaje lo aproximáremos a dos cifras decimales y haremos un ejercicio de indexación con este resultado, imprimiendo un vector con los resultados de la diagonal.
+-->
+:::example
+#### Ejemplo 2.3.3.4
+:::
+
+```{r ejemplo_2_3_3_4, exercise = TRUE}
+
+M <- matrix(seq(from = 18, to = 2, length.out = 16), ncol = 4, byrow = TRUE)
+M
+
+t_col <- colSums(m)
+t_col
+
+porc_M <- cbind(
+  m[, 1] / t_col[1],
+  m[, 2] / t_col[2],
+  m[, 3] / t_col[3],
+  m[, 4] / t_col[4]
+  )
+porc_M <- round(porc_M * 100, 2)
+porc_M
+
+diag(porc_M) # Vector con los resultados de la diagonal (1ra forma)
+
+c(porc_M[1, 1], porc_M[2, 2], porc_M[3, 3], porc_M[4, 4]) # Vector con los resultados de la diagonal (2da forma)
+```
+
 + Indexación lógica
 
 Indexar matrices y conjuntos de datos mediante el uso de vectores lógicos es muy similar a lo visto con vectores:
@@ -1080,10 +1109,10 @@ Indexar matrices y conjuntos de datos mediante el uso de vectores lógicos es mu
   2- Usando el vector lógico se indexa la matriz o conjunto de datos, devolviendo solo aquellos valores para los que dicho vector lógico es igual a `TRUE`.
 
 :::example
-#### Ejemplo 2.3.3.4
+#### Ejemplo 2.3.3.5
 :::
 
-```{r ejemplo_2_3_3_4, exercise = TRUE}
+```{r ejemplo_2_3_3_5, exercise = TRUE}
 
 Starwars[, 'species'] == 'Human'
 #Starwars[Starwars[, 'species'] == 'Human', ]
@@ -1094,10 +1123,10 @@ Starwars[, 'species'] == 'Human'
 El operador `$` permite acceder a una columna especifica en una matriz o conjuntos de datos mediante el nombre de las columnas de la forma `df$name`, donde `df` es el nombre del objeto y `name` es el nombre de la columna. De esta forma, este operador establece una forma de tener acceso a los valores de las matrices y conjuntos de datos mediante los nombres de las variables o columnas.
 
 :::example
-#### Ejemplo 2.3.3.5
+#### Ejemplo 2.3.3.6
 :::
 
-```{r ejemplo_2_3_3_5, exercise = TRUE}
+```{r ejemplo_2_3_3_6, exercise = TRUE}
 
 #Starwars[Starwars[, 'species'] == 'Human', ]
 Starwars[Starwars$species == 'Human', ]
@@ -1106,10 +1135,10 @@ Starwars[Starwars$species == 'Human', ]
 El operador `$` no solo permite acceder a los valores de la matriz y conjunto de datos, sino que también permite crear nuevas columnas o variables.
 
 :::example
-#### Ejemplo 2.3.3.6
+#### Ejemplo 2.3.3.7
 :::
 
-```{r ejemplo_2_3_3_6, exercise = TRUE}
+```{r ejemplo_2_3_3_7, exercise = TRUE}
 
 Starwars$numero <- 1:nrow(Starwars)
 Starwars
@@ -1127,10 +1156,10 @@ knitr::include_graphics("images/52va_imagen.png")
 ```
 
 :::example
-#### Ejemplo 2.3.3.7
+#### Ejemplo 2.3.3.8
 :::
 
-```{r ejemplo_2_3_3_7, exercise = TRUE}
+```{r ejemplo_2_3_3_8, exercise = TRUE}
 
 #Starwars[Starwars[, 'species'] == 'Human', ]
 #Starwars[Starwars$species == 'Human', ]
@@ -1141,10 +1170,10 @@ subset(
 ```
 
 :::example
-#### Ejemplo 2.3.3.8
+#### Ejemplo 2.3.3.9
 :::
 
-```{r ejemplo_2_3_3_8, exercise = TRUE}
+```{r ejemplo_2_3_3_9, exercise = TRUE}
 
 subconjunto <- subset(
   x = Starwars,
@@ -1154,10 +1183,10 @@ subconjunto
 ```
 
 :::example
-#### Ejemplo 2.3.3.9
+#### Ejemplo 2.3.3.10
 :::
 
-```{r ejemplo_2_3_3_9, exercise = TRUE}
+```{r ejemplo_2_3_3_10, exercise = TRUE}
 
 prom_peso <- subset(
   x = Starwars,
@@ -4780,7 +4809,7 @@ rosas <-  data.frame(lunes=c(2,5,10,21,17,10,2,8,3),
 apply(rosas,2,quantile,probs=c(.33,.66,.99))
 ```
 
-Recordemos el ejemplo 2.2.3 en el cual determinamos la representación en porcentual de cada elemento de la columna sobre la suma total de la misma, en aquella ocasión determinar esa representación porcentual nos tomó aproximadamente 8 líneas de código, ahora con `apply()` debes lograrlo en una sola línea.
+Recordemos el ejemplo 2.3.3.4 en el cual determinamos la representación en porcentual de cada elemento de la columna sobre la suma total de la misma. En aquella ocasión determinar esa representación porcentual tomó aproximadamente 8 líneas de código. Ahora con `apply()`, debes lograrlo en una sola línea.
 
 :::exercise
 #### Ejercicio 3.4.1
@@ -4798,7 +4827,7 @@ m
 m <- matrix(seq(18, 2, length.out = 16), ncol = 4, byrow = TRUE)
 m
 #porcentaje columna
-apply(m,2,function(x) round(100*x/sum(x),2))
+apply(m, 2, function(x) round(100*x/sum(x), 2))
 ```
 
 ```{r exe_341-check}
