@@ -27,8 +27,8 @@ require(fontawesome)
 #require(jpeg)
 #require(grid)
 #require(gridGraphics)
-#require(showtext)
-#font_add_google('Gochi Hand', 'gochi')
+require(showtext)
+font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
@@ -793,6 +793,11 @@ x_y
 Recuerden, las matrices pueden contener números o caracteres, ¡no ambos!. Si intenta crear una matriz con números y caracteres, el `R` convertirá todos los números en caracteres (__coerción implicita__).
 :::
 
+```{r, echo = FALSE, eval = TRUE, out.width = "38%", fig.align = "center"}
+
+knitr::include_graphics("images/58va_imagen.png")  
+```
+
 :::example
 #### Ejemplo 2.3.3
 :::
@@ -1535,6 +1540,37 @@ amigos
 
 knitr::include_graphics("images/53va_imagen.png")  
 ```
+
++ Listas
+
+Las listas son como los vectores debido a que almacenan datos en una estructura unidimensional. Sin embargo, las listas a diferencia de los vectores no almacenan valores individuales sino que almacenan objetos, como escalares, conjuntos de datos, funciones e inclusive otras listas. Para crear una lista se emplea la función `list()`.
+
+:::example
+#### Ejemplo 2.4.1
+:::
+
+```{r ejemplo_2_4_1, exercise = TRUE}
+
+lista_1 <- list(L_1 = 40:80, L_2 = 'Hola', L_3 = list(TRUE, FALSE))
+lista_1
+```
+
+Si se desea estraer los elementos almacenados en una lista, se pueden usar los operadores `$`, `[[ ]]` o `[ ]`.
+
+:::example
+#### Ejemplo 2.4.2
+:::
+
+```{r ejemplo_2_4_2, exercise = TRUE}
+
+lista_1$L_2
+
+lista_1[[2]]
+
+lista_1[2]
+```
+
++ Arreglos
 
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
