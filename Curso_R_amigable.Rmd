@@ -1628,6 +1628,41 @@ amigos$fisico[[6]][3][[1]] / (amigos$fisico[[6]][2][[1]] / 100)^2 # IMC de Javie
 
 + Arreglos
 
+Un arreglo es una matriz n-dimensional. Por lo tanto los arreglos, al igual que en una matriz, se pueden almacenar datos de una sola clase atómica. Para construir una arreglo se usa la función `array( )`.
+
+:::example
+#### Ejemplo 2.4.4
+:::
+
+```{r ejemplo_2_4_4, exercise = TRUE}
+
+arreglo_1 <- array(
+  data = c(11:14, 21:24, 31:34),
+  dim = c(2, 2, 3)
+)
+arreglo_1
+```
+
+Si se desea extraer los elementos almacenados en un arreglo, se usa el operador `[ ]` a igual que en una matriz.
+
+:::example
+#### Ejemplo 2.4.5
+:::
+
+```{r ejemplo_2_4_5, exercise = TRUE}
+
+arreglo_1 <- array(
+  data = c(11:14, 21:24, 31:34),
+  dim = c(2, 2, 3)
+)
+
+arreglo_1[2, 1, 3] # Si se quiere extraer el número almacenado en la fila 2 y la columna 1 de la tercera matriz. 
+arreglo_1[, , 2] # Si se quiere extraer la segunda matriz completa.  
+arreglo_1[, 2, ] # Si se quiere extraer la columna 2 de todas las matrices.
+arreglo_1[1, , ] # Si se quiere extraer la fila 1 de todas las matrices.
+```
+
+
 <!-- Aquí inicia la parte de Duvan en el que voy a emplear cositas -->
 
 Antes de realizar operaciones sobre algunos objetos en `R`, veamos cuales de estas podemos realizar.
