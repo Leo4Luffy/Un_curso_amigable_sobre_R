@@ -1393,6 +1393,8 @@ install.packages('tibble')
 library(tibble)
 ```
 
+Las ventajas de los tibbles son:
+
 + Los tibbles proporcionan una mejor forma de escribir los datos a la hora de crear un conjunto de datos, sin necesidad de escribir vectores:
 
 :::example
@@ -1523,13 +1525,13 @@ str(datos_csv)
 ```{r ejemplo_2_3_5_5, exercise = TRUE}
 
 amigos <- tribble(
-   ~nombre,                    ~fisico,                      ~sentimental,
-  'Andres', c(edad = 23, altura = 181),  c(soltero = TRUE, hijos = FALSE),
-  'Julian', c(edad = 24, altura = 179),  c(soltero = FALSE, hijos = TRUE),
-   'Maria', c(edad = 19, altura = 167), c(soltero = TRUE , hijos = FALSE),
-  'sandra', c(edad = 21, altura = 174),  c(soltero = TRUE, hijos = FALSE),
-   'Karol', c(edad = 26, altura = 171),  c(soltero = FALSE, hijos = TRUE),
-  'Javier', c(edad = 18, altura = 164),  c(soltero = TRUE, hijos = FALSE),
+   ~nombre,                               ~fisico,                      ~sentimental,
+  'Andres', c(edad = 23, altura = 181, masa = 98),  c(soltero = TRUE, hijos = FALSE),
+  'Julian', c(edad = 24, altura = 179, masa = 75),  c(soltero = FALSE, hijos = TRUE),
+   'Maria', c(edad = 19, altura = 167, masa = 71), c(soltero = TRUE , hijos = FALSE),
+  'sandra', c(edad = 21, altura = 174, masa = 68),  c(soltero = TRUE, hijos = FALSE),
+   'Karol', c(edad = 26, altura = 171, masa = 70),  c(soltero = FALSE, hijos = TRUE),
+  'Javier', c(edad = 18, altura = 164), masa = 64,  c(soltero = TRUE, hijos = FALSE)
 )
 amigos
 ```
@@ -1551,11 +1553,15 @@ Las listas son como los vectores debido a que almacenan datos en una estructura 
 
 ```{r ejemplo_2_4_1, exercise = TRUE}
 
-lista_1 <- list(L_1 = 40:80, L_2 = 'Hola', L_3 = list(TRUE, FALSE))
+lista_1 <- list(
+  L_1 = 40:80, 
+  L_2 = 'Hola', 
+  L_3 = list(VERDADERO = TRUE, FALSO = FALSE)
+  )
 lista_1
 ```
 
-Si se desea estraer los elementos almacenados en una lista, se pueden usar los operadores `$`, `[[ ]]` o `[ ]`.
+Si se desea extraer los elementos almacenados en una lista, se pueden usar los operadores `$`, `[[ ]]` o `[ ]`.
 
 :::example
 #### Ejemplo 2.4.2
@@ -1563,11 +1569,61 @@ Si se desea estraer los elementos almacenados en una lista, se pueden usar los o
 
 ```{r ejemplo_2_4_2, exercise = TRUE}
 
-lista_1$L_2
+lista_1 <- list(
+  L_1 = 40:80, 
+  L_2 = 'Hola', 
+  L_3 = list(VERDADERO = TRUE, FALSO = FALSE)
+  )
 
-lista_1[[2]]
+lista_1$L_2 # Si queremos extraer el vector con el nombre "L_2" dentro del objeto "lista_1".
 
-lista_1[2]
+lista_1[[2]] # Si queremos extraer el vector con el nombre "L_2", pero esta vez no por su nombre sino por su posición dentro del objeto "lista_1".
+
+lista_1$L_3[2]
+```
+
+:::example
+#### Ejemplo 2.4.3
+:::
+
+```{r ejemplo_2_4_3, exercise = TRUE}
+
+amigos <- tribble(
+   ~nombre,                               ~fisico,                      ~sentimental,
+  'Andres', c(edad = 23, altura = 181, masa = 98),  c(soltero = TRUE, hijos = FALSE),
+  'Julian', c(edad = 24, altura = 179, masa = 75),  c(soltero = FALSE, hijos = TRUE),
+   'Maria', c(edad = 19, altura = 167, masa = 71), c(soltero = TRUE,  hijos = FALSE),
+  'sandra', c(edad = 21, altura = 174, masa = 68),  c(soltero = TRUE, hijos = FALSE),
+   'Karol', c(edad = 26, altura = 171, masa = 70),  c(soltero = FALSE, hijos = TRUE),
+  'Javier', c(edad = 18, altura = 164, masa = 64),  c(soltero = TRUE, hijos = FALSE)
+  )
+
+# Selección de los elementos del anterior tibble ----
+amigos$fisico[[3]][1] # Edad de Maria.
+amigos$fisico[[2]][1] # Edad de Julian.
+amigos$sentimental[[6]][2] # Hijos de Javier. 
+```
+
+:::exercise
+#### Ejercicio 2.4.1
+Sabiendo que el índice de masa corporal de una persona se calcula con base en la expresión ($IMC = \frac{Masa\ (kg)}{Altura(m)^2}$), intente por favor calcular este párametro para Karol y Javier por medio de indexación. Aquí, la altura esta expresada en centímetros, por lo cual requerirá cambiarse a metros.
+:::
+
+```{r ejercicio_2_4_1, exercise = TRUE}
+
+amigos <- tribble(
+   ~nombre,                               ~fisico,                      ~sentimental,
+  'Andres', c(edad = 23, altura = 181, masa = 98),  c(soltero = TRUE, hijos = FALSE),
+  'Julian', c(edad = 24, altura = 179, masa = 75),  c(soltero = FALSE, hijos = TRUE),
+   'Maria', c(edad = 19, altura = 167, masa = 71), c(soltero = TRUE,  hijos = FALSE),
+  'sandra', c(edad = 21, altura = 174, masa = 68),  c(soltero = TRUE, hijos = FALSE),
+   'Karol', c(edad = 26, altura = 171, masa = 70),  c(soltero = FALSE, hijos = TRUE),
+  'Javier', c(edad = 18, altura = 164, masa = 64),  c(soltero = TRUE, hijos = FALSE)
+)
+
+# Calculo del IMC del anterior tibble ----
+amigos$fisico[[5]][3][[1]] / (amigos$fisico[[5]][2][[1]] / 100)^2 # IMC de Karol
+amigos$fisico[[6]][3][[1]] / (amigos$fisico[[6]][2][[1]] / 100)^2 # IMC de Javier
 ```
 
 + Arreglos
