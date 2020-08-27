@@ -207,19 +207,19 @@ c &lt;- matrix(data = 1:4,
 </div>
 <div class="tutorial-exercise" data-label="addition" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>a &lt;- &#39;Hola&#39;
-typeof(a)
+typeof(x = a)
 
 b &lt;- 1L
-typeof(b)
+typeof(x = b)
 
 c &lt;- 12.3
-typeof(c)
+typeof(x = c)
 
 d &lt;- 1 + 2i
-typeof(d)
+typeof(x = d)
 
 e &lt;- c(FALSE, TRUE)
-typeof(e)</code></pre>
+typeof(x = e)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
 </div>
@@ -398,7 +398,7 @@ update.packages() # Para actualizar todo los paquetes instalados.</code></pre>
 </div>
 <div id="section-trabajando-con-proyectos" class="section level3">
 <h3>1.5 Trabajando con proyectos</h3>
-<p>Un <strong>directorio de trabajo</strong> en <code>R</code> es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde <code>R</code> buscara los archivos para importarlos y al que serán exportados.</p>
+<p>Un <strong>directorio de trabajo</strong> es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde el programa <code>R</code> buscara los archivos para importarlos y al que serán exportados.</p>
 <p><img src="images/59va_imagen.png" width="44%" style="display: block; margin: auto;" /></p>
 <p>Con la función <code>getwd()</code> se puede encontrar el directorio en el que se esta trabajando.</p>
 <div class="example">
@@ -408,7 +408,7 @@ update.packages() # Para actualizar todo los paquetes instalados.</code></pre>
 <pre class="text"><code>getwd() # Da como resultado la ruta &quot;/home/leo/Escritorio/github/Un_curso_amigable_sobre_R&quot;.</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
-<p>Para cambiar el directorio de trabajo se puede emplear la función <code>setwd()</code>, dando como argumento la ruta del directorio que se quiere usar.</p>
+<p>Para cambiar el directorio de trabajo se puede emplear la función <code>setwd()</code>, dando como argumento la ruta donde se encuentra el nuevo directorio de trabajo.</p>
 <div class="example">
 <h4 id="section-ejemplo-1.5.2">Ejemplo 1.5.2</h4>
 </div>
@@ -419,7 +419,7 @@ update.packages() # Para actualizar todo los paquetes instalados.</code></pre>
 <p>Sin embargo como señala <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Jenny Bryan</a>, con la función <code>setwd()</code> es practicamente imposible para cualquier otra persona que no sea el autor original del código <code>R</code>, en su computadora, hacer que las rutas de archivo funcionen.<!--"La posibilidad de que el comando setwd() tenga el efecto deseado (hacer que las rutas de archivo funcionen) para cualquier persona además de su autor es 0%. También es poco probable que funcione para el autor dentro de uno o dos años o para computadoras a partir de ahora. El proyecto no es autónomo y portátil. Para recrear y tal vez extender esta trama, el destinatario afortunado deberá editar manualmente uno o más caminos para reflejar dónde ha aterrizado el proyecto en su máquina. Cuando haces esto por 73a vez en 2 días, mientras marcas una tarea, comienzas a fantasear con encender la computadora del perpetrador."--> La solución consistiría en trabajar con <strong>proyectos</strong>.</p>
 <div class="row">
 <div class="col-md-5" markdown="1">
-<p>Un proyecto es un directorio de trabajo nombrado como un archivo <strong>.Rproj</strong>. Cuando se abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo <strong>.Rproj</strong>.</p>
+<p>Un proyecto es un directorio de trabajo designado como un archivo <strong>.Rproj</strong>. Cuando se abre un proyecto, el directorio de trabajo se establecerá automáticamente en la carpeta en el que se encuentra el archivo <strong>.Rproj</strong>.</p>
 <p>El archivo <strong>.Rproj</strong> se puede crear yendo a “File” (archivo) → “New Project…” (nuevo proyecto) en RStudio, que luego se asocia con la carpeta o directorio especificado.</p>
 Configurar un directorio de trabajo correctamente también ayuda a desarrollar buenos hábitos que conducen a un <strong>análisis reproducible</strong>.
 </div>
@@ -430,6 +430,7 @@ Configurar un directorio de trabajo correctamente también ayuda a desarrollar b
 </section>
 </div>
 </div>
+<p>La tabla a continuación presenta algunas funciones útiles para administrar el directorio de trabajo:</p>
 <p><img src="images/60va_imagen.png" width="44%" style="display: block; margin: auto;" /></p>
 <div id="section-estructurando-el-directorio-de-trabajo" class="section level4">
 <h4>1.5.1 Estructurando el directorio de trabajo</h4>
@@ -456,22 +457,22 @@ Configurar un directorio de trabajo correctamente también ayuda a desarrollar b
 </div>
 <div class="tutorial-exercise" data-label="ejemplo_2_1_1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>a &lt;- &#39;Hola&#39;
-typeof(a)
+typeof(x =a)
 
 b &lt;- 1L
-typeof(b)
+typeof(x = b)
 
 b_2 &lt;- 1
-typeof(b_2)
+typeof(x = b_2)
 
 c &lt;- 12.3
-typeof(c)
+typeof(x = c)
 
 d &lt;- 1 + 2i
-typeof(d)
+typeof(x = d)
 
 e &lt;- c(FALSE, TRUE)
-typeof(e)</code></pre>
+typeof(x = e)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
 <div class="caution">
@@ -1763,7 +1764,58 @@ for (i in seq_along(x)){
 }</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
-<p>Se puede ver que el proceso con las listas es tan simple como con los vectores, por ello en el siguiente ejercicio debes retomar la lista <code>carlos_fam_g</code> del ejercicio 2.4.3 y obtener todos los nombres de los familiares de carlos e imprimirlos en pantalla junto con el tipo de relación que tienen y su edad. Por ejemplo para el padre se debe mostrar en pantalla : “El padre de carlos es Juan carlos y tiene 55 años”.</p>
+<p>Se puede ver que el proceso con las listas es tan simple como con los vectores, por ello en el siguiente ejercicio debes hacer uso de la lista <code>carlos_fam_g</code> presentada a continuación y obtener todos los nombres de los familiares de Carlos, e imprimirlos en pantalla junto con el tipo de relación que tienen y su edad. Por ejemplo para el padre se debe mostrar en pantalla : “El padre de Carlos es Juan carlos y tiene 55 años”.</p>
+<table style="width:53%;">
+<colgroup>
+<col width="19%" />
+<col width="23%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Relación</th>
+<th>Nombre</th>
+<th>Edad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Padre</td>
+<td>Juan Carlos</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Madre</td>
+<td>Luz Estela</td>
+<td>53</td>
+</tr>
+<tr class="odd">
+<td>Hijo</td>
+<td>Juan Camilo</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Hijo</td>
+<td>Juan Fernado</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>Hijo</td>
+<td>Juliana</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Hermano</td>
+<td>Andres Felipe</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>Hermano</td>
+<td>Maria Camila</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
 <div class="exercise">
 <h4 id="section-ejercicio-3.2.1">Ejercicio 3.2.1</h4>
 </div>
@@ -2153,7 +2205,7 @@ environment(rowMeans)
 attr(rowMeans,&quot;srcref&quot;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.timelimit":60,"exercise.checker":["function (label = NULL, solution_code = NULL, user_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    envir_prep = NULL, last_value = NULL, ...) ","{","    if (is.null(user_code)) {","        return(list(message = \"I didn't receive your code. Did you write any?\", ","            correct = FALSE, type = \"error\", location = \"append\"))","    }","    else {","        user_code <- parse(text = user_code)","        if (length(user_code) == 0) {","            return(list(message = \"I didn't receive your code. Did you write any?\", ","                correct = FALSE, type = \"error\", location = \"append\"))","        }","    }","    if (!is.null(solution_code)) {","        solution_code <- parse(text = solution_code)","        if (length(solution_code) == 0) {","            return(list(message = \"No solution is provided for this exercise.\", ","                correct = TRUE, type = \"info\", location = \"append\"))","        }","    }","    had_error_checking <- FALSE","    checked_result <- tryCatch({","        parsed_check_code <- parse(text = check_code)","        if (length(parsed_check_code) > 1) {","            for (i in 1:(length(parsed_check_code) - 1)) {","                eval(parsed_check_code[[i]], envir_prep)","            }","        }","        grading_code <- rlang::call_standardise(parsed_check_code[[length(parsed_check_code)]], ","            envir_prep)","        grader_args <- list(user_quo = rlang::as_quosure(user_code[[length(user_code)]], ","            envir_result))","        if (!is.null(solution_code)) {","            grader_args$solution_quo <- rlang::as_quosure(solution_code[[length(solution_code)]], ","                envir_prep)","        }","        learnr_args <- list(...)","        learnr_args$label <- label","        learnr_args$solution_code <- solution_code","        learnr_args$user_code <- user_code","        learnr_args$check_code <- check_code","        learnr_args$envir_result <- envir_result","        learnr_args$evaluate_result <- evaluate_result","        learnr_args$envir_prep <- envir_prep","        learnr_args$last_value <- last_value","        grading_code$grader_args <- grader_args","        grading_code$learnr_args <- learnr_args","        envir_prep$ans <- grader_args$user","        eval(grading_code, envir_prep)","    }, error = function(e) {","        message(\"\", e)","        had_error_checking <<- TRUE","        graded(correct = FALSE, message = \"Error occured while checking the submission\")","    })","    if (!checkmate::test_class(checked_result, \"grader_graded\")) {","        stop(\"`grade_learnr` should receive a `graded` value from every `-check` chunk\")","    }","    message_type <- if (had_error_checking) {","        \"warning\"","    }","    else {","        if (checked_result$correct) {","            \"success\"","        }","        else {","            \"error\"","        }","    }","    ret <- list(message = checked_result$message, correct = checked_result$correct, ","        type = message_type, location = \"append\")","    ret","}"]}</script>
 </div>
-<p>En la sección anterior en los ejemplos y ejercicios 2.3.6 y 2.3.7 usamos <code>function()</code> en conjunto con otras funciones, en esos casos utilizamos lo que se denomina funciones anónimas, las cuales se caracterizan por ser breves (se pueden escribir en una sola línea de código) y por no poseer frecuentemente los <code>{}</code>. Veamos un ejemplo de una función anónima para la integral <span class="math inline">\(\pi \int_{0}^{6} \frac{x}{12} \sqrt{36-x^2}\)</span>, donde la función anónima corresponde al integrando.</p>
+<p>De igual forma, se puede hacer uso de la función <code>function()</code> en conjunto con otras funciones u operadores, en lo que se denomina como funciones anónimas. Estas se caracterizan por ser breves (se pueden escribir en una sola línea de código) y por no poseer frecuentemente los <code>{}</code>. Veamos un ejemplo de una función anónima para la integral <span class="math inline">\(\pi \int_{0}^{6} \frac{x}{12} \sqrt{36-x^2}\)</span>, donde la función anónima corresponde al integrando.</p>
 <div class="example">
 <h4 id="section-ejemplo-3.3.2">Ejemplo 3.3.2</h4>
 </div>
@@ -2511,7 +2563,7 @@ descuento_helados(vec_dias_2,vec_total_2)</code></pre>
 <div class="tutorial-exercise-support" data-label="exe_335-check" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>grade_code(&quot;Excelente lo lograste, sigamos adelante&quot;)</code></pre>
 </div>
-<p>Continuando con teoría acerca de las funciones trabajaremos el argumento especial <code>...</code>, el cual tiene dos usos comunes: 1) Para extender una función y 2) Para permitir que la función posea cualquier número de argumentos adicionales. El primer caso es usado comúnmente cuando se anidan funciones, como se vio en los ejemplos y ejercicios 2.3.7. Veamos un ejemplo de este primer caso utilizando dos funciones <code>my_fun_1</code> y <code>my_fun_2</code>.</p>
+<p>Continuando con la teoría acerca de las funciones, trabajaremos el argumento especial <code>...</code>, el cual tiene dos usos comunes: 1) Para extender una función y 2) Para permitir que la función posea cualquier número de argumentos adicionales. El primer caso es usado comúnmente cuando se anidan funciones. Veamos un ejemplo de este primer caso utilizando dos funciones <code>my_fun_1</code> y <code>my_fun_2</code>.</p>
 <div class="example">
 <h4 id="section-ejemplo-3.3.8">Ejemplo 3.3.8</h4>
 </div>
@@ -6046,7 +6098,7 @@ subtitle: &quot;Un subtitulo&quot;
 author: 
   - &quot;Autor 1&quot;
   - &quot;Autor 2&quot;
-date: &quot;2020-08-26&quot;
+date: &quot;2020-08-27&quot;
 bibliography: biblio.bib
 output: 
   html_document:
@@ -6065,7 +6117,7 @@ subtitle: &quot;Un subtitulo&quot;
 author: 
   - &quot;Autor 1&quot;
   - &quot;Autor 2&quot;
-date: &quot;2020-08-26&quot;
+date: &quot;2020-08-27&quot;
 nocite: &#39;@*&#39;
 output:
   pdf_document:
@@ -6875,7 +6927,7 @@ output$`tutorial-exercise-addition_333-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "exe_332", question = structure("", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_3f804b8",     option = "[1] 30", value = "[1] 30", label = structure("[1] 30", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c127645", option = "[1] 60",     value = "[1] 60", label = structure("[1] 60", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4c6d819", option = "[1] 10",     value = "[1] 10", label = structure("[1] 10", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_58b96e8", option = "[1] 13",     value = "[1] 13", label = structure("[1] 13", html = TRUE, class = c("html",     "character")), correct = TRUE, message = structure("Estas en lo correcto..", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_124eaad", option = "[1] 35",     value = "[1] 35", label = structure("[1] 35", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "exe_332-answer", question = "exe_332"), loading = structure("<strong>Loading:<\u002fstrong> <\u002fp>\n\n<p><br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 983449305.542046, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "exe_332", question = structure("", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_c704aac",     option = "[1] 30", value = "[1] 30", label = structure("[1] 30", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca21aa7", option = "[1] 60",     value = "[1] 60", label = structure("[1] 60", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_60487e8", option = "[1] 10",     value = "[1] 10", label = structure("[1] 10", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8516c4c", option = "[1] 13",     value = "[1] 13", label = structure("[1] 13", html = TRUE, class = c("html",     "character")), correct = TRUE, message = structure("Estas en lo correcto..", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4daed9e", option = "[1] 35",     value = "[1] 35", label = structure("[1] 35", html = TRUE, class = c("html",     "character")), correct = FALSE, message = structure("No estas en lo correcto, sigue intentandolo.", html = TRUE, class = c("html",     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", "character")), message = NULL, post_message = NULL), ids = list(    answer = "exe_332-answer", question = "exe_332"), loading = structure("<strong>Loading:<\u002fstrong> <\u002fp>\n\n<p><br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 2088882293.52729, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">

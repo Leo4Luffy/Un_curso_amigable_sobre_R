@@ -159,19 +159,19 @@ declarar el __tipo de dato__. A su vez, `R` es __fuertemente tipado__.
 ```{r addition, exercise = TRUE}
 
 a <- 'Hola'
-typeof(a)
+typeof(x = a)
 
 b <- 1L
-typeof(b)
+typeof(x = b)
 
 c <- 12.3
-typeof(c)
+typeof(x = c)
 
 d <- 1 + 2i
-typeof(d)
+typeof(x = d)
 
 e <- c(FALSE, TRUE)
-typeof(e)
+typeof(x = e)
 ```
 
 ### 1.2 ¿Por qué usar `R`?
@@ -393,7 +393,7 @@ update.packages() # Para actualizar todo los paquetes instalados.
 
 ### 1.5 Trabajando con proyectos
 
-Un __directorio de trabajo__ en `R` es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde `R` buscara los archivos para importarlos y al que serán exportados.
+Un __directorio de trabajo__ es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde el programa `R` buscara los archivos para importarlos y al que serán exportados.
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
 
@@ -410,7 +410,7 @@ Con la función `getwd()` se puede encontrar el directorio en el que se esta tra
 getwd() # Da como resultado la ruta "/home/leo/Escritorio/github/Un_curso_amigable_sobre_R".
 ```
 
-Para cambiar el directorio de trabajo se puede emplear la función `setwd()`, dando como argumento la ruta del directorio que se quiere usar. 
+Para cambiar el directorio de trabajo se puede emplear la función `setwd()`, dando como argumento la ruta donde se encuentra el nuevo directorio de trabajo. 
 
 :::example
 #### Ejemplo 1.5.2
@@ -424,7 +424,7 @@ Sin embargo como señala [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/wo
 
 <div class="row">
   <div class="col-md-5" markdown="1">
-  Un proyecto es un directorio de trabajo nombrado como un archivo __.Rproj__. Cuando se abre un proyecto, el directorio de trabajo se establecerá automáticamente en el directorio en el que se encuentra el archivo __.Rproj__.
+  Un proyecto es un directorio de trabajo designado como un archivo __.Rproj__. Cuando se abre un proyecto, el directorio de trabajo se establecerá automáticamente en la carpeta en el que se encuentra el archivo __.Rproj__.
   
   El archivo __.Rproj__ se puede crear yendo a "File" (archivo) &#8594; "New Project..." (nuevo proyecto) en RStudio, que luego se asocia con la carpeta o directorio especificado. 
   
@@ -439,53 +439,7 @@ knitr::include_graphics("images/Proyectos.jpg")
   </div>
 </div>
 
-```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
-
-data.frame(
-  x = c(1:6), y = c(1:6)
-) %>%
-  ggplot(aes(x, y)) +
-  geom_blank() +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Función', family = 'gochi', size = 5.5, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'ls()', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'rm(a, b, ...)', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'getwd()', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'setwd()', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'list.files()', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 1.75, y = -0.5, label = 'rm(list = ls())', family = 'gochi', size = 5.0, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 4.7, label = 'Muestra todos los objetos en', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 3.75, y = 4.3, label = 'el espacio de trabajo actual.', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 3.7, label = 'Elimina los objetos (a, b...)', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 3.75, y = 3.3, label = 'del espacio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 2.5, label = 'Devuelve el directorio de trabajo actual.', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 1.7, label = 'Cambia el directorio de trabajo', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 3.75, y = 1.3, label = 'a una ubicación especifica.', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = 0.7, label = 'Devuelve los nombres de los archivos', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 3.75, y = 0.3, label = 'en el directorio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
-  annotate(geom = 'text', x = 3.75, y = -0.3, label = 'Elimina todos los objetos del', family = 'gochi', size = 4.4, colour = 'black') +
-  annotate(geom = 'text', x = 3.75, y = -0.7, label = 'espacio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
-  #scale_y_continuous(limits = c(2.05, 5.0)) +
-  #scale_x_continuous(limits = c(1.0, 7.0)) +
-  theme_void() +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank())
-```
+La tabla a continuación presenta algunas funciones útiles para administrar el directorio de trabajo:
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
 
@@ -524,22 +478,22 @@ Los escalares son el tipo de objeto más simple en `R`. Un objeto escalar es un 
 ```{r ejemplo_2_1_1, exercise = TRUE}
 
 a <- 'Hola'
-typeof(a)
+typeof(x =a)
 
 b <- 1L
-typeof(b)
+typeof(x = b)
 
 b_2 <- 1
-typeof(b_2)
+typeof(x = b_2)
 
 c <- 12.3
-typeof(c)
+typeof(x = c)
 
 d <- 1 + 2i
-typeof(d)
+typeof(x = d)
 
 e <- c(FALSE, TRUE)
-typeof(e)
+typeof(x = e)
 ```
 
 :::caution
@@ -2159,7 +2113,25 @@ for (i in seq_along(my_lista)){
 }
 ```
 
-Se puede ver que el proceso con las listas es tan simple como con los vectores, por ello en el siguiente ejercicio debes retomar la lista `carlos_fam_g` del ejercicio 2.4.3 y obtener todos los nombres de los familiares de carlos e imprimirlos en pantalla junto con el tipo de relación que tienen y su edad. Por ejemplo para el padre se debe mostrar en pantalla : “El padre de carlos es Juan carlos y tiene 55 años”.
+Se puede ver que el proceso con las listas es tan simple como con los vectores, por ello en el siguiente ejercicio debes hacer uso de la lista `carlos_fam_g` presentada a continuación y obtener todos los nombres de los familiares de Carlos, e imprimirlos en pantalla junto con el tipo de relación que tienen y su edad. Por ejemplo para el padre se debe mostrar en pantalla : “El padre de Carlos es Juan carlos y tiene 55 años”.
+
++-------------+----------------+------+
+| Relación    | Nombre         | Edad |
++=============+================+======+
+| Padre       | Juan Carlos    |  55  |
++-------------+----------------+------+
+| Madre       | Luz Estela     |  53  |
++-------------+----------------+------+
+| Hijo        | Juan Camilo    |  3   |
++-------------+----------------+------+
+| Hijo        | Juan Fernado   |  5   |
++-------------+----------------+------+
+| Hijo        | Juliana        |  1   |
++-------------+----------------+------+
+| Hermano     | Andres Felipe  |  25  |
++-------------+----------------+------+
+| Hermano     | Maria Camila   |  21  |
++-------------+----------------+------+
 
 :::exercise
 #### Ejercicio 3.2.1
@@ -2609,7 +2581,7 @@ environment(rowMeans)
 attr(rowMeans,"srcref")
 ```
 
-En la sección anterior en los ejemplos y ejercicios 2.3.6 y 2.3.7  usamos `function()` en conjunto con otras funciones, en esos casos utilizamos lo que se denomina funciones anónimas, las cuales se caracterizan por ser breves (se pueden escribir en una sola línea de código) y por no poseer frecuentemente los  `{}`.  Veamos un ejemplo de una función anónima para la integral $\pi \int_{0}^{6}  \frac{x}{12} \sqrt{36-x^2}$, donde la función anónima corresponde al integrando.
+De igual forma, se puede hacer uso de la función `function()` en conjunto con otras funciones u operadores, en lo que se denomina como funciones anónimas. Estas se caracterizan por ser breves (se pueden escribir en una sola línea de código) y por no poseer frecuentemente los `{}`.  Veamos un ejemplo de una función anónima para la integral $\pi \int_{0}^{6}  \frac{x}{12} \sqrt{36-x^2}$, donde la función anónima corresponde al integrando.
 
 :::example
 #### Ejemplo 3.3.2
@@ -3006,7 +2978,7 @@ descuento_helados(vec_dias_2,vec_total_2)
 grade_code("Excelente lo lograste, sigamos adelante")
 ```
 
-Continuando con teoría acerca de las funciones trabajaremos el argumento especial `...`, el cual tiene dos usos comunes: 1) Para extender una función y 2) Para permitir que la función posea cualquier número de argumentos adicionales. El primer caso es usado comúnmente cuando se anidan funciones, como se vio en los ejemplos y ejercicios 2.3.7. Veamos un ejemplo de este primer caso utilizando dos funciones `my_fun_1` y `my_fun_2`.
+Continuando con la teoría acerca de las funciones, trabajaremos el argumento especial `...`, el cual tiene dos usos comunes: 1) Para extender una función y 2) Para permitir que la función posea cualquier número de argumentos adicionales. El primer caso es usado comúnmente cuando se anidan funciones. Veamos un ejemplo de este primer caso utilizando dos funciones `my_fun_1` y `my_fun_2`.
 
 :::example
 #### Ejemplo 3.3.8
