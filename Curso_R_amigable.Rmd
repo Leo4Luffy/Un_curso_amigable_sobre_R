@@ -24,9 +24,9 @@ require(ggplot2)
 require(patchwork)
 require(fontawesome)
 #PARA COMENTAR AL FINALIZAR
-#require(jpeg)
-#require(grid)
-#require(gridGraphics)
+require(jpeg)
+require(grid)
+require(gridGraphics)
 require(showtext)
 font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
@@ -126,7 +126,7 @@ Se trata de un lenguaje __interpretado__ o de script, con __tipado dinámico__, 
 + __Lenguaje interpretado__ o de script: se ejecuta utilizando
 un programa intermedio llamado __intérprete__ (IDE).
 
-+ __Orientado a objetos__: `R` realiza acciones objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
++ __Orientado a objetos__: `R` realiza acciones sobre objetos (un número, un conjunto de datos, una palabra o un resumen estadístico como una media o varianza).
 
 :::example
 #### Ejemplo 1.1.1
@@ -180,7 +180,7 @@ El lenguaje de programación `R` se puede obtener y distribuir de forma gratuita
 
 <div class="row">
   <div class="col-md-8" markdown="1">
-  `R` cuenta con una __comunidad__ de usuarios alrededor del mundo. Al contar con una comunidad es posible dar con la solución de algún problema de programación, así como el desarrollo de paquetes utilizados en temas específicos, desarrolados por especialistas en alguna parte del mundo.
+  `R` cuenta con una __comunidad__ de usuarios alrededor del mundo. Al contar con una comunidad es posible dar con la solución de algún problema de programación, así como contar con el desarrollo de paquetes utilizados en temas específicos, desarrolados por especialistas en alguna parte del mundo.
   </div>
   <div class="col-md-4" markdown="1">
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
@@ -206,27 +206,23 @@ __¡No se desanime!__ Los lenguajes de programación como el `R` no son sencillo
 
 #### 1.3.1 `R` base:
 
-<div class="row">
-  <div class="col-md-6" markdown="1">
-  + Windows: la instalación de `R` base en windows se realiza a través de la [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive Network).
-  + Linux: la instalación de `R` base en Linux se realiza escribiendo el siguiente código en la terminal:<br>
-  <div style="background-color:#262626">
-  <font color = "white"><p> sudo apt-get update</p></font>
-  <font color = "white"><p> sudo apt-get install r-base r-base-dev</p></font>
-  </div>
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
+La instalación de `R` base tanto en Windows como en Linux se realiza a través de la [CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network).
+
+<details><summary>Ejemplo de __consola__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
 knitr::include_graphics("images/consola_R_base.jpg")
 ```
-  </div>
-</div>
+
+</details>
+
+<br>
 
 #### 1.3.2 RStudio:
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-  Se puede instalar directamente desde la [página de RStudio](https://rstudio.com/products/rstudio/download/). Hay se encuentran los archivos de instalación tanto en windows como en Linux.
+  Se puede instalar directamente desde la [página de RStudio](https://rstudio.com/products/rstudio/). Hay se encuentran los archivos de instalación tanto en Windows como en Linux.
   
   Cuando se abre RStudio se pueden ver cuatro paneles: 
   </div>
@@ -240,7 +236,7 @@ knitr::include_graphics("images/RStudio_2.jpg")
 
 + La fuente: la libreta de notas para el código
 
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 knitr::include_graphics("images/source_RStudio.jpg")
 ```
 
@@ -250,54 +246,65 @@ Un texto insertado en el código el cual es omitido en la ejecución, se denomin
 
 + La consola: el corazón de `R`
 
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 knitr::include_graphics("images/console.jpg")
 ```
 
 + El ambiente / el historial
 
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+<details><summary>Ejemplo de __ambiente__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
 knitr::include_graphics("images/environment.jpg")
 ```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+</details>
+
+<details><summary>Ejemplo de __historial__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
 knitr::include_graphics("images/history.jpg")
 ```
-  </div>
-</div>
 
-+ Los archivos / las gráficas / la ayuda / los paquetes
-
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
-knitr::include_graphics("images/files.jpg")
-```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
-knitr::include_graphics("images/plots.jpg")
-```
-  </div>
-</div>
+</details>
 
 <br>
 
-<div class="row">
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
++ Los archivos / las gráficas / la ayuda / los paquetes
+
+<details><summary>Ejemplo de __archivos__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+knitr::include_graphics("images/files.jpg")
+```
+
+</details>
+
+<details><summary>Ejemplo de __gráficos__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+knitr::include_graphics("images/plots.jpg")
+```
+
+</details>
+
+<details><summary>Ejemplo de __ayuda__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
 knitr::include_graphics("images/help.jpg")
 ```
-  </div>
-  <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "64%", fig.align = "center"}
+
+</details>
+
+<details><summary>Ejemplo de __paqutes__ del `R`</summary>
+
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
 knitr::include_graphics("images/packages.jpg")
 ```
-  </div>
-</div>
+
+</details>
+
+<br>
 
 ### 1.4 Los paquetes en `R`
 
@@ -327,10 +334,10 @@ install.packages('tidyr', 'dplyr', 'ggplot2')
 
 2) Mediante el uso del paquete `devtools`, el cual permite instalar paquetes alojados en distintos servidores:
 
-  + `install_bioc()` desde [Bioconductor](https://www.bioconductor.org/).
-  + `install_cran()` desde [CRAN](https://cran.r-project.org/index.html).
-  + `install_git()` desde un repositorio [git](https://git-scm.com/).
-  + `install_github()` desde [GitHub](https://github.com/).
++ `install_bioc()` desde [Bioconductor](https://www.bioconductor.org/).
++ `install_cran()` desde [CRAN](https://cran.r-project.org/index.html).
++ `install_git()` desde un repositorio [git](https://git-scm.com/).
++ `install_github()` desde [GitHub](https://github.com/).
 
 :::example
 #### Ejemplo 1.4.2
@@ -343,7 +350,7 @@ devtools::install_github('tidyverse/dplyr')
 
 Una vez haya instalado un paquete, estará en la computadora. Si se desea usar una función o un conjunto de datos del paquete instalado, debe cargar el paquete en la sesión de `R`. Para esto, existen dos formas:
 
-1) Con la notación `nombrepaquete::nombrefunción()` para hacer un uso temporal de la función o conjunto de datos.
+1) Con la notación `nombre_paquete::nombre_función()` para hacer un uso temporal de la función o conjunto de datos.
 
 :::example
 #### Ejemplo 1.4.3
@@ -353,11 +360,7 @@ Una vez haya instalado un paquete, estará en la computadora. Si se desea usar u
 dplyr::starwars
 ```
 
-:::caution
-Una ventaja del método anterior es que es inmediatamente claro para cualquier persona que lea el código qué paquete contiene la función. Sin embargo, un inconveniente es que si usa una función de un paquete con frecuencia, lo obliga a volver a escribir constantemente el nombre del paquete.
-:::
-
-2) Cargándolo en la memoria del computador mediante el uso de la función `library()` si su uso es permanente.
+2) Cargándolo en la memoria del computador mediante el uso de la función `library()`.
 
 :::example
 #### Ejemplo 1.4.4
@@ -376,7 +379,7 @@ Para acceder a la descripción de un paquete desde `R` se puede emplear las func
 
 ```{r addition_6, exercise = TRUE}
 packageDescription('dplyr')
-help(package = 'dplyr')
+#help(package = 'dplyr')
 ```
 
 Otras funciones que permiten la gestión de los paquetes instalados en el computador:
@@ -391,6 +394,11 @@ update.packages() # Para actualizar todo los paquetes instalados.
 ### 1.5 Trabajando con proyectos
 
 Un __directorio de trabajo__ en `R` es el lugar en la computadora en el que se encuentran los archivos con los que se esta trabajando. Es el lugar donde `R` buscara los archivos para importarlos y al que serán exportados.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/59va_imagen.png")  
+```
 
 Con la función `getwd()` se puede encontrar el directorio en el que se esta trabajando.
 
@@ -430,6 +438,59 @@ knitr::include_graphics("images/Proyectos.jpg")
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
   </div>
 </div>
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, fig.align = 'center', fig.showtext = TRUE, out.width = '500'}
+
+data.frame(
+  x = c(1:6), y = c(1:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 5.5, label = 'Función', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 4.5, label = 'ls()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 3.5, label = 'rm(a, b, ...)', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 2.5, label = 'getwd()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 1.5, label = 'setwd()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = 0.5, label = 'list.files()', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 2.5, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.75, y = -0.5, label = 'rm(list = ls())', family = 'gochi', size = 5.0, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 5.0, ymax = 6.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 5.5, label = 'Descripción', family = 'gochi', size = 5.5, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 4.0, ymax = 5.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 4.7, label = 'Muestra todos los objetos en', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 4.3, label = 'el espacio de trabajo actual.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 3.0, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 3.7, label = 'Elimina los objetos (a, b...)', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 3.3, label = 'del espacio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 2.0, ymax = 3.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 2.5, label = 'Devuelve el directorio de trabajo actual.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 1.0, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 1.7, label = 'Cambia el directorio de trabajo', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 1.3, label = 'a una ubicación especifica.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = 0.0, ymax = 1.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = 0.7, label = 'Devuelve los nombres de los archivos', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = 0.3, label = 'en el directorio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.0, ymin = -1.0, ymax = 0.0, colour = 'black', fill = 'white', alpha = 0.2) +
+  annotate(geom = 'text', x = 3.75, y = -0.3, label = 'Elimina todos los objetos del', family = 'gochi', size = 4.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.75, y = -0.7, label = 'espacio de trabajo.', family = 'gochi', size = 4.4, colour = 'black') +
+  #scale_y_continuous(limits = c(2.05, 5.0)) +
+  #scale_x_continuous(limits = c(1.0, 7.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/60va_imagen.png")  
+```
 
 #### 1.5.1 Estructurando el directorio de trabajo
 
