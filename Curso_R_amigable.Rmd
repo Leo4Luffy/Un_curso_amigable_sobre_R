@@ -6266,11 +6266,13 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y 
 
 ## 7. Modelación estadística básica
 
-```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
+<!--
+
+```{r, echo = FALSE, eval = FALSE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>-->
 
 ## 8. Comunicación de resultados
 
