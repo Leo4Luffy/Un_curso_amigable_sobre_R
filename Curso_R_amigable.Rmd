@@ -6264,9 +6264,26 @@ Graf_animado <- gapminder %>%
 Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y profundizar más en su uso, puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_ggplot2.pdf). De igual forma, si deseas conocer más sobre el paquete `gganimate` puedes mirar su hoja de trucos [aquí](https://github.com/Leo4Luffy/Un_curso_amigable_sobre_R/blob/master/Documentos/cheat_sheet_gganimate.pdf).
 :::
 
-## 7. Modelación estadística básica
+## 7. Una breve introducción al diseño de experimentos
 
-<!--
+<!--La elección del diseño de un estudio es una de las etapas más complejas en el proceso de investigación, una vez se debe tomar en consideración una seríe de hechos como:
+
+- La información previa que existe respecto al tema de investigación.
+- La factibilidad de realizar la investigación.
+
+A todo lo anterior se le suma la decisión por parte del investigador de si se mantendrá al margen del desarrollo de los acontecimientos o si decidirá intervenir en él. De esta forma, es posible establecer la división de los diferentes estudios que existen en dos tipos:
+
+```{r, echo = FALSE, eval = FALSE, out.width = "40%", fig.align = "center"}
+
+knitr::include_graphics("images/61va_imagen.png")  
+```
+
+### 7.1 Estudios experimentales
+
+```{r, echo = FALSE, eval = FALSE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/62va_imagen.png")  
+```
 
 ```{r, echo = FALSE, eval = FALSE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
