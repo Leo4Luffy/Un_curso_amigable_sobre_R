@@ -22,13 +22,14 @@ require(tibble)
 require(timevis)
 require(ggplot2)
 require(patchwork)
+library(downloadthis)
 require(fontawesome)
 #PARA COMENTAR AL FINALIZAR
-require(jpeg)
-require(grid)
-require(gridGraphics)
-require(showtext)
-font_add_google('Gochi Hand', 'gochi')
+#require(jpeg)
+#require(grid)
+#require(gridGraphics)
+#require(showtext)
+#font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
@@ -948,7 +949,8 @@ Para explicar tanto las funciones anteriores como las que se veran posteriorment
 data("starwars")
 Starwars <- starwars %>% 
   select(-c(12:14))
-Starwars <- as.data.frame(Starwars)
+#Starwars <- as.data.frame(Starwars)
+Starwars <- tibble::as_tibble(Starwars)
 ```
 
 ```{r,eval=TRUE}
@@ -964,6 +966,19 @@ save(Starwars, file="data_pkg/Starwars.rda", compress='xz')
 ```{r, echo = FALSE, eval = TRUE, out.width = "74%", fig.align = "center"}
 
 knitr::include_graphics("images/51va_imagen.png")  
+```
+
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
+
+Starwars %>%
+  download_this(
+    output_name = 'Starwars',
+    output_extension = '.xlsx',
+    button_label = 'Descargar datos Starwars',
+    button_type = 'warning',
+    has_icon = TRUE,
+    icon = 'fa fa-download'
+  )
 ```
 
 :::example
@@ -3952,6 +3967,19 @@ knitr::include_graphics("images/11va_imagen.png")
 save(Tuberculosis, file = 'data_pkg/Tuberculosis.rda', compress='xz')
 ```
 
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
+
+Tuberculosis %>%
+  download_this(
+    output_name = 'Tuberculosis',
+    output_extension = '.xlsx',
+    button_label = 'Descargar datos Tuberculosis',
+    button_type = 'warning',
+    has_icon = TRUE,
+    icon = 'fa fa-download'
+  )
+```
+
 ```{r addition_ejercicio, exercise = TRUE}
 
 ```
@@ -4065,6 +4093,19 @@ knitr::include_graphics("images/culmen_penguins.png")
   6) En `body_mass_g` se registró la masa corporal de cada uno de los pingüinos.
 
   7) En `sex` podrá encontrar la información sobre el sexo (FEMALE para hembras y MALE para machos) de cada uno de los pingüinos.
+
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
+
+palmerpenguins::penguins %>%
+  download_this(
+    output_name = 'penguins',
+    output_extension = '.xlsx',
+    button_label = 'Descargar datos penguins',
+    button_type = 'warning',
+    has_icon = TRUE,
+    icon = 'fa fa-download'
+  )
+```
 
 ### 5.2 Manipulación de datos con `dplyr`
 
@@ -4926,6 +4967,27 @@ Para explicar el concepto de la gramática de gráficos en capas implementado en
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 knitr::include_graphics("images/27va_imagen.png")  
+```
+
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
+
+pokemon <- readr::read_csv("https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-07-10/pokemon.csv")
+
+pokemon <- pokemon %>%
+  mutate(ataque = ataque + fuerza_especial_ataque, defensa = defensa + fuerza_especial_defensa) %>%
+  select(ID_poke, nombre_ingles, tipo_1, ataque, defensa, velocidad, puntos_vida) %>%
+  rename('id' = ID_poke, 'nombre' = nombre_ingles, 'tipo' = tipo_1) 
+  #filter(nombre %in% c('Charmander', 'Bulbasaur', 'Butterfree', 'Pikachu', 'Squirtle'))
+
+pokemon %>%
+  download_this(
+    output_name = 'pokemon',
+    output_extension = '.xlsx',
+    button_label = 'Descargar datos pokemon',
+    button_type = 'warning',
+    has_icon = TRUE,
+    icon = 'fa fa-download'
+  )
 ```
 
 Como puedes ver, este conjunto de datos contiene siete variables:
@@ -6273,19 +6335,19 @@ Si deseas ver un resumen de las posibilidades que ofrece el paquete `ggplot2` y 
 
 A todo lo anterior se le suma la decisión por parte del investigador de si se mantendrá al margen del desarrollo de los acontecimientos o si decidirá intervenir en él. De esta forma, es posible establecer la división de los diferentes estudios que existen en dos tipos:
 
-```{r, echo = FALSE, eval = FALSE, out.width = "40%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "40%", fig.align = "center"}
 
 knitr::include_graphics("images/61va_imagen.png")  
 ```
 
 ### 7.1 Estudios experimentales
 
-```{r, echo = FALSE, eval = FALSE, out.width = "44%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
 
 knitr::include_graphics("images/62va_imagen.png")  
 ```
 
-```{r, echo = FALSE, eval = FALSE, out.width = "30%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
 ```
 
