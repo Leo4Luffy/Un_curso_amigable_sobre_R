@@ -25,11 +25,11 @@ require(patchwork)
 library(downloadthis)
 require(fontawesome)
 #PARA COMENTAR AL FINALIZAR
-#require(jpeg)
-#require(grid)
+require(jpeg)
+require(grid)
 #require(gridGraphics)
-#require(showtext)
-#font_add_google('Gochi Hand', 'gochi')
+require(showtext)
+font_add_google('Gochi Hand', 'gochi')
 #PARA COMENTAR AL FINALIZAR
 tutorial_options(exercise.timelimit = 60, exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = F,
@@ -6355,10 +6355,43 @@ knitr::include_graphics("images/61va_imagen.png")
 
 ### 7.1 Estudios experimentales
 
-```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+Los estudios experimentales se caracterizan por el hecho de que el investigador interviene y controla a voluntad las variables consideradas como causales de un fenómeno, permitiendo de esta forma evaluar una respuesta bajo diferentes configuraciones.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "56%", fig.align = "center"}
 
 knitr::include_graphics("images/62va_imagen.png")  
 ```
+
++ Tratamiento
+
+Son las condiciones cuyo efecto se evalúa a través de una respuesta (aquí, el agua sería el tratamiento y el crecimiento de la semilla la respuesta).
+
++ Grupo control y experimental
+
+En un experimento pueden presentarse dos grupos: el grupo experimental sobre el cual se aplica el tratamiento (aquí, las semillas regadas) y el grupo control que al ser comparados con el grupo experimental permiten determinar si hubo o no efecto del tratamiento (aquí, las semillas sin riego).
+
++ Variable dependiente e independiente
+
+El elemento que es diferente entre los grupos control y experimental (en este caso, la cantidad de agua) se conoce como variable independiente. Por otra parte, la variable dependiente (en este caso, las semillas que crecen) es el elemento que se mide para ver si el tratamiento tuvo efecto. 
+
++ Datos experimentales
+
+Son las observaciones realizadas durante el experimento (aquí, el número de semillas de la planta de frijol que crecieron en cada maceta después de una semana).
+
++ Repetición
+
+Son cada uno de los elementos del grupo experimental que fueron sometidos a un mismo tratamiento (aquí, las diez semillas regadas con agua).
+
++ Error experimental
+
+Es la variabilidad existente entre los elementos del grupo experimental sometidos al mismo tratamiento.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
+
+knitr::include_graphics("images/63va_imagen.png")  
+```
+
+$$EE = \frac{(r_{A} - 1)S_{A}^{2} + (r_{B} - 1)S_{B}^{2} + (r_{C} - 1)S_{C}^{2}}{r_{A} + r_{B} + r_{C} - 3}$$
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
