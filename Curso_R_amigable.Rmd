@@ -6386,12 +6386,29 @@ Son cada uno de los elementos del grupo experimental que fueron sometidos a un m
 
 Es la variabilidad existente entre los elementos del grupo experimental sometidos al mismo tratamiento.
 
+$$EE = \frac{(r_{A} - 1)S_{A}^{2} + (r_{B} - 1)S_{B}^{2} + (r_{C} - 1)S_{C}^{2}}{r_{A} + r_{B} + r_{C} - 3}$$
+
 ```{r, echo = FALSE, eval = TRUE, out.width = "44%", fig.align = "center"}
 
 knitr::include_graphics("images/63va_imagen.png")  
 ```
 
-$$EE = \frac{(r_{A} - 1)S_{A}^{2} + (r_{B} - 1)S_{B}^{2} + (r_{C} - 1)S_{C}^{2}}{r_{A} + r_{B} + r_{C} - 3}$$
++ Aleatorización
+
+Es la asignación al azar de los tratamientos a los grupos experimentales.
+
++ Hipótesis
+
+
+
+#### 7.1.1 Análisis de varianza
+
+El análisis de varianza es un procedimiento que permite comparar el valor promedio de varios grupos experimentales, mediante la partición de la variabilidad total en diferentes fuentes.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "88%", fig.align = "center"}
+
+knitr::include_graphics("images/anova.png")  
+```
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
