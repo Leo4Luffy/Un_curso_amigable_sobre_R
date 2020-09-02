@@ -21,6 +21,7 @@ library(gapminder)
 require(tibble)
 require(timevis)
 require(ggplot2)
+require(gt)
 require(patchwork)
 library(downloadthis)
 require(fontawesome)
@@ -6355,7 +6356,7 @@ knitr::include_graphics("images/61va_imagen.png")
 
 ### 7.1 Estudios experimentales
 
-<!--Los estudios experimentales se caracterizan por el hecho de que el investigador interviene y controla a voluntad las variables consideradas como causales de un fenómeno, permitiendo de esta forma evaluar una respuesta bajo diferentes configuraciones.
+Los estudios experimentales se caracterizan por el hecho de que el investigador interviene y controla a voluntad las variables consideradas como causales de un fenómeno, permitiendo de esta forma evaluar una respuesta bajo diferentes configuraciones.
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "56%", fig.align = "center"}
 
@@ -6453,25 +6454,75 @@ knitr::include_graphics("images/anova.png")
 #### Ejemplo 7.1.1.1
 :::
 
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
+knitr::include_graphics("images/67va_imagen.png")  
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
 
-```{r, eval = FALSE, message = FALSE, echo = FALSE}
+knitr::include_graphics("images/66va_imagen.png")  
+```
+  </div>
+</div>
 
-library(readr)
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
 
-guanabana <- read_csv(file = '/home/leo/Descargas/guanabana.csv')
+tribble(
+  ~e1, ~e2, ~e3, ~e4,
+  7.1, 4.1, 5.7, 6.3,
+  6.5, 4.3, 5.1, 6.0,
+  7.0, 5.1, 6.0, 6.3
+  ) %>%
+  gt()
 ```
 
-```{r, eval = FALSE}
+```{r ejemplo_7_1_1_1, exercise = TRUE}
 
-save(guanabana, file="data_pkg/guanabana.rda", compress='xz')
+tribble(
+  ~e1, ~e2, ~e3, ~e4,
+  7.1, 4.1, 5.7, 6.3,
+  6.5, 4.3, 5.1, 6.0,
+  7.0, 5.1, 6.0, 6.3
+  ) %>%
+  pivot_longer(
+    cols = c('e1', 'e2', 'e3', 'e4'),
+    names_to = 'ttos',
+    values_to = 'pH'
+  )
+```
+
+```{r, eval = TRUE, echo = FALSE, message = FALSE}
+
+tribble(
+  ~e1, ~e2, ~e3, ~e4,
+  7.1, 4.1, 5.7, 6.3,
+  6.5, 4.3, 5.1, 6.0,
+  7.0, 5.1, 6.0, 6.3
+  ) %>%
+  pivot_longer(
+    cols = c('e1', 'e2', 'e3', 'e4'),
+    names_to = 'ttos',
+    values_to = 'pH'
+  ) %>%
+  download_this(
+    output_name = 'guanabana',
+    output_extension = '.xlsx',
+    button_label = 'Descargar datos guanabana',
+    button_type = 'warning',
+    has_icon = TRUE,
+    icon = 'fa fa-download'
+  )
 ```
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
 ```
 
-<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>-->
+<section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section><!---->
 
 ## 8. Comunicación de resultados
 
