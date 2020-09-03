@@ -6363,38 +6363,73 @@ Los estudios experimentales se caracterizan por el hecho de que el investigador 
 knitr::include_graphics("images/62va_imagen.png")  
 ```
 
-+ Tratamiento
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  <div class="box-blue-2">
+  + Tratamiento
+  
+  Son las condiciones cuyo efecto se evalúa a través de una respuesta.
+  </div>
+  </div>
+  <div class="col-md-6" markdown="1">
+  <div class="box-red-2">
+  + Grupo control y experimental
+  
+  El grupo experimental es sobre el cual se aplica el tratamiento y el grupo control es aquel que al ser comparado con el grupo experimental determina si hubo o no efecto del tratamiento.
+  </div>
+  </div>
+</div>
 
-Son las condiciones cuyo efecto se evalúa a través de una respuesta (aquí, el agua sería el tratamiento y el crecimiento de la semilla la respuesta).
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  <div class="box-gray-2">
+  + Variable dependiente e independiente
+  
+  La variable dependiente es el elemento que es diferente entre los grupos control y experimental, mientras que la variable dependiente es el elemento que se mide para ver si el tratamiento tuvo efecto.
+  </div>
+  </div>
+  <div class="col-md-6" markdown="1">
+  <div class="box-yellow-2">
+  + Datos experimentales
+  
+  Son las observaciones realizadas durante el experimento.
+  </div>
+  </div>
+</div>
 
-+ Grupo control y experimental
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  <div class="box-green-2">
+  + Repetición
+  
+  Son cada uno de los elementos del grupo experimental que son sometidos a un mismo tratamiento.
+  </div>
+  </div>
+  <div class="col-md-6" markdown="1">
+  <div class="box-grey-2">
+  + Variabilidad
+  
+  Hace referencia a las distintas causas por las que los datos experimentales obtenidos tienen distintos valores. Esta variabilidad puede ser de dos tipos: debido a los tratamientos y debido al error.
+  </div>
+  </div>
+</div>
 
-En un experimento pueden presentarse dos grupos: el grupo experimental sobre el cual se aplica el tratamiento (aquí, las semillas regadas) y el grupo control que al ser comparados con el grupo experimental permiten determinar si hubo o no efecto del tratamiento (aquí, las semillas sin riego).
-
-+ Variable dependiente e independiente
-
-El elemento que es diferente entre los grupos control y experimental (en este caso, la cantidad de agua) se conoce como variable independiente. Por otra parte, la variable dependiente (en este caso, las semillas que crecen) es el elemento que se mide para ver si el tratamiento tuvo efecto. 
-
-+ Datos experimentales
-
-Son las observaciones realizadas durante el experimento (aquí, el número de semillas de la planta de frijol que crecieron en cada maceta después de una semana).
-
-+ Repetición
-
-Son cada uno de los elementos del grupo experimental que fueron sometidos a un mismo tratamiento (aquí, las diez semillas regadas con agua).
-
-```{r, echo = FALSE, eval = FALSE, out.width = "44%", fig.align = "center"}
-
-knitr::include_graphics("images/63va_imagen.png")  
-```
-
-+ Aleatorización
-
-Es la asignación al azar de los tratamientos a los grupos experimentales.
-
-+ Hipótesis
-
-
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  <div class="box-blue-2">
+  + Aleatorización
+  
+  Es la asignación al azar de los tratamientos a los grupos experimentales.
+  </div>
+  </div>
+  <div class="col-md-6" markdown="1">
+  <div class="box-red-2">
+  + Hipótesis
+  
+  Estas hipótesis generalmente son de dos tipos: la hipótesis nula ($H_{0}$) y la hipótesis alterna ($H_{a}$). 
+  </div>
+  </div>
+</div>
 
 #### 7.1.1 Análisis de varianza
 
@@ -6444,11 +6479,30 @@ knitr::include_graphics("images/65va_imagen.png")
 knitr::include_graphics("images/anova.png")  
 ```
 
-<section style="text-align: center;"><small>Ilustracíon modificada de <font color = "black"><u>\@YaRrrBook</u></font>.</small></section>
-
 #### 7.1.1 Diseño completamente al azar
 
+Este diseño se llama completamente al azar porque todos los tratamientos se asignan de manera aleatoria a los grupos experimentales. <!--Esto con el fin de que los posibles efectos ambientales o temporales que pueden influir, sean repartidos equitativamente entre los tratamientos.--> La razón de esta aleatoriedad radica en el hecho de que las variables no controladas pueden ser distribuidas de manera similar, por lo que se no se afecta la respuesta de algún grupo experimental en particular.
 
+<div class="row">
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/68va_imagen.png")  
+```
+  </div>
+  <div class="col-md-6" markdown="1">
+```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+
+knitr::include_graphics("images/69va_imagen.png")  
+```
+  </div>
+</div>
+
+Se usa un diseño completamente al azar:
+
++ Cuando el experimento se realiza bajo condiciones ambientales controladas (por ejemplo, ensayos de laboratorio).
+
++ Cuando se realizan experimentos en los que, a pesar de que las condiciones ambientales no estan controladas, no hay fuentes de variabilidad reconocibles adicionales a los tratamientos.
 
 :::example
 #### Ejemplo 7.1.1.1
@@ -6462,13 +6516,6 @@ knitr::include_graphics("images/67va_imagen.png")
 ```
   </div>
   <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "54%", fig.align = "center"}
-
-knitr::include_graphics("images/66va_imagen.png")  
-```
-  </div>
-</div>
-
 ```{r, eval = TRUE, echo = FALSE, message = FALSE}
 
 tribble(
@@ -6479,6 +6526,8 @@ tribble(
   ) %>%
   gt()
 ```
+  </div>
+</div>
 
 ```{r ejemplo_7_1_1_1, exercise = TRUE}
 

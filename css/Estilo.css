@@ -184,3 +184,48 @@ div.exercise {
 div.exercise {
   background-image: url("exercise.png");
 }
+
+/* Cajas con contenido de color */
+
+.box-blue-2,
+.box-gray-2,
+.box-green-2,
+.box-grey-2,
+.box-red-2,
+.box-yellow-2 {
+	margin:0 0 25px;
+	overflow:hidden;
+	padding:20px;
+	-webkit-border-radius: 10px;
+        border-radius: 10px;
+}
+
+.box-blue-2 {
+	background-color:#d8ecf7;
+	border:1px solid #afcde3;
+}
+
+.box-gray-2 {
+	background-color:#e2e2e2;
+	border:1px solid #bdbdbd;
+}
+
+.box-green-2 {
+	background-color:#d9edc2;
+	border:1px solid #b2ce96;
+}
+
+.box-grey-2 {
+	background-color:#F5F5F5;
+	border:1px solid #DDDDDD;
+}
+
+.box-red-2 {
+	background-color:#f9dbdb;
+	border:1px solid #e9b3b3;
+}
+
+.box-yellow-2 {
+	background-color:#fef5c4;
+	border:1px solid #fadf98;
+}
