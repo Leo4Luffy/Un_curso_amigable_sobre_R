@@ -1,0 +1,18 @@
+channels:
+  - conda-forge
+dependencies:
+  - r-base=3.6
+  - r-CursoR
+  - r-learnr
+  - r-tidyverse
+  - r-curl
+  - r-gradethis
+  - r-kableExtra
+  - r-palmerpenguins
+  - r-gapminder
+  - r-tibble
+  - r-timevis
+  - r-ggplot2
+  - r-gt
+  - r-patchwork
+  - r-downloadthis
