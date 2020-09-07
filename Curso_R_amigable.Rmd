@@ -6474,28 +6474,22 @@ knitr::include_graphics("images/anova.png")
 
 #### 7.1.1 Diseño completamente al azar
 
-Este diseño se llama completamente al azar porque todos los tratamientos se asignan de manera aleatoria a los grupos experimentales. La razón de esta aleatoriedad radica en el hecho de que las variables no controladas pueden ser distribuidas de manera similar, por lo que se no se afecta la respuesta de algún grupo experimental en particular.
+Este diseño se llama completamente al azar porque todos los grupos experimentales se distribuyen de manera completamente aleatoria, en relación a posibles efectos ambientales que pueden afectar la respuesta de algún grupo experimental. De esta manera, esos posibles efectos ambientales se pueden repartir equitativamente entre los tratamientos.
 
 <div class="row">
   <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "104%", fig.align = "center"}
 
 knitr::include_graphics("images/68va_imagen.png")  
 ```
   </div>
   <div class="col-md-6" markdown="1">
-```{r, echo = FALSE, eval = TRUE, out.width = "84%", fig.align = "center"}
+```{r, echo = FALSE, eval = TRUE, out.width = "104%", fig.align = "center"}
 
 knitr::include_graphics("images/69va_imagen.png")  
 ```
   </div>
 </div>
-
-Se usa un diseño completamente al azar:
-
-+ Cuando el experimento se realiza bajo condiciones ambientales controladas (por ejemplo, ensayos de laboratorio).
-
-+ Cuando se realizan experimentos en los que, a pesar de que las condiciones ambientales no estan controladas, no hay fuentes de variabilidad reconocibles adicionales a los tratamientos.
 
 :::example
 #### Ejemplo 7.1.1.1
@@ -6537,6 +6531,23 @@ tribble(
   )
 ```
 
+```{r, eval=TRUE}
+
+guanabana <- tribble(
+  ~e1, ~e2, ~e3, ~e4,
+  7.1, 4.1, 5.7, 6.3,
+  6.5, 4.3, 5.1, 6.0,
+  7.0, 5.1, 6.0, 6.3
+  ) %>%
+  pivot_longer(
+    cols = c('e1', 'e2', 'e3', 'e4'),
+    names_to = 'ttos',
+    values_to = 'pH'
+  )
+
+save(guanabana, file = "data_pkg/guanabana.rda", compress='xz')
+```
+
 ```{r, eval = TRUE, echo = FALSE, message = FALSE}
 
 tribble(
@@ -6560,12 +6571,42 @@ tribble(
   )
 ```
 
+<br>
+
+Los valores de la tabla anterior, se pueden describir con el siguiente modelo estadístico:
+
+\begin{equation*}
+y_{ij} = \mu + \tau_{i} + \epsilon_{ij}
+\end{equation*}
+
+La manera de probar si existen diferencias en el pH promedio de la pulpa de guanabana sometida a diferentes sistemas de empaque, consiste en contrastar la siguiente hipótesis:
+
+\begin{equation*}
+\begin{split}
+&H_{0}: \mu_{e1} = \mu_{e2}  = \mu_{e3} = \mu_{e4} = \mu\\
+&H_{a}: \mu_{i} \neq \mu_{i`}
+\end{split}
+\end{equation*}
+
+Luego se realiza el análisis de varianza:
+
+```{r ejemplo_7_1_1_1_b, exercise = TRUE}
+
+anova_gua <- guanabana %>%
+  mutate(
+    ttos = as.factor(ttos)
+    )
+modelo <- aov(pH ~ ttos, data = anova_gua)
+summary(modelo)
+```
+
+Se concluye que el pH promedio de la pulpa de guanaba si se ve afectada por el sistema de empaque.
+
 ```{r, echo = FALSE, eval = TRUE, out.width = "30%", fig.align = "center"}
 knitr::include_graphics("images/broom.png")
 ```
 
 <section style="text-align: center;"><small>Ilustracíon hecha por <font color = "black"><u>\@allison_horst</u></font>.</small></section>
-<!---->
 
 ## 8. Comunicación de resultados
 
